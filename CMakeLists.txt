@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.17)
+
+set(CMAKE_PROJECT_NAME bomberman)
+
+project(${CMAKE_PROJECT_NAME})
+
+find_package(raylib 3.0 REQUIRED) # Requires at least version 3.0
+
+include(Findraylib.cmake)
+
+include_directories(_deps/raylib-src/src/ include)
+
+add_executable(${PROJECT_NAME} src/main.cpp)
+
+target_link_libraries(${PROJECT_NAME} raylib)
+
+# Checks if OSX and links appropriate frameworks (only required on MacOS)
+if (APPLE)
+    target_link_libraries(${PROJECT_NAME} "-framework IOKit")
+    target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
+    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
+endif()
