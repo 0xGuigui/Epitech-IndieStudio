@@ -12,38 +12,76 @@
 ********************************************************************************************/
 
 #include "raylib.h"
+#include <stdlib.h>
 
-//------------------------------------------------------------------------------------------
-// Types and Structures Definition
-//------------------------------------------------------------------------------------------
 typedef enum GameScreen { LOGO = 0, TITLE, GAMEPLAY, ENDING } GameScreen;
 
-//------------------------------------------------------------------------------------------
-// Main entry point
-//------------------------------------------------------------------------------------------
+static void AudioProcessEffectLPF(void *buffer, unsigned int frames)
+{
+    static float low[2] = { 0.0f, 0.0f };
+    static const float cutoff = 70.0f / 44100.0f; // 70 Hz lowpass filter
+    const float k = cutoff / (cutoff + 0.1591549431f); // RC filter formula
+
+    for (unsigned int i = 0; i < frames*2; i += 2)
+    {
+        float l = ((float *)buffer)[i], r = ((float *)buffer)[i + 1];
+        low[0] += k * (l - low[0]);
+        low[1] += k * (r - low[1]);
+        ((float *)buffer)[i] = low[0];
+        ((float *)buffer)[i + 1] = low[1];
+    }
+}
+
+static float *delayBuffer = NULL;
+static unsigned int delayBufferSize = 0;
+static unsigned int delayReadIndex = 2;
+static unsigned int delayWriteIndex = 0;
+
 int main(void)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenWidth = 1920;
+    const int screenHeight = 1080;
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic screen manager");
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
+    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+    SetWindowMinSize(1, 1);
 
+    Image image = LoadImage("/home/yusisako/Downloads/platanos.png");  // Load image data into CPU memory (RAM)
+    Texture2D texture = LoadTextureFromImage(image);       // Image converted to texture, GPU memory (RAM -> VRAM)
+    UnloadImage(image);                                    // Unload image data from CPU memory (RAM)
+
+    image = LoadImageFromTexture(texture);                 // Load image from GPU texture (VRAM -> RAM)
+    UnloadTexture(texture);                     // Load image data into CPU memory (RAM)            // Unload texture from GPU memory (VRAM)
+
+    texture = LoadTextureFromImage(image);                 // Recreate texture from retrieved image data (RAM -> VRAM)
+    UnloadImage(image);
+    int framesCounter = 0;
     GameScreen currentScreen = LOGO;
 
-    // TODO: Initialize all required variables and load all required data here!
+    InitAudioDevice();
+    Music music = LoadMusicStream("/home/yusisako/Downloads/log_in.wav");
 
-    int framesCounter = 0;          // Useful to count frames
+    // Allocate buffer for the delay effect
+    delayBufferSize = 48000 * 2;
+    delayBuffer = (float *)RL_CALLOC(delayBufferSize, sizeof(float));   // 1 second delay (device sampleRate*channels)
 
-    SetTargetFPS(60);               // Set desired framerate (frames-per-second)
+    PlayMusicStream(music);
+
+    float timePlayed = 0.0f;
+    bool pause = false;
+
+    bool hasFilter = true;
+    bool hasDelay = true;
+
+    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
+
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        // Update
-        //----------------------------------------------------------------------------------
         switch(currentScreen)
         {
             case LOGO:
@@ -51,6 +89,7 @@ int main(void)
                 // TODO: Update LOGO screen variables here!
 
                 framesCounter++;    // Count frames
+                UpdateMusicStream(music);
 
                 // Wait for 2 seconds (120 frames) before jumping to TITLE screen
                 if (framesCounter > 120)
@@ -90,49 +129,52 @@ int main(void)
             } break;
             default: break;
         }
+        // Update
+        //----------------------------------------------------------------------------------
+        // TODO: Update your variables here
         //----------------------------------------------------------------------------------
 
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-        ClearBackground(RAYWHITE);
+            ClearBackground(RAYWHITE);
 
-        switch(currentScreen)
-        {
-            case LOGO:
+            DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
+
+             switch(currentScreen)
             {
-                // TODO: Draw LOGO screen here!
-                DrawText("LOGO SCREEN", 20, 20, 40, LIGHTGRAY);
-                DrawText("WAIT for 2 SECONDS...", 290, 220, 20, GRAY);
+                case LOGO:
+                {
+                    // TODO: Draw LOGO screen here!
+                } break;
+                case TITLE:
+                {
+                    // TODO: Draw TITLE screen here!
+                    DrawRectangle(0, 0, screenWidth, screenHeight, GREEN);
+                    DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
+                    DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
 
-            } break;
-            case TITLE:
-            {
-                // TODO: Draw TITLE screen here!
-                DrawRectangle(0, 0, screenWidth, screenHeight, GREEN);
-                DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
-                DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
+                } break;
+                case GAMEPLAY:
+                {
+                    // TODO: Draw GAMEPLAY screen here!
+                    DrawRectangle(0, 0, screenWidth, screenHeight, PURPLE);
+                    DrawText("GAMEPLAY SCREEN", 20, 20, 40, MAROON);
+                    DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
 
-            } break;
-            case GAMEPLAY:
-            {
-                // TODO: Draw GAMEPLAY screen here!
-                DrawRectangle(0, 0, screenWidth, screenHeight, PURPLE);
-                DrawText("GAMEPLAY SCREEN", 20, 20, 40, MAROON);
-                DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
+                } break;
+                case ENDING:
+                {
+                    // TODO: Draw ENDING screen here!
+                    DrawRectangle(0, 0, screenWidth, screenHeight, BLUE);
+                    DrawText("ENDING SCREEN", 20, 20, 40, DARKBLUE);
+                    DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, DARKBLUE);
 
-            } break;
-            case ENDING:
-            {
-                // TODO: Draw ENDING screen here!
-                DrawRectangle(0, 0, screenWidth, screenHeight, BLUE);
-                DrawText("ENDING SCREEN", 20, 20, 40, DARKBLUE);
-                DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, DARKBLUE);
+                } break;
+                default: break;
+            }
 
-            } break;
-            default: break;
-        }
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -140,10 +182,13 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-
-    // TODO: Unload all loaded data (textures, fonts, audio) here!
-
-    CloseWindow();        // Close window and OpenGL context
+    music = LoadMusicStream("/home/yusisako/Downloads/log_out.wav");        // Close window and OpenGL context
+    if (IsKeyPressed(KEY_ESCAPE))
+    {
+        PlayMusicStream(music);
+        StopMusicStream(music);
+    }
+    CloseWindow();
     //--------------------------------------------------------------------------------------
 
     return 0;
