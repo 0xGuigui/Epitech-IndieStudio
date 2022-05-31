@@ -25,10 +25,11 @@ int main(void) {
     const int screenWidth = 1920;
     const int screenHeight = 1080;
 
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
     InitWindow(screenWidth, screenHeight, "[PLATANOS STUDIOS] Bomberman - Indie Studio");
     SetWindowMinSize(1, 1);
     InitAudioDevice();
-    Music music = LoadMusicStream("assets/SplashScreen/audio/log_in.ogg");
+    Music music = LoadMusicStream("assets/SplashScreen/audios/log_in.ogg");
     music.looping = false;
     delayBufferSize = 48000 * 2;
     delayBuffer = (float *)RL_CALLOC(delayBufferSize, sizeof(float));
@@ -37,7 +38,6 @@ int main(void) {
 
     float timePlayed = 0.0f;
     bool pause = false;
-
     bool hasFilter = true;
     bool hasDelay = true;
 
