@@ -12,7 +12,8 @@ find_package(raylib 3.0 REQUIRED) # Requires at least version 3.0
 
 include_directories(_deps/raylib-src/src/ include)
 
-add_executable(${CMAKE_PROJECT_NAME} src/main.cpp)
+#@TODO: Try to get all .cpp files for the compilation via cmake and Makefile
+add_executable(${CMAKE_PROJECT_NAME} src/main.cpp src/splashscreen.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} raylib)
 
