@@ -11,5 +11,5 @@
 #include "music.hpp"
 #include "texture.hpp"
 #include "window.hpp"
-#include "splashscreen.hpp"
+#include "indie.hpp"
 
