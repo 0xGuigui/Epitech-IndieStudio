@@ -12,9 +12,6 @@ int main(void) {
     const int screenWidth = 1920;
     const int screenHeight = 1080;
 
-    InitAudioDevice();
-    Music music = LoadMusicStream("assets/SplashScreen/audios/splashscreen.wav");
-    PlayMusicStream(music);
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
     indie.window.Init(screenHeight, screenWidth, "[PLATANOS STUDIOS] - Indie Studio");
     indie.window.setMinSize(1, 1);
@@ -25,11 +22,19 @@ int main(void) {
 
     indie.window.setFPS(60);
 
+    indie.soundSplashScreen();
     while (!indie.window.isClosed()) {
+        // if (timePlayed == 0.0f) {
+        //     timePlayed += GetFrameTime();
+        // }
             if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();
             indie.displaySplashScreen();
+            timePlayed += GetFrameTime();
+            if (timePlayed > 5.0f) {
+                break;
+            }
             ClearBackground(RAYWHITE);
         EndDrawing();
     }
