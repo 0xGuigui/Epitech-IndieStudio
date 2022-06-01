@@ -8,14 +8,15 @@
 #pragma once
 
 #include "window.hpp"
+#include "audioDevice.hpp"
 
 class Indie {
     public:
         Indie();
         ~Indie();
         void displaySplashScreen();
+        bmb::IndieWindow window;
+        bmb::IndieAudioDevice audioDevice;
     protected:
     private:
-        bmb::IndieWindow _window;
-        Music _music;
 };
