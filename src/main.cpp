@@ -26,8 +26,6 @@ int main(void) {
             break;
         BeginDrawing();
 
-        if (indie.timePlayed > 5.0f)
-            break;
         ClearBackground(RAYWHITE);
         EndDrawing();
         indie[indie.state];
