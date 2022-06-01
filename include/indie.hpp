@@ -10,6 +10,12 @@
 #include "window.hpp"
 #include "audioDevice.hpp"
 
+enum indieState {
+    splashScreen,
+    mainMenu,
+    inGame
+};
+
 class Indie {
     public:
         Indie();
@@ -18,6 +24,8 @@ class Indie {
         void soundSplashScreen();
         bmb::IndieWindow window;
         bmb::IndieAudioDevice audioDevice;
+        indieState state = splashScreen;
     protected:
     private:
+
 };

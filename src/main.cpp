@@ -27,15 +27,16 @@ int main(void) {
         // if (timePlayed == 0.0f) {
         //     timePlayed += GetFrameTime();
         // }
-            if (IsKeyPressed(KEY_ESCAPE))
+        if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();
+        if (indie.state == splashScreen)
             indie.displaySplashScreen();
-            timePlayed += GetFrameTime();
-            if (timePlayed > 5.0f) {
-                break;
-            }
-            ClearBackground(RAYWHITE);
+        timePlayed += GetFrameTime();
+        if (timePlayed > 5.0f) {
+            break;
+        }
+        ClearBackground(RAYWHITE);
         EndDrawing();
     }
     return 0;
