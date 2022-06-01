@@ -10,9 +10,16 @@
 #include "includes.hpp"
 
 namespace bmb {
-	class Music {
+	class IndieMusic {
 		public:
-			Music() {};
+			IndieMusic() {};
+			IndieMusic(Music music) {
+				this->music = music;
+			}
+			Music getMusic() {
+				return this->music;
+			}
 		private:
+			Music music;
 	};
 };

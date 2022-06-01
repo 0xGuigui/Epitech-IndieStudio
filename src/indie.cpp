@@ -11,17 +11,23 @@ Indie::Indie() {}
 
 Indie::~Indie() {}
 
-void Indie::soundSplashScreen() {
-    Sound SplashScreenSound = LoadSound("assets/SplashScreen/audios/splashscreen.wav");
-    PlaySound(SplashScreenSound);
-}
-
 void Indie::displaySplashScreen() {
-    Texture2D SplashScreenImage = LoadTexture("assets/SplashScreen/images/splashscreen.png");
-    SplashScreenImage.width = 1920;
-    SplashScreenImage.height = 1080;
-    int x = (GetScreenWidth() - SplashScreenImage.width) / 2;
-    int y = (GetScreenHeight() - SplashScreenImage.height) / 2;
-    DrawTexture(SplashScreenImage, x, y, WHITE);
+	static Texture2D SplashScreenImage = LoadTexture("assets/SplashScreen/images/splashscreen.png");
+	static Sound SplashScreenSound = LoadSound("assets/SplashScreen/audios/splashscreen.wav");
+	static bool isPlaying = false;
+
+	if (!isPlaying) {
+		PlaySound(SplashScreenSound);
+		isPlaying = true;
+	}
+	SplashScreenImage.width = 1920;
+	SplashScreenImage.height = 1080;
+	int x = (GetScreenWidth() - SplashScreenImage.width) / 2;
+	int y = (GetScreenHeight() - SplashScreenImage.height) / 2;
+	DrawTexture(SplashScreenImage, x, y, WHITE);
+	if (this->timePlayed > 5.0f) {
+		this->state = mainMenu;
+		//Destroy textures ?
+	}
 }
 
