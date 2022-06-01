@@ -16,7 +16,8 @@ namespace bmb {
 			int height = 1080;
 			int width = 1920;
 		public:
-			IndieWindow(int screenHeight = 1080, int screenWidth = 1920, std::string title = "") {
+			IndieWindow() {};
+			IndieWindow(int screenHeight, int screenWidth, std::string title = "") {
 				InitWindow(screenWidth, screenHeight, title.c_str());
 				height = screenHeight;
 				width = screenWidth;
