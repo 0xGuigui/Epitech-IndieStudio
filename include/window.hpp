@@ -52,6 +52,9 @@ namespace bmb {
 			bool isMaximized() {
 				return IsWindowMaximized();
 			}
+			bool isFocused() {
+				return IsWindowFocused();
+			}
 			bool isResized() {
 				return IsWindowResized();
 			}
@@ -60,6 +63,18 @@ namespace bmb {
 			}
 			void setState(unsigned int flags) {
 				SetWindowState(flags);
+			}
+			void clearState(unsigned int flags = 0) {
+				ClearWindowState(flags);
+			}
+			void setTitle(const char *title) {
+				SetWindowTitle(title);
+			}
+			void setPosition(int x, int y) {
+				SetWindowPosition(x, y);
+			}
+			void setMinSize(int width, int height) {
+				SetWindowMinSize(width, height);
 			}
 	};
 };
