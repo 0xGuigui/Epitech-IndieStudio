@@ -25,6 +25,11 @@ namespace bmb {
 			~IndieWindow() {
 				CloseWindow();
 			}
+			void Init(int screenHeight, int screenWidth, std::string title = "") {
+				InitWindow(screenWidth, screenHeight, title.c_str());
+				height = screenHeight;
+				width = screenWidth;
+			}
 			int getHeight() {
 				return this->height;
 			}
