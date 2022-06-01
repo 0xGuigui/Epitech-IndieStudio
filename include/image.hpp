@@ -33,6 +33,7 @@ namespace bmb {
             }
             bool ExportAsCode(std::string filename) {
                 ExportImageAsCode(image, filename.c_str());
+                return true;
             }
             void GenerateColor(int width, int height, Color color) {
                 image = GenImageColor(width, height, color);

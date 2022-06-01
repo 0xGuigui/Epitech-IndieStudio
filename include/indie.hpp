@@ -14,8 +14,9 @@ class Indie {
         Indie();
         ~Indie();
         void displaySplashScreen();
+        void InitAudioDevice();
+        bmb::IndieWindow window;
     protected:
     private:
-        bmb::IndieWindow _window;
         Music _music;
 };
