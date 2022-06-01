@@ -4,6 +4,10 @@ bomberman
 # cmake gitignore
 CMakeLists.txt.user
 CMakeCache.txt
+CMakeList.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
+
 CMakeFiles
 CMakeScripts
 Testing
