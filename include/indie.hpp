@@ -16,6 +16,6 @@ class Indie {
         void displaySplashScreen();
     protected:
     private:
-        bmb::Window _window;
+        bmb::IndieWindow _window;
         Music _music;
 };

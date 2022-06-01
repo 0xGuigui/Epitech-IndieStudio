@@ -10,18 +10,18 @@
 #include "includes.hpp"
 
 namespace bmb {
-	class Window {
+	class IndieWindow {
 		private:
 			int fps = 60;
 			int height = 1080;
 			int width = 1920;
 		public:
-			Window(int screenHeight = 1080, int screenWidth = 1920, std::string title = "") {
+			IndieWindow(int screenHeight = 1080, int screenWidth = 1920, std::string title = "") {
 				InitWindow(screenWidth, screenHeight, title.c_str());
 				height = screenHeight;
 				width = screenWidth;
 			}
-			~Window() {
+			~IndieWindow() {
 				CloseWindow();
 			}
 			int getHeight() {
@@ -67,14 +67,17 @@ namespace bmb {
 			void clearState(unsigned int flags = 0) {
 				ClearWindowState(flags);
 			}
-			void setTitle(const char *title) {
-				SetWindowTitle(title);
+			void setTitle(std::string title) {
+				SetWindowTitle(title.c_str());
 			}
 			void setPosition(int x, int y) {
 				SetWindowPosition(x, y);
 			}
 			void setMinSize(int width, int height) {
 				SetWindowMinSize(width, height);
+			}
+			void setIcon(IndieImage icon) {
+				return SetWindowIcon(icon.getImage());
 			}
 	};
 };
