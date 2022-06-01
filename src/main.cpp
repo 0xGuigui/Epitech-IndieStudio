@@ -13,24 +13,22 @@ int main(void) {
     const int screenHeight = 1080;
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
-    InitWindow(screenWidth, screenHeight, "[PLATANOS STUDIOS] Indie Studio");
-    SetWindowMinSize(1, 1);
-
+    indie.window.Init(screenHeight, screenWidth, "[PLATANOS STUDIOS] - Indie Studio");
+    indie.window.setMinSize(1, 1);
     float timePlayed = 0.0f;
     bool pause = false;
     bool hasFilter = true;
     bool hasDelay = true;
 
-    SetTargetFPS(60);
+    indie.window.setFPS(60);
 
-    while (!WindowShouldClose())
-    {
+    while (!indie.window.isClosed()) {
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();
+            indie.displaySplashScreen();
             ClearBackground(RAYWHITE);
         EndDrawing();
     }
-    CloseWindow();
     return 0;
 }

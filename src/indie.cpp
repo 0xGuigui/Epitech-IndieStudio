@@ -13,15 +13,17 @@ Indie::~Indie() {}
 
 void Indie::displaySplashScreen() {
     Texture2D splashScreen = LoadTexture("assets/SplashScreen/images/splashscreen.png");
-    InitAudioDevice();
-    this->_music = LoadMusicStream("assets/SplashScreen/sounds/splashscreen.ogg");
+    // if (IsAudioDeviceReady()) {
+
+    // }
     this->_music.looping = false;
     splashScreen.width = 1920;
     splashScreen.height = 1080;
     int x = (GetScreenWidth() - splashScreen.width) / 2;
     int y = (GetScreenHeight() - splashScreen.height) / 2;
     DrawTexture(splashScreen, x, y, WHITE);
-    PlayMusicStream(this->_music);
-    UpdateMusicStream(this->_music);
+    //PlayMusicStream(this->_music);
+    //UpdateMusicStream(this->_music);
     return;
 }
+
