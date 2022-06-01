@@ -12,7 +12,9 @@ int main(void) {
     const int screenWidth = 1920;
     const int screenHeight = 1080;
 
-    //InitAudioDevice();
+    InitAudioDevice();
+    Music music = LoadMusicStream("assets/SplashScreen/audios/splashscreen.wav");
+    PlayMusicStream(music);
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
     indie.window.Init(screenHeight, screenWidth, "[PLATANOS STUDIOS] - Indie Studio");
     indie.window.setMinSize(1, 1);
