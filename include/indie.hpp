@@ -21,10 +21,21 @@ class Indie {
         Indie();
         ~Indie();
         void displaySplashScreen();
-        void soundSplashScreen();
         bmb::IndieWindow window;
         bmb::IndieAudioDevice audioDevice;
         indieState state = splashScreen;
+        void operator [] (indieState state) {
+            switch (state) {
+                case splashScreen:
+                    this->displaySplashScreen();
+                    break;
+                case mainMenu:
+                    break;
+                case inGame:
+                    break;
+            };
+        }
+        float timePlayed = 0.0f;
     protected:
     private:
 

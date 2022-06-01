@@ -15,29 +15,22 @@ int main(void) {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
     indie.window.Init(screenHeight, screenWidth, "[PLATANOS STUDIOS] - Indie Studio");
     indie.window.setMinSize(1, 1);
-    float timePlayed = 0.0f;
     bool pause = false;
     bool hasFilter = true;
     bool hasDelay = true;
 
     indie.window.setFPS(60);
 
-    indie.soundSplashScreen();
-    while (!indie.window.isClosed()) {
-        // if (timePlayed == 0.0f) {
-        //     timePlayed += GetFrameTime();
-        // }
+    for (; !indie.window.isClosed(); indie.timePlayed += GetFrameTime()) {
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();
-        if (indie.state == splashScreen)
-            indie.displaySplashScreen();
-        timePlayed += GetFrameTime();
-        if (timePlayed > 5.0f) {
+
+        if (indie.timePlayed > 5.0f)
             break;
-        }
         ClearBackground(RAYWHITE);
         EndDrawing();
+        indie[indie.state];
     }
     return 0;
 }
