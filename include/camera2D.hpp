@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <raylib.h>
+#include "vector2.hpp"
 
 namespace bmb {
 	class IndieCamera2D {
