@@ -13,17 +13,17 @@
 namespace bmb {
 	class IndieMatrix {
 		public:
-            IndieMatrix(float m00, float m01, float m02, float m03, float m04, float m05, float m06, float m07, float m08, float m09, float m10, float m11, float m12, float m13, float m14, float m15) {
-                _matrix.m00 = m00;
-                _matrix.m01 = m01;
-                _matrix.m02 = m02;
-                _matrix.m03 = m03;
-                _matrix.m04 = m04;
-                _matrix.m05 = m05;
-                _matrix.m06 = m06;
-                _matrix.m07 = m07;
-                _matrix.m08 = m08;
-                _matrix.m09 = m09;
+            IndieMatrix(float m0, float m1, float m2, float m3, float m4, float m5, float m6, float m7, float m8, float m9, float m10, float m11, float m12, float m13, float m14, float m15) {
+                _matrix.m0 = m0;
+                _matrix.m1 = m1;
+                _matrix.m2 = m2;
+                _matrix.m3 = m3;
+                _matrix.m4 = m4;
+                _matrix.m5 = m5;
+                _matrix.m6 = m6;
+                _matrix.m7 = m7;
+                _matrix.m8 = m8;
+                _matrix.m9 = m9;
                 _matrix.m10 = m10;
                 _matrix.m11 = m11;
                 _matrix.m12 = m12;
