@@ -21,6 +21,7 @@ class Indie {
         Indie();
         ~Indie();
         void displaySplashScreen();
+        void displayMainMenu();
         bmb::IndieWindow window;
         bmb::IndieAudioDevice audioDevice;
         indieState state = splashScreen;
@@ -30,6 +31,7 @@ class Indie {
                     this->displaySplashScreen();
                     break;
                 case mainMenu:
+                    this->displayMainMenu();
                     break;
                 case inGame:
                     break;
