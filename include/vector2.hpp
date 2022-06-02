@@ -23,6 +23,9 @@ namespace bmb {
             float getY() {
                 return _vector.y;
             }
+            operator Vector2 () {
+                return _vector;
+            }
 		private:
             Vector2 _vector;
 	};
