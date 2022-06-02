@@ -16,7 +16,7 @@ namespace bmb {
 			IndieMusic(Music music) {
 				this->music = music;
 			}
-			Music getMusic() {
+			operator Music () {
 				return this->music;
 			}
 		private:

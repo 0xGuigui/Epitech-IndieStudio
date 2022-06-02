@@ -34,6 +34,9 @@ namespace bmb {
 			void Alpha(float alpha) {
 				this->color = ColorAlpha(this->color, alpha);
 			}
+			operator Color () {
+				return this->color;
+			}
 		private:
 			Color color;
 	};
