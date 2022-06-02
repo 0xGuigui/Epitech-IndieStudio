@@ -13,6 +13,10 @@
 enum indieState {
     splashScreen,
     mainMenu,
+    singlePlayerMenu,
+    multiplayerMenu,
+    optionsMenu,
+    quitGameMenu,
     inGame
 };
 
@@ -21,7 +25,13 @@ class Indie {
         Indie();
         ~Indie();
         void displaySplashScreen();
-        void displayMainMenu();
+        void displayMainMenu(float musicTime);
+        void displaySinglePlayerMenu(float musicTime);
+        void displayMultiplayerMenu();
+        void displayOptionsMenu();
+        void displayQuitGameMenu();
+        float getTimeMusicPlayed();
+        float setTimeMusicPlayed(int time);
         bmb::IndieWindow window;
         bmb::IndieAudioDevice audioDevice;
         indieState state = splashScreen;
@@ -31,13 +41,18 @@ class Indie {
                     this->displaySplashScreen();
                     break;
                 case mainMenu:
-                    this->displayMainMenu();
+                    this->displayMainMenu(this->getTimeMusicPlayed());
+                    break;
+                case singlePlayerMenu:
+                    this->displaySinglePlayerMenu(this->getTimeMusicPlayed());
+
                     break;
                 case inGame:
                     break;
             };
         }
         float timePlayed = 0.0f;
+        float _musicPlayed = 0.0f;
     protected:
     private:
 
