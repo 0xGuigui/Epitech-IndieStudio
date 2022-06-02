@@ -5,7 +5,9 @@
 ** screen
 */
 
-#include "includes.hpp"
+#pragma once
+
+#include <raylib.h>
 
 //Rajouter le Indie devant les matrix etc..
 namespace bmb {
@@ -20,7 +22,7 @@ namespace bmb {
                 return GetScreenHeight();
             }
             Ray GetMouseRay(Vector2 mousePosition, Camera camera) {
-                return ::GetMouseRay(Vector2 mousePosition, Camera camera);
+                return ::GetMouseRay(mousePosition, camera);
             }
             Matrix GetCameraMatrix(Camera camera) {
                 return ::GetCameraMatrix(camera);
@@ -28,16 +30,16 @@ namespace bmb {
             Matrix GetCameraMatrix2D(Camera camera) {
                 return ::GetCameraMatrix2D(camera);
             }
-            Vector2 GetWorldToScreen(Vector3 position, Camera camera) {
+            IndieVector2 GetWorldToScreen(Vector3 position, Camera camera) {
                 return ::GetMousePosition(position, camera);
             }
-            Vector2 GetWorldToScreenEx(Vector3 position, Camera camera) {
+            IndieVector2 GetWorldToScreenEx(Vector3 position, Camera camera) {
                 return ::GetWorldToScreenEx(position, camera);
             }
-            Vector2 GetWorldToScreen2D(Vector2 position, Camera camera) {
+            IndieVector2 GetWorldToScreen2D(Vector2 position, Camera camera) {
                 return ::GetWorldToScreen2D(position, camera);
             }
-            Vector2 GetScreenToWorld2D(Vector2 position, Camera camera) {
+            IndieVector2 GetScreenToWorld2D(Vector2 position, Camera camera) {
                 return ::GetScreenToWorld2D(position, camera);
             }
 		private:
