@@ -17,6 +17,9 @@ namespace bmb {
                 _vector.x = x;
                 _vector.z = z;
             }
+            IndieVector3(Vector3 vec) {
+                _vector = vec;
+            }
 			~IndieVector3() {};
             float getX() {
                 return _vector.x;
