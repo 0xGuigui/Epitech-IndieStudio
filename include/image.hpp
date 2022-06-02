@@ -22,6 +22,9 @@ namespace bmb {
             IndieImage(std::string filename) {
                 image = LoadImage(filename.c_str());
             };
+            IndieImage(IndieImage &image) {
+                this->image = ImageCopy(image.getImage());
+            }
             void LoadRaw(std::string filename, int width, int height, int format, int headerSize) {
                 image = LoadImageRaw(filename.c_str(), width, height, format, headerSize);
             }
@@ -46,6 +49,15 @@ namespace bmb {
             }
             void GenerateGradientRadial(int width, int height, float density, Color inner, Color outer) {
                 image = GenImageGradientRadial(width, height, density, inner, outer);
+            }
+            void GenerateChecked(int width, int height, int checksX, int checksY, Color col1, Color col2) {
+                image = GenImageChecked(width, height, checksX, checksY, col1, col2);
+            }
+            void GenerateWhiteNoise(int width, int height, float factor) {
+                image = GenImageWhiteNoise(width, height, factor);
+            }
+            void GenerateImageCellular(int width, int height, int tileSize) {
+                image = GenImageCellular(width, height, tileSize);
             }
         private:
             Image image;
