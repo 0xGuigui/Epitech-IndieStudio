@@ -17,8 +17,15 @@ namespace bmb {
                 _camera2D.rotation = rotation;
                 _camera2D.target = target;
                 _camera2D.offset = offset;
+                BeginMode2D(_camera2D);
             }
 			~IndieCamera2D() {};
+            IndieCamera2D(Camera2D camera) {
+                _camera2D = camera;
+            }
+            void Begin() {
+                BeginMode2D(_camera2D);
+            }
             float getRotation() {
                 return _camera2D.rotation;
             }
