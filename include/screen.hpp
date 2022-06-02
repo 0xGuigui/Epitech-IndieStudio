@@ -21,13 +21,13 @@ namespace bmb {
             int GetHeight() {
                 return GetScreenHeight();
             }
-            Ray GetMouseRay(IndieVector2 mousePosition, IndieCamera camera) {
+            IndieRay GetMouseRay(IndieVector2 mousePosition, IndieCamera camera) {
                 return ::GetMouseRay(mousePosition, camera);
             }
-            Matrix GetCameraMatrix(IndieCamera camera) {
+            IndieMatrix GetCameraMatrix(IndieCamera camera) {
                 return ::GetCameraMatrix(camera);
             }
-            Matrix GetCameraMatrix2D(IndieCamera camera) {
+            InndieMatrix GetCameraMatrix2D(IndieCamera camera) {
                 return ::GetCameraMatrix2D(camera);
             }
             IndieVector2 GetWorldToScreen(IndieVector3 position, IndieCamera camera) {
