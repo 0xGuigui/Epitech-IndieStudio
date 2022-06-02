@@ -5,6 +5,8 @@
 ** include
 */
 
+#pragma once
+
 #include "includes.hpp"
 
 namespace bmb {
