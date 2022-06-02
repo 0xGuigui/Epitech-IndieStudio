@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <raylib.h>
+#include "includes.hpp"
 
 //si besoin de get plusieurs valeurs, add les get
 namespace bmb {

@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "includes.hpp"
+#include "image.hpp"
 
 namespace bmb {
 	class IndieWindow {
