@@ -92,7 +92,7 @@ void Indie::displayMainMenu(float musicTime) {
 		} else
 			PlayMusicStream(MainMenuMusic);
 	}
-	
+
 	timePlayed += GetFrameTime();
 	mainMenuBackground.width = 1920;
     mainMenuBackground.height = 1080;
@@ -240,7 +240,6 @@ void Indie::displaySinglePlayerMenu(float musicTime) {
 	static Rectangle cancelButtonBounds = { middle_x + 1100, middle_y + 850, cancelButton.width, cancelButton.height };
 	static Rectangle cancelButtonHighlightedBounds = { middle_x + 1100, middle_y + 850, cancelButtonHighlighted.width, cancelButtonHighlighted.height };
 
-	//If the window is resized, adapt the position of the buttons with correct proportions and keep a margin of 20 pixels minimum with the window
 	if (GetScreenWidth() != mainMenuBackground.width || GetScreenHeight() != mainMenuBackground.height) {
 		middle_x = (GetScreenWidth() - mainMenuBackground.width) / 2;
 		middle_y = (GetScreenHeight() - mainMenuBackground.height) / 2;
