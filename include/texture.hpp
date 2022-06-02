@@ -7,7 +7,8 @@
 
 #pragma once
 
-#include "includes.hpp"
+#include "color.hpp"
+#include "vector2.hpp"
 
 namespace bmb {
 	class IndieTexture2D {
@@ -37,6 +38,18 @@ namespace bmb {
 			void updateTextureRec(Rectangle source, const void *pixels) {
 				UpdateTextureRec(texture, source, pixels);
 			};
+			void Draw(int posX, int posY, IndieColor &tint) {
+				DrawTexture(texture, posX, posY, tint);
+			}
+			void DrawV(IndieVector2 &position, IndieColor &tint) {
+				DrawTextureV(texture, position, tint);
+			}
+			void DrawEx(IndieVector2 &position, float rotation, float scale, IndieColor &tint) {
+				DrawTextureEx(texture, position, rotation, scale, tint);
+			}
+			// TODO encapsuler Rectangle
+			void DrawRec() {}
+			// TODO reste du draw
 			operator Texture2D () {
 				return texture;
 			};
