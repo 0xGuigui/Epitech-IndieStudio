@@ -11,6 +11,15 @@ Indie::Indie() {}
 
 Indie::~Indie() {}
 
+float Indie::getTimeMusicPlayed() {
+	return this->_musicPlayed;
+}
+
+float Indie::setTimeMusicPlayed(int time) {
+	this->_musicPlayed = time;
+	return this->_musicPlayed;
+}
+
 void Indie::displaySplashScreen() {
 	static Texture2D SplashScreenImage = LoadTexture("assets/SplashScreen/images/splashscreen.png");
 	static Sound SplashScreenSound = LoadSound("assets/SplashScreen/audios/splashscreen.ogg");
@@ -25,6 +34,22 @@ void Indie::displaySplashScreen() {
 	int x = (GetScreenWidth() - SplashScreenImage.width) / 2;
 	int y = (GetScreenHeight() - SplashScreenImage.height) / 2;
 	DrawTexture(SplashScreenImage, x, y, WHITE);
+	if (this->timePlayed > 5.0f)
+		DrawRectangle(x + (SplashScreenImage.width / 2) - (SplashScreenImage.width / 4), 500 + (SplashScreenImage.height / 2) - (SplashScreenImage.height / 4), SplashScreenImage.width / 2, SplashScreenImage.height / 32, WHITE);
+	else
+		DrawRectangle(x + (SplashScreenImage.width / 2) - (SplashScreenImage.width / 4), 500 + (SplashScreenImage.height / 2) - (SplashScreenImage.height / 4), SplashScreenImage.width / 2 * this->timePlayed / 5.0f, SplashScreenImage.height / 32, WHITE);
+	//if the window is resized, the splashscreen and the progress bar are resized too
+	if (GetScreenWidth() != 1920 || GetScreenHeight() != 1080) {
+		SplashScreenImage.width = GetScreenWidth();
+		SplashScreenImage.height = GetScreenHeight();
+		x = (GetScreenWidth() - SplashScreenImage.width) / 2;
+		y = (GetScreenHeight() - SplashScreenImage.height) / 2;
+		DrawTexture(SplashScreenImage, x, y, WHITE);
+		if (this->timePlayed > 5.0f)
+			DrawRectangle(x + (SplashScreenImage.width / 2) - (SplashScreenImage.width / 4), 500 + (SplashScreenImage.height / 2) - (SplashScreenImage.height / 4), SplashScreenImage.width / 2, SplashScreenImage.height / 32, WHITE);
+		else
+			DrawRectangle(x + (SplashScreenImage.width / 2) - (SplashScreenImage.width / 4), 500 + (SplashScreenImage.height / 2) - (SplashScreenImage.height / 4), SplashScreenImage.width / 2 * this->timePlayed / 5.0f, SplashScreenImage.height / 32, WHITE);
+	}
 	if (this->timePlayed > 5.0f) {
 		this->state = mainMenu;
 		isPlaying = false;
@@ -32,8 +57,8 @@ void Indie::displaySplashScreen() {
 	}
 }
 
-void Indie::displayMainMenu() {
-    static Texture2D MainMenuImage = LoadTexture("assets/MainMenu/images/mainmenu.png");
+void Indie::displayMainMenu(float musicTime) {
+    static Texture2D mainMenuBackground = LoadTexture("assets/MainMenu/images/mainmenu.png");
 	static Texture2D TitleImage = LoadTexture("assets/MainMenu/images/IndieCraft.png");
 	static Texture2D singleplayer = LoadTexture("assets/MainMenu/images/buttons/singleplayer.png");
 	static Texture2D singleplayerHighlighted = LoadTexture("assets/MainMenu/images/buttons/singleplayer_highlight.png");
@@ -52,6 +77,7 @@ void Indie::displayMainMenu() {
 	static float frameHeightQuitgame = (float)quitgame.height/3;
 	static float frameHeightAccessibility = (float)accessibility.height/3;
     static Music MainMenuMusic = LoadMusicStream("assets/MainMenu/audios/Moog-City.mp3");
+	static Sound buttonSound = LoadSound("assets/MainMenu/audios/button.ogg");
     static bool isPlaying = false;
     MainMenuMusic.looping = true;
     static Vector2 mousePoint = { 0.0f, 0.0f };
@@ -59,17 +85,22 @@ void Indie::displayMainMenu() {
 
 
     if (!isPlaying) {
-        PlayMusicStream(MainMenuMusic);
-        isPlaying = true;
+        if (musicTime != 0) {
+		SeekMusicStream(MainMenuMusic, musicTime);
+		PlayMusicStream(MainMenuMusic);
+		isPlaying = true;
+		} else
+			PlayMusicStream(MainMenuMusic);
 	}
+	
 	timePlayed += GetFrameTime();
-	MainMenuImage.width = 1920;
-    MainMenuImage.height = 1080;
-    float mainMenuBackground_x = (GetScreenWidth() - MainMenuImage.width) / 2;
-    float mainMenuBackground_y = (GetScreenHeight() - MainMenuImage.height) / 2;
-	float middle_x = (GetScreenWidth() - TitleImage.width) / 2;
-	float middle_y = (GetScreenHeight() - TitleImage.height) / 2;
-    DrawTexture(MainMenuImage, mainMenuBackground_x, mainMenuBackground_y, WHITE);
+	mainMenuBackground.width = 1920;
+    mainMenuBackground.height = 1080;
+    static float mainMenuBackground_x = (GetScreenWidth() - mainMenuBackground.width) / 2;
+    static float mainMenuBackground_y = (GetScreenHeight() - mainMenuBackground.height) / 2;
+	static float middle_x = (GetScreenWidth() - TitleImage.width) / 2;
+	static float middle_y = (GetScreenHeight() - TitleImage.height) / 2;
+    DrawTexture(mainMenuBackground, mainMenuBackground_x, mainMenuBackground_y, WHITE);
 	DrawTexture(TitleImage, middle_x, 75, WHITE);
 	DrawTexture(singleplayer, middle_x, middle_y + 50, WHITE);
 	DrawTexture(multiplayer, middle_x, middle_y + 150, WHITE);
@@ -103,11 +134,11 @@ void Indie::displayMainMenu() {
 
 
 	// Ce truc sera a adapter partout pour éviter de péter le jeu et les boutons si la window est redimensionnée
-	if (GetScreenWidth() != MainMenuImage.width || GetScreenHeight() != MainMenuImage.height) {
-		MainMenuImage.width = GetScreenWidth();
-		MainMenuImage.height = GetScreenHeight();
-		mainMenuBackground_x = (GetScreenWidth() - MainMenuImage.width) / 2;
-		mainMenuBackground_y = (GetScreenHeight() - MainMenuImage.height) / 2;
+	if (GetScreenWidth() != mainMenuBackground.width || GetScreenHeight() != mainMenuBackground.height) {
+		mainMenuBackground.width = GetScreenWidth();
+		mainMenuBackground.height = GetScreenHeight();
+		mainMenuBackground_x = (GetScreenWidth() - mainMenuBackground.width) / 2;
+		mainMenuBackground_y = (GetScreenHeight() - mainMenuBackground.height) / 2;
 		middle_x = (GetScreenWidth() - TitleImage.width) / 2;
 		middle_y = (GetScreenHeight() - TitleImage.height) / 2;
 		singleplayerBounds.x = middle_x;
@@ -132,19 +163,109 @@ void Indie::displayMainMenu() {
 		accessibilityHighlightedBounds.y = middle_y + 250;
 	}
 
-	if (CheckCollisionPointRec(mousePoint, singleplayerBounds))
+	if (CheckCollisionPointRec(mousePoint, singleplayerBounds)) {
 		DrawTexture(singleplayerHighlighted, middle_x, middle_y + 50, WHITE);
-	if (CheckCollisionPointRec(mousePoint, multiplayerBounds))
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+			PlaySound(buttonSound);
+			this->_musicPlayed = GetMusicTimePlayed(MainMenuMusic);
+			StopMusicStream(MainMenuMusic);
+			this->state = singlePlayerMenu;
+		}
+	}
+	if (CheckCollisionPointRec(mousePoint, multiplayerBounds)) {
 		DrawTexture(multiplayerHighlighted, middle_x, middle_y + 150, WHITE);
-	if (CheckCollisionPointRec(mousePoint, optionsBounds))
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+			PlaySound(buttonSound);
+			//this->state = multiPlayerMenu;
+		}
+	}
+	if (CheckCollisionPointRec(mousePoint, optionsBounds)) {
 		DrawTexture(optionsHighlighted, middle_x, middle_y + 250, WHITE);
-	if (CheckCollisionPointRec(mousePoint, quitgameBounds))
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+			PlaySound(buttonSound);
+			//this->state = optionsMenu;
+		}
+	}
+	if (CheckCollisionPointRec(mousePoint, quitgameBounds)) {
 		DrawTexture(quitgameHighlighted, middle_x + 408, middle_y + 250, WHITE);
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+			PlaySound(buttonSound);
+			//this->state = quitGameMenu;
+		}
+	}
 	if (CheckCollisionPointRec(mousePoint, accessibilityBounds)) {
 		DrawTexture(accessibilityHighlighted, middle_x + 825, middle_y + 250, WHITE);
-		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+			PlaySound(buttonSound);
 			OpenURL("https://bit.ly/3PSsHwZ");
+		}
 	}
     UpdateMusicStream(MainMenuMusic);
 }
 
+void Indie::displaySinglePlayerMenu(float musicTime) {
+	static Texture2D mainMenuBackground = LoadTexture("assets/MainMenu/images/background_options.png");
+	static Texture2D playButton = LoadTexture("assets/MainMenu/images/buttons/play.png");
+	static Texture2D playButtonHighlighted = LoadTexture("assets/MainMenu/images/buttons/play_highlight.png");
+	static Texture2D cancelButton = LoadTexture("assets/MainMenu/images/buttons/cancel.png");
+	static Texture2D cancelButtonHighlighted = LoadTexture("assets/MainMenu/images/buttons/cancel_highlight.png");
+	static Sound buttonSound = LoadSound("assets/MainMenu/audios/button.ogg");
+    static Music MainMenuMusic = LoadMusicStream("assets/MainMenu/audios/Moog-City.mp3");
+	static float frameHeightPlayButton = (float)playButton.height/3;
+	static float frameHeightCancelButton = (float)cancelButton.height/3;
+	static Vector2 mousePoint = { 0.0f, 0.0f };
+	mousePoint = GetMousePosition();
+
+	static float musicPlayed = this->_musicPlayed;
+	static bool isPlaying = false;
+    MainMenuMusic.looping = true;
+
+	if (musicTime != 0 && !isPlaying) {
+		SeekMusicStream(MainMenuMusic, musicTime);
+		PlayMusicStream(MainMenuMusic);
+		isPlaying = true;
+	}
+
+	static float middle_x = (GetScreenWidth() - mainMenuBackground.width) / 2;
+	static float middle_y = (GetScreenHeight() - mainMenuBackground.height) / 2;
+	static float mainMenuBackground_x = (GetScreenWidth() - mainMenuBackground.width) / 2;
+    static float mainMenuBackground_y = (GetScreenHeight() - mainMenuBackground.height) / 2;
+
+	DrawTexture(mainMenuBackground, mainMenuBackground_x, mainMenuBackground_y, WHITE);
+	DrawTexture(playButton, middle_x + 200, middle_y + 850, WHITE);
+	DrawTexture(cancelButton, middle_x + 1100, middle_y + 850, WHITE);
+
+	static Rectangle playButtonBounds = { middle_x + 200, middle_y + 850, playButton.width, playButton.height };
+	static Rectangle playButtonHighlightedBounds = { middle_x + 200, middle_y + 850, playButtonHighlighted.width, playButtonHighlighted.height };
+	static Rectangle cancelButtonBounds = { middle_x + 1100, middle_y + 850, cancelButton.width, cancelButton.height };
+	static Rectangle cancelButtonHighlightedBounds = { middle_x + 1100, middle_y + 850, cancelButtonHighlighted.width, cancelButtonHighlighted.height };
+
+	//If the window is resized, adapt the position of the buttons with correct proportions and keep a margin of 20 pixels minimum with the window
+	if (GetScreenWidth() != mainMenuBackground.width || GetScreenHeight() != mainMenuBackground.height) {
+		middle_x = (GetScreenWidth() - mainMenuBackground.width) / 2;
+		middle_y = (GetScreenHeight() - mainMenuBackground.height) / 2;
+		mainMenuBackground_x = (GetScreenWidth() - mainMenuBackground.width) / 2;
+		mainMenuBackground_y = (GetScreenHeight() - mainMenuBackground.height) / 2;
+		playButtonBounds.x = middle_x + 200;
+		playButtonBounds.y = middle_y + 850;
+		playButtonHighlightedBounds.x = middle_x + 200;
+		playButtonHighlightedBounds.y = middle_y + 850;
+		cancelButtonBounds.x = middle_x + 1100;
+		cancelButtonBounds.y = middle_y + 850;
+		cancelButtonHighlightedBounds.x = middle_x + 1100;
+		cancelButtonHighlightedBounds.y = middle_y + 850;
+	}
+
+
+	if (CheckCollisionPointRec(mousePoint, playButtonBounds))
+		DrawTexture(playButtonHighlighted, middle_x + 200, middle_y + 850, WHITE);
+	if (CheckCollisionPointRec(mousePoint, cancelButtonBounds)) {
+		DrawTexture(cancelButtonHighlighted, middle_x + 1100, middle_y + 850, WHITE);
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+			PlaySound(buttonSound);
+			StopMusicStream(MainMenuMusic);
+			this->state = mainMenu;
+		}
+	}
+	UpdateMusicStream(MainMenuMusic);
+}
