@@ -8,58 +8,58 @@
 #pragma once
 
 #include "color.hpp"
+#include <string>
 
 namespace bmb {
     class IndieImage {
+        private:
+            Image _image{};
+
         public:
-            IndieImage() {}
+            IndieImage() = default;
             ~IndieImage() {
-                UnloadImage(image);
+                UnloadImage(_image);
             }
-            IndieImage(std::string filename) {
-                image = LoadImage(filename.c_str());
-            };
-            IndieImage(IndieImage &image) {
-                this->image = ImageCopy(image.getImage());
+            explicit IndieImage(const std::string& filename) : _image(LoadImage(filename.c_str())) {}
+            IndieImage(const IndieImage &image) {
+                this->_image = ImageCopy(image.getImage());
             }
             void LoadRaw(const std::string &filename, int width, int height, int format, int headerSize) {
-                image = LoadImageRaw(filename.c_str(), width, height, format, headerSize);
+                _image = LoadImageRaw(filename.c_str(), width, height, format, headerSize);
             }
-            Image getImage() {
-                return image;
+            Image getImage() const {
+                return _image;
             }
             bool Export(const std::string &filename) {
-                return ExportImage(image, filename.c_str());
+                return ExportImage(_image, filename.c_str());
             }
             bool ExportAsCode(const std::string &filename) {
-                ExportImageAsCode(image, filename.c_str());
+                ExportImageAsCode(_image, filename.c_str());
                 return true;
             }
             void GenerateColor(int width, int height, IndieColor &color) {
-                image = GenImageColor(width, height, color);
+                _image = GenImageColor(width, height, color);
             }
             void GenerateGradientV(int width, int height, IndieColor &top, IndieColor &bottom) {
-                image = GenImageGradientV(width, height, top, bottom);
+                _image = GenImageGradientV(width, height, top, bottom);
             }
             void GenerateGradientH(int width, int height, IndieColor &left, IndieColor &right) {
-                image = GenImageGradientH(width, height, left, right);
+                _image = GenImageGradientH(width, height, left, right);
             }
             void GenerateGradientRadial(int width, int height, float density, IndieColor &inner, IndieColor &outer) {
-                image = GenImageGradientRadial(width, height, density, inner, outer);
+                _image = GenImageGradientRadial(width, height, density, inner, outer);
             }
             void GenerateChecked(int width, int height, int checksX, int checksY, IndieColor &col1, IndieColor &col2) {
-                image = GenImageChecked(width, height, checksX, checksY, col1, col2);
+                _image = GenImageChecked(width, height, checksX, checksY, col1, col2);
             }
             void GenerateWhiteNoise(int width, int height, float factor) {
-                image = GenImageWhiteNoise(width, height, factor);
+                _image = GenImageWhiteNoise(width, height, factor);
             }
             void GenerateImageCellular(int width, int height, int tileSize) {
-                image = GenImageCellular(width, height, tileSize);
+                _image = GenImageCellular(width, height, tileSize);
             }
-            operator Image () {
-                return this->image;
+            operator Image() const {
+                return _image;
             }
-        private:
-            Image image;
     };
 };

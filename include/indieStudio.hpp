@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "image.hpp"
-#include "music.hpp"
-#include "texture.hpp"
-#include "window.hpp"
+#include "encapsulation/image.hpp"
+#include "encapsulation/music.hpp"
+#include "encapsulation/texture.hpp"
+#include "encapsulation/window.hpp"
 #include "indie.hpp"

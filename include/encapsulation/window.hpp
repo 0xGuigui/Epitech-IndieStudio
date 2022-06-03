@@ -12,38 +12,38 @@
 namespace bmb {
 	class IndieWindow {
 		private:
-			int fps = 60;
-			int height = 1080;
-			int width = 1920;
+			int _fps = 60;
+			int _height = 1080;
+			int _width = 1920;
 		public:
-			IndieWindow() {};
-			IndieWindow(int screenHeight, int screenWidth, std::string title = "") {
+			IndieWindow() = default;;
+			IndieWindow(int screenHeight, int screenWidth, const std::string& title = "") {
 				InitWindow(screenWidth, screenHeight, title.c_str());
-				height = screenHeight;
-				width = screenWidth;
+				_height = screenHeight;
+				_width = screenWidth;
 			}
 			~IndieWindow() {
 				CloseWindow();
 			}
-			void Init(int screenHeight, int screenWidth, std::string title = "") {
+			void Init(int screenHeight, int screenWidth, const std::string& title = "") {
 				InitWindow(screenWidth, screenHeight, title.c_str());
-				height = screenHeight;
-				width = screenWidth;
+				_height = screenHeight;
+				_width = screenWidth;
 			}
-			int getHeight() {
-				return this->height;
+			int getHeight() const {
+				return _height;
 			}
-			int getWidth() {
-				return this->width;
+			int getWidth() const {
+				return _width;
 			}
 			void setFPS(int fps) {
 				SetTargetFPS(fps);
-				this->fps = fps;
+				_fps = fps;
 			}
-			int getFPS() {
-				return this->fps;
+			int getFPS() const {
+				return _fps;
 			}
-			bool isClosed() {
+			static bool isClosed() {
 				return WindowShouldClose();
 			}
 			bool isReady() {
@@ -73,17 +73,17 @@ namespace bmb {
 			void clearState(unsigned int flags = 0) {
 				ClearWindowState(flags);
 			}
-			void setTitle(std::string title) {
+			static void setTitle(const std::string& title) {
 				SetWindowTitle(title.c_str());
 			}
 			void setPosition(int x, int y) {
 				SetWindowPosition(x, y);
 			}
-			void setMinSize(int width, int height) {
+			static void setMinSize(int width, int height) {
 				SetWindowMinSize(width, height);
 			}
 			void setIcon(IndieImage icon) {
 				return SetWindowIcon(icon.getImage());
 			}
 	};
-};
+}
