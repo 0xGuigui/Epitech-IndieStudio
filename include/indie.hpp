@@ -35,7 +35,7 @@ class Indie {
         bmb::IndieWindow window;
         bmb::IndieAudioDevice audioDevice;
         indieState state = splashScreen;
-        void operator [] (indieState state) {
+        void operator () (indieState state) {
             switch (state) {
                 case splashScreen:
                     this->displaySplashScreen();

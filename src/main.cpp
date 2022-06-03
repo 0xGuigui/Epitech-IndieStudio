@@ -28,7 +28,7 @@ int main(void) {
 
         ClearBackground(RAYWHITE);
         EndDrawing();
-        indie[indie.state];
+        indie(indie.state);
     }
     return 0;
 }
