@@ -7,11 +7,14 @@
 
 #pragma once
 
-#include "includes.hpp"
+#include "raylib.h"
 
 //si besoin de get plusieurs valeurs, add les get
 namespace bmb {
 	class IndieMatrix {
+        private:
+            Matrix _matrix;
+
 		public:
             IndieMatrix(float m0, float m1, float m2, float m3, float m4, float m5, float m6, float m7, float m8, float m9, float m10, float m11, float m12, float m13, float m14, float m15) {
                 _matrix.m0 = m0;
@@ -31,11 +34,10 @@ namespace bmb {
                 _matrix.m14 = m14;
                 _matrix.m15 = m15;
             };
+            IndieMatrix (const Matrix &matrix) : _matrix(matrix) {};
             ~IndieMatrix() {};
-            operator Matrix () {
+            operator Matrix() const {
                 return _matrix;
             }
-		private:
-            Matrix _matrix;
 	};
 };

@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "window.hpp"
-#include "audioDevice.hpp"
+#include "encapsulation/window.hpp"
+#include "encapsulation/audioDevice.hpp"
 
 enum indieState {
     splashScreen,
