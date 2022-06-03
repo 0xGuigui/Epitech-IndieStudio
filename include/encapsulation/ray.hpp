@@ -8,6 +8,7 @@
 #pragma once
 
 #include "raylib.h"
+#include "vector.hpp"
 
 namespace bmb {
     class IndieRay {
