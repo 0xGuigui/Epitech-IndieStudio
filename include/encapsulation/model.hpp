@@ -12,7 +12,8 @@ namespace bmb {
 	class IndieModel {
 		public:
 			IndieModel() = default;
-			explicit IndieModel(const Model &model) : _model(model) {};
+
+			IndieModel(const Model &model) : _model(model) {};
 
 			explicit IndieModel(const std::string &fileName) : _model(::LoadModel(fileName.c_str())) {};
 
