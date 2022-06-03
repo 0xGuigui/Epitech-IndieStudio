@@ -13,10 +13,10 @@ namespace bmb {
     class IndieRay {
     public:
         IndieRay(const Ray &ray) : _ray(ray) {};
-        IndieRay(bool hit, float distance) {
-            _ray.hit = false;
-            _ray.distance = 0;
-        };
+        IndieRay(IndieVector3 position, IndieVector3 direction) {
+            _ray.direction = direction;
+            _ray.position = position;
+        }
         operator Ray() const {
             return _ray;
         }
