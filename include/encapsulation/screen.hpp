@@ -9,7 +9,6 @@
 
 #include "vector.hpp"
 #include "ray.hpp"
-#include "camera3d.hpp"
 #include "camera.hpp"
 #include "matrix.hpp"
 
