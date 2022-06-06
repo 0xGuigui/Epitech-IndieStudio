@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <string>
 #include "raylib.h"
 
 namespace bmb {
@@ -20,6 +21,9 @@ namespace bmb {
 			//Load from memory
 			IndieMusic(const std::string &fileType, unsigned char *data, int dataSize) :
                 _music(LoadMusicStreamFromMemory(fileType.c_str(), data, dataSize)) {};
+			IndieMusic(Music music) {
+				this->_music = music;
+			}
 			~IndieMusic() {
 				UnloadMusicStream(_music);
 			}
