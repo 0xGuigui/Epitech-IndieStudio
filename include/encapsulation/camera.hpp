@@ -73,5 +73,8 @@ namespace bmb {
         operator Camera() const {
             return _camera;
         }
+        operator Camera *() {
+            return &_camera;
+        }
     };
 };
