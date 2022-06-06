@@ -12,6 +12,7 @@ using namespace bmb;
 void Indie::displaySplashScreen() {
 	static IndieTexture2D SplashScreenImage("assets/SplashScreen/images/splashscreen.png");
 	static IndieSound SplashScreenSound("assets/SplashScreen/audios/splashscreen.ogg");
+	static IndieSound closeSound("assets/SplashScreen/audios/close.ogg");
 	// static IndieRectangle SplashScreenProgressBar(0, 0, 0, 0);
 	static bool isPlaying = false;
 
@@ -20,13 +21,17 @@ void Indie::displaySplashScreen() {
 		isPlaying = true;
 	}
 	//Get screen size
-
+	if (IsKeyPressed(KEY_ESCAPE)) {
+			closeSound.Play();
+			while (closeSound.isPlaying());
+			exit(0);
+	}
 	SplashScreenImage.setWidth(this->_screenWidth);
 	SplashScreenImage.setHeight(this->_screenHeight);
 	int x = (this->screen.GetWidth() - SplashScreenImage.getWidth()) / 2;
 	int y = (this->screen.GetHeight() - SplashScreenImage.getHeight()) / 2;
 	SplashScreenImage.Draw(x, y, WHITE);
-	if (this->timePlayed > 5.0f)
+	if (this->timePlayed > 5.0f) //@TODO a changer
 		DrawRectangle(x + (SplashScreenImage.getWidth() / 2) - (SplashScreenImage.getWidth() / 4), 500 + (SplashScreenImage.getHeight() / 2) - (SplashScreenImage.getHeight() / 4), SplashScreenImage.getWidth() / 2, SplashScreenImage.getHeight() / 32, WHITE);
 	else
 		DrawRectangle(x + (SplashScreenImage.getWidth() / 2) - (SplashScreenImage.getWidth() / 4), 500 + (SplashScreenImage.getHeight() / 2) - (SplashScreenImage.getHeight() / 4), SplashScreenImage.getWidth() / 2 * this->timePlayed / 5.0f, SplashScreenImage.getHeight() / 32, WHITE);

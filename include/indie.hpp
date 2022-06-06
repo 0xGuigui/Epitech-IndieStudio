@@ -26,7 +26,7 @@ class Indie {
         void displaySplashScreen();
         void displayMainMenu(float musicTime);
         void displaySinglePlayerMenu(float musicTime);
-        void displayMultiplayerMenu();
+        void displayMultiPlayerMenu(float musicTime);
         void displayOptionsMenu();
         float getTimeMusicPlayed();
         float setTimeMusicPlayed(int time);
@@ -46,6 +46,9 @@ class Indie {
                     break;
                 case singlePlayerMenu:
                     this->displaySinglePlayerMenu(this->getTimeMusicPlayed());
+                    break;
+                case multiplayerMenu:
+                    this->displayMultiPlayerMenu(this->getTimeMusicPlayed());
                     break;
                 case inGame:
                     break;
