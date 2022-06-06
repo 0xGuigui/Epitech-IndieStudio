@@ -24,11 +24,6 @@ class Indie {
     public:
         Indie();
         ~Indie();
-        void displaySplashScreen();
-        void displayMainMenu(float musicTime);
-        void displaySinglePlayerMenu(float musicTime);
-        void displayMultiplayerMenu();
-        void displayOptionsMenu();
         float getTimeMusicPlayed();
         float setTimeMusicPlayed(int time);
         bmb::IndieWindow window;
@@ -50,6 +45,7 @@ class Indie {
                     this->displaySinglePlayerMenu(this->getTimeMusicPlayed());
                     break;
                 case inGame:
+                    bomberMan();
                     break;
             };
         }
@@ -59,4 +55,10 @@ class Indie {
         int _screenHeight;
     protected:
     private:
+        void displaySplashScreen();
+        void displayMainMenu(float musicTime);
+        void displaySinglePlayerMenu(float musicTime);
+        void displayMultiplayerMenu();
+        void displayOptionsMenu();
+        void bomberMan();
 };
