@@ -11,6 +11,7 @@
 #include "vector.hpp"
 #include "rectangle.hpp"
 #include "npatchInfo.hpp"
+#include <iostream>
 
 namespace bmb {
 	class IndieTexture2D {
@@ -20,15 +21,18 @@ namespace bmb {
 		public:
 			IndieTexture2D() = default;
 
-			explicit IndieTexture2D(const char *fileName) : _texture(LoadTexture(fileName)) {};
+			IndieTexture2D(const char *fileName) : _texture(LoadTexture(fileName)) {};
 
-			explicit IndieTexture2D(Image &image) : _texture(LoadTextureFromImage(image)) {};
+			IndieTexture2D(Image &image) : _texture(LoadTextureFromImage(image)) {};
 
 			IndieTexture2D(IndieTexture2D &texture) {
 				*this = texture;
 			};
+			IndieTexture2D(Texture2D texture) {
+				_texture = texture;
+			}
 			~IndieTexture2D() {
-				UnloadTexture(_texture);
+				//UnloadTexture(_texture);
 			};
 			void loadTexture(const char *fileName) {
 				_texture = LoadTexture(fileName);
@@ -42,13 +46,13 @@ namespace bmb {
 			void updateTextureRec(Rectangle source, const void *pixels) {
 				UpdateTextureRec(_texture, source, pixels);
 			};
-			void Draw(int posX, int posY, IndieColor &tint) {
+			void Draw(int posX, int posY, IndieColor tint) {
 				DrawTexture(_texture, posX, posY, tint);
 			}
-			void DrawV(IndieVector2 &position, IndieColor &tint) {
+			void DrawV(IndieVector2 &position, IndieColor tint) {
 				DrawTextureV(_texture, position, tint);
 			}
-			void DrawEx(IndieVector2 &position, float rotation, float scale, IndieColor &tint) {
+			void DrawEx(IndieVector2 &position, float rotation, float scale, IndieColor tint) {
 				DrawTextureEx(_texture, position, rotation, scale, tint);
 			}
 			void DrawRec(IndieRectangle source, IndieVector2 offset, IndieVector2 position, IndieColor tint) {
@@ -65,6 +69,18 @@ namespace bmb {
 			}
 			void DrawNPatch(IndieNPatchInfo nPatchInfo, IndieRectangle dest, IndieVector2 origin, float rotation, IndieColor tint) {
 				DrawTextureNPatch(_texture, nPatchInfo, dest, origin, rotation, tint);
+			}
+			int getWidth() {
+				return _texture.width;
+			}
+			void setWidth(int width) {
+				_texture.width = width;
+			}
+			int getHeight() {
+				return _texture.height;
+			}
+			void setHeight(int height) {
+				_texture.height = height;
 			}
 			operator Texture2D() const {
 				return _texture;

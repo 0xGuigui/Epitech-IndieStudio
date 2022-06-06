@@ -34,6 +34,7 @@ class Indie {
         float setTimeMusicPlayed(int time);
         bmb::IndieWindow window;
         bmb::IndieAudioDevice audioDevice;
+        bmb::IndieScreen screen;
         indieState state = splashScreen;
         void operator () (indieState state) {
             switch (state) {
