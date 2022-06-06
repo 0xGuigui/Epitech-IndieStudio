@@ -50,20 +50,20 @@ void Indie::displaySinglePlayerMenu(float musicTime) {
 	static Rectangle cancelButtonBounds = { middle_x + 1100, middle_y + 850, static_cast<float>(cancelButton.getWidth()), static_cast<float>(cancelButton.getHeight()) };
 	static Rectangle cancelButtonHighlightedBounds = { middle_x + 1100, middle_y + 850, static_cast<float>(cancelButtonHighlighted.getWidth()), static_cast<float>(cancelButtonHighlighted.getHeight()) };
 
-	if (this->screen.GetWidth() != mainMenuBackground.getWidth() || this->screen.GetHeight() != mainMenuBackground.getHeight()) {
+	if (this->screen.GetWidth() != this->_screenHeight || this->screen.GetHeight() != this->_screenWidth) {
         //Calculate the new position of the buttons and the background to keep it centered and completely on the screen
-        middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
-        middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
-        mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
-        mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
-        playButtonBounds.x = middle_x + 200;
-        playButtonBounds.y = middle_y + 850;
-        playButtonHighlightedBounds.x = middle_x + 200;
-        playButtonHighlightedBounds.y = middle_y + 850;
-        cancelButtonBounds.x = middle_x + 1100;
-        cancelButtonBounds.y = middle_y + 850;
-        cancelButtonHighlightedBounds.x = middle_x + 1100;
-        cancelButtonHighlightedBounds.y = middle_y + 850;
+		mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
+		mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+		middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
+		middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+		playButtonBounds.x = middle_x + 200;
+		playButtonBounds.y = middle_y + 850;
+		playButtonHighlightedBounds.x = middle_x + 200;
+		playButtonHighlightedBounds.y = middle_y + 850;
+		cancelButtonBounds.x = middle_x + 1100;
+		cancelButtonBounds.y = middle_y + 850;
+		cancelButtonHighlightedBounds.x = middle_x + 1100;
+		cancelButtonHighlightedBounds.y = middle_y + 850;
 	}
 
 	//@TODO = A adapter lorsque les encapsulations des colisions seront terminées
