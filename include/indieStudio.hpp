@@ -24,8 +24,4 @@
 #include "encapsulation/window.hpp"
 #include "encapsulation/mouse.hpp"
 #include "indie.hpp"
-<<<<<<< HEAD
-#include "includes.hpp"
-=======
->>>>>>> guiguibranch
 #include "Map.hpp"
