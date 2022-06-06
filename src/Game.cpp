@@ -13,6 +13,9 @@ void Indie::bomberMan() {
     const int screenWidth = this->screen.GetWidth();
     const int screenHeight = this->screen.GetHeight();
 
+    Vector3 enemyBoxPos = { -4.0f, 0.5f, 0.0f };
+    Vector3 enemyBoxSize = { 1.0f, 1.0f, 1.0f };
+
     // Define the camera to look into our 3d world
     IndieCamera3D camera = { { 16.0f, 14.0f, 16.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 45.0f, 0 };
 
@@ -52,6 +55,8 @@ void Indie::bomberMan() {
             BeginMode3D(camera);
 
                 DrawModel(model, mapPosition, 1.0f, WHITE);
+                DrawCube(enemyBoxPos, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, GRAY);
+                DrawCubeWires(enemyBoxPos, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, DARKGRAY);
 
             EndMode3D();
 
