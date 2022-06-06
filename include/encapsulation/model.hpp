@@ -25,10 +25,10 @@ namespace bmb {
 			void LoadModel(const std::string &fileName) {
 				_model = ::LoadModel(fileName.c_str());
 			}
-			operator Model() const {
+			operator Model() {
 				return _model;
 			}
-			operator Model *() const {
+			operator Model *() {
                 return &_model;
             }
 		private:

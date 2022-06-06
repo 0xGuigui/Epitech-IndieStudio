@@ -21,8 +21,8 @@ namespace bmb {
                 UnloadImage(_image);
             }
             explicit IndieImage(const std::string& filename) : _image(LoadImage(filename.c_str())) {}
-            IndieImage(const IndieImage &image) {
-                this->_image = ImageCopy(image.getImage());
+            IndieImage(Image image) {
+                this->_image = ImageCopy(image);
             }
             void LoadRaw(const std::string &filename, int width, int height, int format, int headerSize) {
                 _image = LoadImageRaw(filename.c_str(), width, height, format, headerSize);
