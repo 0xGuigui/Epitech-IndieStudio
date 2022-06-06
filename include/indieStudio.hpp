@@ -10,10 +10,10 @@
 #include "encapsulation/audioDevice.hpp"
 #include "encapsulation/camera.hpp"
 #include "encapsulation/color.hpp"
-#include "encapsulation/draw.hpp"
 #include "encapsulation/image.hpp"
 #include "encapsulation/matrix.hpp"
 #include "encapsulation/model.hpp"
+#include "encapsulation/music.hpp"
 #include "encapsulation/npatchInfo.hpp"
 #include "encapsulation/ray.hpp"
 #include "encapsulation/rectangle.hpp"
@@ -23,5 +23,8 @@
 #include "encapsulation/vector.hpp"
 #include "encapsulation/window.hpp"
 #include "indie.hpp"
+<<<<<<< HEAD
 #include "includes.hpp"
+=======
+>>>>>>> guiguibranch
 #include "Map.hpp"

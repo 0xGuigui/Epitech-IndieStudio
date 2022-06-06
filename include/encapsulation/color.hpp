@@ -21,6 +21,9 @@ namespace bmb {
                 _color.b = b;
                 _color.a = a;
 			}
+			IndieColor(Color color) {
+				_color = color;
+			}
 			// From HSV
 			IndieColor(float hue, float saturation, float value) : _color(ColorFromHSV(hue, saturation, value)) {}
 			explicit IndieColor(unsigned int hexValue) : _color(GetColor(hexValue)) {}
