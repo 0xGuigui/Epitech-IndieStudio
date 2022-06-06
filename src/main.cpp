@@ -25,7 +25,6 @@ int main(void) {
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();
-
         ClearBackground(RAYWHITE);
         EndDrawing();
         indie(indie.state);
