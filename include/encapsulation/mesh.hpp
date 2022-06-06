@@ -39,9 +39,9 @@ namespace bmb {
             return DrawMesh(this->_mesh, material, transform);
         };
         //pointer to fix
-        //void DrawInstanced(IndieMaterial material, IndieMatrix *transform, int instances) {
-        //    return DrawMeshInstanced(this->_mesh, material, transform, instances);
-        //};
+        void DrawInstanced(IndieMaterial material, IndieMatrix transform, int instances) {
+           return DrawMeshInstanced(this->_mesh, material, transform, instances);
+        };
         bool Export(const char *filename) {
             return ExportMesh(this->_mesh, filename);
         };
