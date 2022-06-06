@@ -17,7 +17,7 @@ void Indie::bomberMan() {
     Vector3 enemyBoxSize = { 1.0f, 1.0f, 1.0f };
 
     // Define the camera to look into our 3d world
-    IndieCamera3D camera = { { 16.0f, 14.0f, 16.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 45.0f, 0 };
+    IndieCamera3D camera = { { 0.0f, 17.0f, 5.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 45.0f, 0 };
 
     IndieImage image("assets/InGame/map.png");      // Load cubicmap image (RAM)
     IndieTexture2D cubicmap = LoadTextureFromImage(image);       // Convert image to texture to display (VRAM)
@@ -33,7 +33,7 @@ void Indie::bomberMan() {
 
     UnloadImage(image);     // Unload cubesmap image from RAM, already uploaded to VRAM
 
-    SetCameraMode(camera, CAMERA_ORBITAL);  // Set an orbital camera mode
+    SetCameraMode(camera, CAMERA_CUSTOM);  // Set an orbital camera mode
 
     SetTargetFPS(60);                       // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------

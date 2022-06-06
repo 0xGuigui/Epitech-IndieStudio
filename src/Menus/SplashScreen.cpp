@@ -42,7 +42,7 @@ void Indie::displaySplashScreen() {
 		else
 			DrawRectangle(x + (SplashScreenImage.getWidth() / 2) - (SplashScreenImage.getWidth() / 4), 500 + (SplashScreenImage.getHeight() / 2) - (SplashScreenImage.getHeight() / 4), SplashScreenImage.getWidth() / 2 * this->timePlayed / 5.0f, SplashScreenImage.getHeight() / 32, WHITE);
 	}
-	if (this->timePlayed > 5.0f) {
+	if (this->timePlayed > 0.0f) {
 		this->state = mainMenu;
         SplashScreenSound.Stop();
 	}
