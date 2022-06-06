@@ -8,15 +8,19 @@
 #pragma once
 
 #include "raylib.h"
+#include "vector.hpp"
 
 namespace bmb {
     class IndieRay {
     public:
+        IndieRay(const Ray &ray) : _ray(ray) {};
+        IndieRay(IndieVector3 position, IndieVector3 direction) {
+            _ray.direction = direction;
+            _ray.position = position;
+        }
         operator Ray() const {
             return _ray;
         }
-
-        IndieRay(const Ray &ray) : _ray(ray) {};
     private:
         Ray _ray;
     };
