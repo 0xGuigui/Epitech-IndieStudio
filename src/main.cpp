@@ -12,7 +12,7 @@ int main(void) {
     const int screenWidth = 1920;
     const int screenHeight = 1080;
 
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     indie.window.Init(screenHeight, screenWidth, "[PLATANOS STUDIOS] - IndieCraft");
     indie.window.setMinSize(1, 1);
     bool pause = false;
@@ -25,7 +25,6 @@ int main(void) {
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();
-
         ClearBackground(RAYWHITE);
         EndDrawing();
         indie(indie.state);
