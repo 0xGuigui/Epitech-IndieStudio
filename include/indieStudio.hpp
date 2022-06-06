@@ -22,6 +22,7 @@
 #include "encapsulation/texture.hpp"
 #include "encapsulation/vector.hpp"
 #include "encapsulation/window.hpp"
+#include "encapsulation/mouse.hpp"
 #include "indie.hpp"
 <<<<<<< HEAD
 #include "includes.hpp"
