@@ -37,6 +37,8 @@ class Indie {
         void operator () (indieState state) {
             switch (state) {
                 case splashScreen:
+                    this->_screenHeight = this->window.getHeight();
+                    this->_screenWidth = this->window.getWidth();
                     this->displaySplashScreen();
                     break;
                 case mainMenu:
@@ -51,7 +53,8 @@ class Indie {
         }
         float timePlayed = 0.0f;
         float _musicPlayed = 0.0f;
+        int _screenWidth;
+        int _screenHeight;
     protected:
     private:
-
 };

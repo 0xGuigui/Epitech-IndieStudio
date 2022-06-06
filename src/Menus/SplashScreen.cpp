@@ -20,11 +20,11 @@ void Indie::displaySplashScreen() {
 		isPlaying = true;
 	}
 	//Get screen size
-	static int screenWidth = this->screen.GetWidth();
-	static int screenHeight = this->screen.GetHeight();
 
-	SplashScreenImage.setWidth(screenWidth);
-	SplashScreenImage.setHeight(screenHeight);
+	SplashScreenImage.setWidth(this->_screenWidth);
+	std::cout << this->_screenHeight << std::endl;
+	SplashScreenImage.setHeight(this->_screenHeight);
+	std::cout << this->_screenWidth << std::endl;
 	int x = (this->screen.GetWidth() - SplashScreenImage.getWidth()) / 2;
 	int y = (this->screen.GetHeight() - SplashScreenImage.getHeight()) / 2;
 	SplashScreenImage.Draw(x, y, WHITE);
@@ -33,7 +33,7 @@ void Indie::displaySplashScreen() {
 	else
 		DrawRectangle(x + (SplashScreenImage.getWidth() / 2) - (SplashScreenImage.getWidth() / 4), 500 + (SplashScreenImage.getHeight() / 2) - (SplashScreenImage.getHeight() / 4), SplashScreenImage.getWidth() / 2 * this->timePlayed / 5.0f, SplashScreenImage.getHeight() / 32, WHITE);
 	//if the window is resized, the splashscreen and the progress bar are resized too
-	if (this->screen.GetWidth() != screenWidth || this->screen.GetHeight() != screenHeight) {
+	if (this->screen.GetWidth() != this->_screenWidth || this->screen.GetHeight() != this->_screenHeight) {
 		SplashScreenImage.setWidth(this->screen.GetWidth());
 		SplashScreenImage.setHeight(this->screen.GetHeight());
 		x = (this->screen.GetWidth() - SplashScreenImage.getWidth()) / 2;
