@@ -84,6 +84,7 @@ void Indie::displayMainMenu(float musicTime) {
 	static float frameHeightAccessibility = (float)accessibility.getHeight()/3;
     static IndieMusic MainMenuMusic("assets/MainMenu/audios/Moog-City.mp3");
 	static IndieSound buttonSound("assets/MainMenu/audios/button.ogg");
+	static IndieSound closeSound("assets/SplashScreen/audios/close.ogg");
     static bool isPlaying = false;
     MainMenuMusic.setLoop(true);
     static Vector2 mousePoint = { 0.0f, 0.0f };
@@ -197,7 +198,11 @@ void Indie::displayMainMenu(float musicTime) {
 		quitgameHighlighted.Draw(middle_x + 408, middle_y + 250, WHITE);
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			buttonSound.Play();
-			
+			while (buttonSound.isPlaying());
+			closeSound.Play();
+			while (closeSound.isPlaying());
+			MainMenuMusic.Stop();
+			exit(0); // @TODO: A changer pour quitter proprement
 		}
 	}
 	if (CheckCollisionPointRec(mousePoint, accessibilityBounds)) {

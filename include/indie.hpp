@@ -16,7 +16,6 @@ enum indieState {
     singlePlayerMenu,
     multiplayerMenu,
     optionsMenu,
-    quitGameMenu,
     inGame
 };
 
@@ -29,7 +28,6 @@ class Indie {
         void displaySinglePlayerMenu(float musicTime);
         void displayMultiplayerMenu();
         void displayOptionsMenu();
-        void displayQuitGameMenu();
         float getTimeMusicPlayed();
         float setTimeMusicPlayed(int time);
         bmb::IndieWindow window;
@@ -46,7 +44,6 @@ class Indie {
                     break;
                 case singlePlayerMenu:
                     this->displaySinglePlayerMenu(this->getTimeMusicPlayed());
-
                     break;
                 case inGame:
                     break;
