@@ -56,14 +56,14 @@ void Indie::displaySinglePlayerMenu(float musicTime) {
 		mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
 		middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
 		middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
-		playButtonBounds.x = middle_x + 200;
-		playButtonBounds.y = middle_y + 850;
-		playButtonHighlightedBounds.x = middle_x + 200;
-		playButtonHighlightedBounds.y = middle_y + 850;
-		cancelButtonBounds.x = middle_x + 1100;
-		cancelButtonBounds.y = middle_y + 850;
-		cancelButtonHighlightedBounds.x = middle_x + 1100;
-		cancelButtonHighlightedBounds.y = middle_y + 850;
+		playButtonBounds.x = middle_x + 300;
+		playButtonBounds.y = middle_y + 950;
+		playButtonHighlightedBounds.x = middle_x + 300;
+		playButtonHighlightedBounds.y = middle_y + 950;
+		cancelButtonBounds.x = middle_x + 1200;
+		cancelButtonBounds.y = middle_y + 950;
+		cancelButtonHighlightedBounds.x = middle_x + 1200;
+		cancelButtonHighlightedBounds.y = middle_y + 950;
 	}
 
 	//@TODO = A adapter lorsque les encapsulations des colisions seront terminées
