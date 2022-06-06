@@ -46,10 +46,11 @@ void Indie::displayMainMenu(float musicTime) {
 	MainMenuMusic.Update();
 
 	timePlayed += GetFrameTime();
-	static int screenWidth = this->screen.GetWidth();
-	static int screenHeight = this->screen.GetHeight();
-	mainMenuBackground.setWidth(screenWidth);
-    mainMenuBackground.setHeight(screenHeight);
+
+	mainMenuBackground.setWidth(this->_screenWidth);
+	std::cout << this->_screenHeight << std::endl;
+	std::cout << this->_screenWidth << std::endl;
+    mainMenuBackground.setHeight(this->_screenHeight);
     static float mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
     static float mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
 	static float middle_x = (this->screen.GetWidth() - titleImage.getWidth()) / 2;
@@ -88,59 +89,34 @@ void Indie::displayMainMenu(float musicTime) {
 
 
 	// Ce truc sera a adapter partout pour éviter de péter le jeu et les boutons si la window est redimensionnée
-	if (this->screen.GetWidth() != mainMenuBackground.getWidth() || this->screen.GetHeight() != mainMenuBackground.getHeight()) {
-        mainMenuBackground.setWidth(this->screen.GetWidth());
-        mainMenuBackground.setHeight(this->screen.GetHeight());
-        mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
-        mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
-        middle_x = (this->screen.GetWidth() - titleImage.getWidth()) / 2;
-        middle_y = (this->screen.GetHeight() - titleImage.getHeight()) / 2;
-        sourceRecSingleplayer = {0, 0, static_cast<float>(singleplayer.getWidth()), static_cast<float>(singleplayer.getHeight())};
-        destinationRecSingleplayer = {middle_x, middle_y + 50, static_cast<float>(singleplayer.getWidth()), static_cast<float>(singleplayer.getHeight())};
-        sourceRecMultiplayer = {0, 0, static_cast<float>(multiplayer.getWidth()), static_cast<float>(multiplayer.getHeight())};
-        destinationRecMultiplayer = {middle_x, middle_y + 150, static_cast<float>(multiplayer.getWidth()), static_cast<float>(multiplayer.getHeight())};
-        sourceRecOptions = {0, 0, static_cast<float>(options.getWidth()), static_cast<float>(options.getHeight())};
-        destinationRecOptions = {middle_x, middle_y + 250, static_cast<float>(options.getWidth()), static_cast<float>(options.getHeight())};
-        sourceRecQuitgame = {0, 0, static_cast<float>(quitgame.getWidth()), static_cast<float>(quitgame.getHeight())};
-        destinationRecQuitgame = {middle_x + 408, middle_y + 250, static_cast<float>(quitgame.getWidth()), static_cast<float>(quitgame.getHeight())};
-        sourceRecAccessibility = {0, 0, static_cast<float>(accessibility.getWidth()), static_cast<float>(accessibility.getHeight())};
-        destinationRecAccessibility = {middle_x + 825, middle_y + 250, static_cast<float>(accessibility.getWidth()), static_cast<float>(accessibility.getHeight())};
-        singleplayerBounds = {middle_x, middle_y + 50, static_cast<float>(singleplayer.getWidth()), static_cast<float>(singleplayer.getHeight())};
-        singleplayerHighlightedBounds = {middle_x, middle_y + 50, static_cast<float>(singleplayerHighlighted.getWidth()), static_cast<float>(singleplayerHighlighted.getHeight())};
-        multiplayerBounds = {middle_x, middle_y + 150, static_cast<float>(multiplayer.getWidth()), static_cast<float>(multiplayer.getHeight())};
-        multiplayerHighlightedBounds = {middle_x, middle_y + 150, static_cast<float>(multiplayerHighlighted.getWidth()), static_cast<float>(multiplayerHighlighted.getHeight())};
-        optionsBounds = {middle_x, middle_y + 250, static_cast<float>(options.getWidth()), static_cast<float>(options.getHeight())};
-        optionsHighlightedBounds = {middle_x, middle_y + 250, static_cast<float>(optionsHighlighted.getWidth()), static_cast<float>(optionsHighlighted.getHeight())};
-        quitgameBounds = {middle_x + 408, middle_y + 250, static_cast<float>(quitgame.getWidth()), static_cast<float>(quitgame.getHeight())};
-        quitgameHighlightedBounds = {middle_x + 408, middle_y + 250, static_cast<float>(quitgameHighlighted.getWidth()), static_cast<float>(quitgameHighlighted.getHeight())};
-        accessibilityBounds = {middle_x + 825, middle_y + 250, static_cast<float>(accessibility.getWidth()), static_cast<float>(accessibility.getHeight())};
-        accessibilityHighlightedBounds = {middle_x + 825, middle_y + 250, static_cast<float>(accessibilityHighlighted.getWidth()), static_cast<float>(accessibilityHighlighted.getHeight())};
-	} else {
-        mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
-        mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
-        middle_x = (this->screen.GetWidth() - titleImage.getWidth()) / 2;
-        middle_y = (this->screen.GetHeight() - titleImage.getHeight()) / 2;
-        sourceRecSingleplayer = {0, 0, static_cast<float>(singleplayer.getWidth()), static_cast<float>(singleplayer.getHeight())};
-        destinationRecSingleplayer = {middle_x, middle_y + 50, static_cast<float>(singleplayer.getWidth()), static_cast<float>(singleplayer.getHeight())};
-        sourceRecMultiplayer = {0, 0, static_cast<float>(multiplayer.getWidth()), static_cast<float>(multiplayer.getHeight())};
-        destinationRecMultiplayer = {middle_x, middle_y + 150, static_cast<float>(multiplayer.getWidth()), static_cast<float>(multiplayer.getHeight())};
-        sourceRecOptions = {0, 0, static_cast<float>(options.getWidth()), static_cast<float>(options.getHeight())};
-        destinationRecOptions = {middle_x, middle_y + 250, static_cast<float>(options.getWidth()), static_cast<float>(options.getHeight())};
-        sourceRecQuitgame = {0, 0, static_cast<float>(quitgame.getWidth()), static_cast<float>(quitgame.getHeight())};
-        destinationRecQuitgame = {middle_x + 408, middle_y + 250, static_cast<float>(quitgame.getWidth()), static_cast<float>(quitgame.getHeight())};
-        sourceRecAccessibility = {0, 0, static_cast<float>(accessibility.getWidth()), static_cast<float>(accessibility.getHeight())};
-        destinationRecAccessibility = {middle_x + 825, middle_y + 250, static_cast<float>(accessibility.getWidth()), static_cast<float>(accessibility.getHeight())};
-        singleplayerBounds = {middle_x, middle_y + 50, static_cast<float>(singleplayer.getWidth()), static_cast<float>(singleplayer.getHeight())};
-        singleplayerHighlightedBounds = {middle_x, middle_y + 50, static_cast<float>(singleplayerHighlighted.getWidth()), static_cast<float>(singleplayerHighlighted.getHeight())};
-        multiplayerBounds = {middle_x, middle_y + 150, static_cast<float>(multiplayer.getWidth()), static_cast<float>(multiplayer.getHeight())};
-        multiplayerHighlightedBounds = {middle_x, middle_y + 150, static_cast<float>(multiplayerHighlighted.getWidth()), static_cast<float>(multiplayerHighlighted.getHeight())};
-        optionsBounds = {middle_x, middle_y + 250, static_cast<float>(options.getWidth()), static_cast<float>(options.getHeight())};
-        optionsHighlightedBounds = {middle_x, middle_y + 250, static_cast<float>(optionsHighlighted.getWidth()), static_cast<float>(optionsHighlighted.getHeight())};
-        quitgameBounds = {middle_x + 408, middle_y + 250, static_cast<float>(quitgame.getWidth()), static_cast<float>(quitgame.getHeight())};
-        quitgameHighlightedBounds = {middle_x + 408, middle_y + 250, static_cast<float>(quitgameHighlighted.getWidth()), static_cast<float>(quitgameHighlighted.getHeight())};
-        accessibilityBounds = {middle_x + 825, middle_y + 250, static_cast<float>(accessibility.getWidth()), static_cast<float>(accessibility.getHeight())};
-        accessibilityHighlightedBounds = {middle_x + 825, middle_y + 250, static_cast<float>(accessibilityHighlighted.getWidth()), static_cast<float>(accessibilityHighlighted.getHeight())};
-    }
+    if (this->screen.GetWidth() != mainMenuBackground.getWidth() || this->screen.GetHeight() != mainMenuBackground.getHeight()) {
+		mainMenuBackground.setWidth(this->screen.GetWidth());
+		mainMenuBackground.setHeight(this->screen.GetHeight());
+		mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
+		mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+		middle_x = (this->screen.GetWidth() - titleImage.getWidth()) / 2;
+		middle_y = (this->screen.GetHeight() - titleImage.getHeight()) / 2;
+		singleplayerBounds.x = middle_x;
+		singleplayerBounds.y = middle_y + 50;
+		singleplayerHighlightedBounds.x = middle_x;
+		singleplayerHighlightedBounds.y = middle_y + 50;
+		multiplayerBounds.x = middle_x;
+		multiplayerBounds.y = middle_y + 150;
+		multiplayerHighlightedBounds.x = middle_x;
+		multiplayerHighlightedBounds.y = middle_y + 150;
+		optionsBounds.x = middle_x;
+		optionsBounds.y = middle_y + 250;
+		optionsHighlightedBounds.x = middle_x;
+		optionsHighlightedBounds.y = middle_y + 250;
+		quitgameBounds.x = middle_x + 408;
+		quitgameBounds.y = middle_y + 250;
+		quitgameHighlightedBounds.x = middle_x + 408;
+		quitgameHighlightedBounds.y = middle_y + 250;
+		accessibilityBounds.x = middle_x + 825;
+		accessibilityBounds.y = middle_y + 250;
+		accessibilityHighlightedBounds.x = middle_x + 825;
+		accessibilityHighlightedBounds.y = middle_y + 250;
+	}
 
 	if (CheckCollisionPointRec(mousePoint, singleplayerBounds)) {
 		singleplayerHighlighted.Draw(middle_x, middle_y + 50, WHITE);
