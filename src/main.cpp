@@ -22,8 +22,7 @@ int main(void) {
     indie.window.setFPS(60);
 
     for (; !indie.window.isClosed(); indie.timePlayed += GetFrameTime()) {
-        if (IsKeyPressed(KEY_ESCAPE))
-            break;
+        
         BeginDrawing();
         ClearBackground(RAYWHITE);
         EndDrawing();

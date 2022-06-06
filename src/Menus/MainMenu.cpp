@@ -36,6 +36,8 @@ void Indie::displayMainMenu(float musicTime) {
     static Vector2 mousePoint = { 0.0f, 0.0f };
 	mousePoint = GetMousePosition();
 
+
+	this->_musicPlayed = MainMenuMusic.getTimePlayed();
     if (musicTime != 0 && !isPlaying) {
 		MainMenuMusic.Seek(musicTime);
 		this->setTimeMusicPlayed(musicTime);
@@ -43,8 +45,13 @@ void Indie::displayMainMenu(float musicTime) {
 		isPlaying = true;
 	} else
 		MainMenuMusic.Play();
-
 	MainMenuMusic.Update();
+
+	if (IsKeyPressed(KEY_ESCAPE)) {
+		closeSound.Play();
+		while (closeSound.isPlaying());
+		exit(0);
+	}
 	timePlayed += GetFrameTime();
 	mainMenuBackground.setWidth(this->_screenWidth);
 	std::cout << this->_screenHeight << std::endl;
@@ -162,7 +169,6 @@ void Indie::displayMainMenu(float musicTime) {
 		singleplayerHighlighted.Draw(middle_x, middle_y + 50, WHITE);
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			buttonSound.Play();
-			this->_musicPlayed = MainMenuMusic.getTimePlayed();
 			this->state = singlePlayerMenu;
 			MainMenuMusic.Stop();
 		}
@@ -170,7 +176,8 @@ void Indie::displayMainMenu(float musicTime) {
 		multiplayerHighlighted.Draw(middle_x, middle_y + 150, WHITE);
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			buttonSound.Play();
-			//this->state = multiPlayerMenu;
+			this->state = multiplayerMenu;
+			MainMenuMusic.Stop();
 		}
 	} if (CheckCollisionPointRec(mousePoint, optionsBounds)) {
 		optionsHighlighted.Draw(middle_x, middle_y + 250, WHITE);
