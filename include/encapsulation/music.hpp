@@ -66,6 +66,9 @@ namespace bmb {
 			float getTimePlayed() {
 				return GetMusicTimePlayed(_music);
 			}
+			void setLoop(bool loop) {
+				_music.looping = loop;
+			}
 			operator Music() const {
 				return _music;
 			}
