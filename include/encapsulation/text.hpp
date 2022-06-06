@@ -22,8 +22,8 @@ namespace bmb {
 			void Unload() {
 				UnloadFileText(_text);
 			}
-			// operator char * () {
-			// 	return _text.c_str();
-			// }
+			operator char * () {
+				return _text;
+			}
 	};
 };
