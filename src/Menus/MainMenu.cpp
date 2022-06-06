@@ -116,6 +116,31 @@ void Indie::displayMainMenu(float musicTime) {
 		accessibilityBounds.y = middle_y + 250;
 		accessibilityHighlightedBounds.x = middle_x + 825;
 		accessibilityHighlightedBounds.y = middle_y + 250;
+	} else {
+		mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
+		mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+		middle_x = (this->screen.GetWidth() - titleImage.getWidth()) / 2;
+		middle_y = (this->screen.GetHeight() - titleImage.getHeight()) / 2;
+		singleplayerBounds.x = middle_x;
+		singleplayerBounds.y = middle_y + 50;
+		singleplayerHighlightedBounds.x = middle_x;
+		singleplayerHighlightedBounds.y = middle_y + 50;
+		multiplayerBounds.x = middle_x;
+		multiplayerBounds.y = middle_y + 150;
+		multiplayerHighlightedBounds.x = middle_x;
+		multiplayerHighlightedBounds.y = middle_y + 150;
+		optionsBounds.x = middle_x;
+		optionsBounds.y = middle_y + 250;
+		optionsHighlightedBounds.x = middle_x;
+		optionsHighlightedBounds.y = middle_y + 250;
+		quitgameBounds.x = middle_x + 408;
+		quitgameBounds.y = middle_y + 250;
+		quitgameHighlightedBounds.x = middle_x + 408;
+		quitgameHighlightedBounds.y = middle_y + 250;
+		accessibilityBounds.x = middle_x + 825;
+		accessibilityBounds.y = middle_y + 250;
+		accessibilityHighlightedBounds.x = middle_x + 825;
+		accessibilityHighlightedBounds.y = middle_y + 250;
 	}
 
 	if (CheckCollisionPointRec(mousePoint, singleplayerBounds)) {
