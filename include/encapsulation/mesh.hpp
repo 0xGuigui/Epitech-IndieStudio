@@ -23,6 +23,9 @@ namespace bmb {
         IndieMesh() {};
         ~IndieMesh() {};
 
+        IndieMesh(Mesh mesh) {
+            _mesh = mesh;
+        }
         void Upload(bool dynamic) {
             return UploadMesh(&this->_mesh, dynamic);
         };
@@ -58,60 +61,62 @@ namespace bmb {
             return GenMeshBinormals();
         };
 
-        Mesh GenPoly(int sides, float radius)
+        void GenPoly(int sides, float radius)
         {
-            return GenMeshPoly(sides, radius);
+            _mesh = GenMeshPoly(sides, radius);
         };
 
-        Mesh GenPlane(float width, float length, int resX, int resZ)
+        void GenPlane(float width, float length, int resX, int resZ)
         {
-            return GenMeshPlane(width, length, resX, resZ);
+            _mesh = GenMeshPlane(width, length, resX, resZ);
         };
 
-        Mesh GenCube(float width, float height, float length)
+        void GenCube(float width, float height, float length)
         {
-            return GenMeshCube(width, height, length);
+            _mesh = GenMeshCube(width, height, length);
         };
 
-        Mesh GenSphere(float radius, int rings, int slices)
+        void GenSphere(float radius, int rings, int slices)
         {
-            return GenMeshSphere(radius, rings, slices);
+            _mesh = GenMeshSphere(radius, rings, slices);
         };
 
-        Mesh GenHemiSphere(float radius, int rings, int slices)
+        void GenHemiSphere(float radius, int rings, int slices)
         {
-            return GenMeshHemiSphere(radius, rings, slices);
+            _mesh = GenMeshHemiSphere(radius, rings, slices);
         };
 
-        Mesh GenCylinder(float radius, float height, int slices)
+        void GenCylinder(float radius, float height, int slices)
         {
-            return GenMeshCylinder(radius, height, slices);
+            _mesh = GenMeshCylinder(radius, height, slices);
         };
 
-        Mesh GenCone(float radius, float height, int slices)
+        void GenCone(float radius, float height, int slices)
         {
-            return GenMeshCone(radius, height, slices);
+            _mesh = GenMeshCone(radius, height, slices);
         };
 
-        Mesh GenTorus(float radius, float size, int radSeg, int sides)
+        void GenTorus(float radius, float size, int radSeg, int sides)
         {
-            return GenMeshTorus(radius, size, radSeg, sides);
+            _mesh = GenMeshTorus(radius, size, radSeg, sides);
         };
 
-        Mesh GenKnot(float radius, float size, int radSeg, int sides)
+        void GenKnot(float radius, float size, int radSeg, int sides)
         {
-            return GenKnot(radius, size, radSeg, sides);
+            _mesh = GenMeshKnot(radius, size, radSeg, sides);
         };
 
-        Mesh GenHeightmap(Image heightmap, Vector3 size)
+        void GenHeightmap(Image heightmap, Vector3 size)
         {
-            return GenMeshHeightmap(heightmap, size);
+            _mesh = GenMeshHeightmap(heightmap, size);
         };
 
-        Mesh GenCubicmap(Image cubicmap, Vector3 cubeSize)
+        void GenCubicmap(Image cubicmap, Vector3 cubeSize)
         {
-            return GenMeshCubicmap(cubicmap, cubeSize);
+            _mesh = GenMeshCubicmap(cubicmap, cubeSize);
         };
-
+        operator Mesh () {
+            return _mesh;
+        }
     };
 }

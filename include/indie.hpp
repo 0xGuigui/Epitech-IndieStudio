@@ -21,6 +21,13 @@ enum indieState {
 };
 
 class Indie {
+    private:
+        void displaySplashScreen();
+        void displayMainMenu(float musicTime);
+        void displaySinglePlayerMenu(float musicTime);
+        void displayMultiplayerMenu();
+        void displayOptionsMenu();
+        void bomberMan();
     public:
         Indie();
         ~Indie();
@@ -45,7 +52,7 @@ class Indie {
                     this->displaySinglePlayerMenu(this->getTimeMusicPlayed());
                     break;
                 case inGame:
-                    bomberMan();
+                    this->bomberMan();
                     break;
             };
         }
@@ -54,11 +61,4 @@ class Indie {
         int _screenWidth;
         int _screenHeight;
     protected:
-    private:
-        void displaySplashScreen();
-        void displayMainMenu(float musicTime);
-        void displaySinglePlayerMenu(float musicTime);
-        void displayMultiplayerMenu();
-        void displayOptionsMenu();
-        void bomberMan();
 };

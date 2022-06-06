@@ -14,6 +14,7 @@
 #include "encapsulation/matrix.hpp"
 #include "encapsulation/model.hpp"
 #include "encapsulation/music.hpp"
+#include "encapsulation/mesh.hpp"
 #include "encapsulation/npatchInfo.hpp"
 #include "encapsulation/ray.hpp"
 #include "encapsulation/rectangle.hpp"
