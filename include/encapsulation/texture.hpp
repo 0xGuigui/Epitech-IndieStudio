@@ -11,6 +11,7 @@
 #include "vector.hpp"
 #include "rectangle.hpp"
 #include "npatchInfo.hpp"
+#include <iostream>
 
 namespace bmb {
 	class IndieTexture2D {
@@ -31,7 +32,7 @@ namespace bmb {
 				_texture = texture;
 			}
 			~IndieTexture2D() {
-				UnloadTexture(_texture);
+				//UnloadTexture(_texture);
 			};
 			void loadTexture(const char *fileName) {
 				_texture = LoadTexture(fileName);

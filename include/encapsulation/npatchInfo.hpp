@@ -5,6 +5,8 @@
 ** encapsulation
 */
 
+#pragma once
+
 #include "rectangle.hpp"
 
 namespace bmb {
