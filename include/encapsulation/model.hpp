@@ -28,6 +28,9 @@ namespace bmb {
 			operator Model() const {
 				return _model;
 			}
+			operator Model *() const {
+                return &_model;
+            }
 		private:
 			Model _model{};
 	};
