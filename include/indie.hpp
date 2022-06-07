@@ -10,6 +10,7 @@
 #include "encapsulation/window.hpp"
 #include "encapsulation/audioDevice.hpp"
 #include "encapsulation/mouse.hpp"
+#include "MapController.hpp"
 
 enum indieState {
     splashScreen,
@@ -37,6 +38,7 @@ class Indie {
         bmb::IndieAudioDevice audioDevice;
         bmb::IndieScreen screen;
         bmb::IndieMouse mouse;
+        bmb::MapController map;
         indieState state = splashScreen;
         void operator () (indieState state) {
             switch (state) {

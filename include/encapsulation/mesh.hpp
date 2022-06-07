@@ -26,6 +26,12 @@ namespace bmb {
         IndieMesh(Mesh mesh) {
             _mesh = mesh;
         }
+        IndieMesh(IndieImage image, IndieVector3 cubSize) {
+            _mesh = GenMeshCubicmap(image, cubSize);
+        }
+        void GenCubicMap(IndieImage image, IndieVector3 cubSize) {
+            _mesh = GenMeshCubicmap(image, cubSize);
+        }
         void Upload(bool dynamic) {
             return UploadMesh(&this->_mesh, dynamic);
         };
