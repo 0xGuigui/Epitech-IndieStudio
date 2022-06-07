@@ -36,6 +36,8 @@ void Indie::displayMainMenu(float musicTime) {
     static Vector2 mousePoint = { 0.0f, 0.0f };
 	mousePoint = GetMousePosition();
 
+
+	this->_musicPlayed = MainMenuMusic.getTimePlayed();
     if (musicTime != 0 && !isPlaying) {
 		MainMenuMusic.Seek(musicTime);
 		this->setTimeMusicPlayed(musicTime);
@@ -45,8 +47,12 @@ void Indie::displayMainMenu(float musicTime) {
 		MainMenuMusic.Play();
 	MainMenuMusic.Update();
 
+	if (IsKeyPressed(KEY_ESCAPE)) {
+		closeSound.Play();
+		while (closeSound.isPlaying());
+		exit(0);
+	}
 	timePlayed += GetFrameTime();
-
 	mainMenuBackground.setWidth(this->_screenWidth);
     mainMenuBackground.setHeight(this->_screenHeight);
     static float mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
@@ -60,7 +66,7 @@ void Indie::displayMainMenu(float musicTime) {
 	options.Draw(middle_x, middle_y + 250, WHITE);
 	quitgame.Draw(middle_x + 408, middle_y + 250, WHITE);
 	accessibility.Draw(middle_x + 825, middle_y + 250, WHITE);
-	// @TODO Ici faudrait faire une sorte d'effet de bpm pour le splashtext
+
 	SplashText.Draw(middle_x + 675, 10, WHITE);
 	DrawText("IndieCraft is an Epitech project, based on the bomberman", this->screen.GetWidth() - 600, this->screen.GetHeight() - 30, 20, WHITE);
 
@@ -84,7 +90,6 @@ void Indie::displayMainMenu(float musicTime) {
 	static Rectangle quitgameHighlightedBounds = {middle_x + 408, middle_y + 250, static_cast<float>(quitgameHighlighted.getWidth()), static_cast<float>(quitgameHighlighted.getHeight())};
 	static Rectangle accessibilityBounds = {middle_x + 825, middle_y + 250, static_cast<float>(accessibility.getWidth()), static_cast<float>(accessibility.getHeight())};
 	static Rectangle accessibilityHighlightedBounds = {middle_x + 825, middle_y + 250, static_cast<float>(accessibilityHighlighted.getWidth()), static_cast<float>(accessibilityHighlighted.getHeight())};
-
 
 	// Ce truc sera a adapter partout pour éviter de péter le jeu et les boutons si la window est redimensionnée
     if (this->screen.GetWidth() != mainMenuBackground.getWidth() || this->screen.GetHeight() != mainMenuBackground.getHeight()) {
@@ -141,30 +146,44 @@ void Indie::displayMainMenu(float musicTime) {
 		accessibilityHighlightedBounds.y = middle_y + 250;
 	}
 
+	static float timer = 0;
+	timer += 0.05f;
+	static float defaultSizeSplashTextWidth = SplashText.getWidth();
+	static float defaultSizeSplashTextHeight = SplashText.getHeight();
+	if (timer > 0.0f && timer < 1.0f) {
+		SplashText.setHeight(SplashText.getHeight() + 1);
+		SplashText.setWidth(SplashText.getWidth() + 1);
+	} if (timer > 1.0f && timer < 2.0f) {
+		SplashText.setHeight(SplashText.getHeight() - 1);
+		SplashText.setWidth(SplashText.getWidth() - 1);
+	} if (timer > 2.0f) {
+		SplashText.setHeight(defaultSizeSplashTextHeight);
+		SplashText.setWidth(defaultSizeSplashTextWidth);
+		timer = 0;
+	}
+
+
 	if (CheckCollisionPointRec(mousePoint, singleplayerBounds)) {
 		singleplayerHighlighted.Draw(middle_x, middle_y + 50, WHITE);
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			buttonSound.Play();
-			this->_musicPlayed = MainMenuMusic.getTimePlayed();
 			this->state = singlePlayerMenu;
 			MainMenuMusic.Stop();
 		}
-	}
-	if (CheckCollisionPointRec(mousePoint, multiplayerBounds)) {
+	} if (CheckCollisionPointRec(mousePoint, multiplayerBounds)) {
 		multiplayerHighlighted.Draw(middle_x, middle_y + 150, WHITE);
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			buttonSound.Play();
-			//this->state = multiPlayerMenu;
+			this->state = multiplayerMenu;
+			MainMenuMusic.Stop();
 		}
-	}
-	if (CheckCollisionPointRec(mousePoint, optionsBounds)) {
+	} if (CheckCollisionPointRec(mousePoint, optionsBounds)) {
 		optionsHighlighted.Draw(middle_x, middle_y + 250, WHITE);
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			buttonSound.Play();
 			//this->state = optionsMenu;
 		}
-	}
-	if (CheckCollisionPointRec(mousePoint, quitgameBounds)) {
+	} if (CheckCollisionPointRec(mousePoint, quitgameBounds)) {
 		quitgameHighlighted.Draw(middle_x + 408, middle_y + 250, WHITE);
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			buttonSound.Play();
@@ -174,8 +193,7 @@ void Indie::displayMainMenu(float musicTime) {
 			MainMenuMusic.Stop();
 			exit(0); // @TODO: A changer pour quitter proprement
 		}
-	}
-	if (CheckCollisionPointRec(mousePoint, accessibilityBounds)) {
+	} if (CheckCollisionPointRec(mousePoint, accessibilityBounds)) {
 		accessibilityHighlighted.Draw(middle_x + 825, middle_y + 250, WHITE);
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			buttonSound.Play();
