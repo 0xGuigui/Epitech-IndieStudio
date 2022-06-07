@@ -26,7 +26,7 @@ void Indie::displaySplashScreen() {
 	int x = (this->screen.GetWidth() - SplashScreenImage.getWidth()) / 2;
 	int y = (this->screen.GetHeight() - SplashScreenImage.getHeight()) / 2;
 	SplashScreenImage.Draw(x, y, WHITE);
-	if (this->timePlayed > 5.0f)
+	if (!SplashScreenSound.isPlaying())
 		DrawRectangle(x + (SplashScreenImage.getWidth() / 2) - (SplashScreenImage.getWidth() / 4), 500 + (SplashScreenImage.getHeight() / 2) - (SplashScreenImage.getHeight() / 4), SplashScreenImage.getWidth() / 2, SplashScreenImage.getHeight() / 32, WHITE);
 	else
 		DrawRectangle(x + (SplashScreenImage.getWidth() / 2) - (SplashScreenImage.getWidth() / 4), 500 + (SplashScreenImage.getHeight() / 2) - (SplashScreenImage.getHeight() / 4), SplashScreenImage.getWidth() / 2 * this->timePlayed / 5.0f, SplashScreenImage.getHeight() / 32, WHITE);
@@ -37,12 +37,12 @@ void Indie::displaySplashScreen() {
 		x = (this->screen.GetWidth() - SplashScreenImage.getWidth()) / 2;
 		y = (this->screen.GetHeight() - SplashScreenImage.getHeight()) / 2;
 		SplashScreenImage.Draw(x, y, WHITE);
-		if (this->timePlayed > 5.0f)
+		if (!SplashScreenSound.isPlaying())
 			DrawRectangle(x + (SplashScreenImage.getWidth() / 2) - (SplashScreenImage.getWidth() / 4), 500 + (SplashScreenImage.getHeight() / 2) - (SplashScreenImage.getHeight() / 4), SplashScreenImage.getWidth() / 2, SplashScreenImage.getHeight() / 32, WHITE);
 		else
 			DrawRectangle(x + (SplashScreenImage.getWidth() / 2) - (SplashScreenImage.getWidth() / 4), 500 + (SplashScreenImage.getHeight() / 2) - (SplashScreenImage.getHeight() / 4), SplashScreenImage.getWidth() / 2 * this->timePlayed / 5.0f, SplashScreenImage.getHeight() / 32, WHITE);
 	}
-	if (this->timePlayed > 0.0f) {
+	if (!SplashScreenSound.isPlaying()) {
 		this->state = mainMenu;
         SplashScreenSound.Stop();
 	}

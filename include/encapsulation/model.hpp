@@ -7,8 +7,7 @@
 
 #pragma once
 
-#include <string>
-#include "raylib.h"
+#include "mesh.hpp"
 
 namespace bmb {
 	class IndieModel {
@@ -19,11 +18,23 @@ namespace bmb {
 
 			explicit IndieModel(const std::string &fileName) : _model(::LoadModel(fileName.c_str())) {};
 
+			IndieModel(IndieMesh mesh) {
+				_model = LoadModelFromMesh(mesh);
+			}
 			~IndieModel() {
-				UnloadModel(_model);
+				// UnloadModel(_model);
 			}
 			void LoadModel(const std::string &fileName) {
 				_model = ::LoadModel(fileName.c_str());
+			}
+			void LoadFromMesh(IndieMesh mesh) {
+				_model = LoadModelFromMesh(mesh);
+			}
+			void Draw(IndieVector3 position, float scale, IndieColor tint) {
+				DrawModel(_model, position, scale, tint);
+			}
+			Model &getModel() {
+				return _model;
 			}
 			operator Model() {
 				return _model;

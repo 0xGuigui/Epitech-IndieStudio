@@ -18,7 +18,7 @@ namespace bmb {
         public:
             IndieImage() = default;
             ~IndieImage() {
-                UnloadImage(_image);
+                // UnloadImage(_image);
             }
             explicit IndieImage(const std::string& filename) : _image(LoadImage(filename.c_str())) {}
             IndieImage(Image image) {
