@@ -7,9 +7,7 @@
 
 #pragma once
 
-#include "raylib.h"
 #include "texture.hpp"
-#include "model.hpp"
 
 namespace bmb {
     class IndieMaterial {
@@ -28,9 +26,9 @@ namespace bmb {
         void SetTexture(int mapType, IndieTexture2D texture) {
             return SetMaterialTexture(&this->_material, mapType, texture);
         }
-        void SetModelMesh(IndieModel model, int meshId, int materialId) {
-            return SetModelMeshMaterial(model, meshId, materialId);
-        }
+        // void SetModelMesh(IndieModel model, int meshId, int materialId) {
+        //     return SetModelMeshMaterial(model, meshId, materialId);
+        // }
         operator Material() const {
             return _material;
         };

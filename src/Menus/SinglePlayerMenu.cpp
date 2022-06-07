@@ -67,8 +67,14 @@ void Indie::displaySinglePlayerMenu(float musicTime) {
 	}
 
 	//@TODO = A adapter lorsque les encapsulations des colisions seront terminées
-	if (CheckCollisionPointRec(mousePoint, playButtonBounds))
+	if (CheckCollisionPointRec(mousePoint, playButtonBounds)) {
 		playButtonHighlighted.Draw(middle_x + 200, middle_y + 850, WHITE);
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+			this->state = inGame;
+			MainMenuMusic.Stop();
+			this->_musicPlayed = MainMenuMusic.getTimePlayed();
+		}
+	}
 	if (CheckCollisionPointRec(mousePoint, cancelButtonBounds)) {
 		cancelButtonHighlighted.Draw(middle_x + 1100, middle_y + 850, WHITE);
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {

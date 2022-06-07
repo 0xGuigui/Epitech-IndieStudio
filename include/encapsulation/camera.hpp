@@ -50,6 +50,7 @@ namespace bmb {
         Camera _camera{};
 
     public:
+        IndieCamera3D() {};
         IndieCamera3D(IndieVector3 position, IndieVector3 target, IndieVector3 up, float fovy, int projection) {
             _camera.position = position;
             _camera.target = target;
@@ -66,8 +67,26 @@ namespace bmb {
         void SetAltControl(int keyAlt) {
             SetCameraAltControl(keyAlt);
         }
-        void SetCameraSmoothZoomControl(int keySmoothZoom) {
-            ::SetCameraSmoothZoomControl(keySmoothZoom);
+        void SetSmoothZoomControl(int keySmoothZoom) {
+            SetCameraSmoothZoomControl(keySmoothZoom);
+        }
+        void setPosition(IndieVector3 position) {
+            _camera.position = position;
+        }
+        void setTarget(IndieVector3 target) {
+            _camera.target = target;
+        }
+        void setMode(int mode) {
+            SetCameraMode(_camera, mode);
+        }
+        void update() {
+            UpdateCamera(&_camera);
+        }
+        void begin3D() {
+            BeginMode3D(_camera);
+        }
+        void end3D() {
+            EndMode3D();
         }
         ~IndieCamera3D() {};
         operator Camera() const {

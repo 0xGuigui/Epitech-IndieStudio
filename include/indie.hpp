@@ -10,6 +10,7 @@
 #include "encapsulation/window.hpp"
 #include "encapsulation/audioDevice.hpp"
 #include "encapsulation/mouse.hpp"
+#include "MapController.hpp"
 
 enum indieState {
     splashScreen,
@@ -21,20 +22,23 @@ enum indieState {
 };
 
 class Indie {
-    public:
-        Indie();
-        ~Indie();
+    private:
         void displaySplashScreen();
         void displayMainMenu(float musicTime);
         void displaySinglePlayerMenu(float musicTime);
         void displayMultiplayerMenu();
         void displayOptionsMenu();
+        void bomberMan();
+    public:
+        Indie();
+        ~Indie();
         float getTimeMusicPlayed();
         float setTimeMusicPlayed(int time);
         bmb::IndieWindow window;
         bmb::IndieAudioDevice audioDevice;
         bmb::IndieScreen screen;
         bmb::IndieMouse mouse;
+        bmb::MapController map;
         indieState state = splashScreen;
         void operator () (indieState state) {
             switch (state) {
@@ -50,6 +54,7 @@ class Indie {
                     this->displaySinglePlayerMenu(this->getTimeMusicPlayed());
                     break;
                 case inGame:
+                    this->bomberMan();
                     break;
             };
         }
@@ -58,5 +63,4 @@ class Indie {
         int _screenWidth;
         int _screenHeight;
     protected:
-    private:
 };
