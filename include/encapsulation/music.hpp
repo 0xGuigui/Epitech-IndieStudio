@@ -25,7 +25,7 @@ namespace bmb {
 				this->_music = music;
 			}
 			~IndieMusic() {
-				UnloadMusicStream(_music);
+				// UnloadMusicStream(_music);
 			}
 			void Load(const std::string &filename) {
 				_music = LoadMusicStream(filename.c_str());

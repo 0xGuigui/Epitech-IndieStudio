@@ -20,7 +20,7 @@ namespace bmb {
 			IndieSound(const Sound &sound) : _sound(sound) {};
 			explicit IndieSound(const std::string &fileName) : _sound(::LoadSound(fileName.c_str())) {};
 			~IndieSound() {
-				UnloadSound(_sound);
+				// UnloadSound(_sound);
 			}
 			void LoadSound(const std::string &fileName) {
 				_sound = ::LoadSound(fileName.c_str());
