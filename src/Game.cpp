@@ -38,17 +38,11 @@ std::vector<IndieVector3> generateBoxes() {
 }
 
 void Indie::bomberMan() {
-    static std::vector<IndieVector3> map = generateBoxes();
-
     if (!this->map.isCameraUpdated()) {
         this->map.setCameraMode(CAMERA_FREE);
     }
     this->map.updateCamera();
     this->map.begin3D();
     this->map.Draw();
-    for (IndieVector3 &BoxPos : map) {
-        DrawCube(BoxPos, 1.0f, 1.0f, 1.0f, GRAY);
-        DrawCubeWires(BoxPos, 1.0f, 1.0f, 1.0f, DARKGRAY);
-    }
     this->map.end3D();
 }
