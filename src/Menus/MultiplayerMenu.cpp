@@ -62,7 +62,7 @@ void Indie::displayMultiPlayerMenu(float musicTime) {
 	if (this->screen.GetWidth() != 1920 || this->screen.GetHeight() != 1080) {
 		middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
 		middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
-		if (this->screen.GetWidth() != 1920)
+		if (this->screen.GetWidth() < 1920)
 			DrawText("The window is resized, \nthe game can have a bad experience", middle_x + 250, middle_y + 200, 50, RED);
 		mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
 		mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
