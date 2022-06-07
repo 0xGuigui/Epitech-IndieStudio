@@ -23,7 +23,19 @@ int main(void) {
     indie.window.setFPS(60);
 
     srand(time(NULL));
-	indie.map = bmb::MapController("assets/InGame/map.png", "assets/InGame/block.png", "assets/InGame/map_obstacles.png", "assets/InGame/brick.png", { -16.0f, 0.0f, -8.0f}, { { -20.0f, 20.0f, -1.0f }, { -9.0f, 0.0f, -1.0f }, { 0.0f, 1.0f, 0.0f }, 45.0f, 0 });
+	indie.map = bmb::MapController(
+        "assets/InGame/map.png",
+        "assets/InGame/block.png",
+        "assets/InGame/map_obstacles.png",
+        "assets/InGame/brick.png",
+        "assets/InGame/oak_planks.png",
+        { -16.0f, 0.0f, -8.0f},
+        {
+            { -20.0f, 20.0f, -1.0f },
+            { -9.0f, 0.0f, -1.0f },
+            { 0.0f, 1.0f, 0.0f },
+            45.0f, 0
+        });
     for (; !indie.window.isClosed(); indie.timePlayed += GetFrameTime()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
