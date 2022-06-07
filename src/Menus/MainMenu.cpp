@@ -54,8 +54,6 @@ void Indie::displayMainMenu(float musicTime) {
 	}
 	timePlayed += GetFrameTime();
 	mainMenuBackground.setWidth(this->_screenWidth);
-	std::cout << this->_screenHeight << std::endl;
-	std::cout << this->_screenWidth << std::endl;
     mainMenuBackground.setHeight(this->_screenHeight);
     static float mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
     static float mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
