@@ -12,6 +12,7 @@ using namespace bmb;
 void Indie::displaySplashScreen() {
 	static IndieTexture2D &SplashScreenImage = loader.textures["splashscreen"];
 	static IndieSound &SplashScreenSound = loader.sounds["splashscreen"];
+    static IndieSound &closeSound = loader.sounds["close"];
 	// static IndieRectangle SplashScreenProgressBar(0, 0, 0, 0);
 	static bool isPlaying = false;
 
@@ -20,7 +21,11 @@ void Indie::displaySplashScreen() {
 		isPlaying = true;
 	}
 	//Get screen size
-
+    if (IsKeyPressed(KEY_ESCAPE)) {
+        closeSound.Play();
+        while (closeSound.isPlaying());
+        exit(0);
+    }
 	SplashScreenImage.setWidth(this->screenWidth);
 	SplashScreenImage.setHeight(this->screenHeight);
 	int x = (this->screen.GetWidth() - SplashScreenImage.getWidth()) / 2;
@@ -30,7 +35,6 @@ void Indie::displaySplashScreen() {
 		DrawRectangle(x + (SplashScreenImage.getWidth() / 2) - (SplashScreenImage.getWidth() / 4), 500 + (SplashScreenImage.getHeight() / 2) - (SplashScreenImage.getHeight() / 4), SplashScreenImage.getWidth() / 2, SplashScreenImage.getHeight() / 32, WHITE);
 	else
 		DrawRectangle(x + (SplashScreenImage.getWidth() / 2) - (SplashScreenImage.getWidth() / 4), 500 + (SplashScreenImage.getHeight() / 2) - (SplashScreenImage.getHeight() / 4), SplashScreenImage.getWidth() / 2 * this->timePlayed / 5.0f, SplashScreenImage.getHeight() / 32, WHITE);
-	//if the window is resized, the splashscreen and the progress bar are resized too and the progress bar need to be always showed
 	if (this->screen.GetWidth() != this->screenWidth || this->screen.GetHeight() != this->screenHeight) {
 		SplashScreenImage.setWidth(this->screen.GetWidth());
 		SplashScreenImage.setHeight(this->screen.GetHeight());

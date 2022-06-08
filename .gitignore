@@ -1159,3 +1159,4 @@ dkms.conf
 *.uf2
 # Raspberry Pi Pico disassembler file
 *.dis
+assets/3D model/Steve.fbx
