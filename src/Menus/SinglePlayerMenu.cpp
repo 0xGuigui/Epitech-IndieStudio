@@ -10,17 +10,16 @@
 using namespace bmb;
 
 void Indie::displaySinglePlayerMenu(float musicTime) {
-	static IndieTexture2D mainMenuBackground("assets/MainMenu/images/background_options.png");
-	static IndieTexture2D playButton("assets/MainMenu/images/buttons/play.png");
-	static IndieTexture2D playButtonHighlighted("assets/MainMenu/images/buttons/play_highlight.png");
-	static IndieTexture2D cancelButton("assets/MainMenu/images/buttons/cancel.png");
-	static IndieTexture2D cancelButtonHighlighted("assets/MainMenu/images/buttons/cancel_highlight.png");
-	static IndieSound buttonSound("assets/MainMenu/audios/button.ogg");
-    static IndieMusic MainMenuMusic("assets/MainMenu/audios/Moog-City.mp3");
+	static IndieTexture2D mainMenuBackground = loader.textures["background_options"];
+	static IndieTexture2D playButton = loader.textures["play"];
+	static IndieTexture2D playButtonHighlighted = loader.textures["play_highlight"];
+	static IndieTexture2D cancelButton = loader.textures["cancel"];
+	static IndieTexture2D cancelButtonHighlighted = loader.textures["cancel_highlight"];
+	static IndieSound buttonSound = loader.sounds["button"];
+    static IndieMusic MainMenuMusic = loader.musics["Moog-City"];
 	static float frameHeightPlayButton = (float)playButton.getHeight()/3;
 	static float frameHeightCancelButton = (float)cancelButton.getHeight()/3;
-	static Vector2 mousePoint = { 0.0f, 0.0f };
-	mousePoint = GetMousePosition();
+	Vector2 mousePoint = GetMousePosition();
 
 	static float musicPlayed = this->_musicPlayed;
 	static bool isPlaying = false;

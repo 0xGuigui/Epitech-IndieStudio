@@ -37,7 +37,6 @@ class Indie {
         float setTimeMusicPlayed(int time);
         bmb::IndieWindow window;
         bmb::ResourceLoader loader;
-        bmb::IndieAudioDevice audioDevice;
         bmb::IndieScreen screen;
         bmb::IndieMouse mouse;
         bmb::MapController map;

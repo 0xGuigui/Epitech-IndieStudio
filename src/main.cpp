@@ -12,12 +12,11 @@ int main(void) {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     Indie indie;
 
-    for (; !indie.window.isClosed(); indie.timePlayed += GetFrameTime()) {
+    for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawFPS(10, 10);
         indie(indie.state);
         EndDrawing();
     }
