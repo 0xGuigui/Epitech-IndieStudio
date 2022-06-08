@@ -15,8 +15,9 @@ namespace bmb {
 			int _fps = 60;
 			int _height = 1080;
 			int _width = 1920;
+            bmb::IndieAudioDevice audioDevice;
 		public:
-			IndieWindow() = default;;
+			IndieWindow() = default;
 			IndieWindow(int screenHeight, int screenWidth, const std::string& title = "") {
 				InitWindow(screenWidth, screenHeight, title.c_str());
 				_height = screenHeight;
@@ -82,7 +83,7 @@ namespace bmb {
 			static void setMinSize(int width, int height) {
 				SetWindowMinSize(width, height);
 			}
-			void setIcon(IndieImage icon) {
+			static void setIcon(const IndieImage& icon) {
 				return SetWindowIcon(icon.getImage());
 			}
 	};

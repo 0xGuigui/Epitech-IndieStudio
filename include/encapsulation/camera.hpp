@@ -51,7 +51,7 @@ namespace bmb {
 
     public:
         IndieCamera3D() {};
-        IndieCamera3D(IndieVector3 position, IndieVector3 target, IndieVector3 up, float fovy, int projection) {
+        IndieCamera3D(const IndieVector3& position, const IndieVector3& target, const IndieVector3& up, float fovy, int projection) {
             _camera.position = position;
             _camera.target = target;
             _camera.up = up;
@@ -96,4 +96,4 @@ namespace bmb {
             return &_camera;
         }
     };
-};
+}
