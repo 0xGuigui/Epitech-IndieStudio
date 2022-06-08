@@ -5,8 +5,9 @@
 ** include
 */
 
-#include <string>
-#include "raylib.h"
+#pragma once
+
+#include "mesh.hpp"
 
 namespace bmb {
 	class IndieModel {
@@ -17,15 +18,30 @@ namespace bmb {
 
 			explicit IndieModel(const std::string &fileName) : _model(::LoadModel(fileName.c_str())) {};
 
+			IndieModel(IndieMesh mesh) {
+				_model = LoadModelFromMesh(mesh);
+			}
 			~IndieModel() {
-				UnloadModel(_model);
+				// UnloadModel(_model);
 			}
 			void LoadModel(const std::string &fileName) {
 				_model = ::LoadModel(fileName.c_str());
 			}
-			operator Model() const {
+			void LoadFromMesh(IndieMesh mesh) {
+				_model = LoadModelFromMesh(mesh);
+			}
+			void Draw(IndieVector3 position, float scale, IndieColor tint) {
+				DrawModel(_model, position, scale, tint);
+			}
+			Model &getModel() {
 				return _model;
 			}
+			operator Model() {
+				return _model;
+			}
+			operator Model *() {
+                return &_model;
+            }
 		private:
 			Model _model{};
 	};

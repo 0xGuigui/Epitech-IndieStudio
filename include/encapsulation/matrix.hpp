@@ -39,5 +39,8 @@ namespace bmb {
             operator Matrix() const {
                 return _matrix;
             }
+            operator Matrix *() {
+                return &_matrix;
+            }
 	};
 };
