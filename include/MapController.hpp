@@ -51,7 +51,7 @@ namespace bmb {
 		public:
 			MapController() = default;
 			MapController(const IndieImage& mapImage, const IndieImage& mapObstacleImage,
-                          const IndieTexture2D& block, const IndieTexture2D& obstacle, const &IndieTexture2D destructible,
+                          const IndieTexture2D& block, const IndieTexture2D& obstacle, const IndieTexture2D& destructible,
                           const IndieVector3& mapPosition, const IndieCamera3D& camera) {
                 IndieMesh destructibleMesh;
                 destructibleMesh.GenCube(1.0f, 1.0f, 1.0f);

@@ -13,7 +13,7 @@ Indie::Indie() :
         window(1080, 1920, "[PLATANOS STUDIOS] - IndieCraft"),
         loader("assets"),
         map(loader.images["map"], loader.images["map_obstacles"],
-            loader.textures["block"], loader.textures["brick"],
+            loader.textures["block"], loader.textures["brick"], loader.textures["oak_planks"],
             {-16.0f, 0.0f, -8.0f},
             {{0.0f, 17.0f, 5.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, 45.0f, 0}) {
     bmb::IndieWindow::setMinSize(1, 1);
