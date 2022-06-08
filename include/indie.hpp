@@ -32,8 +32,8 @@ class Indie {
         void bomberMan();
     public:
         Indie();
-        ~Indie();
-        float getTimeMusicPlayed();
+        ~Indie() = default;
+        float getTimeMusicPlayed() const;
         float setTimeMusicPlayed(int time);
         bmb::IndieWindow window;
         bmb::ResourceLoader loader;

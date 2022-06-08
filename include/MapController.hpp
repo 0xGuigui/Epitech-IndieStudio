@@ -20,11 +20,9 @@ namespace bmb {
 			bool _updateCamera = false;
 		public:
 			MapController() = default;
-			MapController(const std::string& map, const std::string& blockTexture, const std::string& mapObstacle, const std::string& blockObsTexture, const IndieVector3& mapPosition, const IndieCamera3D& camera) {
-				IndieImage mapImage(map);
-				IndieImage mapObstacleImage(mapObstacle);
-				IndieTexture2D block(blockTexture);
-				IndieTexture2D obstacle(blockObsTexture);
+			MapController(const IndieImage& mapImage, const IndieImage& mapObstacleImage,
+                          const IndieTexture2D& block, const IndieTexture2D& obstacle,
+                          const IndieVector3& mapPosition, const IndieCamera3D& camera) {
 				IndieMesh mapMesh(mapImage, { 1.0f, 1.0f, 1.0f });
 				IndieMesh obsMesh(mapObstacleImage, { 1.0f, 1.0f, 1.0f });
 				_map.LoadFromMesh(mapMesh);
