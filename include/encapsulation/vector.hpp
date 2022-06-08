@@ -33,6 +33,7 @@ namespace bmb {
 
     class IndieVector3 {
     public:
+        IndieVector3() {};
         IndieVector3(float x, float y, float z) {
             _vector.y = y;
             _vector.x = x;
@@ -50,6 +51,9 @@ namespace bmb {
         }
         float getZ() const {
             return _vector.z;
+        }
+        Vector3 &getVector() {
+            return _vector;
         }
         operator Vector3() const {
             return _vector;

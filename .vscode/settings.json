@@ -1,7 +1,3 @@
 {
-    "makefile.extensionOutputFolder": "./.vscode",
-    "files.associations": {
-        "*.m": "cpp",
-        "string": "cpp"
-    }
+	"makefile.extensionOutputFolder": "./.vscode"
 }
