@@ -12,6 +12,7 @@
 #include <filesystem>
 #include "error.hpp"
 #include "../external/robin_hood.hpp"
+#include "../encapsulation/texture.hpp"
 
 namespace bmb {
     class IResourceConnector {
@@ -31,7 +32,7 @@ namespace bmb {
         robin_hood::unordered_flat_map<std::string, T> _resources;
 
     public:
-        ResourceConnector() = delete;
+        ResourceConnector() : _paths(), _fileExtensions(), _resources() {};
 
         explicit ResourceConnector(const std::string &subPath, std::vector<std::string> fileExtensions = {}) :
                 _paths(std::vector<std::string>{subPath}),
@@ -90,7 +91,6 @@ namespace bmb {
                 }
                 if (_fileExtensions.empty() || std::find(_fileExtensions.begin(), _fileExtensions.end(),
                                                          file.path().extension().string()) != _fileExtensions.end()) {
-                    std::cout << file.path().extension().string() << std::endl;
                     this->addResource(file.path().stem().string(), file.path().string());
                 }
             }
@@ -100,32 +100,31 @@ namespace bmb {
          * Used to access an element of the resource map
          */
         T &operator[](const std::string &name) {
-            auto value = _resources.find(name);
-
-            if (value == _resources.end()) {
-                throw ResourceConnectorException("Resource \"" + name + "\" does not exist");
-            }
-            return value->second;
+            return _resources[name];
         }
     };
 
     class ResourceLoader {
     public:
         // List of all connectors
+        ResourceConnector<IndieTexture2D> textures;
 
     private:
         // Add your connectors here for building process
-        std::vector<std::reference_wrapper<IResourceConnector>> _connectors = {};
+        std::vector<std::reference_wrapper<IResourceConnector>> _connectors = {
+                textures,
+        };
 
     public:
-        explicit ResourceLoader(const std::string &rootFolderName) {
+        explicit ResourceLoader(const std::string &rootFolderName) :
+                textures("InGame") {
             std::string rootPath = std::filesystem::current_path().string() + "/" + rootFolderName;
 
             for (auto &file: std::filesystem::directory_iterator(rootPath)) {
                 if (!file.is_directory()) {
                     continue;
                 }
-                for (auto i : _connectors) {
+                for (auto i: _connectors) {
                     const std::vector<std::string> &paths = i.get().getPaths();
 
                     if (std::find(paths.begin(), paths.end(), file.path().stem().string()) != paths.end()) {
@@ -133,6 +132,6 @@ namespace bmb {
                     }
                 }
             }
-        }
+        };
     };
 }

@@ -19,12 +19,12 @@ namespace bmb {
 			IndieVector3 _position;
 			bool _updateCamera = false;
 		public:
-			MapController() {};
-			MapController(std::string map, std::string blockTexture, std::string mapObstacle, std::string blockObsTexture, IndieVector3 mapPosition, IndieCamera3D camera) {
+			MapController() = default;
+			MapController(const std::string& map, const std::string& blockTexture, const std::string& mapObstacle, const std::string& blockObsTexture, const IndieVector3& mapPosition, const IndieCamera3D& camera) {
 				IndieImage mapImage(map);
 				IndieImage mapObstacleImage(mapObstacle);
-				IndieTexture2D block(blockTexture.c_str());
-				IndieTexture2D obstacle(blockObsTexture.c_str());
+				IndieTexture2D block(blockTexture);
+				IndieTexture2D obstacle(blockObsTexture);
 				IndieMesh mapMesh(mapImage, { 1.0f, 1.0f, 1.0f });
 				IndieMesh obsMesh(mapObstacleImage, { 1.0f, 1.0f, 1.0f });
 				_map.LoadFromMesh(mapMesh);
@@ -34,24 +34,24 @@ namespace bmb {
 				_position = mapPosition;
 				_camera = camera;
 			};
-			void setPosition(IndieVector3 position) {
+			void setPosition(const IndieVector3& position) {
 				_position = position;
 			}
 			void Draw() {
 				_map.Draw(_position, 1.0f, WHITE);
 				_mapObstacle.Draw(_position, 1.0f, WHITE);
 			}
-			bool isCameraUpdated() {
+			bool isCameraUpdated() const {
 				return _updateCamera;
 			}
 			void setCameraUpdate(bool state) {
 				_updateCamera = state;
 			}
-			void setCameraPosition(IndieVector3 position) {
+			void setCameraPosition(const IndieVector3& position) {
 				_camera.setPosition(position);
 				_updateCamera = true;
 			}
-			void setCameraTarget(IndieVector3 target) {
+			void setCameraTarget(const IndieVector3& target) {
 				_camera.setTarget(target);
 				_updateCamera = true;
 			}
@@ -69,4 +69,4 @@ namespace bmb {
 				_camera.end3D();
 			}
 	};
-};
+}

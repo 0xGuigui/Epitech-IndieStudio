@@ -10,6 +10,7 @@
 #include "encapsulation/window.hpp"
 #include "encapsulation/audioDevice.hpp"
 #include "encapsulation/mouse.hpp"
+#include "components/resourceLoader.hpp"
 #include "MapController.hpp"
 
 enum indieState {
@@ -35,6 +36,7 @@ class Indie {
         float getTimeMusicPlayed();
         float setTimeMusicPlayed(int time);
         bmb::IndieWindow window;
+        bmb::ResourceLoader loader;
         bmb::IndieAudioDevice audioDevice;
         bmb::IndieScreen screen;
         bmb::IndieMouse mouse;
@@ -43,8 +45,8 @@ class Indie {
         void operator () (indieState state) {
             switch (state) {
                 case splashScreen:
-                    this->_screenHeight = this->window.getHeight();
-                    this->_screenWidth = this->window.getWidth();
+                    this->screenHeight = this->window.getHeight();
+                    this->screenWidth = this->window.getWidth();
                     this->displaySplashScreen();
                     break;
                 case mainMenu:
@@ -60,7 +62,7 @@ class Indie {
         }
         float timePlayed = 0.0f;
         float _musicPlayed = 0.0f;
-        int _screenWidth;
-        int _screenHeight;
+        int screenWidth = 1920;
+        int screenHeight = 1080;
     protected:
 };

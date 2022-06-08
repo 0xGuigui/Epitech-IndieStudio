@@ -47,8 +47,8 @@ void Indie::displayMainMenu(float musicTime) {
 
 	timePlayed += GetFrameTime();
 
-	mainMenuBackground.setWidth(this->_screenWidth);
-    mainMenuBackground.setHeight(this->_screenHeight);
+	mainMenuBackground.setWidth(this->screenWidth);
+    mainMenuBackground.setHeight(this->screenHeight);
     static float mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
     static float mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
 	static float middle_x = (this->screen.GetWidth() - titleImage.getWidth()) / 2;

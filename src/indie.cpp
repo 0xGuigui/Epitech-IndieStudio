@@ -9,7 +9,10 @@
 
 using namespace bmb;
 
-Indie::Indie() {}
+Indie::Indie() : window(1080, 1920, "[PLATANOS STUDIOS] - IndieCraft"), loader("assets") {
+    window.setMinSize(1, 1);
+    window.setFPS(60);
+}
 
 Indie::~Indie() {}
 
