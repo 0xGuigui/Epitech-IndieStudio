@@ -15,7 +15,11 @@ Indie::Indie() :
         map(loader.images["map"], loader.images["map_obstacles"],
             loader.textures["block"], loader.textures["brick"], loader.textures["oak_planks"],
             {-16.0f, 0.0f, -8.0f},
-            {{0.0f, 17.0f, 5.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, 45.0f, 0}) {
+            {
+            { -10.0f, 20.0f, -1.0f },
+            { -9.0f, 0.0f, -1.0f },
+            { 0.0f, 1.0f, 0.0f },
+            45.0f, 0}) {
     bmb::IndieWindow::setMinSize(1, 1);
     window.setFPS(60);
 }
