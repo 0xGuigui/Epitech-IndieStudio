@@ -31,7 +31,7 @@ int main(void) {
         "assets/InGame/oak_planks.png",
         { -16.0f, 0.0f, -8.0f},
         {
-            { -20.0f, 20.0f, -1.0f },
+            { -10.0f, 20.0f, -1.0f },
             { -9.0f, 0.0f, -1.0f },
             { 0.0f, 1.0f, 0.0f },
             45.0f, 0
