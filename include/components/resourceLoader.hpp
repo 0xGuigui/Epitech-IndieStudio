@@ -111,6 +111,7 @@ namespace bmb {
         // List of all connectors
         ResourceConnector<IndieTexture2D> textures;
         ResourceConnector<IndieSound> sounds;
+        ResourceConnector<IndieMusic> musics;
         ResourceConnector<IndieImage> images;
 
     private:
@@ -119,12 +120,14 @@ namespace bmb {
                 textures,
                 sounds,
                 images,
+                musics,
         };
 
     public:
         explicit ResourceLoader(const std::string &rootFolderName) :
                 textures("textures"),
-                sounds("audio"),
+                sounds("audio", {".ogg"}),
+                musics("audio", {".mp3"}),
                 images("images") {
             std::string rootPath = std::filesystem::current_path().string() + "/" + rootFolderName;
 
