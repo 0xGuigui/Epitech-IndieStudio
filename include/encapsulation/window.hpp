@@ -82,7 +82,7 @@ namespace bmb {
 			static void setMinSize(int width, int height) {
 				SetWindowMinSize(width, height);
 			}
-			void setIcon(IndieImage icon) {
+			static void setIcon(const IndieImage& icon) {
 				return SetWindowIcon(icon.getImage());
 			}
 	};

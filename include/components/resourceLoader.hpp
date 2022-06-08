@@ -13,6 +13,8 @@
 #include "error.hpp"
 #include "../external/robin_hood.hpp"
 #include "../encapsulation/texture.hpp"
+#include "../encapsulation/sound.hpp"
+#include "../encapsulation/image.hpp"
 
 namespace bmb {
     class IResourceConnector {
@@ -108,16 +110,22 @@ namespace bmb {
     public:
         // List of all connectors
         ResourceConnector<IndieTexture2D> textures;
+        ResourceConnector<IndieSound> sounds;
+        ResourceConnector<IndieImage> images;
 
     private:
         // Add your connectors here for building process
         std::vector<std::reference_wrapper<IResourceConnector>> _connectors = {
                 textures,
+                sounds,
+                images,
         };
 
     public:
         explicit ResourceLoader(const std::string &rootFolderName) :
-                textures("InGame") {
+                textures("textures"),
+                sounds("audio"),
+                images("images") {
             std::string rootPath = std::filesystem::current_path().string() + "/" + rootFolderName;
 
             for (auto &file: std::filesystem::directory_iterator(rootPath)) {
