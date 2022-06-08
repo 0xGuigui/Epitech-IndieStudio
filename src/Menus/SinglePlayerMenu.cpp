@@ -24,6 +24,8 @@ void Indie::displaySinglePlayerMenu(float musicTime) {
 	static float musicPlayed = this->_musicPlayed;
 	static bool isPlaying = false;
     MainMenuMusic.setLoop(true);
+	this->_musicPlayed = MainMenuMusic.getTimePlayed();
+
 
 	if (musicTime != 0 && !isPlaying) {
 		MainMenuMusic.Seek(musicTime);
@@ -34,12 +36,18 @@ void Indie::displaySinglePlayerMenu(float musicTime) {
 		MainMenuMusic.Play();
 	MainMenuMusic.Update();
 
+	if (IsKeyPressed(KEY_ESCAPE)) {
+			closeSound.Play();
+			while (closeSound.isPlaying());
+			exit(0);
+	}
 
 	static float middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
 	static float middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
 	static float mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
     static float mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
 
+	//display the model on the middle of the screen
 	mainMenuBackground.Draw(mainMenuBackground_x, mainMenuBackground_y, WHITE);
 	playButton.Draw(middle_x + 200, middle_y + 850, WHITE);
 	cancelButton.Draw(middle_x + 1100, middle_y + 850, WHITE);
@@ -51,18 +59,27 @@ void Indie::displaySinglePlayerMenu(float musicTime) {
 
 	if (this->screen.GetWidth() != this->screenHeight || this->screen.GetHeight() != this->screenWidth) {
         //Calculate the new position of the buttons and the background to keep it centered and completely on the screen
-		mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
-		mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+	// Apdapt the entire menu if the window is resized, like a image whose size is not the same as the screen, same for the buttons
+	if (this->screen.GetWidth() != 1920 || this->screen.GetHeight() != 1080) {
 		middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
 		middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
-		playButtonBounds.x = middle_x + 200;
-		playButtonBounds.y = middle_y + 850;
-		playButtonHighlightedBounds.x = middle_x + 200;
-		playButtonHighlightedBounds.y = middle_y + 850;
-		cancelButtonBounds.x = middle_x + 1100;
-		cancelButtonBounds.y = middle_y + 850;
-		cancelButtonHighlightedBounds.x = middle_x + 1100;
-		cancelButtonHighlightedBounds.y = middle_y + 850;
+		if (this->screen.GetWidth() < 1920)
+			DrawText("The window is resized, \nthe game can have a bad experience", middle_x + 250, middle_y + 200, 50, RED);
+		mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
+		mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+		playButtonBounds = { middle_x + 200, middle_y + 850, static_cast<float>(playButton.getWidth()), static_cast<float>(playButton.getHeight()) };
+		playButtonHighlightedBounds = { middle_x + 200, middle_y + 850, static_cast<float>(playButtonHighlighted.getWidth()), static_cast<float>(playButtonHighlighted.getHeight()) };
+		cancelButtonBounds = { middle_x + 1100, middle_y + 850, static_cast<float>(cancelButton.getWidth()), static_cast<float>(cancelButton.getHeight()) };
+		cancelButtonHighlightedBounds = { middle_x + 1100, middle_y + 850, static_cast<float>(cancelButtonHighlighted.getWidth()), static_cast<float>(cancelButtonHighlighted.getHeight()) };
+	} else {
+		middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
+		middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+		mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
+		mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+		playButtonBounds = { middle_x + 200, middle_y + 850, static_cast<float>(playButton.getWidth()), static_cast<float>(playButton.getHeight()) };
+		playButtonHighlightedBounds = { middle_x + 200, middle_y + 850, static_cast<float>(playButtonHighlighted.getWidth()), static_cast<float>(playButtonHighlighted.getHeight()) };
+		cancelButtonBounds = { middle_x + 1100, middle_y + 850, static_cast<float>(cancelButton.getWidth()), static_cast<float>(cancelButton.getHeight()) };
+		cancelButtonHighlightedBounds = { middle_x + 1100, middle_y + 850, static_cast<float>(cancelButtonHighlighted.getWidth()), static_cast<float>(cancelButtonHighlighted.getHeight()) };
 	}
 
 	//@TODO = A adapter lorsque les encapsulations des colisions seront terminées
@@ -78,7 +95,6 @@ void Indie::displaySinglePlayerMenu(float musicTime) {
 		cancelButtonHighlighted.Draw(middle_x + 1100, middle_y + 850, WHITE);
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			buttonSound.Play();
-			this->_musicPlayed = MainMenuMusic.getTimePlayed();
 			this->state = mainMenu;
 			MainMenuMusic.Stop();
 		}
