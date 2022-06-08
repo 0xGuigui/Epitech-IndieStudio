@@ -10,27 +10,27 @@
 using namespace bmb;
 
 void Indie::displayMainMenu(float musicTime) {
-    static IndieTexture2D mainMenuBackground("assets/MainMenu/images/mainmenu.png");
-	static IndieTexture2D titleImage("assets/MainMenu/images/IndieCraft.png");
-	static IndieTexture2D singleplayer("assets/MainMenu/images/buttons/singleplayer.png");
-	static IndieTexture2D singleplayerHighlighted("assets/MainMenu/images/buttons/singleplayer_highlight.png");
-	static IndieTexture2D multiplayer("assets/MainMenu/images/buttons/multiplayer.png");
-	static IndieTexture2D multiplayerHighlighted("assets/MainMenu/images/buttons/multiplayer_highlight.png");
-	static IndieTexture2D options("assets/MainMenu/images/buttons/options.png");
-	static IndieTexture2D optionsHighlighted("assets/MainMenu/images/buttons/options_highlight.png");
-	static IndieTexture2D quitgame("assets/MainMenu/images/buttons/quitgame.png");
-	static IndieTexture2D quitgameHighlighted("assets/MainMenu/images/buttons/quitgame_highlight.png");
-	static IndieTexture2D accessibility("assets/MainMenu/images/buttons/accessibility.png");
-	static IndieTexture2D accessibilityHighlighted("assets/MainMenu/images/buttons/accessibility_highlight.png");
-	static IndieTexture2D SplashText("assets/MainMenu/images/splashtext.png");
+    static IndieTexture2D mainMenuBackground = loader.textures["mainmenu"];
+	static IndieTexture2D titleImage = loader.textures["IndieCraft"];
+	static IndieTexture2D singleplayer = loader.textures["singleplayer"];
+	static IndieTexture2D singleplayerHighlighted = loader.textures["singleplayer_highlight"];
+	static IndieTexture2D multiplayer = loader.textures["multiplayer"];
+	static IndieTexture2D multiplayerHighlighted = loader.textures["multiplayer_highlight"];
+	static IndieTexture2D options = loader.textures["options"];
+	static IndieTexture2D optionsHighlighted = loader.textures["options_highlight"];
+	static IndieTexture2D quitgame = loader.textures["quitgame"];
+	static IndieTexture2D quitgameHighlighted = loader.textures["quitgame"];
+	static IndieTexture2D accessibility = loader.textures["accessibility"];
+	static IndieTexture2D accessibilityHighlighted = loader.textures["accessibility_highlight"];
+	static IndieTexture2D SplashText = loader.textures["splashtext"];
 	static float frameHeightSingleplayer = (float)singleplayer.getHeight()/3;
 	static float frameHeightMultiplayer = (float)multiplayer.getHeight()/3;
 	static float frameHeightOptions = (float)options.getHeight()/3;
 	static float frameHeightQuitgame = (float)quitgame.getHeight()/3;
 	static float frameHeightAccessibility = (float)accessibility.getHeight()/3;
-    static IndieMusic MainMenuMusic("assets/MainMenu/audios/Moog-City.mp3");
-	static IndieSound buttonSound("assets/MainMenu/audios/button.ogg");
-	static IndieSound closeSound("assets/SplashScreen/audios/close.ogg");
+    static IndieMusic MainMenuMusic = loader.musics["Moog-City"];
+	static IndieSound buttonSound = loader.sounds["button"];
+	static IndieSound closeSound = loader.sounds["close"];
     static bool isPlaying = false;
     MainMenuMusic.setLoop(true);
     static Vector2 mousePoint = { 0.0f, 0.0f };
@@ -53,8 +53,9 @@ void Indie::displayMainMenu(float musicTime) {
 		exit(0);
 	}
 	timePlayed += GetFrameTime();
-	mainMenuBackground.setWidth(this->_screenWidth);
-    mainMenuBackground.setHeight(this->_screenHeight);
+
+	mainMenuBackground.setWidth(this->screenWidth);
+    mainMenuBackground.setHeight(this->screenHeight);
     static float mainMenuBackground_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
     static float mainMenuBackground_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
 	static float middle_x = (this->screen.GetWidth() - titleImage.getWidth()) / 2;

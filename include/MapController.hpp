@@ -49,15 +49,12 @@ namespace bmb {
 					this->generateLineHorizontal(y, minX, maxX, percentage);
 			}
 		public:
-			MapController() {};
-			MapController(std::string map, std::string blockTexture, std::string mapObstacle, std::string blockObsTexture, std::string destructibleTexture, IndieVector3 mapPosition, IndieCamera3D camera) {
-				IndieImage mapImage(map);
-				IndieImage mapObstacleImage(mapObstacle);
-				IndieTexture2D block(blockTexture.c_str());
-				IndieTexture2D obstacle(blockObsTexture.c_str());
-				IndieTexture2D destructible(destructibleTexture.c_str());
-				IndieMesh destructibleMesh;
-				destructibleMesh.GenCube(1.0f, 1.0f, 1.0f);
+			MapController() = default;
+			MapController(const IndieImage& mapImage, const IndieImage& mapObstacleImage,
+                          const IndieTexture2D& block, const IndieTexture2D& obstacle, const IndieTexture2D& destructible,
+                          const IndieVector3& mapPosition, const IndieCamera3D& camera) {
+                IndieMesh destructibleMesh;
+                destructibleMesh.GenCube(1.0f, 1.0f, 1.0f);
 				IndieMesh mapMesh(mapImage, { 1.0f, 1.0f, 1.0f });
 				IndieMesh obsMesh(mapObstacleImage, { 1.0f, 1.0f, 1.0f });
 				_map.LoadFromMesh(mapMesh);
@@ -70,7 +67,7 @@ namespace bmb {
 				_camera = camera;
 				this->generateBoxes(75);
 			};
-			void setPosition(IndieVector3 position) {
+			void setPosition(const IndieVector3& position) {
 				_position = position;
 			}
 			void DrawMap() {
@@ -87,17 +84,17 @@ namespace bmb {
 				for (IndieVector3 pos : _destructiblePositions)
 					_destructible.Draw(pos, 1.0f, WHITE);
 			}
-			bool isCameraUpdated() {
+			bool isCameraUpdated() const {
 				return _updateCamera;
 			}
 			void setCameraUpdate(bool state) {
 				_updateCamera = state;
 			}
-			void setCameraPosition(IndieVector3 position) {
+			void setCameraPosition(const IndieVector3& position) {
 				_camera.setPosition(position);
 				_updateCamera = true;
 			}
-			void setCameraTarget(IndieVector3 target) {
+			void setCameraTarget(const IndieVector3& target) {
 				_camera.setTarget(target);
 				_updateCamera = true;
 			}

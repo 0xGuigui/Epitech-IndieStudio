@@ -21,13 +21,12 @@ namespace bmb {
 		public:
 			IndieTexture2D() = default;
 
-			IndieTexture2D(const char *fileName) : _texture(LoadTexture(fileName)) {};
+			IndieTexture2D(const std::string &fileName) : _texture(LoadTexture(fileName.c_str())) {};
 
 			IndieTexture2D(Image &image) : _texture(LoadTextureFromImage(image)) {};
 
-			IndieTexture2D(IndieTexture2D &texture) {
-				*this = texture;
-			};
+			IndieTexture2D(const IndieTexture2D &texture) = default;
+
 			IndieTexture2D(Texture2D texture) {
 				_texture = texture;
 			}

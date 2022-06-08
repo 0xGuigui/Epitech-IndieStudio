@@ -9,11 +9,22 @@
 
 using namespace bmb;
 
-Indie::Indie() {}
+Indie::Indie() :
+        window(1080, 1920, "[PLATANOS STUDIOS] - IndieCraft"),
+        loader("assets"),
+        map(loader.images["map"], loader.images["map_obstacles"],
+            loader.textures["block"], loader.textures["brick"], loader.textures["oak_planks"],
+            {-16.0f, 0.0f, -8.0f},
+            {
+            { -10.0f, 20.0f, -1.0f },
+            { -9.0f, 0.0f, -1.0f },
+            { 0.0f, 1.0f, 0.0f },
+            45.0f, 0}) {
+    bmb::IndieWindow::setMinSize(1, 1);
+    window.setFPS(60);
+}
 
-Indie::~Indie() {}
-
-float Indie::getTimeMusicPlayed() {
+float Indie::getTimeMusicPlayed() const {
 	return this->_musicPlayed;
 }
 
