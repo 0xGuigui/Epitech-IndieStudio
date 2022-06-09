@@ -13,17 +13,19 @@
 namespace bmb {
 	class IndieText {
 		private:
-			char *_text;
+			std::string _text;
 		public:
-			IndieText() {};
-			IndieText(std::string fileName) {
-				_text = LoadFileText(fileName.c_str());
-			}
-			void Unload() {
-				UnloadFileText(_text);
-			}
-			operator char * () {
-				return _text;
+			IndieText() {
+				this->_text = "";
+			};
+			IndieText(const IndieText &other) {
+				this->_text = other._text;
+			};
+			// void writeText(const char *text, int posX, int posY, int fontSize, Color color) {
+			// 	DrawText(_text.c_str(), posX, posY, fontSize, color);
+			// }
+			operator char *() {
+				return (char *)this->_text.c_str();
 			}
 	};
 };

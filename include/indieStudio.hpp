@@ -21,6 +21,7 @@
 #include "encapsulation/screen.hpp"
 #include "encapsulation/sound.hpp"
 #include "encapsulation/texture.hpp"
+#include "encapsulation/text.hpp"
 #include "encapsulation/vector.hpp"
 #include "encapsulation/window.hpp"
 #include "encapsulation/mouse.hpp"
