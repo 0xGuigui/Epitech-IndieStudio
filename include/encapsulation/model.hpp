@@ -33,6 +33,9 @@ namespace bmb {
 			void Draw(IndieVector3 position, float scale, IndieColor tint) {
 				DrawModel(_model, position, scale, tint);
 			}
+			void DrawEx(IndieVector3 position, IndieVector3 rotationAxis, float rotationAngle, IndieVector3 scale, IndieColor tint) {
+				DrawModelEx(_model, position, rotationAxis, rotationAngle, scale, tint);
+			}
 			Model &getModel() {
 				return _model;
 			}

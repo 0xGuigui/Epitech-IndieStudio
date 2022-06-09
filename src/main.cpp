@@ -12,6 +12,7 @@ int main(void) {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     Indie indie;
 
+    indie.state = inGame;
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
         if (IsKeyPressed(KEY_ESCAPE))
             break;
