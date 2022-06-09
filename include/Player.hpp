@@ -18,7 +18,7 @@ namespace bmb {
 			int frame = 0;
 			IndieColor playerColor = WHITE;
 			IndieVector3 position;
-			bool _animate = true;
+			bool _animate = false;
 		public:
 			Player() = default;
 			Player(std::string path, IndieColor color, IndieVector3 position) {
@@ -30,8 +30,6 @@ namespace bmb {
 				playerModel.LoadModel("assets/Steve.iqm");
 				anim = LoadModelAnimations("assets/Steve.iqm", &count);
 				playerModel.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
-				std::cout << "AAAAAAAAAAAAAAAAA  " << count << "  AAAAAAAAAAAAAAAAAAAAA" << std::endl;
-				std::cout << "AAAAAAAAAAAAAAAAA  " << IsModelAnimationValid(playerModel, anim[0]) << "  AAAAAAAAAAAAAAAAAAAAA" << std::endl;
 			}
 			void startAnimation() {
 				_animate = true;
@@ -49,7 +47,7 @@ namespace bmb {
 				UpdateModelAnimation(playerModel, anim[0], frame);
 				//61.4f
 				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f, 0.0f});
-				playerModel.Draw(position, 1.0f, playerColor);
+				playerModel.Draw(position, 0.5f, playerColor);
 			}
 	};
 }

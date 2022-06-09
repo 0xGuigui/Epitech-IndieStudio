@@ -9,11 +9,14 @@
 
 using namespace bmb;
 
+// -15 -7
+// -3 5
+
 void Indie::bomberMan() {
-    static Player player("", BLUE, {-10.0f, 4.0f, -4.0f});
-    static Player player2("", RED, {-10.0f, 4.0f, -10.0f});
-    static Player player3("", YELLOW, {-10.0f, 4.0f, 2.0f});
-    static Player player4("", GREEN, {-10.0f, 4.0f, 7.0f});
+    static Player player("", BLUE, {-15.0f, 1.5f, -7.0f});
+    static Player player2("", RED, {-15.0f, 1.5f, 5.0f});
+    static Player player3("", YELLOW, {-3.0f, 1.5f, 5.0f});
+    static Player player4("", GREEN, {-3.0f, 1.5f, -7.0f});
 
     if (!this->map.isCameraUpdated())
         this->map.setCameraMode(CAMERA_PERSPECTIVE);
