@@ -8,12 +8,18 @@
 #include "indieStudio.hpp"
 #include "MapController.hpp"
 
+namespace bmb {
+    KeyboardManager keyboard;
+}
+
 int main(void) {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     Indie indie;
 
-    indie.state = inGame;
+    // indie.state = inGame;
+    SetExitKey(KEY_NULL);
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
+        bmb::keyboard.update();
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();

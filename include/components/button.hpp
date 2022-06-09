@@ -5,27 +5,35 @@
 ** button
 */
 
-#include "indieStudio.hpp"
-#include <functional>
-
 #pragma once
+
+#include <functional>
+#include "indieStudio.hpp"
 
 namespace bmb {
     class IndieButton {
         private:
             IndieRectangle rect;
             IndieVector2 position;
-            IndieTexture texture;
-            IndieTexture textureHover;
+            IndieTexture2D texture;
+            IndieTexture2D textureHover;
             std::function<void()> _onPress;
         public:
             IndieButton() = default;
             ~IndieButton() = default;
-            IndieButton(IndieRectangle rect, IndieVector2 position, IndieTexture texture, IndieTexture textureHover) {
+            IndieButton(IndieRectangle rect, IndieVector2 position, IndieTexture2D texture, IndieTexture2D textureHover) {
                 this->rect = rect;
                 this->position = position;
                 this->texture = texture;
                 this->textureHover = textureHover;
+            }
+            template<typename T>
+            IndieButton(IndieRectangle rect, IndieVector2 position, IndieTexture2D texture, IndieTexture2D textureHover, T onPressFct) {
+                this->rect = rect;
+                this->position = position;
+                this->texture = texture;
+                this->textureHover = textureHover;
+                _onPress = std::function<void()>(onPressFct);
             }
             template<typename T>
             void onPress(T fct)
