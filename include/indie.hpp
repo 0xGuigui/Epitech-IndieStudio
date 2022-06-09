@@ -16,8 +16,7 @@
 enum indieState {
     splashScreen,
     mainMenu,
-    singlePlayerMenu,
-    multiplayerMenu,
+    PlayMenu,
     optionsMenu,
     inGame
 };
@@ -26,9 +25,8 @@ class Indie {
     private:
         void displaySplashScreen();
         void displayMainMenu(float musicTime);
-        void displaySinglePlayerMenu(float musicTime);
-        void displayMultiPlayerMenu(float musicTime);
-        void displayOptionsMenu();
+        void displayPlayMenu(float musicTime);
+        void displayOptionsMenu(float musicTime);
         void bomberMan();
     public:
         Indie();
@@ -39,6 +37,7 @@ class Indie {
         bmb::ResourceLoader loader;
         bmb::IndieScreen screen;
         bmb::IndieMouse mouse;
+        bmb::IndieText text;
         bmb::MapController map;
         indieState state = splashScreen;
         void operator () (indieState state) {
@@ -51,11 +50,11 @@ class Indie {
                 case mainMenu:
                     this->displayMainMenu(this->getTimeMusicPlayed());
                     break;
-                case singlePlayerMenu:
-                    this->displaySinglePlayerMenu(this->getTimeMusicPlayed());
+                case PlayMenu:
+                    this->displayPlayMenu(this->getTimeMusicPlayed());
                     break;
-                case multiplayerMenu:
-                    this->displayMultiPlayerMenu(this->getTimeMusicPlayed());
+                case optionsMenu:
+                    this->displayOptionsMenu(this->getTimeMusicPlayed());
                     break;
                 case inGame:
                     this->bomberMan();
