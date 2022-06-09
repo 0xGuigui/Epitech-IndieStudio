@@ -12,6 +12,7 @@
 #include "encapsulation/mouse.hpp"
 #include "components/resourceLoader.hpp"
 #include "MapController.hpp"
+#include "KeyboardManager.hpp"
 
 enum indieState {
     splashScreen,
@@ -68,3 +69,7 @@ class Indie {
         int screenHeight = 1080;
     protected:
 };
+
+namespace bmb {
+    extern KeyboardManager keyboard;
+}

@@ -24,5 +24,6 @@
 #include "encapsulation/vector.hpp"
 #include "encapsulation/window.hpp"
 #include "encapsulation/mouse.hpp"
+#include "components/button.hpp"
 #include "indie.hpp"
 #include "Map.hpp"
