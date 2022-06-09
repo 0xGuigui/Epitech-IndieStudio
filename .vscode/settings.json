@@ -1,11 +1,3 @@
 {
-	"makefile.extensionOutputFolder": "./.vscode",
-	"files.associations": {
-		"vector": "cpp",
-		"cstdlib": "cpp",
-		"sstream": "cpp",
-		"random": "cpp",
-		"iomanip": "cpp",
-		"string": "cpp"
-	}
+    "makefile.extensionOutputFolder": "./.vscode"
 }
