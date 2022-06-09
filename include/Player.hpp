@@ -44,7 +44,7 @@ namespace bmb {
 				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f, 0.0f});
 			}
 			void turnLeft() {
-				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f, 0.0f});
+				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, -59.7f, 0.0f});
 			}
 			void turnUp() {
 				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f, 0.0f});
