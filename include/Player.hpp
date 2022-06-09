@@ -43,6 +43,15 @@ namespace bmb {
 			void turnRight() {
 				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f, 0.0f});
 			}
+			void turnLeft() {
+				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f, 0.0f});
+			}
+			void turnUp() {
+				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f, 0.0f});
+			}
+			void turnDown() {
+				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f, 0.0f});
+			}
 			void Draw() {
 				frame += _animate ? 2 : 0;
 				if (frame >= 110)
