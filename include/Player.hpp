@@ -40,13 +40,14 @@ namespace bmb {
 			bool isAnimated() {
 				return _animate;
 			}
+			void turnRight() {
+				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f, 0.0f});
+			}
 			void Draw() {
 				frame += _animate ? 2 : 0;
 				if (frame >= 110)
 					frame = 0;
 				UpdateModelAnimation(playerModel, anim[0], frame);
-				//61.4f
-				playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f, 0.0f});
 				playerModel.Draw(position, 0.5f, playerColor);
 			}
 	};
