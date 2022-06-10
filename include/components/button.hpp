@@ -51,6 +51,11 @@ namespace bmb {
                     texture.Draw(position.getX(), position.getY(), WHITE);
                 }
             }
+            void hideButton()
+            {
+                texture.Draw(position.getX(), position.getY(), WHITE);
+            }
+            
         protected:
     };
 }

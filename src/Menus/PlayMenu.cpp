@@ -1,0 +1,42 @@
+/*
+** EPITECH PROJECT, 2022
+** B-YEP-400-LIL-4-1-indiestudio-paul.gervais
+** File description:
+** SinglePlayerMenu
+*/
+
+#include "indieStudio.hpp"
+
+using namespace bmb;
+
+void Indie::displayPlayMenu(float musicTime)
+{
+    static IndieTexture2D mainMenuBackground = loader.textures["background_options"];
+    static float middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
+    static float middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+    static IndieTexture2D playButton = loader.textures["play"];
+    static IndieTexture2D playButtonHighlighted = loader.textures["play_highlight"];
+    static IndieTexture2D cancelButton = loader.textures["cancel"];
+    static IndieTexture2D cancelButtonHighlighted = loader.textures["cancel_highlight"];
+    static IndieSound buttonSound = loader.sounds["button"];
+    static IndieSound closeSound = loader.sounds["close"];
+    static IndieMusic MainMenuMusic = loader.musics["Moog-City"];
+    static IndieButton playButtonObject((IndieRectangle){middle_x + 200, middle_y + 850, static_cast<float>(playButton.getWidth()), static_cast<float>(playButton.getHeight())},
+                                        (IndieVector2){middle_x + 200, middle_y + 850}, playButton, loader.textures["play_highlight"], [&]() -> void
+                                        {
+        buttonSound.Play();
+        this->state = inGame;
+        MainMenuMusic.Stop(); });
+    static IndieButton cancelButtonObject((IndieRectangle){middle_x + 1100, middle_y + 850, static_cast<float>(cancelButton.getWidth()), static_cast<float>(cancelButton.getHeight())},
+                                          (IndieVector2){middle_x + 1100, middle_y + 850}, cancelButton, loader.textures["cancel_highlight"], [&]() -> void
+                                          {
+        buttonSound.Play();
+        this->state = mainMenu; });
+    MainMenuMusic.setLoop(true);
+    MainMenuMusic.Play();
+    MainMenuMusic.Update();
+
+    mainMenuBackground.Draw(middle_x, middle_y, WHITE);
+    playButtonObject.update();
+    cancelButtonObject.update();
+}
