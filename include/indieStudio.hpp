@@ -24,5 +24,8 @@
 #include "encapsulation/vector.hpp"
 #include "encapsulation/window.hpp"
 #include "encapsulation/mouse.hpp"
+#include "save/dataStruct.hpp"
+#include "save/Deserialization.hpp"
+#include "save/Serialization.hpp"
 #include "indie.hpp"
 #include "Map.hpp"

@@ -11,7 +11,13 @@
 
 namespace bmb {
     class Deserialization {
+    protected
+        struct saveData;
+    public:
         Deserialization();
         ~Deserialization();
+        void fileReader();
+        void setSaveData();
+        saveData getSaveData();
     };
 }

@@ -5,4 +5,12 @@
 ** serialization.cpp
 */
 
-#include "serialization.hpp"
+#include "../../../include/save/Serialization.hpp"
+
+bmb::Serialization::Serialization() {
+
+}
+
+bmb::Serialization::~Serialization() {
+
+}
