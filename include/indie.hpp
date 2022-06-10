@@ -40,6 +40,7 @@ class Indie {
         bmb::ResourceLoader loader;
         bmb::IndieScreen screen;
         bmb::IndieMouse mouse;
+        bmb::KeyboardManager keyboard;
         bmb::MapController map;
         indieState state = splashScreen;
         void operator () (indieState state) {
@@ -70,6 +71,4 @@ class Indie {
     protected:
 };
 
-namespace bmb {
-    extern KeyboardManager keyboard;
-}
+extern Indie indie;
