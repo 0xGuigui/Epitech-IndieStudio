@@ -121,5 +121,8 @@ namespace bmb {
 			IndieModel getObstacleModel() {
 				return _mapObstacle;
 			}
+			std::vector<IndieVector3> getDestructiblePositions() {
+				return _destructiblePositions;
+			}
 	};
 };
