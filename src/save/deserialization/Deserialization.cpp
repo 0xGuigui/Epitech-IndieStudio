@@ -5,4 +5,12 @@
 ** deserialization.cpp
 */
 
-#include "deserialization.hpp"
+#include "../../../include/save/Deserialization.hpp"
+
+bmb::Deserialization::Deserialization() {
+
+}
+
+bmb::Deserialization::~Deserialization() {
+
+}
