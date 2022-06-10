@@ -12,7 +12,7 @@
 namespace bmb {
 	class IndieVector2 {
 		public:
-            IndieVector2(float x, float y) {
+            IndieVector2(float x = 0.0f, float y = 0.0f) {
                 _vector.y = y;
                 _vector.x = x;
             }

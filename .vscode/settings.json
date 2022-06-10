@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"makefile.extensionOutputFolder": "./.vscode",
 	"files.associations": {
 		"string": "cpp",
@@ -57,4 +58,12 @@
 		"cinttypes": "cpp",
 		"typeinfo": "cpp"
 	}
+=======
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "random": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp"
+    }
+>>>>>>> feature/player
 }
