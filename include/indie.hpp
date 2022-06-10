@@ -17,17 +17,19 @@
 enum indieState {
     splashScreen,
     mainMenu,
-    PlayMenu,
+    playMenu,
     optionsMenu,
+    controlsMenu,
     inGame
 };
 
 class Indie {
     private:
         void displaySplashScreen();
-        void displayMainMenu(float musicTime);
-        void displayPlayMenu(float musicTime);
-        void displayOptionsMenu(float musicTime);
+        void displayMainMenu();
+        void displayPlayMenu();
+        void displayOptionsMenu();
+        void displayControlsMenu();
         void bomberMan();
     public:
         Indie();
@@ -49,13 +51,16 @@ class Indie {
                     this->displaySplashScreen();
                     break;
                 case mainMenu:
-                    this->displayMainMenu(this->getTimeMusicPlayed());
+                    this->displayMainMenu();
                     break;
-                case PlayMenu:
-                    this->displayPlayMenu(this->getTimeMusicPlayed());
+                case playMenu:
+                    this->displayPlayMenu();
                     break;
                 case optionsMenu:
-                    this->displayOptionsMenu(this->getTimeMusicPlayed());
+                    this->displayOptionsMenu();
+                    break;
+                case controlsMenu:
+                    this->displayControlsMenu();
                     break;
                 case inGame:
                     this->bomberMan();

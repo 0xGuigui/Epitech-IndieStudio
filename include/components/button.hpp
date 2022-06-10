@@ -40,6 +40,10 @@ namespace bmb {
             {
                 _onPress = std::function<void()>(fct);
             }
+            void setTexture(IndieTexture2D texture, IndieTexture2D textureHover) {
+                this->texture = texture;
+                this->textureHover = textureHover;
+            }
             void update()
             {
                 if (CheckCollisionPointRec(GetMousePosition(), rect)) {
