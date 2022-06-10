@@ -15,5 +15,15 @@ void Indie::displayControlsMenu()
     static float middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
     static float middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
     static IndieTexture2D doneButton = loader.textures["done"];
+    static IndieSound buttonSound = loader.sounds["button"];
     static IndieMusic MainMenuMusic = loader.musics["Moog-City"];
+
+    static IndieButton doneButtonObject((IndieRectangle){middle_x + 575, middle_y + 850, static_cast<float>(doneButton.getWidth()), static_cast<float>(doneButton.getHeight())},
+                                        (IndieVector2){middle_x + 575, middle_y + 850}, doneButton, loader.textures["done_highlight"], [&]() -> void
+                                        {
+        buttonSound.Play();
+        this->state = optionsMenu; });
+
+    mainMenuBackground.Draw(middle_x, middle_y, WHITE);
+    doneButtonObject.update();
 }

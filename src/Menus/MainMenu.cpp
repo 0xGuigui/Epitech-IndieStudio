@@ -66,7 +66,7 @@ void Indie::displayMainMenu() {
 
     mainMenuBackground.Draw(0, 0, WHITE);
     titleImage.Draw(middle_x, 75, WHITE);
-    SplashText.Draw(middle_x + 675, 10, WHITE);
+    SplashText.Draw(middle_x + 645, 25, WHITE);
     DrawText("IndieCraft is an Epitech project, based on the bomberman", this->screen.GetWidth() - 600, this->screen.GetHeight() - 30, 20, WHITE);
 
     static float timer = 0;
