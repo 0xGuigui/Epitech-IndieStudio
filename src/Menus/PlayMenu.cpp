@@ -9,15 +9,13 @@
 
 using namespace bmb;
 
-void Indie::displayPlayMenu(float musicTime)
+void Indie::displayPlayMenu()
 {
     static IndieTexture2D mainMenuBackground = loader.textures["background_options"];
     static float middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
     static float middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
     static IndieTexture2D playButton = loader.textures["play"];
-    static IndieTexture2D playButtonHighlighted = loader.textures["play_highlight"];
     static IndieTexture2D cancelButton = loader.textures["cancel"];
-    static IndieTexture2D cancelButtonHighlighted = loader.textures["cancel_highlight"];
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieSound closeSound = loader.sounds["close"];
     static IndieMusic MainMenuMusic = loader.musics["Moog-City"];
@@ -33,9 +31,11 @@ void Indie::displayPlayMenu(float musicTime)
         buttonSound.Play();
         this->state = mainMenu; });
     MainMenuMusic.setLoop(true);
-    MainMenuMusic.Play();
-    MainMenuMusic.Update();
 
+    if (this->_musicPlay)
+        MainMenuMusic.Play();
+
+    MainMenuMusic.Update();
     mainMenuBackground.Draw(middle_x, middle_y, WHITE);
     playButtonObject.update();
     cancelButtonObject.update();

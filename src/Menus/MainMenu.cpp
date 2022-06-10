@@ -9,7 +9,7 @@
 
 using namespace bmb;
 
-void Indie::displayMainMenu(float musicTime) {
+void Indie::displayMainMenu() {
     static IndieTexture2D mainMenuBackground = loader.textures["mainmenu"];
     static IndieTexture2D titleImage = loader.textures["IndieCraft"];
     static float middle_x = (this->screen.GetWidth() - titleImage.getWidth()) / 2;
@@ -26,7 +26,7 @@ void Indie::displayMainMenu(float musicTime) {
     static IndieButton singlePlayerButton((IndieRectangle){middle_x, middle_y + 100, static_cast<float>(singleplayer.getWidth()), static_cast<float>(singleplayer.getHeight())},
     (IndieVector2){middle_x, middle_y + 100}, singleplayer, loader.textures["singleplayer_highlight"], [&]() -> void {
         buttonSound.Play();
-        this->state = PlayMenu;
+        this->state = playMenu;
     });
 
     static IndieButton optionsButton((IndieRectangle){middle_x, middle_y + 200, static_cast<float>(options.getWidth()), static_cast<float>(options.getHeight())},
@@ -49,10 +49,13 @@ void Indie::displayMainMenu(float musicTime) {
     (IndieVector2){middle_x + 825, middle_y + 200}, accessibility, loader.textures["accessibility_highlight"], [&]() -> void {
         buttonSound.Play();
         OpenURL("https://bit.ly/3PSsHwZ");
+        std::cout << "EXIT: EXITED FROM ACCESSIBILITY" << std::endl;
+        exit(0);
     });
 
     if (this->_musicPlay)
         MainMenuMusic.Play();
+
     MainMenuMusic.Update();
 
     keyboard.bind(KEY_ESCAPE, [&]() -> void {

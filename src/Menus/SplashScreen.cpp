@@ -13,7 +13,6 @@ void Indie::displaySplashScreen() {
 	static IndieTexture2D &SplashScreenImage = loader.textures["splashscreen"];
 	static IndieSound &SplashScreenSound = loader.sounds["splashscreen"];
     static IndieSound &closeSound = loader.sounds["close"];
-	// static IndieRectangle SplashScreenProgressBar(0, 0, 0, 0);
 	static bool isPlaying = false;
 
 	if (!isPlaying && !SplashScreenSound.isPlaying()) {
