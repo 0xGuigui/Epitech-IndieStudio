@@ -23,6 +23,16 @@ namespace bmb {
 			IndieVector3 position;
 			bool _animate = false;
 			bool hasBinded = false;
+			bool ghost = false; // WALLPASS
+			bool checkCollision(float x, float y) {
+				Rectangle playerRect = {position.getX() + x, position.getZ() + y, 0.75f, 0.75f};
+				for (IndieVector3 pos : indie.map.getDestructiblePositions()) {
+					Rectangle destructibleRect = {pos.getX(), pos.getZ(), 0.75f, 0.75f};
+					if (CheckCollisionRecs(playerRect, destructibleRect))
+						return true;
+				}
+				return false;
+			}
 		public:
 			Player() = default;
 			Player(IndieColor color, IndieVector3 position, KeyboardKey controls[5]) {
@@ -64,8 +74,7 @@ namespace bmb {
 				hasBinded = true;
 				indie.keyboard.bind(key, [&]() -> void {
 					turnLeft();
-					// Rectangle playerRect = {position.getX(), position.getY(), position.getX() + 0.75f, position.getY() + 0.75f};
-					if (position.getZ() > -7.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() - 0.35f)) % 2 != 0))
+					if (position.getZ() > -7.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() - 0.35f)) % 2 != 0) && !checkCollision(0.0f, -0.05f))
 						position = { position.getX(), position.getY(), position.getZ() - 0.05f};
 					_animate = true;
 				}, [&]() -> void {
@@ -77,7 +86,7 @@ namespace bmb {
 				hasBinded = true;
 				indie.keyboard.bind(key, [&]() -> void {
 					turnRight();
-					if (position.getZ() < 5.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() + 0.35f)) % 2 != 0))
+					if (position.getZ() < 5.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() + 0.35f)) % 2 != 0) && !checkCollision(0.0f, 0.05f))
 						position = { position.getX(), position.getY(), position.getZ() + 0.05f };
 					_animate = true;
 				}, [&]() -> void {
@@ -89,7 +98,7 @@ namespace bmb {
 				hasBinded = true;
 				indie.keyboard.bind(key, [&]() -> void {
 					turnUp();
-					if (position.getX() < -3.0f && (static_cast<int>(round(position.getX() + 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0))
+					if (position.getX() < -3.0f && (static_cast<int>(round(position.getX() + 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0) && !checkCollision(0.05f, 0.0f))
 						position = { position.getX() + 0.05f, position.getY(), position.getZ()};
 					_animate = true;
 				}, [&]() -> void {
@@ -101,7 +110,7 @@ namespace bmb {
 				hasBinded = true;
 				indie.keyboard.bind(key, [&]() -> void {
 					turnDown();
-					if (position.getX() > -15.35f && (static_cast<int>(round(position.getX() - 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0))
+					if (position.getX() > -15.35f && (static_cast<int>(round(position.getX() - 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0) && !checkCollision(-0.05f, 0.0f))
 						position = { position.getX() - 0.05f, position.getY(), position.getZ()};
 					_animate = true;
 				}, [&]() -> void {
