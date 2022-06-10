@@ -5,8 +5,11 @@
 ** include
 */
 
+#pragma once
+
 #include "indieStudio.hpp"
 #include "raymath.h"
+#include <cmath>
 
 //ModelGetBoundingBox
 
@@ -59,9 +62,11 @@ namespace bmb {
 			}
 			void setKeyLeft(KeyboardKey key) {
 				hasBinded = true;
-				bmb::keyboard.bind(key, [&]() -> void {
+				indie.keyboard.bind(key, [&]() -> void {
 					turnLeft();
-					position = { position.getX(), position.getY(), position.getZ() - 0.05f};
+					// Rectangle playerRect = {position.getX(), position.getY(), position.getX() + 0.75f, position.getY() + 0.75f};
+					if (position.getZ() > -7.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() - 0.35f)) % 2 != 0))
+						position = { position.getX(), position.getY(), position.getZ() - 0.05f};
 					_animate = true;
 				}, [&]() -> void {
 					_animate = false;
@@ -70,9 +75,10 @@ namespace bmb {
 			}
 			void setKeyRight(KeyboardKey key) {
 				hasBinded = true;
-				bmb::keyboard.bind(key, [&]() -> void {
+				indie.keyboard.bind(key, [&]() -> void {
 					turnRight();
-					position = { position.getX(), position.getY(), position.getZ() + 0.05f };
+					if (position.getZ() < 5.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() + 0.35f)) % 2 != 0))
+						position = { position.getX(), position.getY(), position.getZ() + 0.05f };
 					_animate = true;
 				}, [&]() -> void {
 					_animate = false;
@@ -81,9 +87,10 @@ namespace bmb {
 			}
 			void setKeyUp(KeyboardKey key) {
 				hasBinded = true;
-				bmb::keyboard.bind(key, [&]() -> void {
+				indie.keyboard.bind(key, [&]() -> void {
 					turnUp();
-					position = { position.getX() + 0.05f, position.getY(), position.getZ()};
+					if (position.getX() < -3.0f && (static_cast<int>(round(position.getX() + 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0))
+						position = { position.getX() + 0.05f, position.getY(), position.getZ()};
 					_animate = true;
 				}, [&]() -> void {
 					_animate = false;
@@ -92,9 +99,10 @@ namespace bmb {
 			}
 			void setKeyDown(KeyboardKey key) {
 				hasBinded = true;
-				bmb::keyboard.bind(key, [&]() -> void {
+				indie.keyboard.bind(key, [&]() -> void {
 					turnDown();
-					position = { position.getX() - 0.05f, position.getY(), position.getZ()};
+					if (position.getX() > -15.35f && (static_cast<int>(round(position.getX() - 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0))
+						position = { position.getX() - 0.05f, position.getY(), position.getZ()};
 					_animate = true;
 				}, [&]() -> void {
 					_animate = false;

@@ -36,6 +36,9 @@ namespace bmb {
 			void DrawEx(IndieVector3 position, IndieVector3 rotationAxis, float rotationAngle, IndieVector3 scale, IndieColor tint) {
 				DrawModelEx(_model, position, rotationAxis, rotationAngle, scale, tint);
 			}
+			BoundingBox getBoundingBox() {
+				return GetModelBoundingBox(_model);
+			}
 			Model &getModel() {
 				return _model;
 			}

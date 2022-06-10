@@ -115,5 +115,11 @@ namespace bmb {
 				_destructiblePositions.clear();
 				generateBoxes(percentage);
 			}
+			IndieModel getMapModel() {
+				return _map;
+			}
+			IndieModel getObstacleModel() {
+				return _mapObstacle;
+			}
 	};
 };
