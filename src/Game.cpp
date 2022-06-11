@@ -5,8 +5,7 @@
 ** Menus
 */
 
-#include "Player.hpp"
-#include "bomb.hpp"
+#include "indie.hpp"
 
 using namespace bmb;
 

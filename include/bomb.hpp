@@ -9,8 +9,6 @@
 
 #include "indie.hpp"
 
-extern Indie indie;
-
 namespace bmb {
     class IndieBomb {
         private:
@@ -24,29 +22,24 @@ namespace bmb {
             bool bombExplosion = false;
         public:
             IndieBomb() = default;
-            IndieBomb(IndieTexture2D textureBomb, IndieVector3 position) {
+            IndieBomb(IndieTexture2D &textureBomb, IndieVector3 position) {
                 create(textureBomb, position);
             }
             template<typename F>
-            IndieBomb(IndieTexture2D textureBomb, IndieVector3 position, F onDetonate) {
+            IndieBomb(IndieTexture2D &textureBomb, IndieVector3 position, F onDetonate) {
                 create(textureBomb, position, onDetonate);
             }
             ~IndieBomb() = default;
             void updateBombAnimation() {
-                bombColor = (frame % 30) >= 15 ? RED : WHITE;
-                DrawCube(_position, 1.0f, 1.0f, 1.0f, bombColor);
+                bombColor = (frame % 30) >= 15 ? IndieColor(255, 0, 0, 200) : IndieColor(255, 255, 255, 200);
+                _bomb.Draw(_position, 1.0f, bombColor);
                 if (frame > 180) {
                     bombExplosion = true;
                     _onDetonate();
                     frame = 0;
                 }
             }
-            void updateExplosionAnimation() {
-                _bombExplosion.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = indie.loader.textures["explosion_" + frame];
-                for (IndieVector3 pos : explosion) {
-                    _bombExplosion.Draw(pos, 1.0f, WHITE);
-                }
-            }
+            void updateExplosionAnimation();
             void update() {
                 if (bombExplosion)
                     updateExplosionAnimation();
@@ -54,15 +47,16 @@ namespace bmb {
                     updateBombAnimation();
                 frame++;
             }
-            void create(IndieTexture2D textureBomb, IndieVector3 position) {
+            void create(IndieTexture2D &textureBomb, IndieVector3 position) {
                 IndieMesh mesh;
                 mesh.GenCube(1.0f, 1.0f, 1.0f);
+                _position = position;
                 _bomb.LoadFromMesh(mesh);
                 _bombExplosion.LoadFromMesh(mesh);
                 _bomb.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = textureBomb;
             }
             template<typename F>
-            void create(IndieTexture2D textureBomb, IndieVector3 position, F func) {
+            void create(IndieTexture2D &textureBomb, IndieVector3 position, F func) {
                 create(textureBomb, position);
                 _onDetonate = func;
             }

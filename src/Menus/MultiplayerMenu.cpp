@@ -5,7 +5,8 @@
 ** MultiPlayerMenu
 */
 
-#include "indieStudio.hpp"
+#include "indie.hpp"
+#include "encapsulation/texture.hpp"
 
 using namespace bmb;
 
