@@ -6,6 +6,7 @@
 */
 
 #include "Player.hpp"
+#include "bomb.hpp"
 
 using namespace bmb;
 
@@ -21,6 +22,7 @@ void Indie::bomberMan() {
     static Player player2(RED, {-15.0f, 1.5f, 5.0f}, control2);
     static Player player3(YELLOW, {-3.0f, 1.5f, 5.0f}, control3);
     static Player player4(GREEN, {-3.0f, 1.5f, -7.0f}, control4);
+    static IndieBomb bomb(WHITE, {-15.0f, 1.5f, -7.0f});
 
     if (!this->map.isCameraUpdated())
         this->map.setCameraMode(CAMERA_PERSPECTIVE);
@@ -31,5 +33,6 @@ void Indie::bomberMan() {
     player2.Draw();
     player3.Draw();
     player4.Draw();
+    bomb.Draw();
     this->map.end3D();
 }
