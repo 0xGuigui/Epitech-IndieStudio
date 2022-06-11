@@ -7,34 +7,45 @@
 
 #pragma once
 
-#include "encapsulation/texture.hpp"
+#include "indie.hpp"
+
+extern Indie indie;
 
 namespace bmb {
     class IndieBomb {
         private:
             int frame = 0;
-            //int bombStock = 0;
-            //int bombFireUp = 0;
             IndieColor bombColor = WHITE;
-            IndieVector3 position;
-            IndieModel _bombDestroyed;
-            IndieModel _bombCreated;
+            IndieVector3 _position;
+            std::vector<IndieVector3> explosion = {};
+            IndieModel _bombExplosion;
+            IndieModel _bomb;
+            std::function<void()> _onDetonate;
             bool bombExplosion = false;
         public:
             IndieBomb() = default;
-            ~IndieBomb() = default;
-            void Draw();
-            IndieTexture2D texture = IndieTexture2D("assets/textures/blocks/tnt.png");
-            void startExplosion() {
-                bombExplosion = true;
+            IndieBomb(IndieTexture2D textureBomb, IndieVector3 position) {
+                create(textureBomb, position);
             }
+            template<typename F>
+            IndieBomb(IndieTexture2D textureBomb, IndieVector3 position, F onDetonate) {
+                create(textureBomb, position, onDetonate);
+            }
+            ~IndieBomb() = default;
             void updateBombAnimation() {
-                // Draw cube red or white
-                DrawCube(position, 1.0f, 1.0f, 1.0f, bombColor);
+                bombColor = (frame % 30) >= 15 ? RED : WHITE;
+                DrawCube(_position, 1.0f, 1.0f, 1.0f, bombColor);
+                if (frame > 180) {
+                    bombExplosion = true;
+                    _onDetonate();
+                    frame = 0;
+                }
             }
             void updateExplosionAnimation() {
-                //Draw texture explosion
-                DrawTexture(texture, position.getX(), position.getY(), bombColor);
+                _bombExplosion.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = indie.loader.textures["explosion_" + frame];
+                for (IndieVector3 pos : explosion) {
+                    _bombExplosion.Draw(pos, 1.0f, WHITE);
+                }
             }
             void update() {
                 if (bombExplosion)
@@ -43,9 +54,17 @@ namespace bmb {
                     updateBombAnimation();
                 frame++;
             }
-            int BombCreation(const IndieTexture2D texture, const IndieVector3 position){
-                IndieMesh
-                _bombDestroyed.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
+            void create(IndieTexture2D textureBomb, IndieVector3 position) {
+                IndieMesh mesh;
+                mesh.GenCube(1.0f, 1.0f, 1.0f);
+                _bomb.LoadFromMesh(mesh);
+                _bombExplosion.LoadFromMesh(mesh);
+                _bomb.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = textureBomb;
+            }
+            template<typename F>
+            void create(IndieTexture2D textureBomb, IndieVector3 position, F func) {
+                create(textureBomb, position);
+                _onDetonate = func;
             }
         protected:
     };
