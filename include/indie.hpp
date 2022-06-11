@@ -17,6 +17,7 @@ enum direction {
 #include "encapsulation/window.hpp"
 #include "encapsulation/audioDevice.hpp"
 #include "encapsulation/mouse.hpp"
+#include "encapsulation/screen.hpp"
 #include "components/resourceLoader.hpp"
 #include "MapController.hpp"
 #include "KeyboardManager.hpp"
