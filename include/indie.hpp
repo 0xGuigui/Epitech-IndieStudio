@@ -13,6 +13,7 @@
 #include "components/resourceLoader.hpp"
 #include "MapController.hpp"
 #include "KeyboardManager.hpp"
+#include "bomb.hpp"
 
 enum indieState {
     splashScreen,
