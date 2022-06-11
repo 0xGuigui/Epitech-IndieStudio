@@ -1,0 +1,10 @@
+# This file contains data for blocks around the playground
+# line starting with '#' are comments
+# The following line define the environment boundaries
+# format: "starting_x, starting_y, width, height"
+0 0 100 100
+
+# Each following line define a block
+# format: "x, y, level, count, model"
+
+0, 0, 0, 1, dummy
