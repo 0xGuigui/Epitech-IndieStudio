@@ -8,12 +8,13 @@
 #pragma once
 
 #include "encapsulation/audioDevice.hpp"
+#include "encapsulation/music.hpp"
+#include "indie.hpp"
 #include "encapsulation/camera.hpp"
 #include "encapsulation/color.hpp"
 #include "encapsulation/image.hpp"
 #include "encapsulation/matrix.hpp"
 #include "encapsulation/model.hpp"
-#include "encapsulation/music.hpp"
 #include "encapsulation/mesh.hpp"
 #include "encapsulation/npatchInfo.hpp"
 #include "encapsulation/ray.hpp"
@@ -25,5 +26,4 @@
 #include "encapsulation/window.hpp"
 #include "encapsulation/mouse.hpp"
 #include "components/button.hpp"
-#include "indie.hpp"
 #include "Map.hpp"
