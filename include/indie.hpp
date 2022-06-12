@@ -40,7 +40,7 @@ class Indie {
         bmb::IndieScreen screen;
         bmb::IndieMouse mouse;
         bmb::MapController map;
-        indieState state = splashScreen;
+        indieState state = inGame;
         void operator () (indieState state) {
             switch (state) {
                 case splashScreen:

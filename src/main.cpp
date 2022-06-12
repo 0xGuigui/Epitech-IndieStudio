@@ -7,6 +7,7 @@
 
 #include "indieStudio.hpp"
 #include "MapController.hpp"
+#include <iostream>
 
 int main(void) {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);

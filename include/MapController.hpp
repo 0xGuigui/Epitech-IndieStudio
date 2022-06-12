@@ -82,6 +82,7 @@ namespace bmb {
 					_destructible.Draw(pos, 1.0f, WHITE);
 			}
 			void Draw() {
+                _environmentHandler.draw();
 				_map.Draw(_position, 1.0f, WHITE);
 				_mapObstacle.Draw(_position, 1.0f, WHITE);
 				for (IndieVector3 pos : _destructiblePositions)
