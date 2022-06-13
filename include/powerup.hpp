@@ -10,7 +10,7 @@
 #pragma once
 
 namespace bmb {
-    class IndiePowerUp {
+    class IIndiePowerUp {
         private:
             IndieModel _powerUp;
             IndieVector3 _position;
