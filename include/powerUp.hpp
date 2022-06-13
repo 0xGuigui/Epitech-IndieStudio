@@ -14,12 +14,18 @@ namespace bmb {
         private:
             IndieModel _powerUp;
             IndieVector3 _position;
+            bool powerUpPickedUp = false;
+            std::function<void()> _onPick;
         public:
             IndiePowerUp() = default;
             virtual ~IndiePowerUp() = default;
-            void create(IndieTexture2D &texturePowerUp, IndieVector3 position) = 0;
-            void update() = 0;
-            void draw() = 0;
+            template<typename F>
+            virtual void create(IndieTexture2D &texturePowerUp, IndieVector3 position) = 0;
+            virtual void update() = 0;
+            virtual void draw() = 0;
+            virtual void updatePowerUpAnimation() = 0;
+            virtual void updatePowerUp() = 0;
+        protected:
     };
 }
 
