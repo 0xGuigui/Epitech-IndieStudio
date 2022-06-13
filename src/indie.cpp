@@ -5,7 +5,7 @@
 ** splashscreen
 */
 
-#include "indieStudio.hpp"
+#include "indie.hpp"
 
 using namespace bmb;
 

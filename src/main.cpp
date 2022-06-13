@@ -5,21 +5,24 @@
 ** main
 */
 
-#include "indieStudio.hpp"
+#include "indie.hpp"
 #include "MapController.hpp"
 
-namespace bmb {
-    KeyboardManager keyboard;
-}
+Indie indie;
 
 int main(void) {
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    Indie indie;
-
-    // indie.state = inGame;
+    KeyboardKey playerControls[5] = {KEY_UP, KEY_DOWN, KEY_RIGHT, KEY_LEFT, KEY_SPACE};
+    KeyboardKey playerControls2[5] = {KEY_W, KEY_S, KEY_D, KEY_A, KEY_Q};
+    KeyboardKey playerControls3[5] = {KEY_T, KEY_G, KEY_H, KEY_F, KEY_R};
+    KeyboardKey playerControls4[5] = {KEY_I, KEY_K, KEY_L, KEY_J, KEY_U};
+    indie.players[0].setControls(playerControls);
+    indie.players[1].setControls(playerControls2);
+    indie.players[2].setControls(playerControls3);
+    indie.players[3].setControls(playerControls4);
+    indie.state = inGame;
     SetExitKey(KEY_NULL);
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
-        bmb::keyboard.update();
+        indie.keyboard.update();
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();

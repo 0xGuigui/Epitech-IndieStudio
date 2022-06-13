@@ -8,7 +8,7 @@
 #pragma once
 
 #include <functional>
-#include "indieStudio.hpp"
+#include "encapsulation/texture.hpp"
 
 namespace bmb {
     class IndieButton {

@@ -7,12 +7,22 @@
 
 #pragma once
 
+enum direction {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+};
+
 #include "encapsulation/window.hpp"
 #include "encapsulation/audioDevice.hpp"
 #include "encapsulation/mouse.hpp"
+#include "encapsulation/screen.hpp"
 #include "components/resourceLoader.hpp"
 #include "MapController.hpp"
 #include "KeyboardManager.hpp"
+#include "Player.hpp"
+#include "bomb.hpp"
 
 enum indieState {
     splashScreen,
@@ -40,7 +50,15 @@ class Indie {
         bmb::ResourceLoader loader;
         bmb::IndieScreen screen;
         bmb::IndieMouse mouse;
+        bmb::KeyboardManager keyboard;
         bmb::MapController map;
+        std::vector<bmb::Player> players = {
+            bmb::Player(BLUE, {-15.0f, 1.5f, -7.0f}, RIGHT), // top-left
+            bmb::Player(RED, {-15.0f, 1.5f, 5.0f}, DOWN), // top-right
+            bmb::Player(YELLOW, {-3.0f, 1.5f, 5.0f}, LEFT), // bottom-right
+            bmb::Player(GREEN, {-3.0f, 1.5f, -7.0f}, UP) // bottom-left
+        };
+        std::vector<bmb::IndieBomb> bombs;
         indieState state = splashScreen;
         void operator () (indieState state) {
             switch (state) {
@@ -70,6 +88,4 @@ class Indie {
     protected:
 };
 
-namespace bmb {
-    extern KeyboardManager keyboard;
-}
+extern Indie indie;

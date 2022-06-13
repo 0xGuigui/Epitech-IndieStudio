@@ -5,6 +5,8 @@
 ** include
 */
 
+#pragma once
+
 #include "raylib.h"
 #include <functional>
 #include <map>
@@ -25,13 +27,13 @@ namespace bmb {
 			}
 			void update() {
 				for (const auto &[key, funcTuple] : map) {
-    			    if (IsKeyDown(key)) {
+					if (IsKeyDown(key)) {
 						std::get<0>(funcTuple)();
 					}
 					if (IsKeyReleased(key)) {
 						std::get<1>(funcTuple)();
 					}
-    			}
+				}
 			}
 			auto &operator [] (KeyboardKey key) {
 				return map[key];
