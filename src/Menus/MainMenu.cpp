@@ -18,7 +18,7 @@ void Indie::displayMainMenu() {
     static IndieTexture2D singleplayer = loader.textures["singleplayer"];
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieSound closeSound = loader.sounds["close"];
-    static IndieMusic MainMenuMusic = loader.musics["Moog-City"];
+    static IndieMusic MainMenuMusic = loader.musics["Moog-City-2"];
     static IndieTexture2D options = loader.textures["options"];
     static IndieTexture2D quitgame = loader.textures["quitgame"];
     static IndieTexture2D accessibility = loader.textures["accessibility"];

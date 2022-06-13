@@ -22,7 +22,7 @@ add_executable (
     src/Menus/SplashScreen.cpp
     src/Game.cpp
     src/Menus/ControlsMenu.cpp
-    src/Menus/PlayerMenu.cpp
+    src/Menus/PlayerControlsMenu.cpp
     src/IncludeDefinitions/Bomb.cpp
     src/IncludeDefinitions/Player.cpp
 )

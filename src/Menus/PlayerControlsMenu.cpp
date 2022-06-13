@@ -19,7 +19,7 @@ void Indie::displayPlayerMenu()
     static IndieTexture2D done = loader.textures["done_short"];
     static IndieTexture2D resetKeys = loader.textures["reset_keys"];
     static IndieSound buttonSound = loader.sounds["button"];
-    static IndieMusic MainMenuMusic = loader.musics["Moog-City"];
+    static IndieMusic MainMenuMusic = loader.musics["Moog-City-2"];
 
     if (this->_musicPlay)
         MainMenuMusic.Play();
@@ -30,7 +30,7 @@ void Indie::displayPlayerMenu()
                                   (IndieVector2){middle_x + 1000, middle_y + 920}, done, loader.textures["done_short_highlight"], [&]() -> void
                                   {
         buttonSound.Play();
-        this->state = optionsMenu; });
+        this->state = controlsMenu; });
 
     static IndieButton resetKeysButton((IndieRectangle){middle_x + 300, middle_y + 920, static_cast<float>(resetKeys.getWidth()), static_cast<float>(resetKeys.getHeight())},
                                        (IndieVector2){middle_x + 300, middle_y + 920}, resetKeys, loader.textures["reset_keys_highlight"], [&]() -> void

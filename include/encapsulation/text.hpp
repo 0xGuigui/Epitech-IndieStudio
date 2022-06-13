@@ -21,9 +21,6 @@ namespace bmb {
 			IndieText(const IndieText &other) {
 				this->_text = other._text;
 			};
-			// void writeText(const char *text, int posX, int posY, int fontSize, Color color) {
-			// 	DrawText(_text.c_str(), posX, posY, fontSize, color);
-			// }
 			operator char *() {
 				return (char *)this->_text.c_str();
 			}
