@@ -15,6 +15,7 @@
 #include "../encapsulation/texture.hpp"
 #include "../encapsulation/sound.hpp"
 #include "../encapsulation/image.hpp"
+#include "../encapsulation/font.hpp"
 
 namespace bmb {
     class IResourceConnector {
@@ -113,6 +114,7 @@ namespace bmb {
         ResourceConnector<IndieSound> sounds;
         ResourceConnector<IndieMusic> musics;
         ResourceConnector<IndieImage> images;
+        ResourceConnector<IndieFont> fonts;
 
     private:
         // Add your connectors here for building process
@@ -121,6 +123,7 @@ namespace bmb {
                 sounds,
                 images,
                 musics,
+                fonts,
         };
 
     public:
@@ -128,7 +131,8 @@ namespace bmb {
                 textures("textures"),
                 sounds("audio", {".ogg"}),
                 musics("audio", {".mp3"}),
-                images("images") {
+                images("images"),
+                fonts("fonts") {
             std::string rootPath = std::filesystem::current_path().string() + "/" + rootFolderName;
 
             for (auto &file: std::filesystem::directory_iterator(rootPath)) {
