@@ -119,13 +119,13 @@ namespace bmb {
 				_destructiblePositions.clear();
 				generateBoxes(percentage);
 			}
-			IndieModel getMapModel() {
+			IndieModel &getMapModel() {
 				return _map;
 			}
-			IndieModel getObstacleModel() {
+			IndieModel &getObstacleModel() {
 				return _mapObstacle;
 			}
-			std::vector<IndieVector3> getDestructiblePositions() {
+			std::vector<IndieVector3> &getDestructiblePositions() {
 				return _destructiblePositions;
 			}
 	};

@@ -127,7 +127,7 @@ void Player::setKeyBomb(KeyboardKey key) {
         if (!bombLeft)
             return;
 		bombLeft--;
-        IndieBomb bomb(indie.loader.textures["tnt"], newPos, [&]() -> void {
+        IndieBomb bomb(indie.loader.textures["tnt"], force, newPos, [&]() -> void {
             bombLeft++;
         });
         indie.bombs.push_back(bomb);
