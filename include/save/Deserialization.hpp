@@ -8,16 +8,22 @@
 #pragma once
 
 #include "indieStudio.hpp"
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include "bmbSysCall.hpp"
 
 namespace bmb {
     class Deserialization {
     protected
-        struct saveData;
+        std::string *input;
+        std::string pathToSave = "./save/data/save.save";
+        bmb::systemCall sysCall;
     public:
         Deserialization();
         ~Deserialization();
         void fileReader();
         void setSaveData();
-        saveData getSaveData();
+        std::string getSaveData();
     };
 }

@@ -12,6 +12,7 @@
 #include <string>
 #include <tuple>
 #include <list>
+#include <fstream>
 
 namespace bmb {
     struct player {
@@ -35,8 +36,8 @@ namespace bmb {
     };
 
     struct header { //struct quantity
-        int playerNumber;
+        int playerNumber = 4;
+        int mapNumber = 1;
         int bombNumber;
-        int mapNumber;
     };
 }

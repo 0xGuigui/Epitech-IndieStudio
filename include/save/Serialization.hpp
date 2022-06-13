@@ -12,22 +12,22 @@
 #include <string>
 #include <tuple>
 #include <list>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include "bmbSysCall.hpp"
 
 namespace bmb {
     class Serialization {
     protected:
-        struct saveData {
-
-            std::vector<std::tuple<float, float>> charactersPosition;
-
-        };
-        std::list<IndieBomb>
-        std::vector<>
+        std::string *output;
+        std::string pathToSave = "./save/data/save.save";
+        bmb::systemCall sysCall;
     public:
         Serialization();
         ~Serialization();
         void fileWriter();
         void setSaveData();
-        saveData getSaveData();
+        std::string getSaveData();
     };
 }
