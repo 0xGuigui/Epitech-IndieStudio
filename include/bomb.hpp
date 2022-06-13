@@ -24,13 +24,13 @@ namespace bmb {
             bool isExplosionValid(IndieVector3 position, int &direction);
         public:
             IndieBomb() = default;
-            IndieBomb(IndieTexture2D &textureBomb, int force, IndieVector3 position) {
-                create(textureBomb, position);
+            IndieBomb(int force, IndieVector3 position) {
+                create(position);
                 this->force = force;
             }
             template<typename F>
-            IndieBomb(IndieTexture2D &textureBomb, int force, IndieVector3 position, F onDetonate) {
-                create(textureBomb, position, onDetonate);
+            IndieBomb(int force, IndieVector3 position, F onDetonate) {
+                create(position, onDetonate);
                 this->force = force;
             }
             ~IndieBomb() = default;
@@ -53,17 +53,16 @@ namespace bmb {
                     updateBombAnimation();
                 frame++;
             }
-            void create(IndieTexture2D &textureBomb, IndieVector3 position) {
+            void create(IndieVector3 position) {
+                _bomb = IndieModel("assets/models/tnt.glb");
                 IndieMesh mesh;
                 mesh.GenCube(1.0f, 1.0f, 1.0f);
-                _position = position;
-                _bomb.LoadFromMesh(mesh);
                 _bombExplosion.LoadFromMesh(mesh);
-                _bomb.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = textureBomb;
+                _position = position;
             }
             template<typename F>
-            void create(IndieTexture2D &textureBomb, IndieVector3 position, F func) {
-                create(textureBomb, position);
+            void create(IndieVector3 position, F func) {
+                create(position);
                 _onDetonate = func;
             }
             IndieVector3 getPosition() {
