@@ -10,7 +10,7 @@
 using namespace bmb;
 
 Indie::Indie() :
-        window(980, 1820, "[PLATANOS STUDIOS] - IndieCraft"),
+        window(1080, 1920, "[PLATANOS STUDIOS] - IndieCraft"),
         loader("assets"),
         map(loader.images["map"], loader.images["map_obstacles"],
             loader.textures["block"], loader.textures["brick"], loader.textures["oak_planks"],
