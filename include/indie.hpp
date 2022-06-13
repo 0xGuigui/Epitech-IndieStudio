@@ -92,7 +92,7 @@ class Indie {
         float timePlayed = 0.0f;
         float _musicPlayed = 0.0f;
         int screenWidth = 1920;
-        int screenHeight = 1032;
+        int screenHeight = 1080;
         bool _musicPlay = true;
         int playerSelected = 0;
     protected:
