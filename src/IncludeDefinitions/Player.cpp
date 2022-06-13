@@ -23,7 +23,7 @@ bool Player::checkCollision(float x, float y) {
 
 Player::Player(IndieColor color, IndieVector3 position, direction facing) {
 	unsigned int count = 0;
-    IndieTexture2D texture("assets/char.png");
+    IndieTexture2D texture = indie.loader.textures["skin"];
 
     playerColor = color;
     this->position = position;
@@ -114,15 +114,20 @@ void Player::setKeyBomb(KeyboardKey key) {
     indie.keyboard.unbind(keys[4]);
     keys[4] = key;
     indie.keyboard.bind(key, [&]() -> void {
-        if (!bombLeft)
-            return;
-		bombLeft--;
         IndieVector3 newPos(
             round(position.getX()),
             0.5f,
             round(position.getZ())
 		);
-        IndieBomb bomb(indie.loader.textures["brick"], newPos, [&]() -> void {
+        for (IndieBomb &bomb : indie.bombs) {
+            IndieVector3 pos = bomb.getPosition();
+            if (pos.getX() == newPos.getX() && pos.getZ() == newPos.getZ())
+                return;
+        }
+        if (!bombLeft)
+            return;
+		bombLeft--;
+        IndieBomb bomb(indie.loader.textures["tnt"], newPos, [&]() -> void {
             bombLeft++;
         });
         indie.bombs.push_back(bomb);
@@ -130,8 +135,9 @@ void Player::setKeyBomb(KeyboardKey key) {
 }
 
 void Player::unbindKeys() {
-    for (KeyboardKey key : keys) {
+    for (KeyboardKey &key : keys) {
         indie.keyboard.unbind(key);
+        key = KEY_NULL;
     }
 }
 

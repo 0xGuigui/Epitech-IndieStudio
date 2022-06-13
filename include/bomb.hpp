@@ -13,6 +13,7 @@ namespace bmb {
     class IndieBomb {
         private:
             int frame = 0;
+            int force = 1;
             IndieColor bombColor = WHITE;
             IndieVector3 _position;
             std::vector<IndieVector3> explosion = {};
@@ -30,12 +31,14 @@ namespace bmb {
                 create(textureBomb, position, onDetonate);
             }
             ~IndieBomb() = default;
+            void detonate();
             void updateBombAnimation() {
                 bombColor = (frame % 30) >= 15 ? IndieColor(255, 0, 0, 200) : IndieColor(255, 255, 255, 200);
                 _bomb.Draw(_position, 1.0f, bombColor);
                 if (frame > 180) {
                     bombExplosion = true;
                     _onDetonate();
+                    detonate();
                     frame = 0;
                 }
             }
@@ -59,6 +62,9 @@ namespace bmb {
             void create(IndieTexture2D &textureBomb, IndieVector3 position, F func) {
                 create(textureBomb, position);
                 _onDetonate = func;
+            }
+            IndieVector3 getPosition() {
+                return _position;
             }
         protected:
     };

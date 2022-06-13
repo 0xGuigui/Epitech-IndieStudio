@@ -15,3 +15,7 @@ void IndieBomb::updateExplosionAnimation() {
         _bombExplosion.Draw(pos, 1.0f, WHITE);
     }
 }
+
+void IndieBomb::detonate() {
+    
+}
