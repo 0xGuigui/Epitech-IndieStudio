@@ -52,6 +52,11 @@ namespace bmb {
             void setKeyDown(KeyboardKey key);
             void setKeyBomb(KeyboardKey key);
             void unbindKeys();
+            void unbindKeyLeft();
+            void unbindKeyRight();
+            void unbindKeyUp();
+            void unbindKeyDown();
+            void unbindKeyBomb();
             void Draw();
     };
 }
