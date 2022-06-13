@@ -36,10 +36,12 @@ void Indie::displayOptionsMenu()
         buttonSound.Play();
         if (this->_musicPlay) {
             this->_musicPlay = false;
+            this->_musicPlayed = MainMenuMusic.getTimePlayed();
             MainMenuMusic.Stop();
             musicOnButtonObject.setTexture(musicOFF, musicOFFHighlight);
         } else {
             this->_musicPlay = true;
+            MainMenuMusic.Seek(this->_musicPlayed);
             MainMenuMusic.Play();
             musicOnButtonObject.setTexture(musicON, musicONHighlight);
         } });
