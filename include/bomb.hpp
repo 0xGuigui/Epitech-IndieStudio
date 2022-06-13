@@ -21,14 +21,17 @@ namespace bmb {
             IndieModel _bomb;
             std::function<void()> _onDetonate;
             bool bombExplosion = false;
+            bool isExplosionValid(IndieVector3 position, int &direction);
         public:
             IndieBomb() = default;
-            IndieBomb(IndieTexture2D &textureBomb, IndieVector3 position) {
+            IndieBomb(IndieTexture2D &textureBomb, int force, IndieVector3 position) {
                 create(textureBomb, position);
+                this->force = force;
             }
             template<typename F>
-            IndieBomb(IndieTexture2D &textureBomb, IndieVector3 position, F onDetonate) {
+            IndieBomb(IndieTexture2D &textureBomb, int force, IndieVector3 position, F onDetonate) {
                 create(textureBomb, position, onDetonate);
+                this->force = force;
             }
             ~IndieBomb() = default;
             void detonate();
@@ -66,6 +69,7 @@ namespace bmb {
             IndieVector3 getPosition() {
                 return _position;
             }
+            void Delete();
         protected:
     };
 }

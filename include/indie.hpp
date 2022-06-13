@@ -3,6 +3,8 @@
 ** B-YEP-400-LIL-4-1-indiestudio-paul.gervais
 ** File description:
 ** splashscreen
+            bmb::Player(RED, {-15.0f, 1.5f, 5.0f}, DOWN), // top-right
+            bmb::Player(YELLOW, {-3.0f, 1.5f, 5.0f}, LEFT), // bottom-right
 */
 
 #pragma once
@@ -55,8 +57,8 @@ class Indie {
         std::vector<bmb::Player> players = {
             bmb::Player(BLUE, {-15.0f, 1.5f, -7.0f}, RIGHT), // top-left
             bmb::Player(RED, {-15.0f, 1.5f, 5.0f}, DOWN), // top-right
-            bmb::Player(YELLOW, {-3.0f, 1.5f, 5.0f}, LEFT), // bottom-right
-            bmb::Player(GREEN, {-3.0f, 1.5f, -7.0f}, UP) // bottom-left
+            bmb::Player(GREEN, {-3.0f, 1.5f, -7.0f}, UP), // bottom-left
+            bmb::Player(YELLOW, {-3.0f, 1.5f, 5.0f}, LEFT) // bottom-right
         };
         std::vector<bmb::IndieBomb> bombs;
         indieState state = splashScreen;
