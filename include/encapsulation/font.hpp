@@ -15,6 +15,8 @@ namespace bmb {
         Font _font;
 
     public:
+        IndieFont() = default;
+
         IndieFont(const std::string &fileName) {
             _font = LoadFont(fileName.c_str());
         }
