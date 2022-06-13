@@ -11,7 +11,8 @@ enum direction {
     UP,
     DOWN,
     LEFT,
-    RIGHT
+    RIGHT,
+    BOMB
 };
 
 #include "encapsulation/window.hpp"

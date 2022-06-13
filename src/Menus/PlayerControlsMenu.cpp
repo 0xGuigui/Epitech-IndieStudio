@@ -26,6 +26,8 @@ void Indie::displayPlayerMenu()
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieMusic MainMenuMusic = loader.musics["Moog-City-2"];
     static IndieText fowardText("Foward");
+    static int control = -1;
+    static IndieButton *button = nullptr;
 
     if (this->_musicPlay)
         MainMenuMusic.Play();
@@ -74,42 +76,47 @@ void Indie::displayPlayerMenu()
         buttonSound.Play();
         this->players[this->playerSelected].unbindKeyBomb(); });
 
-    static IndieButton bindLeftButton((IndieRectangle){middle_x + 1100, middle_y + 250, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
-                                      (IndieVector2){middle_x + 1100, middle_y + 250}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
+    static IndieButton bindLeftButton((IndieRectangle){middle_x + 1080, middle_y + 250, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
+                                      (IndieVector2){middle_x + 1080, middle_y + 250}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
                                       {
         buttonSound.Play();
         bindLeftButton.setTexture(waitingInputButton, waitingInputButton);
-        KeyboardKey key = KEY_NULL;
-        do {
-            key = static_cast<KeyboardKey>(GetKeyPressed());
-        }
-        while (key == KEY_NULL);
-        this->players[this->playerSelected].setKeyLeft(key);
-        bindLeftButton.setTexture(emptyButtonShort, loader.textures["empty_button_short_highlight"]); });
+        control = LEFT;
+        button = &bindLeftButton;
+                                      });
 
-    static IndieButton bindRightButton((IndieRectangle){middle_x + 1100, middle_y + 375, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
-                                       (IndieVector2){middle_x + 1100, middle_y + 375}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
+
+    static IndieButton bindRightButton((IndieRectangle){middle_x + 1080, middle_y + 375, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
+                                       (IndieVector2){middle_x + 1080, middle_y + 375}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
                                        {
         buttonSound.Play();
-        bindRightButton.setTexture(waitingInputButton, waitingInputButton); });
+        bindRightButton.setTexture(waitingInputButton, waitingInputButton);
+        control = RIGHT;
+        button = &bindRightButton; });
 
-    static IndieButton bindUptButton((IndieRectangle){middle_x + 1100, middle_y + 500, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
-                                     (IndieVector2){middle_x + 1100, middle_y + 500}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
+    static IndieButton bindUpButton((IndieRectangle){middle_x + 1080, middle_y + 500, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
+                                     (IndieVector2){middle_x + 1080, middle_y + 500}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
                                      {
         buttonSound.Play();
-        bindUptButton.setTexture(waitingInputButton, waitingInputButton); });
+        bindUpButton.setTexture(waitingInputButton, waitingInputButton);
+        control = UP;
+        button = &bindUpButton;});
 
-    static IndieButton bindDownButton((IndieRectangle){middle_x + 1100, middle_y + 625, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
-                                      (IndieVector2){middle_x + 1100, middle_y + 625}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
+    static IndieButton bindDownButton((IndieRectangle){middle_x + 1080, middle_y + 625, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
+                                      (IndieVector2){middle_x + 1080, middle_y + 625}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
                                       {
         buttonSound.Play();
-        bindDownButton.setTexture(waitingInputButton, waitingInputButton); });
+        bindDownButton.setTexture(waitingInputButton, waitingInputButton);
+        control = DOWN;
+        button = &bindDownButton;});
 
-    static IndieButton bindBombButton((IndieRectangle){middle_x + 1100, middle_y + 750, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
-                                      (IndieVector2){middle_x + 1100, middle_y + 750}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
+    static IndieButton bindBombButton((IndieRectangle){middle_x + 1080, middle_y + 750, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
+                                      (IndieVector2){middle_x + 1080, middle_y + 750}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
                                       {
         buttonSound.Play();
-        bindBombButton.setTexture(waitingInputButton, waitingInputButton); });
+        bindBombButton.setTexture(waitingInputButton, waitingInputButton);
+        control = BOMB;
+        button = &bindBombButton;});
 
     mainMenuBackground.Draw(middle_x, middle_y, WHITE);
     doneButton.update();
@@ -119,10 +126,25 @@ void Indie::displayPlayerMenu()
     resetUpButton.update();
     resetDownButton.update();
     resetBombButton.update();
-    fowardText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 1000, middle_y + 250}, 1.0f, 1.0f, WHITE);
-    bindLeftButton.update();
-    bindRightButton.update();
-    bindUptButton.update();
-    bindDownButton.update();
-    bindBombButton.update();
+    bindLeftButton.update(false, players[playerSelected].getKeys(), LEFT);
+    bindRightButton.update(false, players[playerSelected].getKeys(), RIGHT);
+    bindUpButton.update(false, players[playerSelected].getKeys(), UP);
+    bindDownButton.update(false, players[playerSelected].getKeys(), DOWN);
+    bindBombButton.update(false, players[playerSelected].getKeys(), BOMB);
+    fowardText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 1000, middle_y + 250}, 48.0f, 1.0f, WHITE);
+    if (button) {
+        KeyboardKey key = KEY_NULL;
+        button->update(true);
+        EndDrawing();
+        BeginDrawing();
+        do {
+            PollInputEvents();
+            key = static_cast<KeyboardKey>(GetKeyPressed());
+            MainMenuMusic.Update();
+        } while (key == KEY_NULL);
+        this->players[this->playerSelected].setKey(static_cast<direction>(control), key);
+        button->setTexture(emptyButtonShort, loader.textures["empty_button_short_highlight"]);
+        button = nullptr;
+        control = -1;
+    }
 }

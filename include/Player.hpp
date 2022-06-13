@@ -51,6 +51,25 @@ namespace bmb {
             void setKeyUp(KeyboardKey key);
             void setKeyDown(KeyboardKey key);
             void setKeyBomb(KeyboardKey key);
+            void setKey(direction direction, KeyboardKey key) {
+                switch (direction) {
+                    case LEFT:
+                        setKeyLeft(key);
+                        break;
+                    case RIGHT:
+                        setKeyRight(key);
+                        break;
+                    case UP:
+                        setKeyUp(key);
+                        break;
+                    case DOWN:
+                        setKeyDown(key);
+                        break;
+                    case BOMB:
+                        setKeyBomb(key);
+                        break;
+                }
+            }
             void unbindKeys();
             void unbindKeyLeft();
             void unbindKeyRight();
@@ -58,5 +77,8 @@ namespace bmb {
             void unbindKeyDown();
             void unbindKeyBomb();
             void Draw();
+            KeyboardKey *getKeys() {
+                return keys;
+            }
     };
 }
