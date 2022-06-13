@@ -1,0 +1,66 @@
+# This file contains data for blocks around the playground
+# line starting with '#' are comments
+# Each following line define a block
+# format: "x, y, z, count, scale, model"
+# numbers support floats and can go up to 2 floating points
+
+# Blocks around the playground
+-2 0.5 -9 1 1 tnt
+-2 1.5 -9 1 1 tnt
+-2 0.5 -10 1 1 tnt
+-1 0.5 -9 1 1 tnt
+
+# base platform
+17 -0.6 -6 11 1 grass_block
+16 -0.6 -9 17 1 grass_block
+15 -0.6 -12 23 1 grass_block
+14 -0.6 -14 27 1 grass_block
+13 -0.6 -15 29 1 grass_block
+12 -0.6 -17 33 1 grass_block
+11 -0.6 -18 35 1 grass_block
+10 -0.6 -19 37 1 grass_block
+9 -0.6 -20 39 1 grass_block
+8 -0.6 -21 41 1 grass_block
+7 -0.6 -22 43 1 grass_block
+6 -0.6 -22 43 1 grass_block
+5 -0.6 -23 45 1 grass_block
+4 -0.6 -24 47 1 grass_block
+3 -0.6 -24 47 1 grass_block
+2 -0.6 -25 49 1 grass_block
+1 -0.6 -25 49 1 grass_block
+0 -0.6 -25 49 1 grass_block
+-1 -0.6 -26 51 1 grass_block
+-2 -0.6 -26 51 1 grass_block
+-3 -0.6 -26 51 1 grass_block
+-4 -0.6 -27 53 1 grass_block
+-5 -0.6 -27 53 1 grass_block
+-6 -0.6 -27 53 1 grass_block
+-7 -0.6 -27 53 1 grass_block
+-8 -0.6 -27 53 1 grass_block
+-9 -0.6 -27 53 1 grass_block
+-10 -0.6 -27 53 1 grass_block
+-11 -0.6 -27 53 1 grass_block
+-12 -0.6 -27 53 1 grass_block
+-13 -0.6 -27 53 1 grass_block
+-14 -0.6 -27 53 1 grass_block
+-15 -0.6 -26 51 1 grass_block
+-16 -0.6 -26 51 1 grass_block
+-17 -0.6 -26 51 1 grass_block
+-18 -0.6 -25 49 1 grass_block
+-19 -0.6 -25 49 1 grass_block
+-20 -0.6 -25 49 1 grass_block
+-21 -0.6 -24 47 1 grass_block
+-22 -0.6 -24 47 1 grass_block
+-23 -0.6 -23 45 1 grass_block
+-24 -0.6 -22 43 1 grass_block
+-25 -0.6 -22 43 1 grass_block
+-26 -0.6 -21 41 1 grass_block
+-27 -0.6 -20 39 1 grass_block
+-28 -0.6 -19 37 1 grass_block
+-29 -0.6 -18 35 1 grass_block
+-30 -0.6 -17 33 1 grass_block
+-31 -0.6 -15 29 1 grass_block
+-32 -0.6 -14 27 1 grass_block
+-33 -0.6 -12 23 1 grass_block
+-34 -0.6 -9 17 1 grass_block
+-35 -0.6 -6 11 1 grass_block
