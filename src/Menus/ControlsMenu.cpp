@@ -5,7 +5,8 @@
 ** ControlsMenu
 */
 
-#include "indieStudio.hpp"
+#include "indie.hpp"
+#include "components/button.hpp"
 #include "Player.hpp"
 
 

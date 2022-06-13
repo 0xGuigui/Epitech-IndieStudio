@@ -5,7 +5,8 @@
 ** OptionMenu
 */
 
-#include "indieStudio.hpp"
+#include "indie.hpp"
+#include "components/button.hpp"
 
 using namespace bmb;
 
