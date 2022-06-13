@@ -7,6 +7,7 @@
 
 #include "indie.hpp"
 #include "MapController.hpp"
+#include <iostream>
 
 Indie indie;
 

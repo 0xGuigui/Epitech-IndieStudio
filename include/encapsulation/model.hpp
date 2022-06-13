@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cstring>
 #include "mesh.hpp"
 
 namespace bmb {
@@ -42,6 +43,11 @@ namespace bmb {
 			Model &getModel() {
 				return _model;
 			}
+
+            bool operator ==(const IndieModel &model) const {
+                return memcmp(&this->_model, &model._model, sizeof(Model)) == 0;
+            }
+
 			operator Model() {
 				return _model;
 			}
