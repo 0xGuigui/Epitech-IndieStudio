@@ -20,6 +20,8 @@ void Indie::displayOptionsMenu()
     static IndieTexture2D musicOFF = loader.textures["music_off"];
     static IndieTexture2D musicONHighlight = loader.textures["music_on_highlight"];
     static IndieTexture2D musicOFFHighlight = loader.textures["music_off_highlight"];
+    static IndieTexture2D github = loader.textures["github"];
+    static IndieTexture2D help = loader.textures["help"];
     static IndieTexture2D controls = loader.textures["controls"];
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieSound closeSound = loader.sounds["close"];
@@ -53,6 +55,18 @@ void Indie::displayOptionsMenu()
         buttonSound.Play();
         this->state = controlsMenu; });
 
+    static IndieButton githubButtonObject((IndieRectangle){middle_x + 300, middle_y + 350, static_cast<float>(github.getWidth()), static_cast<float>(github.getHeight())},
+                                           (IndieVector2){middle_x + 300, middle_y + 350}, github, loader.textures["github_highlight"], [&]() -> void
+                                           {
+        buttonSound.Play();
+        OpenURL("https://github.com/EpitechPromo2025/B-YEP-400-LIL-4-1-indiestudio-paul.gervais");
+                                           });
+
+    static IndieButton helpButtonObject((IndieRectangle){middle_x + 300, middle_y + 450, static_cast<float>(help.getWidth()), static_cast<float>(help.getHeight())},
+                                        (IndieVector2){middle_x + 300, middle_y + 450}, help, loader.textures["help_highlight"], [&]() -> void
+                                        {
+        buttonSound.Play();
+        this->state = helpMenu; });
 
     MainMenuMusic.setLoop(true);
 
@@ -63,4 +77,6 @@ void Indie::displayOptionsMenu()
     musicOnButtonObject.update();
     doneButtonObject.update();
     controlsButtonObject.update();
+    githubButtonObject.update();
+    helpButtonObject.update();
 }
