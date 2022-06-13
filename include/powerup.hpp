@@ -9,15 +9,19 @@
 
 #pragma once
 
+enum PowerUpType {
+    BOMBUP,
+    WALLPASS,
+    SPEEDUP,
+    FIREUP
+};
+
 namespace bmb {
     class IIndiePowerUp {
         private:
-            IndieModel _powerUp;
-            IndieVector3 _position;
-            bool powerUpPickedUp = false;
-            std::function<void()> _onPick;
         public:
             IndiePowerUp() = default;
+            IndieBombUp(std::function<void(PowerUpType)> _onPick, IndieVector3 position);
             virtual ~IndiePowerUp() = default;
             template<typename F>
             virtual void create(IndieTexture2D &texturePowerUp, IndieVector3 position) = 0;
@@ -25,6 +29,14 @@ namespace bmb {
             virtual void draw() = 0;
             virtual void updatePowerUpAnimation() = 0;
             virtual void updatePowerUp() = 0;
+            virtual IndieModel getPowerUp() = 0;
+            virtual IndieVector3 getPosition() = 0;
+            virtual bool getpowerUpPickedUp() = 0;
+            virtual std::function<void(PowerUpType)> getOnPick() = 0;
+            virtual void setPosition(IndieVector3 position) = 0;
+            virtual void setpowerUp(IndieModel powerUp) = 0;
+            virtual void setPowerUpPickedUp(bool powerUpPickedUp) = 0;
+            virtual void setOnPick(std::function<void(PowerUpType)> onPick) = 0;
         protected:
     };
 }
