@@ -24,6 +24,7 @@ namespace bmb {
             bool _animate = false;
             bool ghost = false; // WALLPASS
             int bombLeft = 1;
+            int speed = 1.0f;
             KeyboardKey keys[5] = { KEY_NULL, KEY_NULL, KEY_NULL, KEY_NULL, KEY_NULL };
             bool checkCollision(float x, float y);
         public:
