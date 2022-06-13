@@ -12,6 +12,7 @@
 namespace bmb {
     class IndiePowerUp : public IIndiePowerUp {
         private:
+            int frame = 0;
             IndieModel _powerUp;
             IndieVector3 _position;
             PowerUpType _powerUpType;
@@ -38,6 +39,26 @@ namespace bmb {
             }
             void setPowerUpPickedUp(bool powerUpPickedUp) {
                 this->powerUpPickedUp = powerUpPickedUp;
+            }
+            void updatePowerUpAnimation();
+            void update() {
+                if (powerUpPickedUp)
+                    updatePowerUpAnimation();
+                else
+                    updatePowerUpPickedUpAnimation();
+                frame++;
+            }
+            void create(IndieTexture2D &texturePowerUp, IndieVector3 position) {
+                IndieMesh mesh;
+                mesh.GenCube(1.0f, 1.0f, 1.0f);
+                _position = position;
+                _powerUp.LoadFromMesh(mesh);
+                _powerUp.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texturePowerUp;
+            }
+            template<typename F>
+            void create(IndieTexture2D &texturePowerUp, IndieVector3 position, F onPick) {
+                create(texturePowerUp, position);
+                _onPick = onPick;
             }
         protected:
     }
