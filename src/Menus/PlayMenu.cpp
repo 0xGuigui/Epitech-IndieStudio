@@ -19,7 +19,7 @@ void Indie::displayPlayMenu()
     static IndieTexture2D cancelButton = loader.textures["cancel"];
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieSound closeSound = loader.sounds["close"];
-    static IndieMusic MainMenuMusic = loader.musics["Moog-City"];
+    static IndieMusic MainMenuMusic = loader.musics["Moog-City-2"];
     static IndieButton playButtonObject((IndieRectangle){middle_x + 200, middle_y + 850, static_cast<float>(playButton.getWidth()), static_cast<float>(playButton.getHeight())},
                                         (IndieVector2){middle_x + 200, middle_y + 850}, playButton, loader.textures["play_highlight"], [&]() -> void
                                         {
