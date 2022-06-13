@@ -30,10 +30,7 @@ enum indieState {
     playMenu,
     optionsMenu,
     controlsMenu,
-    playerOne,
-    playerTwo,
-    playerThree,
-    playerFour,
+    playerMenu,
     inGame
 };
 
@@ -44,10 +41,7 @@ class Indie {
         void displayPlayMenu();
         void displayOptionsMenu();
         void displayControlsMenu();
-        void displayPlayerOne();
-        void displayPlayerTwo();
-        void displayPlayerThree();
-        void displayPlayerFour();
+        void displayPlayerMenu();
         void bomberMan();
     public:
         Indie();
@@ -57,6 +51,7 @@ class Indie {
         bmb::IndieWindow window;
         bmb::ResourceLoader loader;
         bmb::IndieScreen screen;
+        bmb::KeyboardManager keyboard;
         bmb::IndieMouse mouse;
         bmb::MapController map;
         std::vector<bmb::Player> players = {
@@ -86,17 +81,8 @@ class Indie {
                 case controlsMenu:
                     this->displayControlsMenu();
                     break;
-                case playerOne:
-                    this->displayPlayerOne();
-                    break;
-                case playerTwo:
-                    this->displayPlayerTwo();
-                    break;
-                case playerThree:
-                    this->displayPlayerThree();
-                    break;
-                case playerFour:
-                    this->displayPlayerFour();
+                case playerMenu:
+                    this->displayPlayerMenu();
                     break;
                 case inGame:
                     this->bomberMan();
@@ -108,6 +94,7 @@ class Indie {
         int screenWidth = 1920;
         int screenHeight = 1032;
         bool _musicPlay = true;
+        int playerSelected = 0;
     protected:
 };
 

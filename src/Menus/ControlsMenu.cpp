@@ -40,25 +40,29 @@ void Indie::displayControlsMenu()
                                     (IndieVector2){middle_x + 200, middle_y + 150}, player1, loader.textures["player1_highlight"], [&]() -> void
                                     {
         buttonSound.Play();
-        this->state = playerOne; });
+        this->playerSelected = 1;
+        this->state = playerMenu; });
 
     static IndieButton player2Button((IndieRectangle){middle_x + 200, middle_y + 250, static_cast<float>(player2.getWidth()), static_cast<float>(player2.getHeight())},
                                     (IndieVector2){middle_x + 200, middle_y + 250}, player2, loader.textures["player2_highlight"], [&]() -> void
                                     {
         buttonSound.Play();
-        this->state = playerTwo; });
+        this->playerSelected = 2;
+        this->state = playerMenu; });
 
     static IndieButton player3Button((IndieRectangle){middle_x + 200, middle_y + 350, static_cast<float>(player3.getWidth()), static_cast<float>(player3.getHeight())},
                                     (IndieVector2){middle_x + 200, middle_y + 350}, player3, loader.textures["player3_highlight"], [&]() -> void
                                     {
         buttonSound.Play();
-        this->state = playerThree; });
+        this->playerSelected = 3;
+        this->state = playerMenu; });
 
     static IndieButton player4Button((IndieRectangle){middle_x + 200, middle_y + 450, static_cast<float>(player4.getWidth()), static_cast<float>(player4.getHeight())},
                                     (IndieVector2){middle_x + 200, middle_y + 450}, player4, loader.textures["player4_highlight"], [&]() -> void
                                     {
         buttonSound.Play();
-        this->state = playerFour; });
+        this->playerSelected = 4;
+        this->state = playerMenu; });
 
     mainMenuBackground.Draw(middle_x, middle_y, WHITE);
     doneButtonObject.update();
