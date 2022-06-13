@@ -25,6 +25,7 @@ add_executable (
     src/Menus/PlayerControlsMenu.cpp
     src/IncludeDefinitions/Bomb.cpp
     src/IncludeDefinitions/Player.cpp
+    src/Menus/HelpMenu.cpp
 )
 
 target_link_libraries(${CMAKE_PROJECT_NAME} raylib)
