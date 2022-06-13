@@ -8,6 +8,8 @@
 #pragma once
 
 #include "image.hpp"
+#include "audioDevice.hpp"
+#include "music.hpp"
 
 namespace bmb {
 	class IndieWindow {
