@@ -18,7 +18,7 @@ namespace bmb {
     private:
         std::string _text;
     public:
-        IndieText() = default;
+        IndieText(const std::string text) : _text(text) {};
 
         IndieText(const IndieText &other) {
             this->_text = other._text;
