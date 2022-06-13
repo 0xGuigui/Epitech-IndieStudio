@@ -21,12 +21,32 @@ void IndieBomb::updateExplosionAnimation() {
 bool IndieBomb::isExplosionValid(IndieVector3 position, int &direction) {
     if (!(position.getX() >= -15.0f && position.getX() <= -3.0f &&
     position.getZ() <= 5.0f && position.getZ() >= -7.0f &&
-    (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0)))
-        return direction = false;
+    (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0))) {
+        direction = false;
+        return false;
+    }
+    bool removed = false;
     for (auto pos = indie.map.getDestructiblePositions().begin(); pos != indie.map.getDestructiblePositions().end(); pos++) {
-        if ((*pos).getX() == position.getX() && (*pos).getZ() == position.getZ()) {
-            indie.map.getDestructiblePositions().erase(pos);
+        if (pos->getX() == position.getX() && pos->getZ() == position.getZ()) {
+            pos = indie.map.getDestructiblePositions().erase(pos);
             direction = false;
+            removed = true;
+            if (pos == indie.map.getDestructiblePositions().end())
+                break;
+        }
+    }
+    if (removed)
+        return true;
+    if (direction != 2) {
+        for (IndieBomb &bomb : indie.bombs) {
+            if ((_position.getX() != bomb._position.getX() || position.getZ() != _position.getZ()) &&
+            (!bomb.bombExplosion && position.getX() == bomb._position.getX() && position.getZ() == bomb._position.getZ())) {
+                bomb.bombExplosion = true;
+                bomb._onDetonate();
+                bomb.detonate();
+                bomb.frame = 0;
+                return true;
+            }
         }
     }
     for (Player &player : indie.players) {
@@ -37,17 +57,6 @@ bool IndieBomb::isExplosionValid(IndieVector3 position, int &direction) {
 		);
         if (playerPos.getX() == position.getX() && playerPos.getZ() == position.getZ()) {
             //player.die();
-        }
-    }
-    if (direction != 2) {
-        for (IndieBomb &bomb : indie.bombs) {
-            if ((_position.getX() != bomb._position.getX() || position.getZ() != _position.getZ()) &&
-            (!bomb.bombExplosion && position.getX() == bomb._position.getX() && position.getZ() == bomb._position.getZ())) {
-                bomb.bombExplosion = true;
-                bomb._onDetonate();
-                bomb.detonate();
-                bomb.frame = 0;
-            }
         }
     }
     return true;
@@ -71,6 +80,8 @@ void IndieBomb::detonate() {
             this->explosion.push_back(explosionPos3);
         if (left && isExplosionValid(explosionPos4, left))
             this->explosion.push_back(explosionPos4);
+        if (!left && !right && !up && !down)
+            break;
     }
 }
 
