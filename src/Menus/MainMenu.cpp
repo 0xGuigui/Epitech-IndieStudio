@@ -10,7 +10,8 @@
 
 using namespace bmb;
 
-void Indie::displayMainMenu() {
+void Indie::displayMainMenu()
+{
     static IndieTexture2D mainMenuBackground = loader.textures["mainmenu"];
     static IndieTexture2D titleImage = loader.textures["IndieCraft"];
     static float middle_x = (this->screen.GetWidth() - titleImage.getWidth()) / 2;
@@ -25,45 +26,47 @@ void Indie::displayMainMenu() {
     static IndieTexture2D SplashText = loader.textures["splashtext"];
 
     static IndieButton singlePlayerButton((IndieRectangle){middle_x, middle_y + 100, static_cast<float>(singleplayer.getWidth()), static_cast<float>(singleplayer.getHeight())},
-    (IndieVector2){middle_x, middle_y + 100}, singleplayer, loader.textures["singleplayer_highlight"], [&]() -> void {
+                                          (IndieVector2){middle_x, middle_y + 100}, singleplayer, loader.textures["singleplayer_highlight"], [&]() -> void
+                                          {
         buttonSound.Play();
-        this->state = playMenu;
-    });
+        this->state = playMenu; });
 
     static IndieButton optionsButton((IndieRectangle){middle_x, middle_y + 200, static_cast<float>(options.getWidth()), static_cast<float>(options.getHeight())},
-    (IndieVector2){middle_x, middle_y + 200}, options, loader.textures["options_highlight"], [&]() -> void {
+                                     (IndieVector2){middle_x, middle_y + 200}, options, loader.textures["options_highlight"], [&]() -> void
+                                     {
         buttonSound.Play();
-        this->state = optionsMenu;
-    });
+        this->state = optionsMenu; });
 
     static IndieButton quitButton((IndieRectangle){middle_x + 408, middle_y + 200, static_cast<float>(quitgame.getWidth()), static_cast<float>(quitgame.getHeight())},
-    (IndieVector2){middle_x + 408, middle_y + 200}, quitgame, loader.textures["quitgame_highlight"], [&]() -> void {
+                                  (IndieVector2){middle_x + 408, middle_y + 200}, quitgame, loader.textures["quitgame_highlight"], [&]() -> void
+                                  {
         buttonSound.Play();
         while (buttonSound.isPlaying());
         closeSound.Play();
         while (closeSound.isPlaying());
         MainMenuMusic.Stop();
-        exit(0); // @TODO: A changer pour quitter proprement
-    });
+        exit(0); });
 
     static IndieButton accessibilityButton((IndieRectangle){middle_x + 825, middle_y + 200, static_cast<float>(accessibility.getWidth()), static_cast<float>(accessibility.getHeight())},
-    (IndieVector2){middle_x + 825, middle_y + 200}, accessibility, loader.textures["accessibility_highlight"], [&]() -> void {
+                                           (IndieVector2){middle_x + 825, middle_y + 200}, accessibility, loader.textures["accessibility_highlight"], [&]() -> void
+                                           {
         buttonSound.Play();
         OpenURL("https://bit.ly/3PSsHwZ");
         std::cout << "EXIT: EXITED FROM ACCESSIBILITY" << std::endl;
-        exit(0);
-    });
+        exit(0); });
 
     if (this->_musicPlay)
         MainMenuMusic.Play();
 
     MainMenuMusic.Update();
 
-    keyboard.bind(KEY_ESCAPE, [&]() -> void {
+    keyboard.bind(
+        KEY_ESCAPE, [&]() -> void
+        {
         closeSound.Play();
         while (closeSound.isPlaying());
-        exit(0);
-    }, []() -> void {});
+        exit(0); },
+        []() -> void {});
 
     mainMenuBackground.Draw(0, 0, WHITE);
     titleImage.Draw(middle_x, 75, WHITE);
@@ -74,13 +77,18 @@ void Indie::displayMainMenu() {
     timer += 0.05f;
     static float defaultSizeSplashTextWidth = SplashText.getWidth();
     static float defaultSizeSplashTextHeight = SplashText.getHeight();
-    if (timer > 0.0f && timer < 1.0f) {
+    if (timer > 0.0f && timer < 1.0f)
+    {
         SplashText.setHeight(SplashText.getHeight() + 1);
         SplashText.setWidth(SplashText.getWidth() + 1);
-    } if (timer > 1.0f && timer < 2.0f) {
+    }
+    if (timer > 1.0f && timer < 2.0f)
+    {
         SplashText.setHeight(SplashText.getHeight() - 1);
         SplashText.setWidth(SplashText.getWidth() - 1);
-    } if (timer > 2.0f) {
+    }
+    if (timer > 2.0f)
+    {
         SplashText.setHeight(defaultSizeSplashTextHeight);
         SplashText.setWidth(defaultSizeSplashTextWidth);
         timer = 0;
@@ -89,5 +97,4 @@ void Indie::displayMainMenu() {
     optionsButton.update();
     quitButton.update();
     accessibilityButton.update();
-    // MainMenuMusic.Update();
 }
