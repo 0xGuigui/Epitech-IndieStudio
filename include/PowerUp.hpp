@@ -10,16 +10,17 @@
 #pragma once
 
 namespace bmb {
-    class IndieBombUp : public IIndiePowerUp {
+    class IndiePowerUp : public IIndiePowerUp {
         private:
             IndieModel _powerUp;
             IndieVector3 _position;
+            PowerUpType _powerUpType;
             bool powerUpPickedUp = false;
             std::function<void(PowerUpType)> _onPick;
         public:
-            IndieBombUp() = default;
-            IndieBombUp(std::function<void(PowerUpType)> _onPick, IndieVector3 position);
-            ~IndieBombUp() = default;
+            IndiePowerUp() = default;
+            IndiePowerUp(std::function<void(PowerUpType)> _onPick, IndieVector3 position, IndieTexture2D &texturePowerUp);
+            ~IndiePowerUp() = default;
             IndieModel getPowerUp() {
                 return _powerUp;
             }
