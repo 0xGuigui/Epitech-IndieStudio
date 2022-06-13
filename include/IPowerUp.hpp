@@ -20,10 +20,9 @@ namespace bmb {
     class IIndiePowerUp {
         private:
         public:
-            IndiePowerUp() = default;
-            IndieBombUp(std::function<void(PowerUpType)> _onPick, IndieVector3 position);
-            virtual ~IndiePowerUp() = default;
-            template<typename F>
+            IIndiePowerUp() = default;
+            IIndiePowerUp(std::function<void(PowerUpType)> _onPick, IndieVector3 position, IndieTexture2D &texturePowerUp);
+            virtual ~IIndiePowerUp() = default;
             virtual void create(IndieTexture2D &texturePowerUp, IndieVector3 position) = 0;
             virtual void update() = 0;
             virtual void draw() = 0;
