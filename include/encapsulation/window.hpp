@@ -16,7 +16,7 @@ namespace bmb {
 		private:
 			int _fps = 60;
 			int _height = 1080;
-			int _width = 1920;
+			int _width = 920;
             bmb::IndieAudioDevice audioDevice;
 		public:
 			IndieWindow() = default;

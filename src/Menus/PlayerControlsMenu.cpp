@@ -7,10 +7,11 @@
 
 #include "indie.hpp"
 #include "components/button.hpp"
+#include "Player.hpp"
 
 using namespace bmb;
 
-void Indie::displayPlayerOne()
+void Indie::displayPlayerMenu()
 {
     static IndieTexture2D mainMenuBackground = loader.textures["background_options_controls"];
     static float middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
@@ -33,7 +34,10 @@ void Indie::displayPlayerOne()
 
     static IndieButton resetKeysButton((IndieRectangle){middle_x + 300, middle_y + 920, static_cast<float>(resetKeys.getWidth()), static_cast<float>(resetKeys.getHeight())},
                                        (IndieVector2){middle_x + 300, middle_y + 920}, resetKeys, loader.textures["reset_keys_highlight"], [&]() -> void
-                                       { buttonSound.Play(); });
+                                       {
+        buttonSound.Play();
+        this->players[this->playerSelected].unbindKeys();
+        });
 
     mainMenuBackground.Draw(middle_x, middle_y, WHITE);
     doneButton.update();

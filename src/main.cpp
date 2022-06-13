@@ -19,7 +19,7 @@ int main(void) {
     indie.players[1].setControls(playerControls2);
     indie.players[2].setControls(playerControls3);
     indie.players[3].setControls(playerControls4);
-    indie.state = inGame;
+    indie.state = indieState::splashScreen;
     SetExitKey(KEY_NULL);
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
         indie.keyboard.update();
