@@ -26,7 +26,7 @@ namespace bmb {
 			bool _updateCamera = false;
 			void generateLineHorizontal(float posY, float posX, float posXEnd, int percentage) {
 				for (float x = posX; x <= posXEnd; x++) {
-					if (((rand() % 100) - 100 + percentage) > 0) {
+					if (((std::rand() % 100) - 100 + percentage) > 0) {
 						IndieVector3 vec = { x, 0.5f, posY };
 						bool skip = false;
 						for (IndieVector3 &vector : _destructiblePositions) {
@@ -41,7 +41,7 @@ namespace bmb {
 			}
 			void generateLineVertical(float posX, float posY, float posYEnd, int percentage) {
 				for (float y = posY; y <= posYEnd; y++) {
-					if (((rand() % 100) - 100 + percentage) > 0) {
+					if (((std::rand() % 100) - 100 + percentage) > 0) {
 						IndieVector3 vec = { posX, 0.5f, y };
 						bool skip = false;
 						for (IndieVector3 &vector : _destructiblePositions) {
