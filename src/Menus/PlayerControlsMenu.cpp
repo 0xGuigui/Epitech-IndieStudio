@@ -23,9 +23,14 @@ void Indie::displayPlayerMenu()
     static IndieTexture2D reset = loader.textures["reset"];
     static IndieTexture2D emptyButtonShort = loader.textures["empty_button_short"];
     static IndieTexture2D waitingInputButton = loader.textures["mapping_button_empty"];
+    static IndieTexture2D errorBind = loader.textures["empty_button_short_error"];
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieMusic MainMenuMusic = loader.musics["Moog-City-2"];
-    static IndieText fowardText("Foward");
+    static IndieText leftText("Left");
+    static IndieText rightText("Right");
+    static IndieText upText("Up");
+    static IndieText downText("Down");
+    static IndieText bombText("Bomb");
     static int control = -1;
     static IndieButton *button = nullptr;
 
@@ -131,7 +136,11 @@ void Indie::displayPlayerMenu()
     bindUpButton.update(false, players[playerSelected].getKeys(), UP);
     bindDownButton.update(false, players[playerSelected].getKeys(), DOWN);
     bindBombButton.update(false, players[playerSelected].getKeys(), BOMB);
-    fowardText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 1000, middle_y + 250}, 48.0f, 1.0f, WHITE);
+    leftText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 100, middle_y + 250}, 48.0f, 1.0f, WHITE);
+    rightText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 100, middle_y + 375}, 48.0f, 1.0f, WHITE);
+    upText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 100, middle_y + 500}, 48.0f, 1.0f, WHITE);
+    downText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 100, middle_y + 625}, 48.0f, 1.0f, WHITE);
+    bombText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 100, middle_y + 750}, 48.0f, 1.0f, WHITE);
     if (button) {
         KeyboardKey key = KEY_NULL;
         button->update(true);
@@ -140,6 +149,13 @@ void Indie::displayPlayerMenu()
         do {
             PollInputEvents();
             key = static_cast<KeyboardKey>(GetKeyPressed());
+            for (int j = 0; j < players.size(); j++) {
+                for (int i = 0; i < 5; i++) {
+                    if (players[playerSelected].getKeys()[i] == key) {
+                        players[playerSelected].getKeys()[i] = KEY_NULL;
+                    }
+                }
+            }
             MainMenuMusic.Update();
         } while (key == KEY_NULL);
         this->players[this->playerSelected].setKey(static_cast<direction>(control), key);

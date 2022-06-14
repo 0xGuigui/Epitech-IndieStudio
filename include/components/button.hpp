@@ -55,15 +55,18 @@ namespace bmb {
                     texture.Draw(position.getX(), position.getY(), WHITE);
                 }
                 if (controls) {
+                    if (controls[index] == KEY_NULL) {
+                        IndieText("No key mapped").Draw(position + IndieVector2(20, 20), 35.0f, RED);
+                        return;
+                    }
                     char letter = static_cast<int>(controls[index]);
-                    IndieText(std::string(&letter)).Draw(position, 48.0f, WHITE);
+                    IndieText(std::string(&letter)).Draw(position + IndieVector2(135, 20), 48.0f, WHITE);
                 }
             }
             void hideButton()
             {
                 texture.Draw(position.getX(), position.getY(), WHITE);
             }
-            
         protected:
     };
 }
