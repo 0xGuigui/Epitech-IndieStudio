@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "indieStudio.hpp"
+#include "../indieStudio.hpp"
 #include <vector>
 #include <string>
 #include <tuple>
@@ -15,7 +15,6 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
-#include "bmbSysCall.hpp"
 
 namespace bmb {
     class Serialization {
@@ -23,11 +22,15 @@ namespace bmb {
         std::string *output;
         std::string pathToSave = "./save/data/save.save";
         bmb::systemCall sysCall;
+        std::vector<bmb::playerSave_t> playerSaveArray;
+        std::vector<bmb::bombSave_t> bombSaveArray;
+        bmb::mapSave_t mapSaveArray;
+        bmb::headerSave_t headerSave;
+
     public:
         Serialization();
         ~Serialization();
         void fileWriter();
-        void setSaveData();
-        std::string getSaveData();
+        void setSaveData(std::vector<bmb::Bomb> bombArray, std::vector<bmb::Player> playerArray, std::vector<IndieVector3> destructibleObstacleArray);
     };
 }
