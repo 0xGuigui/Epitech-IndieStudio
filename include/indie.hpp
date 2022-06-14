@@ -33,6 +33,7 @@ enum indieState {
     controlsMenu,
     playerMenu,
     helpMenu,
+    gameMenu,
     inGame
 };
 
@@ -45,6 +46,7 @@ class Indie {
         void displayControlsMenu();
         void displayPlayerMenu();
         void displayHelpMenu();
+        void displayGameMenu();
         void bomberMan();
     public:
         Indie();
@@ -89,6 +91,9 @@ class Indie {
                     break;
                 case helpMenu:
                     this->displayHelpMenu();
+                    break;
+                case gameMenu:
+                    this->displayGameMenu();
                     break;
                 case inGame:
                     this->bomberMan();
