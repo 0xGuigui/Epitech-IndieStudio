@@ -26,6 +26,8 @@ namespace bmb {
             int bombLeft = 3;
             int force = 4;
             int speed = 1.0f;
+            bool deadAnimation = false;
+            bool dead = false;
             KeyboardKey keys[5] = { KEY_NULL, KEY_NULL, KEY_NULL, KEY_NULL, KEY_NULL };
             bool checkCollision(float x, float y);
         public:
@@ -52,13 +54,45 @@ namespace bmb {
             IndieVector3 getPosition() {
                 return position;
             }
+            void die() {
+                deadAnimation = true;
+                frame = 0;
+            }
             void setControls(KeyboardKey *controls);
             void setKeyLeft(KeyboardKey key);
             void setKeyRight(KeyboardKey key);
             void setKeyUp(KeyboardKey key);
             void setKeyDown(KeyboardKey key);
             void setKeyBomb(KeyboardKey key);
+            void bindKeys();
+            void setKey(direction direction, KeyboardKey key) {
+                switch (direction) {
+                    case LEFT:
+                        setKeyLeft(key);
+                        break;
+                    case RIGHT:
+                        setKeyRight(key);
+                        break;
+                    case UP:
+                        setKeyUp(key);
+                        break;
+                    case DOWN:
+                        setKeyDown(key);
+                        break;
+                    case BOMB:
+                        setKeyBomb(key);
+                        break;
+                }
+            }
             void unbindKeys();
+            void unbindKeyLeft();
+            void unbindKeyRight();
+            void unbindKeyUp();
+            void unbindKeyDown();
+            void unbindKeyBomb();
             void Draw();
+            KeyboardKey *getKeys() {
+                return keys;
+            }
     };
 }
