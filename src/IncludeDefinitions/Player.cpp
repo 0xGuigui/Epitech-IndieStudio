@@ -55,8 +55,8 @@ void Player::setControls(KeyboardKey *controls) {
 }
 
 void Player::setKeyLeft(KeyboardKey key) {
-	indie.keyboard.unbind(keys[0]);
-    keys[0] = key;
+	indie.keyboard.unbind(keys[LEFT]);
+    keys[LEFT] = key;
     indie.keyboard.bind(key, [&]() -> void {
         if (dead || deadAnimation)
             return;
@@ -73,8 +73,8 @@ void Player::setKeyLeft(KeyboardKey key) {
 }
 
 void Player::setKeyRight(KeyboardKey key) {
-    indie.keyboard.unbind(keys[1]);
-    keys[1] = key;
+    indie.keyboard.unbind(keys[RIGHT]);
+    keys[RIGHT] = key;
     indie.keyboard.bind(key, [&]() -> void {
         if (dead || deadAnimation)
             return;
@@ -91,8 +91,8 @@ void Player::setKeyRight(KeyboardKey key) {
 }
 
 void Player::setKeyUp(KeyboardKey key) {
-    indie.keyboard.unbind(keys[2]);
-    keys[2] = key;
+    indie.keyboard.unbind(keys[UP]);
+    keys[UP] = key;
     indie.keyboard.bind(key, [&]() -> void {
         if (dead || deadAnimation)
             return;
@@ -109,8 +109,8 @@ void Player::setKeyUp(KeyboardKey key) {
 }
 
 void Player::setKeyDown(KeyboardKey key) {
-    indie.keyboard.unbind(keys[3]);
-    keys[3] = key;
+    indie.keyboard.unbind(keys[DOWN]);
+    keys[DOWN] = key;
     indie.keyboard.bind(key, [&]() -> void {
         if (dead || deadAnimation)
             return;
@@ -127,8 +127,8 @@ void Player::setKeyDown(KeyboardKey key) {
 }
 
 void Player::setKeyBomb(KeyboardKey key) {
-    indie.keyboard.unbind(keys[4]);
-    keys[4] = key;
+    indie.keyboard.unbind(keys[BOMB]);
+    keys[BOMB] = key;
     indie.keyboard.bind(key, [&]() -> void {
         if (dead || deadAnimation)
             return;
@@ -157,6 +157,31 @@ void Player::unbindKeys() {
         indie.keyboard.unbind(key);
         key = KEY_NULL;
     }
+}
+
+void Player::unbindKeyLeft() {
+    indie.keyboard.unbind(keys[LEFT]);
+    keys[LEFT] = KEY_NULL;
+}
+
+void Player::unbindKeyRight() {
+    indie.keyboard.unbind(keys[RIGHT]);
+    keys[RIGHT] = KEY_NULL;
+}
+
+void Player::unbindKeyUp() {
+    indie.keyboard.unbind(keys[UP]);
+    keys[UP] = KEY_NULL;
+}
+
+void Player::unbindKeyDown() {
+    indie.keyboard.unbind(keys[DOWN]);
+    keys[DOWN] = KEY_NULL;
+}
+
+void Player::unbindKeyBomb() {
+    indie.keyboard.unbind(keys[BOMB]);
+    keys[BOMB] = KEY_NULL;
 }
 
 void Player::Draw() {

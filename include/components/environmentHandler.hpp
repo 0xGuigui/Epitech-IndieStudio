@@ -11,7 +11,7 @@
 #include "encapsulation/model.hpp"
 #include "encapsulation/color.hpp"
 #include "encapsulation/vector.hpp"
-#include "vector"
+#include <vector>
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -26,30 +26,30 @@ namespace bmb {
         short _x;
         short _y;
         short _z;
-        short _count;
-        char _scale;
+        unsigned short _xCount;
+        unsigned short _yCount;
 
     public:
-        RenderChunk(float x, float y, float z, int count, float scale) {
-            this->_x = static_cast<short>(x * CHUNK_FLOATING_POINT);
-            this->_y = static_cast<short>(y * CHUNK_FLOATING_POINT);
-            this->_z = static_cast<short>(z * CHUNK_FLOATING_POINT);
-            this->_count = static_cast<short>(count);
-            this->_scale = static_cast<char>(scale * CHUNK_FLOATING_POINT);
+        RenderChunk(float x, float y, float z, unsigned short xCount, unsigned short yCount) {
+            _x = static_cast<short>(x * CHUNK_FLOATING_POINT);
+            _y = static_cast<short>(y * CHUNK_FLOATING_POINT);
+            _z = static_cast<short>(z * CHUNK_FLOATING_POINT);
+            _xCount = xCount;
+            _yCount = yCount;
         }
 
-        IndieVector3 getPosition() const {
+        [[nodiscard]] IndieVector3 getPosition() const {
             return {static_cast<float>(this->_x) / CHUNK_FLOATING_POINT,
                     static_cast<float>(this->_y) / CHUNK_FLOATING_POINT,
                     static_cast<float>(this->_z) / CHUNK_FLOATING_POINT};
         }
 
-        int getCount() const {
-            return this->_count;
-        }
-
-        float getScale() const {
-            return static_cast<float>(this->_scale) / CHUNK_FLOATING_POINT;
+        [[nodiscard]] auto getChunkBoundaries() const {
+            struct ChunkBoundaries {
+                unsigned short xCount;
+                unsigned short yCount;
+            };
+            return ChunkBoundaries{this->_xCount, this->_yCount};
         }
     };
 
@@ -58,20 +58,13 @@ namespace bmb {
     class EnvironmentHandler {
     private:
         std::vector<ModelRenderChunks> _renderData;
-        std::unordered_map<std::string, bmb::IndieModel> fakeMap = {
-                {"grass_block", bmb::IndieModel("assets/models/grass_block.glb")},
-                {"tnt", bmb::IndieModel("assets/models/tnt.glb")},
-                {"stone", bmb::IndieModel("assets/models/stone.glb")},
-                {"dirt", bmb::IndieModel("assets/models/dirt.glb")},
-                {"cobblestone", bmb::IndieModel("assets/models/cobblestone.glb")},
-        };
 
     public:
         EnvironmentHandler() = default;
 
         ~EnvironmentHandler() = default;
 
-        std::string& ltrim(std::string &s);
+        static std::string& ltrim(std::string &s);
 
         /*
          * Open and parse config file for environment
@@ -87,5 +80,10 @@ namespace bmb {
          * Draw all blocks in the world
          */
         void draw();
+
+        /*
+         * Draw a block chunk
+         */
+        static void drawChunk(IndieModel &model, RenderChunk &chunk);
     };
 }

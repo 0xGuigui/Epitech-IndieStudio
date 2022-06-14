@@ -27,6 +27,9 @@ namespace bmb {
             operator Vector2() const {
                 return _vector;
             }
+            IndieVector2 operator + (const IndieVector2 &vec) const {
+                return IndieVector2(_vector.x + vec.getX(), _vector.y + vec.getY());
+            }
 		private:
             Vector2 _vector{};
 	};
@@ -54,6 +57,12 @@ namespace bmb {
         }
         void incrementZ(float z) {
             _vector.z += z;
+        }
+        void setZ(float z) {
+            _vector.z = z;
+        }
+        void decrementX(float x) {
+            _vector.x -= x;
         }
         Vector3 &getVector() {
             return _vector;
