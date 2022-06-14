@@ -18,5 +18,7 @@ void Indie::bomberMan() {
         player.Draw();
     for (IndieBomb &bomb : indie.bombs)
         bomb.update();
+    for (IndiePowerUp &powerUp : indie.map.getBonuses())
+        powerUp.update();
     this->map.end3D();
 }

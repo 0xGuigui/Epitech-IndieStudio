@@ -11,7 +11,7 @@ using namespace bmb;
 
 bool Player::checkCollision(float x, float y) {
     if (ghost)
-        return true;
+        return false;
     Rectangle playerRect = {position.getX() + x, position.getZ() + y, 0.75f, 0.75f};
     for (IndieVector3 pos : indie.map.getDestructiblePositions()) {
         Rectangle destructibleRect = {pos.getX(), pos.getZ(), 0.75f, 0.75f};
@@ -142,6 +142,10 @@ void Player::setKeyBomb(KeyboardKey key) {
             if (pos.getX() == newPos.getX() && pos.getZ() == newPos.getZ())
                 return;
         }
+        for (IndieVector3 &pos : indie.map.getDestructiblePositions()) {
+            if (pos.getX() == newPos.getX() && pos.getZ() == newPos.getZ())
+                return;
+        }
         if (!bombLeft)
             return;
 		bombLeft--;
@@ -198,6 +202,10 @@ void Player::Draw() {
         }
         frame++;
     }
-    if (!dead)
-        playerModel.Draw(position, 0.5f, deadAnimation ? IndieColor(RED) : playerColor);
+    if (!dead) {
+        if (deadAnimation)
+            playerModel.Draw(position, (0.5f - (frame * 0.005f)), IndieColor(RED));
+        else
+            playerModel.Draw(position, 0.5f, playerColor);
+    }
 }
