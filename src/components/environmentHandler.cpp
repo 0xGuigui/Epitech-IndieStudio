@@ -5,6 +5,7 @@
 ** Handle the environment
 */
 
+#include "indie.hpp"
 #include "components/environmentHandler.hpp"
 
 std::string &bmb::EnvironmentHandler::ltrim(std::string &s) {
@@ -21,8 +22,8 @@ void bmb::EnvironmentHandler::init(const std::string &configPath) {
     std::string line;
     std::string modelName;
     float x, y, z;
-    int count;
-    float scale;
+    unsigned short xCount;
+    unsigned short yCount;
 
     if (!file.is_open())
         throw std::runtime_error("Can't open file " + configPath);
@@ -31,19 +32,13 @@ void bmb::EnvironmentHandler::init(const std::string &configPath) {
         if (line.empty() || line[0] == '#')
             continue;
         std::istringstream iss(line);
-        if (!(iss >> x >> y >> z >> count >> scale >> modelName)) {
+        if (!(iss >> x >> y >> z >> xCount >> yCount >> modelName)) {
             throw bmb::EnvironmentHandlerException("Invalid line: '" + line += "'");
         }
-        // Get model
-        // @TODO use the resource loader
-        auto it = fakeMap.find(modelName);
-        if (it != fakeMap.end()) {
-            bmb::RenderChunk newChunk(x, y, z, count, scale);
+        bmb::IndieModel &model = indie.loader.models.getResource(modelName);
+        bmb::RenderChunk newChunk(x, y, z, xCount, yCount);
 
-            addBlock(it->second, newChunk);
-        } else {
-            throw bmb::EnvironmentHandlerException("Unknown model: " + modelName += " in line: '" + line += "'");
-        }
+        addBlock(model, newChunk);
     }
 }
 
@@ -60,17 +55,22 @@ void bmb::EnvironmentHandler::addBlock(bmb::IndieModel &model, bmb::RenderChunk 
     }
 }
 
+void bmb::EnvironmentHandler::drawChunk(bmb::IndieModel &model, bmb::RenderChunk &chunk) {
+    auto [xCount, yCount] = chunk.getChunkBoundaries();
+    bmb::IndieVector3 position = chunk.getPosition();
+
+    for (unsigned short x = 0; x < xCount; x++, position.decrementX(1.0f)) {
+        position.setZ(chunk.getPosition().getZ());
+        for (unsigned short y = 0; y < yCount; y++, position.incrementZ(1.0f)) {
+            model.Draw(position, 1.0f, WHITE);
+        }
+    }
+}
+
 void bmb::EnvironmentHandler::draw() {
     for (auto &data: _renderData) {
         for (auto &chunk: std::get<1>(data)) {
-            IndieVector3 position = chunk.getPosition();
-            int count = chunk.getCount();
-            float scale = chunk.getScale();
-
-            for (int i = 0; i < count; i++) {
-                std::get<0>(data).Draw(position, scale, WHITE);
-                position.incrementZ(1);
-            }
+            drawChunk(std::get<0>(data), chunk);
         }
     }
 }
