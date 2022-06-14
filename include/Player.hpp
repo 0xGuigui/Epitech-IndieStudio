@@ -106,5 +106,11 @@ namespace bmb {
             int getSpeedBonus() {
                 return this->speed;
             };
+            IndieColor getPlayerColor() {
+                return this->playerColor;
+            }
+            IndieVector3 getPlayerPosition() {
+                return this->position;
+            }
     };
 }

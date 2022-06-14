@@ -72,6 +72,9 @@ namespace bmb {
             IndieColor getBombColor() {
                 return this->bombColor;
             }
+            IndieVector3 getBombPosition() {
+                return this->_position;
+            }
         protected:
     };
 }
