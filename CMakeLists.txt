@@ -20,12 +20,13 @@ add_executable (
     src/Menus/OptionsMenu.cpp
     src/Menus/PlayMenu.cpp
     src/Menus/SplashScreen.cpp
-    src/Game.cpp
     src/Menus/ControlsMenu.cpp
     src/Menus/PlayerControlsMenu.cpp
+    src/Menus/HelpMenu.cpp
+    src/Menus/GameMenu.cpp
     src/IncludeDefinitions/Bomb.cpp
     src/IncludeDefinitions/Player.cpp
-    src/Menus/HelpMenu.cpp
+    src/Game.cpp
 )
 
 target_link_libraries(${CMAKE_PROJECT_NAME} raylib)
