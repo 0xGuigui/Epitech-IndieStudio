@@ -15,6 +15,7 @@
 #include "../encapsulation/texture.hpp"
 #include "../encapsulation/sound.hpp"
 #include "../encapsulation/image.hpp"
+#include "../encapsulation/font.hpp"
 #include "../encapsulation/model.hpp"
 
 namespace bmb {
@@ -126,6 +127,7 @@ namespace bmb {
         ResourceConnector<IndieSound> sounds;
         ResourceConnector<IndieMusic> musics;
         ResourceConnector<IndieImage> images;
+        ResourceConnector<IndieFont> fonts;
         ResourceConnector<IndieModel> models;
 
 
@@ -136,7 +138,8 @@ namespace bmb {
                 sounds,
                 images,
                 musics,
-                models
+                models,
+                fonts,
         };
 
     public:
@@ -145,6 +148,7 @@ namespace bmb {
                 sounds("audio", {".ogg"}),
                 musics("audio", {".mp3"}),
                 images("images"),
+                fonts("fonts"),
                 models("models") {
             std::string rootPath = std::filesystem::current_path().string() + "/" + rootFolderName;
 

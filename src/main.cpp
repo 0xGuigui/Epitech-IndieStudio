@@ -12,6 +12,8 @@
 Indie indie;
 
 int main() {
+    indie.window.fullScreen();
+    indie.window.windowIcon(indie.loader.images["tnt"]);
     KeyboardKey playerControls[5] = {KEY_UP, KEY_DOWN, KEY_RIGHT, KEY_LEFT, KEY_SPACE};
     KeyboardKey playerControls2[5] = {KEY_W, KEY_S, KEY_D, KEY_A, KEY_Q};
     KeyboardKey playerControls3[5] = {KEY_T, KEY_G, KEY_H, KEY_F, KEY_R};
@@ -20,7 +22,7 @@ int main() {
     indie.players[1].setControls(playerControls2);
     indie.players[2].setControls(playerControls3);
     indie.players[3].setControls(playerControls4);
-    indie.state = inGame;
+    indie.state = indieState::splashScreen;
     SetExitKey(KEY_NULL);
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
         indie.keyboard.update();

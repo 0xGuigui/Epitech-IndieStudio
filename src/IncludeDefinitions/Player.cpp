@@ -141,6 +141,31 @@ void Player::unbindKeys() {
     }
 }
 
+void Player::unbindKeyLeft() {
+    indie.keyboard.unbind(keys[0]);
+    keys[0] = KEY_NULL;
+}
+
+void Player::unbindKeyRight() {
+    indie.keyboard.unbind(keys[1]);
+    keys[1] = KEY_NULL;
+}
+
+void Player::unbindKeyUp() {
+    indie.keyboard.unbind(keys[2]);
+    keys[2] = KEY_NULL;
+}
+
+void Player::unbindKeyDown() {
+    indie.keyboard.unbind(keys[3]);
+    keys[3] = KEY_NULL;
+}
+
+void Player::unbindKeyBomb() {
+    indie.keyboard.unbind(keys[4]);
+    keys[4] = KEY_NULL;
+}
+
 void Player::Draw() {
     frame += _animate ? 2 : 0;
     if (frame >= 110)

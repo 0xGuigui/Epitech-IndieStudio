@@ -10,10 +10,11 @@
 #pragma once
 
 enum direction {
+    LEFT,
+    RIGHT,
     UP,
     DOWN,
-    LEFT,
-    RIGHT
+    BOMB
 };
 
 #include "encapsulation/window.hpp"
@@ -29,19 +30,23 @@ enum direction {
 enum indieState {
     splashScreen,
     mainMenu,
-    singlePlayerMenu,
-    multiplayerMenu,
+    playMenu,
     optionsMenu,
+    controlsMenu,
+    playerMenu,
+    helpMenu,
     inGame
 };
 
 class Indie {
     private:
         void displaySplashScreen();
-        void displayMainMenu(float musicTime);
-        void displaySinglePlayerMenu(float musicTime);
-        void displayMultiPlayerMenu(float musicTime);
+        void displayMainMenu();
+        void displayPlayMenu();
         void displayOptionsMenu();
+        void displayControlsMenu();
+        void displayPlayerMenu();
+        void displayHelpMenu();
         void bomberMan();
     public:
         Indie();
@@ -51,8 +56,8 @@ class Indie {
         bmb::IndieWindow window;
         bmb::ResourceLoader loader;
         bmb::IndieScreen screen;
-        bmb::IndieMouse mouse;
         bmb::KeyboardManager keyboard;
+        bmb::IndieMouse mouse;
         bmb::MapController map;
         std::vector<bmb::Player> players = {
             bmb::Player(BLUE, {-15.0f, 1.5f, -7.0f}, RIGHT), // bottom-left
@@ -70,13 +75,22 @@ class Indie {
                     this->displaySplashScreen();
                     break;
                 case mainMenu:
-                    this->displayMainMenu(this->getTimeMusicPlayed());
+                    this->displayMainMenu();
                     break;
-                case singlePlayerMenu:
-                    this->displaySinglePlayerMenu(this->getTimeMusicPlayed());
+                case playMenu:
+                    this->displayPlayMenu();
                     break;
-                case multiplayerMenu:
-                    this->displayMultiPlayerMenu(this->getTimeMusicPlayed());
+                case optionsMenu:
+                    this->displayOptionsMenu();
+                    break;
+                case controlsMenu:
+                    this->displayControlsMenu();
+                    break;
+                case playerMenu:
+                    this->displayPlayerMenu();
+                    break;
+                case helpMenu:
+                    this->displayHelpMenu();
                     break;
                 case inGame:
                     this->bomberMan();
@@ -87,6 +101,8 @@ class Indie {
         float _musicPlayed = 0.0f;
         int screenWidth = 1920;
         int screenHeight = 1080;
+        bool _musicPlay = true;
+        int playerSelected = 0;
     protected:
 };
 

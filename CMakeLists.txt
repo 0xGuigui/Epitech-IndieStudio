@@ -19,9 +19,12 @@ add_executable(${CMAKE_PROJECT_NAME}
         src/Menus/MainMenu.cpp
         src/Menus/MultiplayerMenu.cpp
         src/Menus/OptionMenu.cpp
+        src/Menus/PlayMenu.cpp
         src/Menus/SinglePlayerMenu.cpp
         src/Menus/SplashScreen.cpp
+        src/Menus/PlayerControlsMenu.cpp
         src/Game.cpp
+        src/Menus/HelpMenu.cpp
         src/IncludeDefinitions/Player.cpp
         src/IncludeDefinitions/Bomb.cpp
         src/components/environmentHandler.cpp)
