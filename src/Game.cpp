@@ -5,15 +5,18 @@
 ** Menus
 */
 
-#include "indieStudio.hpp"
+#include "indie.hpp"
 
 using namespace bmb;
 
 void Indie::bomberMan() {
     if (!this->map.isCameraUpdated())
-        this->map.setCameraMode(CAMERA_PERSPECTIVE);
     this->map.updateCamera();
     this->map.begin3D();
     this->map.Draw();
+    for (Player &player : indie.players)
+        player.Draw();
+    for (IndieBomb &bomb : indie.bombs)
+        bomb.update();
     this->map.end3D();
 }
