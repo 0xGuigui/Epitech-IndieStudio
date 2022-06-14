@@ -10,7 +10,6 @@
 #include "components/environmentHandler.hpp"
 #include "encapsulation/model.hpp"
 #include "encapsulation/camera.hpp"
-#include "PowerUp.hpp"
 #include <vector>
 
 namespace bmb {
@@ -22,7 +21,7 @@ namespace bmb {
 			IndieCamera3D _camera;
 			IndieVector3 _position;
             EnvironmentHandler _environmentHandler;
-			std::vector<IndiePowerUp> _bonuses = {};
+			//std::vector<IndiePowerUp> _bonuses = {};
 			std::vector<IndieVector3> _destructiblePositions = {};
 			bool _updateCamera = false;
 			void generateLineHorizontal(float posY, float posX, float posXEnd, int percentage) {
@@ -71,6 +70,7 @@ namespace bmb {
 				_position = mapPosition;
 				_camera = camera;
 				this->generateBoxes(75);
+                /*
 				for (auto& destructiblePosition : _destructiblePositions) {
 					// if random qui génère des PowerUp et qui push dans bonusPositions
 					int probability = (rand() % 100) - 100;
@@ -89,6 +89,7 @@ namespace bmb {
 					}
 
 				}
+                 */
 			};
 			void setPosition(const IndieVector3& position) {
 				_position = position;
