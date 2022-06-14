@@ -94,5 +94,17 @@ namespace bmb {
             KeyboardKey *getKeys() {
                 return keys;
             }
+            bool getGhostBonus() {
+                return this->ghost;
+            };
+            int getBombLeftBonus() {
+                return this->bombLeft;
+            };
+            int getForceBonus() {
+                return this->force;
+            };
+            int getSpeedBonus() {
+                return this->speed;
+            };
     };
 }
