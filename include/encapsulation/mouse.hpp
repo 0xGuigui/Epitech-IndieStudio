@@ -14,48 +14,48 @@ namespace bmb {
 	class IndieMouse {
 		private:
 		public:
-			IndieMouse() {};
-			IndieRay getRay(IndieVector2 mousePosition, IndieCamera3D camera) {
+			IndieMouse() = default;
+			static IndieRay getRay(IndieVector2 mousePosition, IndieCamera3D camera) {
 				return GetMouseRay(mousePosition, camera);
 			}
-			bool isButtonPressed(int button) {
+			static bool isButtonPressed(int button) {
 				return IsMouseButtonPressed(button);
 			}
-			bool isButtonDown(int button) {
+			static bool isButtonDown(int button) {
 				return IsMouseButtonDown(button);
 			}
-			bool isButtonReleased(int button) {
+			static bool isButtonReleased(int button) {
 				return IsMouseButtonReleased(button);
 			}
-			bool isButtonUp(int button) {
+			static bool isButtonUp(int button) {
 				return IsMouseButtonUp(button);
 			}
-			int getX() {
+			static int getX() {
 				return GetMouseX();
 			}
-			int getY() {
+			static int getY() {
 				return GetMouseY();
 			}
-			IndieVector2 getPosition() {
+			static IndieVector2 getPosition() {
 				return GetMousePosition();
 			}
-			IndieVector2 getDelta() {
+			static IndieVector2 getDelta() {
 				return GetMouseDelta();
 			}
-			void setPosition(int x, int y) {
+			static void setPosition(int x, int y) {
 				SetMousePosition(x, y);
 			}
-			void setOffset(int offsetX, int offsetY) {
+			static void setOffset(int offsetX, int offsetY) {
 				SetMouseOffset(offsetX, offsetY);
 			}
-			void setScale(float scaleX, float scaleY) {
+			static void setScale(float scaleX, float scaleY) {
 				SetMouseScale(scaleX, scaleY);
 			}
-			float getWheelMove() {
+			static float getWheelMove() {
 				return GetMouseWheelMove();
 			}
-			void setCursor(int cursor) {
+			static void setCursor(int cursor) {
 				SetMouseCursor(cursor);
 			}
 	};
-};
+}

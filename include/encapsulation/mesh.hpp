@@ -20,16 +20,16 @@ namespace bmb {
         BoundingBox _boundingBox;
 
     public:
-        IndieMesh() {};
-        ~IndieMesh() {};
+        IndieMesh() = default;
+        ~IndieMesh() = default;
 
         IndieMesh(Mesh mesh) {
             _mesh = mesh;
         }
-        IndieMesh(IndieImage image, IndieVector3 cubSize) {
+        IndieMesh(IndieImage image, const IndieVector3& cubSize) {
             _mesh = GenMeshCubicmap(image, cubSize);
         }
-        void GenCubicMap(IndieImage image, IndieVector3 cubSize) {
+        void GenCubicMap(IndieImage image, const IndieVector3& cubSize) {
             _mesh = GenMeshCubicmap(image, cubSize);
         }
         void Upload(bool dynamic) {
@@ -47,7 +47,6 @@ namespace bmb {
         void Draw(IndieMaterial material, IndieMatrix transform) {
             return DrawMesh(this->_mesh, material, transform);
         };
-        //pointer to fix
         void DrawInstanced(IndieMaterial material, IndieMatrix transform, int instances) {
            return DrawMeshInstanced(this->_mesh, material, transform, instances);
         };
@@ -56,15 +55,15 @@ namespace bmb {
         };
 
         BoundingBox GetBoundingBox() {
-            return GetMeshBoundingBox(this->_mesh);
+            return GetMeshBoundingBox(_mesh);
         };
 
         void GenTangents() {
-            return GenMeshTangents(&this->_mesh);
+            GenMeshTangents(&_mesh);
         };
 
         void GenMeshBinormals() {
-            return GenMeshBinormals();
+            ::GenMeshBinormals(&_mesh);
         };
 
         void GenPoly(int sides, float radius)
@@ -112,12 +111,12 @@ namespace bmb {
             _mesh = GenMeshKnot(radius, size, radSeg, sides);
         };
 
-        void GenHeightmap(Image heightmap, Vector3 size)
+        void GenHeightmap(IndieImage heightmap, const IndieVector3& size)
         {
             _mesh = GenMeshHeightmap(heightmap, size);
         };
 
-        void GenCubicmap(Image cubicmap, Vector3 cubeSize)
+        void GenCubicmap(IndieImage cubicmap, const IndieVector3& cubeSize)
         {
             _mesh = GenMeshCubicmap(cubicmap, cubeSize);
         };

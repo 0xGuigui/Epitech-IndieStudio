@@ -5,7 +5,7 @@
 ** IncludeDefinitions
 */
 
-#include "MapController.hpp"
+#include "components/mapController.hpp"
 #include "indie.hpp"
 
 using namespace bmb;
@@ -30,20 +30,20 @@ MapController::MapController(const IndieImage& mapImage, const IndieImage& mapOb
 	for (IndieVector3 &destructiblePosition : _destructiblePositions) {
 		int probability = rand() % 100;
 		if (probability > 50 && probability < 65)
-			_bonuses.push_back(IndiePowerUp([&](Player &player) -> void {
+			_bonuses.emplace_back([&](Player &player) -> void {
 				player.setBombLeft(player.getBombLeft() + 1);
-			}, destructiblePosition, indie.loader.models["bomb_up"], BOMBUP));
+			}, destructiblePosition, indie.loader.models["bomb_up"], BOMBUP);
 		if (probability > 65 && probability < 80)
-			_bonuses.push_back(IndiePowerUp([&](Player &player) -> void {
+			_bonuses.emplace_back([&](Player &player) -> void {
 				player.setSpeed(player.getSpeed() + 0.2f);
-			}, destructiblePosition, indie.loader.models["speed_up"], SPEEDUP));
+			}, destructiblePosition, indie.loader.models["speed_up"], SPEEDUP);
 		if (probability > 80 && probability < 95)
-			_bonuses.push_back(IndiePowerUp([&](Player &player) -> void {
+			_bonuses.emplace_back([&](Player &player) -> void {
 				player.setForce(player.getForce() + 1);
-			}, destructiblePosition, indie.loader.models["fire_up"], FIREUP));
+			}, destructiblePosition, indie.loader.models["fire_up"], FIREUP);
 		if (probability > 95 && probability < 100)
-			_bonuses.push_back(IndiePowerUp([&](Player &player) -> void {
+			_bonuses.emplace_back([&](Player &player) -> void {
 				player.setGhost(true);
-			}, destructiblePosition, indie.loader.models["wall_pass"], WALLPASS));
+			}, destructiblePosition, indie.loader.models["wall_pass"], WALLPASS);
 	}
 }

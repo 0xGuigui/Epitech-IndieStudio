@@ -12,7 +12,6 @@ find_package(raylib 3.0 REQUIRED) # Requires at least version 3.0
 
 include_directories(_deps/raylib-src/src/ include)
 
-#@TODO: Try to get all .cpp files for the compilation via cmake and Makefile
 add_executable(${CMAKE_PROJECT_NAME}
         src/main.cpp
         src/indie.cpp
@@ -22,12 +21,12 @@ add_executable(${CMAKE_PROJECT_NAME}
         src/Menus/PlayMenu.cpp
         src/Menus/SplashScreen.cpp
         src/Menus/PlayerControlsMenu.cpp
-        src/Game.cpp
+        src/game.cpp
         src/Menus/HelpMenu.cpp
-        src/IncludeDefinitions/Player.cpp
-        src/IncludeDefinitions/Bomb.cpp
-        src/IncludeDefinitions/PowerUp.cpp
-        src/IncludeDefinitions/MapController.cpp
+        src/components/player.cpp
+        src/components/bomb.cpp
+        src/components/powerUp.cpp
+        src/components/mapController.cpp
         src/components/environmentHandler.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} raylib)

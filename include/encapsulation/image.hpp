@@ -17,14 +17,12 @@ namespace bmb {
 
         public:
             IndieImage() = default;
-            ~IndieImage() {
-                // UnloadImage(_image);
-            }
+            ~IndieImage() = default;
             explicit IndieImage(const std::string& filename) : _image(LoadImage(filename.c_str())) {}
             IndieImage(Image image) {
                 this->_image = ImageCopy(image);
             }
-            IndieImage(std::string text, int fontSize, IndieColor color) {
+            IndieImage(const std::string& text, int fontSize, IndieColor color) {
                 _image = ImageText(text.c_str(), fontSize, color);
             }
             void LoadRaw(const std::string &filename, int width, int height, int format, int headerSize) {

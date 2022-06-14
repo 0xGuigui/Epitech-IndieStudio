@@ -6,23 +6,23 @@
 */
 
 #include "indie.hpp"
+#include "components/player.hpp"
 
 using namespace bmb;
 
 bool Player::checkCollision(float x, float y) {
-    if (ghost)
+    if (_ghost)
         return false;
     Rectangle playerRect = {position.getX() + x, position.getZ() + y, 0.75f, 0.75f};
-    for (IndieVector3 pos : indie.map.getDestructiblePositions()) {
-        Rectangle destructibleRect = {pos.getX(), pos.getZ(), 0.75f, 0.75f};
-        if (CheckCollisionRecs(playerRect, destructibleRect))
-            return true;
-    }
-    return false;
+    return std::any_of(indie.map.getDestructiblePositions().begin(), indie.map.getDestructiblePositions().end(),
+                [&playerRect](const IndieVector3 &pos) {
+                    Rectangle destructibleRect = {pos.getX(), pos.getZ(), 0.75f, 0.75f};
+                    return CheckCollisionRecs(playerRect, destructibleRect);
+                });
 }
 
-Player::Player(IndieColor color, IndieVector3 position, direction facing) {
-	unsigned int count = 0;
+Player::Player(IndieColor color, const IndieVector3& position, direction facing) {
+    unsigned int count = 0;
     IndieTexture2D texture = indie.loader.textures["skin"];
 
     playerColor = color;
@@ -43,11 +43,13 @@ Player::Player(IndieColor color, IndieVector3 position, direction facing) {
         case DOWN:
             turnDown();
             break;
-    };
+        default:
+            break;
+    }
 }
 
 void Player::setControls(KeyboardKey *controls) {
-	setKeyUp(controls[0]);
+    setKeyUp(controls[0]);
     setKeyDown(controls[1]);
     setKeyRight(controls[2]);
     setKeyLeft(controls[3]);
@@ -55,14 +57,16 @@ void Player::setControls(KeyboardKey *controls) {
 }
 
 void Player::setKeyLeft(KeyboardKey key) {
-	indie.keyboard.unbind(keys[LEFT]);
+    indie.keyboard.unbind(keys[LEFT]);
     keys[LEFT] = key;
     indie.keyboard.bind(key, [&]() -> void {
         if (dead || deadAnimation)
             return;
         turnLeft();
-        if (position.getZ() > -7.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() - 0.35f)) % 2 != 0) && !checkCollision(0.0f, -0.05f))
-            position = { position.getX(), position.getY(), position.getZ() - (0.05f * speed)};
+        if (position.getZ() > -7.35f && (static_cast<int>(round(position.getX())) % 2 != 0 ||
+                                         static_cast<int>(round(position.getZ() - 0.35f)) % 2 != 0) &&
+            !checkCollision(0.0f, -0.05f))
+            position = {position.getX(), position.getY(), position.getZ() - (0.05f * _speed)};
         _animate = true;
     }, [&]() -> void {
         if (dead || deadAnimation)
@@ -79,8 +83,10 @@ void Player::setKeyRight(KeyboardKey key) {
         if (dead || deadAnimation)
             return;
         turnRight();
-        if (position.getZ() < 5.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() + 0.35f)) % 2 != 0) && !checkCollision(0.0f, 0.05f))
-            position = { position.getX(), position.getY(), position.getZ() + (0.05f * speed) };
+        if (position.getZ() < 5.35f && (static_cast<int>(round(position.getX())) % 2 != 0 ||
+                                        static_cast<int>(round(position.getZ() + 0.35f)) % 2 != 0) &&
+            !checkCollision(0.0f, 0.05f))
+            position = {position.getX(), position.getY(), position.getZ() + (0.05f * _speed)};
         _animate = true;
     }, [&]() -> void {
         if (dead || deadAnimation)
@@ -97,8 +103,10 @@ void Player::setKeyUp(KeyboardKey key) {
         if (dead || deadAnimation)
             return;
         turnUp();
-        if (position.getX() < -3.0f && (static_cast<int>(round(position.getX() + 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0) && !checkCollision(0.05f, 0.0f))
-            position = { position.getX() + (0.05f * speed), position.getY(), position.getZ()};
+        if (position.getX() < -3.0f && (static_cast<int>(round(position.getX() + 0.35f)) % 2 != 0 ||
+                                        static_cast<int>(round(position.getZ())) % 2 != 0) &&
+            !checkCollision(0.05f, 0.0f))
+            position = {position.getX() + (0.05f * _speed), position.getY(), position.getZ()};
         _animate = true;
     }, [&]() -> void {
         if (dead || deadAnimation)
@@ -115,8 +123,10 @@ void Player::setKeyDown(KeyboardKey key) {
         if (dead || deadAnimation)
             return;
         turnDown();
-        if (position.getX() > -15.35f && (static_cast<int>(round(position.getX() - 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0) && !checkCollision(-0.05f, 0.0f))
-            position = { position.getX() - (0.05f * speed), position.getY(), position.getZ()};
+        if (position.getX() > -15.35f && (static_cast<int>(round(position.getX() - 0.35f)) % 2 != 0 ||
+                                          static_cast<int>(round(position.getZ())) % 2 != 0) &&
+            !checkCollision(-0.05f, 0.0f))
+            position = {position.getX() - (0.05f * _speed), position.getY(), position.getZ()};
         _animate = true;
     }, [&]() -> void {
         if (dead || deadAnimation)
@@ -133,31 +143,31 @@ void Player::setKeyBomb(KeyboardKey key) {
         if (dead || deadAnimation)
             return;
         IndieVector3 newPos(
-            round(position.getX()),
-            0.5f,
-            round(position.getZ())
-		);
-        for (IndieBomb &bomb : indie.bombs) {
+                round(position.getX()),
+                0.5f,
+                round(position.getZ())
+        );
+        for (IndieBomb &bomb: indie.bombs) {
             IndieVector3 pos = bomb.getPosition();
             if (pos.getX() == newPos.getX() && pos.getZ() == newPos.getZ())
                 return;
         }
-        for (IndieVector3 &pos : indie.map.getDestructiblePositions()) {
+        for (IndieVector3 &pos: indie.map.getDestructiblePositions()) {
             if (pos.getX() == newPos.getX() && pos.getZ() == newPos.getZ())
                 return;
         }
-        if (!bombLeft)
+        if (!_bombLeft)
             return;
-		bombLeft--;
-        IndieBomb bomb(force, newPos, [&]() -> void {
-            bombLeft++;
+        _bombLeft--;
+        IndieBomb bomb(_force, newPos, [&]() -> void {
+            _bombLeft++;
         });
         indie.bombs.push_back(bomb);
     }, []() -> void {}, inGame);
 }
 
 void Player::unbindKeys() {
-    for (KeyboardKey &key : keys) {
+    for (KeyboardKey &key: keys) {
         indie.keyboard.unbind(key);
         key = KEY_NULL;
     }
@@ -195,7 +205,7 @@ void Player::Draw() {
             frame = 0;
         UpdateModelAnimation(playerModel, anim[0], frame);
     } else {
-        playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f +  + (frame * 0.2f), 0.0f});
+        playerModel.getModel().transform = MatrixRotateXYZ({-61.4f, 0.0f + (static_cast<float>(frame) * 0.2f), 0.0f});
         if (frame >= 90) {
             frame = 0;
             dead = true;
@@ -204,7 +214,7 @@ void Player::Draw() {
     }
     if (!dead) {
         if (deadAnimation)
-            playerModel.Draw(position, (0.5f - (frame * 0.005f)), IndieColor(RED));
+            playerModel.Draw(position, (0.5f - (static_cast<float>(frame) * 0.005f)), IndieColor(RED));
         else
             playerModel.Draw(position, 0.5f, playerColor);
     }
