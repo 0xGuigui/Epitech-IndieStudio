@@ -11,14 +11,21 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
+#include <cstring>
 #include "bmbSysCall.hpp"
+#include "dataStruct.hpp"
 
 namespace bmb {
     class Deserialization {
     protected
-        std::string *input;
+        char *input;
         std::string pathToSave = "./save/data/save.save";
         bmb::systemCall sysCall;
+        std::vector<bmb::playerSave_t> playerSaveArray;
+        std::vector<bmb::bombSave_t> bombSaveArray;
+        bmb::mapSave_t mapSave;
+        bmb::headerSave_t headerSave;
+
     public:
         Deserialization();
         ~Deserialization();

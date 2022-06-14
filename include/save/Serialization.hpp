@@ -8,6 +8,7 @@
 #pragma once
 
 #include "../indieStudio.hpp"
+#include "dataStruct.hpp"
 #include <vector>
 #include <string>
 #include <tuple>
@@ -24,7 +25,7 @@ namespace bmb {
         bmb::systemCall sysCall;
         std::vector<bmb::playerSave_t> playerSaveArray;
         std::vector<bmb::bombSave_t> bombSaveArray;
-        bmb::mapSave_t mapSaveArray;
+        bmb::mapSave_t mapSave;
         bmb::headerSave_t headerSave;
 
     public:

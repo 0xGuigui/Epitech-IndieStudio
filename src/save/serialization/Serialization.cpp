@@ -16,10 +16,16 @@ void bmb::Serialization::fileWriter() {
     saveOut << "\n" << endl;
     saveOut << static_cast<string>(this->mapSave) << endl;
     saveOut << "\n" << endl;
-    for (it = this->mapSave.begin(); it != this->mapSave.end(); it++, i++)
+    for (it = this->mapSave.begin(); it != this->mapSave.end(); it++, i++) {
         saveOut << static_cast<string>(*it) << endl;
-    for (it = this->bombSaveArray.begin(); it != this->bombSaveArray.end(); it++, i++)
+        saveOut << "\n" << endl;
+
+    }
+    for (it = this->bombSaveArray.begin(); it != this->bombSaveArray.end(); it++, i++) {
         saveOut << static_cast<string>(*it) << endl;
+        saveOut << "\n" << endl;
+    }
+    saveOut << "\n" << endl;
     saveOut.close();
 }
 

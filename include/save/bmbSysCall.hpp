@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include "indieStudio.hpp"
 #include <unistd.h>
 #include <fcntl.h>
 #include <string>
