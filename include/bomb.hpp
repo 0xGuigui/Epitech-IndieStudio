@@ -69,6 +69,9 @@ namespace bmb {
                 return _position;
             }
             void Delete();
+            IndieColor getBombColor() {
+                return this->bombColor;
+            }
         protected:
     };
 }
