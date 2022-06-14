@@ -10,7 +10,7 @@
 #include "components/environmentHandler.hpp"
 #include "encapsulation/model.hpp"
 #include "encapsulation/camera.hpp"
-// #include "PowerUp.hpp"
+#include "PowerUp.hpp"
 
 namespace bmb {
 	class MapController {
@@ -21,19 +21,37 @@ namespace bmb {
 			IndieCamera3D _camera;
 			IndieVector3 _position;
             EnvironmentHandler _environmentHandler;
-			// std::vector<IndiePowerUp> _bonuses = {};
+			std::vector<IndiePowerUp> _bonuses = {};
 			std::vector<IndieVector3> _destructiblePositions = {};
 			bool _updateCamera = false;
 			void generateLineHorizontal(float posY, float posX, float posXEnd, int percentage) {
 				for (float x = posX; x <= posXEnd; x++) {
-					if (((rand() % 100) - 100 + percentage) > 0)
-						_destructiblePositions.push_back({ x, 0.5f, posY });
+					if (((rand() % 100) - 100 + percentage) > 0) {
+						IndieVector3 vec = { x, 0.5f, posY };
+						bool skip = false;
+						for (IndieVector3 &vector : _destructiblePositions) {
+							if (vec.getX() == vector.getX() && vec.getZ() == vector.getZ()) {
+								skip = true;
+							}
+						}
+						if (!skip)
+							_destructiblePositions.push_back({ x, 0.5f, posY });
+					}
 				}
 			}
 			void generateLineVertical(float posX, float posY, float posYEnd, int percentage) {
 				for (float y = posY; y <= posYEnd; y++) {
-					if (((rand() % 100) - 100 + percentage) > 0)
-						_destructiblePositions.push_back({ posX, 0.5f, y });
+					if (((rand() % 100) - 100 + percentage) > 0) {
+						IndieVector3 vec = { posX, 0.5f, y };
+						bool skip = false;
+						for (IndieVector3 &vector : _destructiblePositions) {
+							if (vec.getX() == vector.getX() && vec.getZ() == vector.getZ()) {
+								skip = true;
+							}
+						}
+						if (!skip)
+							_destructiblePositions.push_back({ posX, 0.5f, y });
+					}
 				}
 			}
 			void generateBoxes(int percentage) {
@@ -55,36 +73,7 @@ namespace bmb {
 			MapController() = default;
 			MapController(const IndieImage& mapImage, const IndieImage& mapObstacleImage,
                           const IndieTexture2D& block, const IndieTexture2D& obstacle, const IndieTexture2D& destructible,
-                          const IndieVector3& mapPosition, const IndieCamera3D& camera) {
-                _environmentHandler.init();
-                IndieMesh destructibleMesh;
-                destructibleMesh.GenCube(1.0f, 1.0f, 1.0f);
-				IndieMesh mapMesh(mapImage, { 1.0f, 1.0f, 1.0f });
-				IndieMesh obsMesh(mapObstacleImage, { 1.0f, 1.0f, 1.0f });
-				_map.LoadFromMesh(mapMesh);
-				_mapObstacle.LoadFromMesh(obsMesh);
-				_destructible.LoadFromMesh(destructibleMesh);
-				_map.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = block;
-				_mapObstacle.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = obstacle;
-				_destructible.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = destructible;
-				_position = mapPosition;
-				_camera = camera;
-				this->generateBoxes(75);
-				// for (auto& destructiblePosition : _destructiblePositions) {
-				// 	// if random qui génère des PowerUp et qui push dans bonusPositions
-				// 	int probability = (rand() % 100) - 100;
-				// 	if (probability > 0 && probability < 50)
-				// 		_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]NONE));
-				// 	if (probability > 50 && probability < 65)
-				// 		_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]BOMBUP));
-				// 	if (probability > 65 && probability < 80)
-				// 		_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]SPEEDUP));
-				// 	if (probability > 80 && probability < 95)
-				// 		_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]FIREUP));
-				// 	if (probability > 80 && probability < 95)
-				// 		_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]WALLPASS));
-				// }
-			};
+                          const IndieVector3& mapPosition, const IndieCamera3D& camera);
 			void setPosition(const IndieVector3& position) {
 				_position = position;
 			}
@@ -142,6 +131,9 @@ namespace bmb {
 			}
 			std::vector<IndieVector3> &getDestructiblePositions() {
 				return _destructiblePositions;
+			}
+			std::vector<IndiePowerUp> &getBonuses() {
+				return _bonuses;
 			}
 	};
 };
