@@ -48,10 +48,17 @@ void bmb::Deserialization::setSaveData() {
     }
 }
 
-std::string bmb::Deserialization::getSaveData() {
-
+std::vector<bmb::playerSave_t> bmb::Deserialization::getPlayerSaveArray() {
+    return this->playerSaveArray;
 }
 
+std::vector<bmb::bombSave_t> bmb::Deserialization::getBombSaveArray() {
+    return this->bombSaveArray;
+}
+
+bmb::mapSave_t bmb::Deserialization::getMapSave() {
+    return this->mapSave;
+}
 
 bmb::Deserialization::Deserialization() {
     this->sysCall;
