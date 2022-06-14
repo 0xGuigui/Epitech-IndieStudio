@@ -7,10 +7,11 @@
 
 #include "indie.hpp"
 #include "MapController.hpp"
+#include <iostream>
 
 Indie indie;
 
-int main(void) {
+int main() {
     indie.window.fullScreen();
     indie.window.windowIcon(indie.loader.images["tnt"]);
     KeyboardKey playerControls[5] = {KEY_UP, KEY_DOWN, KEY_RIGHT, KEY_LEFT, KEY_SPACE};
@@ -24,7 +25,7 @@ int main(void) {
     indie.state = indieState::splashScreen;
     SetExitKey(KEY_NULL);
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
-        indie.keyboard.update();
+        indie.keyboard.update(static_cast<int>(indie.state));
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();

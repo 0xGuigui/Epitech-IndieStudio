@@ -2,16 +2,18 @@
 ** EPITECH PROJECT, 2022
 ** B-YEP-400-LIL-4-1-indiestudio-paul.gervais
 ** File description:
-** splashscreen
+** indie
 */
+
+
 
 #pragma once
 
 enum direction {
-    LEFT,
-    RIGHT,
     UP,
     DOWN,
+    LEFT,
+    RIGHT,
     BOMB
 };
 
@@ -33,8 +35,9 @@ enum indieState {
     controlsMenu,
     playerMenu,
     helpMenu,
+    inGame,
     gameMenu,
-    inGame
+    any
 };
 
 class Indie {
@@ -60,10 +63,10 @@ class Indie {
         bmb::IndieMouse mouse;
         bmb::MapController map;
         std::vector<bmb::Player> players = {
-            bmb::Player(BLUE, {-15.0f, 1.5f, -7.0f}, RIGHT), // top-left
-            bmb::Player(RED, {-15.0f, 1.5f, 5.0f}, DOWN), // top-right
-            bmb::Player(YELLOW, {-3.0f, 1.5f, 5.0f}, LEFT), // bottom-right
-            bmb::Player(GREEN, {-3.0f, 1.5f, -7.0f}, UP) // bottom-left
+            bmb::Player(VIOLET, {-15.0f, 1.5f, -7.0f}, RIGHT), // bottom-left
+            bmb::Player(SKYBLUE, {-15.0f, 1.5f, 5.0f}, DOWN), // bottom-right
+            bmb::Player(GREEN, {-3.0f, 1.5f, -7.0f}, UP), // top-left
+            bmb::Player(GOLD, {-3.0f, 1.5f, 5.0f}, LEFT) // top-right
         };
         std::vector<bmb::IndieBomb> bombs;
         indieState state = splashScreen;
