@@ -51,11 +51,10 @@ void Indie::displayMainMenu()
                                            (IndieVector2){middle_x + 825, middle_y + 200}, accessibility, loader.textures["accessibility_highlight"], [&]() -> void
                                            {
         buttonSound.Play();
-        Serialization serialization;
-        //OpenURL("https://bit.ly/3PSsHwZ");
-        //std::cout << "EXIT: EXITED FROM ACCESSIBILITY" << std::endl;
-        //exit(0);
-        // });
+        OpenURL("https://bit.ly/3PSsHwZ");
+        std::cout << "EXIT: EXITED FROM ACCESSIBILITY" << std::endl;
+        exit(0);
+         });
 
     if (this->_musicPlay)
         MainMenuMusic.Play();

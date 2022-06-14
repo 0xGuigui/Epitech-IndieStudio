@@ -7,37 +7,48 @@
 
 #pragma once
 
-#include "bomb.hpp"
+#include "indie.hpp"
 #include <vector>
 #include <string>
 #include <tuple>
 #include <fstream>
 
 namespace bmb {
-    struct playerSave_t {
+    class playerSave {
+    public:
         IndieVector3 position;
         int fireUp;
         int speedUp;
         int bombUp;
         int wallPass;
-        int bombs;
-        IndieColor color;
+        IndieColor color = WHITE;
+        playerSave() {};
+        ~playerSave() {};
     };
 
-    struct bombSave_t {
+    class bombSave {
+    public:
         IndieVector3 position;
         int frame;
-        IndieColor color;
+        IndieColor color = WHITE;
+        bombSave() {};
+        ~bombSave() {};
     };
 
-    struct mapSave_t {
+    class mapSave {
+    public:
         std::vector<IndieVector3> map;
         std::vector<IndieVector3> bonus;
+        mapSave() {};
+        ~mapSave() {};
     };
 
-    struct headerSave_t { //struct quantity
+    class headerSave { //struct quantity
+    public:
         int mapNumber;
         int playerNumber;
         int bombNumber;
+        headerSave() {};
+        ~headerSave() {};
     };
 }
