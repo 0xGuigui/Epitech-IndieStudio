@@ -31,6 +31,8 @@ namespace bmb {
         ~Deserialization();
         void fileReader();
         void setSaveData();
-        std::string getSaveData();
+        std::vector<bmb::playerSave_t> getPlayerSaveArray();
+        std::vector<bmb::bombSave_t> getBombSaveArray();
+        bmb::mapSave_t getMapSave();
     };
 }
