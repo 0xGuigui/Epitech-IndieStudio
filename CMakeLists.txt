@@ -22,6 +22,7 @@ add_executable(${CMAKE_PROJECT_NAME}
         src/Menus/PlayMenu.cpp
         src/Menus/SplashScreen.cpp
         src/Menus/PlayerControlsMenu.cpp
+        src/Menus/GameMenu.cpp
         src/Game.cpp
         src/Menus/HelpMenu.cpp
         src/IncludeDefinitions/Player.cpp
