@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cstring>
 #include "mesh.hpp"
 
 namespace bmb {
@@ -33,9 +34,20 @@ namespace bmb {
 			void Draw(IndieVector3 position, float scale, IndieColor tint) {
 				DrawModel(_model, position, scale, tint);
 			}
+			void DrawEx(IndieVector3 position, IndieVector3 rotationAxis, float rotationAngle, IndieVector3 scale, IndieColor tint) {
+				DrawModelEx(_model, position, rotationAxis, rotationAngle, scale, tint);
+			}
+			BoundingBox getBoundingBox() {
+				return GetModelBoundingBox(_model);
+			}
 			Model &getModel() {
 				return _model;
 			}
+
+            bool operator ==(const IndieModel &model) const {
+                return memcmp(&this->_model, &model._model, sizeof(Model)) == 0;
+            }
+
 			operator Model() {
 				return _model;
 			}
