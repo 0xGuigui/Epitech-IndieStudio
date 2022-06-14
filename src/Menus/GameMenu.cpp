@@ -43,7 +43,7 @@ void Indie::displayGameMenu()
         buttonSound.Play();
         this->state = mainMenu; });
 
-    mainMenuBackground.Draw(middle_x, middle_y, WHITE);
+    // mainMenuBackground.Draw(middle_x, middle_y, WHITE);
     backToGameButton.update();
     saveGameButton.update();
     quitGameButton.update();

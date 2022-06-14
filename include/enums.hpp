@@ -24,5 +24,7 @@ enum indieState {
     playerMenu,
     helpMenu,
     inGame,
+    creditsMenu,
+    gameMenu,
     any
 };

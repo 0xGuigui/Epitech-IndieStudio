@@ -24,13 +24,17 @@ int main() {
     indie.players[2].setControls(playerControls3);
     indie.players[3].setControls(playerControls4);
     indie.state = indieState::splashScreen;
+    indie.keyboard.bind(KEY_BACKSPACE, [&]() -> void {
+        indie.state = gameMenu;
+    }, []() -> void {}, inGame);
     SetExitKey(KEY_NULL);
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
         indie.keyboard.update(static_cast<int>(indie.state));
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        if (indie.state != gameMenu)
+            ClearBackground(RAYWHITE);
         indie(indie.state);
         EndDrawing();
     }
