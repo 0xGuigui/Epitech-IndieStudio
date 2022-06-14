@@ -121,16 +121,16 @@ namespace bmb {
             }
             bool getGhostBonus() {
                 return this->ghost;
-            };
+            }
             int getBombLeftBonus() {
                 return this->bombLeft;
-            };
+            }
             int getForceBonus() {
                 return this->force;
-            };
+            }
             int getSpeedBonus() {
                 return this->speed;
-            };
+            }
             IndieColor getPlayerColor() {
                 return this->playerColor;
             }

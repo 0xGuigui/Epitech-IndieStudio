@@ -75,6 +75,9 @@ namespace bmb {
             IndieVector3 getBombPosition() {
                 return this->_position;
             }
+            int getFrame() {
+                return this->frame;
+            }
         protected:
     };
 }
