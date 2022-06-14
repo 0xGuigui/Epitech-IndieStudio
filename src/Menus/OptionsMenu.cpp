@@ -55,12 +55,12 @@ void Indie::displayOptionsMenu()
         buttonSound.Play();
         this->state = controlsMenu; });
 
-    static IndieButton githubButtonObject((IndieRectangle){middle_x + 300, middle_y + 350, static_cast<float>(github.getWidth()), static_cast<float>(github.getHeight())},
+    static IndieButton githubButton((IndieRectangle){middle_x + 300, middle_y + 350, static_cast<float>(github.getWidth()), static_cast<float>(github.getHeight())},
                                            (IndieVector2){middle_x + 300, middle_y + 350}, github, loader.textures["github_highlight"], [&]() -> void
                                            {
         buttonSound.Play();
-        OpenURL("https://github.com/EpitechPromo2025/B-YEP-400-LIL-4-1-indiestudio-paul.gervais");
-        exit(0);
+        OpenURL("https://bit.ly/3tAMBmy");
+        // exit(0);
         });
 
     static IndieButton helpButtonObject((IndieRectangle){middle_x + 300, middle_y + 450, static_cast<float>(help.getWidth()), static_cast<float>(help.getHeight())},
@@ -78,6 +78,6 @@ void Indie::displayOptionsMenu()
     musicOnButtonObject.update();
     doneButtonObject.update();
     controlsButtonObject.update();
-    githubButtonObject.update();
+    githubButton.update();
     helpButtonObject.update();
 }
