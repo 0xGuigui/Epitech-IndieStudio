@@ -1,0 +1,14 @@
+# This file contains data for blocks around the playground
+# line starting with '#' are comments
+# Each following line define a block
+# format: "x, y, z, x_count, z_count, model"
+# numbers support floats and can go up to 2 floating points
+
+# Blocks around the playground
+-2 0.5 -9 1 1 tnt
+-2 1.5 -9 1 1 tnt
+-2 0.5 -10 1 1 tnt
+-1 0.5 -9 1 1 tnt
+
+# base platform
+-1 -0.6 -9 17 17 stone

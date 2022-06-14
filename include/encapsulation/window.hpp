@@ -8,6 +8,8 @@
 #pragma once
 
 #include "image.hpp"
+#include "audioDevice.hpp"
+#include "music.hpp"
 
 namespace bmb {
 	class IndieWindow {
@@ -25,6 +27,15 @@ namespace bmb {
 			}
 			~IndieWindow() {
 				CloseWindow();
+			}
+			void fullScreen() {
+				ToggleFullscreen();
+			}
+			void windowIcon(IndieImage &image) {
+				SetWindowIcon(image.getImage());
+			}
+			void FPS(int posX, int posY) {
+				DrawFPS(posX, posY);
 			}
 			void Init(int screenHeight, int screenWidth, const std::string& title = "") {
 				InitWindow(screenWidth, screenHeight, title.c_str());
