@@ -23,7 +23,8 @@ void Indie::displayOptionsMenu()
     static IndieTexture2D github = loader.textures["github"];
     static IndieTexture2D help = loader.textures["help"];
     static IndieTexture2D controls = loader.textures["controls"];
-    static IndieTexture2D gameMenuButton = loader.textures["save_game"];
+    static IndieTexture2D credits = loader.textures["credits"];
+    static IndieTexture2D SuperSecretSettings = loader.textures["super_secret_settings"];
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieSound closeSound = loader.sounds["close"];
     static IndieMusic MainMenuMusic = loader.musics["Moog-City-2"];
@@ -70,11 +71,12 @@ void Indie::displayOptionsMenu()
         buttonSound.Play();
         this->state = helpMenu; });
 
-    static IndieButton gameMenuButtonObject((IndieRectangle){middle_x + 300, middle_y + 550, static_cast<float>(gameMenuButton.getWidth()), static_cast<float>(gameMenuButton.getHeight())},
-                                        (IndieVector2){middle_x + 300, middle_y + 550}, gameMenuButton, loader.textures["save_game_highlight"], [&]() -> void
-                                        {
+    static IndieButton creditsButtonObject((IndieRectangle){middle_x + 950, middle_y + 150, static_cast<float>(credits.getWidth()), static_cast<float>(credits.getHeight())},
+                                           (IndieVector2){middle_x + 950, middle_y + 150}, credits, loader.textures["credits_highlight"], [&]() -> void
+                                           {
         buttonSound.Play();
         this->state = gameMenu; });
+        // this->state = creditsMenu; });
 
     MainMenuMusic.setLoop(true);
 
@@ -87,5 +89,6 @@ void Indie::displayOptionsMenu()
     controlsButtonObject.update();
     githubButton.update();
     helpButtonObject.update();
-    gameMenuButtonObject.update();
+    creditsButtonObject.update();
+    SuperSecretSettings.Draw(middle_x + 950, middle_y + 250, WHITE);
 }
