@@ -60,7 +60,7 @@ void Player::setKeyLeft(KeyboardKey key) {
     indie.keyboard.bind(key, [&]() -> void {
         turnLeft();
         if (position.getZ() > -7.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() - 0.35f)) % 2 != 0) && !checkCollision(0.0f, -0.05f))
-            position = { position.getX(), position.getY(), position.getZ() - 0.05f};
+            position = { position.getX(), position.getY(), position.getZ() - (0.05f * speed)};
         _animate = true;
     }, [&]() -> void {
         _animate = false;
@@ -74,7 +74,7 @@ void Player::setKeyRight(KeyboardKey key) {
     indie.keyboard.bind(key, [&]() -> void {
         turnRight();
         if (position.getZ() < 5.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() + 0.35f)) % 2 != 0) && !checkCollision(0.0f, 0.05f))
-            position = { position.getX(), position.getY(), position.getZ() + 0.05f };
+            position = { position.getX(), position.getY(), position.getZ() + (0.05f * speed) };
         _animate = true;
     }, [&]() -> void {
         _animate = false;
@@ -88,7 +88,7 @@ void Player::setKeyUp(KeyboardKey key) {
     indie.keyboard.bind(key, [&]() -> void {
         turnUp();
         if (position.getX() < -3.0f && (static_cast<int>(round(position.getX() + 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0) && !checkCollision(0.05f, 0.0f))
-            position = { position.getX() + 0.05f, position.getY(), position.getZ()};
+            position = { position.getX() + (0.05f * speed), position.getY(), position.getZ()};
         _animate = true;
     }, [&]() -> void {
         _animate = false;
@@ -102,7 +102,7 @@ void Player::setKeyDown(KeyboardKey key) {
     indie.keyboard.bind(key, [&]() -> void {
         turnDown();
         if (position.getX() > -15.35f && (static_cast<int>(round(position.getX() - 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0) && !checkCollision(-0.05f, 0.0f))
-            position = { position.getX() - 0.05f, position.getY(), position.getZ()};
+            position = { position.getX() - (0.05f * speed), position.getY(), position.getZ()};
         _animate = true;
     }, [&]() -> void {
         _animate = false;
