@@ -10,10 +10,10 @@
 #pragma once
 
 enum direction {
-    LEFT,
-    RIGHT,
     UP,
     DOWN,
+    LEFT,
+    RIGHT,
     BOMB
 };
 
