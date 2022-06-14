@@ -16,11 +16,10 @@ include_directories(_deps/raylib-src/src/ include)
 add_executable(${CMAKE_PROJECT_NAME}
         src/main.cpp
         src/indie.cpp
+        src/Menus/ControlsMenu.cpp
         src/Menus/MainMenu.cpp
-        src/Menus/MultiplayerMenu.cpp
-        src/Menus/OptionMenu.cpp
+        src/Menus/OptionsMenu.cpp
         src/Menus/PlayMenu.cpp
-        src/Menus/SinglePlayerMenu.cpp
         src/Menus/SplashScreen.cpp
         src/Menus/PlayerControlsMenu.cpp
         src/Game.cpp
