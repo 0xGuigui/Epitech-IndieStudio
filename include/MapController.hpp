@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "components/environmentHandler.hpp"
 #include "encapsulation/model.hpp"
 #include "encapsulation/camera.hpp"
 #include <vector>
@@ -19,6 +20,7 @@ namespace bmb {
 			IndieModel _destructible;
 			IndieCamera3D _camera;
 			IndieVector3 _position;
+            EnvironmentHandler _environmentHandler;
 			std::vector<IndieVector3> _destructiblePositions = {};
 			bool _updateCamera = false;
 			void generateLineHorizontal(float posY, float posX, float posXEnd, int percentage) {
@@ -53,6 +55,7 @@ namespace bmb {
 			MapController(const IndieImage& mapImage, const IndieImage& mapObstacleImage,
                           const IndieTexture2D& block, const IndieTexture2D& obstacle, const IndieTexture2D& destructible,
                           const IndieVector3& mapPosition, const IndieCamera3D& camera) {
+                _environmentHandler.init();
                 IndieMesh destructibleMesh;
                 destructibleMesh.GenCube(1.0f, 1.0f, 1.0f);
 				IndieMesh mapMesh(mapImage, { 1.0f, 1.0f, 1.0f });
@@ -79,6 +82,7 @@ namespace bmb {
 					_destructible.Draw(pos, 1.0f, WHITE);
 			}
 			void Draw() {
+                _environmentHandler.draw();
 				_map.Draw(_position, 1.0f, WHITE);
 				_mapObstacle.Draw(_position, 1.0f, WHITE);
 				for (IndieVector3 pos : _destructiblePositions)
@@ -115,13 +119,13 @@ namespace bmb {
 				_destructiblePositions.clear();
 				generateBoxes(percentage);
 			}
-			IndieModel getMapModel() {
+			IndieModel &getMapModel() {
 				return _map;
 			}
-			IndieModel getObstacleModel() {
+			IndieModel &getObstacleModel() {
 				return _mapObstacle;
 			}
-			std::vector<IndieVector3> getDestructiblePositions() {
+			std::vector<IndieVector3> &getDestructiblePositions() {
 				return _destructiblePositions;
 			}
 	};
