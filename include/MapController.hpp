@@ -11,7 +11,6 @@
 #include "encapsulation/model.hpp"
 #include "encapsulation/camera.hpp"
 #include "PowerUp.hpp"
-#include <vector>
 
 namespace bmb {
 	class MapController {
@@ -74,20 +73,16 @@ namespace bmb {
 				for (auto& destructiblePosition : _destructiblePositions) {
 					// if random qui génère des PowerUp et qui push dans bonusPositions
 					int probability = (rand() % 100) - 100;
-					switch (probability) {
-						case probability > 0 && probability < 50:
-							_bonuses.push_back(IndiePowerUp(destructiblePosition, FIREUP));
-							break;
-						case probability > 50 && probability < 75:
-							_bonuses.push_back(destructiblePosition, BOMBUP);
-							break;
-						case probability > 75 && probability < 100:
-							_bonuses.push_back(destructiblePosition, SPEEDUP);
-							break;
-						default:
-							break;
-					}
-
+					if (probability > 0 && probability < 50)
+						_bonuses.push_back(IndiePowerUp(destructiblePosition, NONE));
+					if (probability > 50 && probability < 65)
+						_bonuses.push_back(IndiePowerUp(destructiblePosition, BOMBUP));
+					if (probability > 65 && probability < 80)
+						_bonuses.push_back(IndiePowerUp(destructiblePosition, SPEEDUP));
+					if (probability > 80 && probability < 95)
+						_bonuses.push_back(IndiePowerUp(destructiblePosition, FIREUP));
+					if (probability > 80 && probability < 95)
+						_bonuses.push_back(IndiePowerUp(destructiblePosition, WALLPASS));
 				}
 			};
 			void setPosition(const IndieVector3& position) {
