@@ -7,11 +7,10 @@
 
 #pragma once
 
-#include "../indieStudio.hpp"
 #include <vector>
 #include <string>
 #include <tuple>
-#include <list>
+#include <list>head
 #include <fstream>
 
 namespace bmb {
