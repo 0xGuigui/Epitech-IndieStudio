@@ -86,11 +86,11 @@ void IndieBomb::detonate() {
 }
 
 void IndieBomb::Delete() {
-    std::vector<bmb::IndieBomb>::iterator iterator;
     for (std::vector<bmb::IndieBomb>::iterator it = indie.bombs.begin(); it != indie.bombs.end(); it++) {
         IndieVector3 pos = (*it).getPosition();
         if (pos.getX() == _position.getX() && pos.getZ() == _position.getZ())
-            iterator = it;
+            it = indie.bombs.erase(it);
+        if (it == indie.bombs.end())
+            break;
     }
-    indie.bombs.erase(iterator);
 }
