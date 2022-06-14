@@ -60,7 +60,8 @@ void Indie::displayOptionsMenu()
                                            {
         buttonSound.Play();
         OpenURL("https://github.com/EpitechPromo2025/B-YEP-400-LIL-4-1-indiestudio-paul.gervais");
-        this->state = optionsMenu; });
+        exit(0);
+        });
 
     static IndieButton helpButtonObject((IndieRectangle){middle_x + 300, middle_y + 450, static_cast<float>(help.getWidth()), static_cast<float>(help.getHeight())},
                                         (IndieVector2){middle_x + 300, middle_y + 450}, help, loader.textures["help_highlight"], [&]() -> void
