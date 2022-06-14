@@ -7,9 +7,10 @@
 
 #pragma once
 
+#include "components/environmentHandler.hpp"
 #include "encapsulation/model.hpp"
 #include "encapsulation/camera.hpp"
-#include <vector>
+// #include "PowerUp.hpp"
 
 namespace bmb {
 	class MapController {
@@ -19,6 +20,8 @@ namespace bmb {
 			IndieModel _destructible;
 			IndieCamera3D _camera;
 			IndieVector3 _position;
+            EnvironmentHandler _environmentHandler;
+			// std::vector<IndiePowerUp> _bonuses = {};
 			std::vector<IndieVector3> _destructiblePositions = {};
 			bool _updateCamera = false;
 			void generateLineHorizontal(float posY, float posX, float posXEnd, int percentage) {
@@ -53,6 +56,7 @@ namespace bmb {
 			MapController(const IndieImage& mapImage, const IndieImage& mapObstacleImage,
                           const IndieTexture2D& block, const IndieTexture2D& obstacle, const IndieTexture2D& destructible,
                           const IndieVector3& mapPosition, const IndieCamera3D& camera) {
+                _environmentHandler.init();
                 IndieMesh destructibleMesh;
                 destructibleMesh.GenCube(1.0f, 1.0f, 1.0f);
 				IndieMesh mapMesh(mapImage, { 1.0f, 1.0f, 1.0f });
@@ -66,7 +70,21 @@ namespace bmb {
 				_position = mapPosition;
 				_camera = camera;
 				this->generateBoxes(75);
-			};
+			// 	for (auto& destructiblePosition : _destructiblePositions) {
+			// 		// if random qui génère des PowerUp et qui push dans bonusPositions
+			// 		int probability = (rand() % 100) - 100;
+			// 		if (probability > 0 && probability < 50)
+			// 			_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]NONE));
+			// 		if (probability > 50 && probability < 65)
+			// 			_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]BOMBUP));
+			// 		if (probability > 65 && probability < 80)
+			// 			_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]SPEEDUP));
+			// 		if (probability > 80 && probability < 95)
+			// 			_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]FIREUP));
+			// 		if (probability > 80 && probability < 95)
+			// 			_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]WALLPASS));
+			// 	}
+			// };
 			void setPosition(const IndieVector3& position) {
 				_position = position;
 			}
@@ -79,6 +97,7 @@ namespace bmb {
 					_destructible.Draw(pos, 1.0f, WHITE);
 			}
 			void Draw() {
+                _environmentHandler.draw();
 				_map.Draw(_position, 1.0f, WHITE);
 				_mapObstacle.Draw(_position, 1.0f, WHITE);
 				for (IndieVector3 pos : _destructiblePositions)
@@ -115,13 +134,13 @@ namespace bmb {
 				_destructiblePositions.clear();
 				generateBoxes(percentage);
 			}
-			IndieModel getMapModel() {
+			IndieModel &getMapModel() {
 				return _map;
 			}
-			IndieModel getObstacleModel() {
+			IndieModel &getObstacleModel() {
 				return _mapObstacle;
 			}
-			std::vector<IndieVector3> getDestructiblePositions() {
+			std::vector<IndieVector3> &getDestructiblePositions() {
 				return _destructiblePositions;
 			}
 	};

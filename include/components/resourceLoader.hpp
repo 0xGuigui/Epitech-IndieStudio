@@ -16,6 +16,7 @@
 #include "../encapsulation/sound.hpp"
 #include "../encapsulation/image.hpp"
 #include "../encapsulation/font.hpp"
+#include "../encapsulation/model.hpp"
 
 namespace bmb {
     class IResourceConnector {
@@ -100,6 +101,18 @@ namespace bmb {
         }
 
         /*
+         * This function is similar to [] operator but it will throw an exception if the resource is not found
+         */
+        [[nodiscard]] T &getResource(const std::string &name) {
+            auto it = _resources.find(name);
+
+            if (it == _resources.end()) {
+                throw ResourceConnectorException("Error: \"" + name + "\" is not a valid resource");
+            }
+            return it->second;
+        }
+
+        /*
          * Used to access an element of the resource map
          */
         T &operator[](const std::string &name) {
@@ -115,6 +128,8 @@ namespace bmb {
         ResourceConnector<IndieMusic> musics;
         ResourceConnector<IndieImage> images;
         ResourceConnector<IndieFont> fonts;
+        ResourceConnector<IndieModel> models;
+
 
     private:
         // Add your connectors here for building process
@@ -123,6 +138,7 @@ namespace bmb {
                 sounds,
                 images,
                 musics,
+                models,
                 fonts,
         };
 
@@ -132,7 +148,8 @@ namespace bmb {
                 sounds("audio", {".ogg"}),
                 musics("audio", {".mp3"}),
                 images("images"),
-                fonts("fonts") {
+                fonts("fonts"),
+                models("models") {
             std::string rootPath = std::filesystem::current_path().string() + "/" + rootFolderName;
 
             for (auto &file: std::filesystem::directory_iterator(rootPath)) {

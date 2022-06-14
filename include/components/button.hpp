@@ -59,8 +59,8 @@ namespace bmb {
                         IndieText("No key mapped").Draw(position + IndieVector2(20, 20), 35.0f, RED);
                         return;
                     }
-                    char letter = static_cast<int>(controls[index]);
-                    IndieText(std::string(&letter)).Draw(position + IndieVector2(135, 20), 48.0f, WHITE);
+                    char letter[2] = {static_cast<char>(controls[index]), '\0'};
+                    IndieText(letter).Draw(position + IndieVector2(135, 20), 48.0f, WHITE);
                 }
             }
             void hideButton()
