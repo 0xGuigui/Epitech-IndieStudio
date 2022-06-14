@@ -74,15 +74,15 @@ namespace bmb {
 					// if random qui génère des PowerUp et qui push dans bonusPositions
 					int probability = (rand() % 100) - 100;
 					if (probability > 0 && probability < 50)
-						_bonuses.push_back(IndiePowerUp(destructiblePosition, NONE));
+						_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]NONE));
 					if (probability > 50 && probability < 65)
-						_bonuses.push_back(IndiePowerUp(destructiblePosition, BOMBUP));
+						_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]BOMBUP));
 					if (probability > 65 && probability < 80)
-						_bonuses.push_back(IndiePowerUp(destructiblePosition, SPEEDUP));
+						_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]SPEEDUP));
 					if (probability > 80 && probability < 95)
-						_bonuses.push_back(IndiePowerUp(destructiblePosition, FIREUP));
+						_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]FIREUP));
 					if (probability > 80 && probability < 95)
-						_bonuses.push_back(IndiePowerUp(destructiblePosition, WALLPASS));
+						_bonuses.push_back(IndiePowerUp(destructiblePosition, indie.loader.models[""]WALLPASS));
 				}
 			};
 			void setPosition(const IndieVector3& position) {
