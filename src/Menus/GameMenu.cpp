@@ -26,5 +26,6 @@ void Indie::displayGameMenu()
                                         {
         buttonSound.Play();
         this->state = inGame; });
+
     mainMenuBackground.Draw(middle_x, middle_y, WHITE);
 }

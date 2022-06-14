@@ -71,8 +71,8 @@ void Indie::displayOptionsMenu()
         this->state = helpMenu; });
 
     static IndieButton gameMenuButtonObject((IndieRectangle){middle_x + 300, middle_y + 550, static_cast<float>(gameMenuButton.getWidth()), static_cast<float>(gameMenuButton.getHeight())},
-                                            (IndieVector2){middle_x + 300, middle_y + 550}, gameMenu, loader.textures["save_game_highlight"], [&]() -> void
-                                            {
+                                        (IndieVector2){middle_x + 300, middle_y + 550}, gameMenuButton, loader.textures["save_game_highlight"], [&]() -> void
+                                        {
         buttonSound.Play();
         this->state = gameMenu; });
 
@@ -87,4 +87,5 @@ void Indie::displayOptionsMenu()
     controlsButtonObject.update();
     githubButton.update();
     helpButtonObject.update();
+    gameMenuButtonObject.update();
 }
