@@ -64,7 +64,7 @@ namespace bmb {
 
         ~EnvironmentHandler() = default;
 
-        static std::string& ltrim(std::string &s);
+        static std::string &ltrim(std::string &s);
 
         /*
          * Open and parse config file for environment
