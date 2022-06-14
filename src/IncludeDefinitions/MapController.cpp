@@ -29,7 +29,6 @@ MapController::MapController(const IndieImage& mapImage, const IndieImage& mapOb
 	this->generateBoxes(75);
 	for (IndieVector3 &destructiblePosition : _destructiblePositions) {
 		int probability = rand() % 100;
-		std::cout << probability << std::endl;
 		if (probability > 50 && probability < 65)
 			_bonuses.push_back(IndiePowerUp([&](Player &player) -> void {
 				player.setBombLeft(player.getBombLeft() + 1);
