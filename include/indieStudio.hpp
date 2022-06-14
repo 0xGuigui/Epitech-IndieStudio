@@ -27,5 +27,6 @@
 #include "save/dataStruct.hpp"
 #include "save/Deserialization.hpp"
 #include "save/Serialization.hpp"
+#include "save/bmbSysCall.hpp"
 #include "indie.hpp"
 #include "Map.hpp"

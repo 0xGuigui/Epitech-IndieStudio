@@ -15,29 +15,29 @@
 #include <fstream>
 
 namespace bmb {
-    struct player {
+    struct playerSave_t {
         IndieVector3 position;
-        bool fireUp;
-        bool speedUp;
-        bool bombUp;
-        bool wallPass;
+        int fireUp;
+        int speedUp;
+        int bombUp;
+        int wallPass;
         int bombs;
         IndieColor color;
     };
 
-    struct bomb {
+    struct bombSave_t {
         IndieVector3 position;
         int frame;
         IndieColor color;
     };
 
-    struct map {
+    struct mapSave_t {
         std::vector<IndieVector3> map;
     };
 
-    struct header { //struct quantity
-        int playerNumber = 4;
-        int mapNumber = 1;
+    struct headerSave_t { //struct quantity
+        int mapNumber;
+        int playerNumber;
         int bombNumber;
     };
 }
