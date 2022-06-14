@@ -15,4 +15,16 @@ void Indie::displayGameMenu()
     static IndieTexture2D mainMenuBackground = loader.textures["game_menu"];
     static float middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
     static float middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
-    static IndieTexture2D 
+    static IndieTexture2D backToGame = loader.textures["back_to_game"];
+    static IndieTexture2D saveGame = loader.textures["save_and_quit"];
+    static IndieTexture2D quitGame = loader.textures["quit_to_title"];
+    static IndieTexture2D saveAndQuit = loader.textures["save_and_quit"];
+    static IndieSound buttonSound = loader.sounds["button"];
+
+    static IndieButton backToGameButton((IndieRectangle){middle_x + 575, middle_y + 850, static_cast<float>(backToGame.getWidth()), static_cast<float>(backToGame.getHeight())},
+                                        (IndieVector2){middle_x + 575, middle_y + 850}, backToGame, loader.textures["back_to_game_highlight"], [&]() -> void
+                                        {
+        buttonSound.Play();
+        this->state = inGame; });
+    mainMenuBackground.Draw(middle_x, middle_y, WHITE);
+}
