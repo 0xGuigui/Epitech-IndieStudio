@@ -56,13 +56,14 @@ void bmb::EnvironmentHandler::addBlock(bmb::IndieModel &model, bmb::RenderChunk 
 }
 
 void bmb::EnvironmentHandler::drawChunk(bmb::IndieModel &model, bmb::RenderChunk &chunk) {
+    float scale = model.getScale();
     auto [xCount, yCount] = chunk.getChunkBoundaries();
     bmb::IndieVector3 position = chunk.getPosition();
 
     for (unsigned short x = 0; x < xCount; x++, position.decrementX(1.0f)) {
         position.setZ(chunk.getPosition().getZ());
         for (unsigned short y = 0; y < yCount; y++, position.incrementZ(1.0f)) {
-            model.Draw(position, 1.0f, WHITE);
+            model.Draw(position, scale, WHITE);
         }
     }
 }

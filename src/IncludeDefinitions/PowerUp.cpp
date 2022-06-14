@@ -15,7 +15,7 @@ void IndiePowerUp::update() {
 		if (obstaclePos.getX() == _position.getX() && obstaclePos.getZ() == _position.getZ())
 			return;
 	}
-	_powerUp.Draw(_position, 1.0f, WHITE);
+	_powerUp.Draw(_position, 1.3f, WHITE);
 	IndieRectangle rectangleBonus(_position.getX(), _position.getZ(), 0.75f, 0.75f);
 	for (Player &player : indie.players) {
 		IndieRectangle rectanglePlayer(player.getPosition().getX(), player.getPosition().getZ(), 0.75f, 0.75f);

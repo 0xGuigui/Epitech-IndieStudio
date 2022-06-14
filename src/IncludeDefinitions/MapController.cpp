@@ -42,7 +42,7 @@ MapController::MapController(const IndieImage& mapImage, const IndieImage& mapOb
 			_bonuses.push_back(IndiePowerUp([&](Player &player) -> void {
 				player.setForce(player.getForce() + 1);
 			}, destructiblePosition, indie.loader.models["fire_up"], FIREUP));
-		if (probability > 80 && probability < 95)
+		if (probability > 95 && probability < 100)
 			_bonuses.push_back(IndiePowerUp([&](Player &player) -> void {
 				player.setGhost(true);
 			}, destructiblePosition, indie.loader.models["wall_pass"], WALLPASS));
