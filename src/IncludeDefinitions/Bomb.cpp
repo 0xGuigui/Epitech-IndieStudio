@@ -56,7 +56,7 @@ bool IndieBomb::isExplosionValid(IndieVector3 position, int &direction) {
             round(player.getPosition().getZ())
 		);
         if (playerPos.getX() == position.getX() && playerPos.getZ() == position.getZ()) {
-            //player.die();
+            player.die();
         }
     }
     return true;
