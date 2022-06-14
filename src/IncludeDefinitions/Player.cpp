@@ -62,7 +62,7 @@ void Player::setKeyLeft(KeyboardKey key) {
             return;
         turnLeft();
         if (position.getZ() > -7.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() - 0.35f)) % 2 != 0) && !checkCollision(0.0f, -0.05f))
-            position = { position.getX(), position.getY(), position.getZ() - 0.05f};
+            position = { position.getX(), position.getY(), position.getZ() - (0.05f * speed)};
         _animate = true;
     }, [&]() -> void {
         if (dead || deadAnimation)
@@ -80,7 +80,7 @@ void Player::setKeyRight(KeyboardKey key) {
             return;
         turnRight();
         if (position.getZ() < 5.35f && (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ() + 0.35f)) % 2 != 0) && !checkCollision(0.0f, 0.05f))
-            position = { position.getX(), position.getY(), position.getZ() + 0.05f };
+            position = { position.getX(), position.getY(), position.getZ() + (0.05f * speed) };
         _animate = true;
     }, [&]() -> void {
         if (dead || deadAnimation)
@@ -98,7 +98,7 @@ void Player::setKeyUp(KeyboardKey key) {
             return;
         turnUp();
         if (position.getX() < -3.0f && (static_cast<int>(round(position.getX() + 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0) && !checkCollision(0.05f, 0.0f))
-            position = { position.getX() + 0.05f, position.getY(), position.getZ()};
+            position = { position.getX() + (0.05f * speed), position.getY(), position.getZ()};
         _animate = true;
     }, [&]() -> void {
         if (dead || deadAnimation)
@@ -116,7 +116,7 @@ void Player::setKeyDown(KeyboardKey key) {
             return;
         turnDown();
         if (position.getX() > -15.35f && (static_cast<int>(round(position.getX() - 0.35f)) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0) && !checkCollision(-0.05f, 0.0f))
-            position = { position.getX() - 0.05f, position.getY(), position.getZ()};
+            position = { position.getX() - (0.05f * speed), position.getY(), position.getZ()};
         _animate = true;
     }, [&]() -> void {
         if (dead || deadAnimation)

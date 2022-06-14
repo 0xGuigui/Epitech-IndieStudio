@@ -5,42 +5,57 @@
 ** bombup
 */
 
-#include "powerup.hpp"
-
 #pragma once
 
+enum PowerUpType {
+    BOMBUP,
+    WALLPASS,
+    SPEEDUP,
+    FIREUP,
+    NONE
+};
+
+#include <functional>
+
 namespace bmb {
-    class IndiePowerUp : public IIndiePowerUp {
+    class IndiePowerUp {
         private:
             int frame = 0;
             IndieModel _powerUp;
             IndieVector3 _position;
             PowerUpType _powerUpType;
             bool powerUpPickedUp = false;
-            std::function<void(PowerUpType)> _onPick;
+            std::function<void(Player &)> _onPick;
         public:
             IndiePowerUp() = default;
-            IndiePowerUp(std::function<void(PowerUpType)> _onPick, IndieVector3 position, IndieTexture2D &texturePowerUp);
-            ~IndiePowerUp() = default;
-            IndieModel getPowerUp() {
-                return _powerUp;
+            IndiePowerUp(std::function<void(Player &)> onPick, IndieVector3 &position, IndieModel &model, PowerUpType type) {
+                _onPick = onPick;
+                _position = position;
+                _powerUp = model;
+                _powerUpType = type;
             }
+            ~IndiePowerUp() = default;
             IndieVector3 getPosition() {
                 return _position;
             }
-            bool powerUpPickedUp() {
-                return powerUpPickedUp;
+            void Load(std::function<void(Player &)> onPick, IndieVector3 &position, IndieModel &model, PowerUpType type) {
+                _onPick = onPick;
+                _position = position;
+                _powerUp = model;
+                _powerUpType = type;
+            };
+            IndieVector3 getPosition() {
+                return _position;
             }
-            IndieModel setpowerUp(IndieModel powerUp) {
-                _powerUp = powerUp;
-            }
-            IndieVector3 setPosition(IndieVector3 position) {
+            void setPosition(IndieVector3 position) {
                 _position = position;
             }
-            void setPowerUpPickedUp(bool powerUpPickedUp) {
-                this->powerUpPickedUp = powerUpPickedUp;
+            void updatePowerUpAnimation() {
+                _powerUp.Draw(_position, 1.0f, WHITE);
+            };
+            void updatePowerUpPickedUpAnimation() {
+                // nothing
             }
-            void updatePowerUpAnimation();
             void update() {
                 if (powerUpPickedUp)
                     updatePowerUpAnimation();
@@ -48,18 +63,6 @@ namespace bmb {
                     updatePowerUpPickedUpAnimation();
                 frame++;
             }
-            void create(IndieTexture2D &texturePowerUp, IndieVector3 position) {
-                IndieMesh mesh;
-                mesh.GenCube(1.0f, 1.0f, 1.0f);
-                _position = position;
-                _powerUp.LoadFromMesh(mesh);
-                _powerUp.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texturePowerUp;
-            }
-            template<typename F>
-            void create(IndieTexture2D &texturePowerUp, IndieVector3 position, F onPick) {
-                create(texturePowerUp, position);
-                _onPick = onPick;
-            }
         protected:
-    }
-}
+    };
+};
