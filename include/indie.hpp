@@ -9,14 +9,6 @@
 
 #pragma once
 
-enum direction {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    BOMB
-};
-
 #include "encapsulation/window.hpp"
 #include "encapsulation/audioDevice.hpp"
 #include "encapsulation/mouse.hpp"
@@ -26,18 +18,7 @@ enum direction {
 #include "KeyboardManager.hpp"
 #include "Player.hpp"
 #include "bomb.hpp"
-
-enum indieState {
-    splashScreen,
-    mainMenu,
-    playMenu,
-    optionsMenu,
-    controlsMenu,
-    playerMenu,
-    helpMenu,
-    inGame,
-    any
-};
+#include "enums.hpp"
 
 class Indie {
     private:
