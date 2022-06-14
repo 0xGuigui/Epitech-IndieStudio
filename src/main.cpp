@@ -14,6 +14,7 @@ Indie indie;
 int main() {
     indie.window.fullScreen();
     indie.window.windowIcon(indie.loader.images["tnt"]);
+    std::srand(std::time(NULL));
     KeyboardKey playerControls[5] = {KEY_UP, KEY_DOWN, KEY_RIGHT, KEY_LEFT, KEY_SPACE};
     KeyboardKey playerControls2[5] = {KEY_W, KEY_S, KEY_D, KEY_A, KEY_Q};
     KeyboardKey playerControls3[5] = {KEY_T, KEY_G, KEY_H, KEY_F, KEY_R};
