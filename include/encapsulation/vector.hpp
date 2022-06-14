@@ -52,6 +52,9 @@ namespace bmb {
         float getZ() const {
             return _vector.z;
         }
+        void incrementZ(float z) {
+            _vector.z += z;
+        }
         Vector3 &getVector() {
             return _vector;
         }
