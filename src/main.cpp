@@ -23,7 +23,7 @@ int main(void) {
     indie.state = inGame;
     SetExitKey(KEY_NULL);
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
-        indie.keyboard.update();
+        indie.keyboard.update(static_cast<int>(indie.state));
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();
