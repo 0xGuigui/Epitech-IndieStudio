@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "raymath.h"
 #include <iostream>
 #include <string>
 #include <filesystem>

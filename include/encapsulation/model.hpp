@@ -12,6 +12,10 @@
 
 namespace bmb {
 	class IndieModel {
+        private:
+            Model _model{};
+            float _scale = 1.0f;
+
 		public:
 			IndieModel() = default;
 
@@ -25,6 +29,12 @@ namespace bmb {
 			~IndieModel() {
 				// UnloadModel(_model);
 			}
+            void setScale(float scale) {
+                _scale = scale;
+            }
+            float getScale() const {
+                return _scale;
+            }
 			void LoadModel(const std::string &fileName) {
 				_model = ::LoadModel(fileName.c_str());
 			}
@@ -54,7 +64,5 @@ namespace bmb {
 			operator Model *() {
                 return &_model;
             }
-		private:
-			Model _model{};
 	};
 };

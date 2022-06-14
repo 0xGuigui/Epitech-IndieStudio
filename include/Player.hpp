@@ -10,6 +10,7 @@
 #include "encapsulation/model.hpp"
 #include "raymath.h"
 #include <cmath>
+#include "enums.hpp"
 
 // ModelGetBoundingBox
 
@@ -23,9 +24,9 @@ namespace bmb {
             IndieVector3 position;
             bool _animate = false;
             bool ghost = false; // WALLPASS
-            int bombLeft = 3;
-            int force = 4;
-            int speed = 1.0f;
+            int bombLeft = 1;
+            int force = 1;
+            float speed = 1.0f;
             bool deadAnimation = false;
             bool dead = false;
             KeyboardKey keys[5] = { KEY_NULL, KEY_NULL, KEY_NULL, KEY_NULL, KEY_NULL };
@@ -57,6 +58,30 @@ namespace bmb {
             void die() {
                 deadAnimation = true;
                 frame = 0;
+            }
+            int getBombLeft() {
+                return bombLeft;
+            }
+            void setBombLeft(int bombLeft) {
+                this->bombLeft = bombLeft;
+            }
+            int getForce() {
+                return force;
+            }
+            void setForce(int force) {
+                this->force = force;
+            }
+            float getSpeed() {
+                return speed;
+            }
+            void setSpeed(float speed) {
+                this->speed = speed;
+            }
+            bool getGhost() {
+                return ghost;
+            }
+            void setGhost(bool ghost) {
+                this->ghost = ghost;
             }
             void setControls(KeyboardKey *controls);
             void setKeyLeft(KeyboardKey key);
