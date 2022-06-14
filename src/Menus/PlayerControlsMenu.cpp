@@ -26,11 +26,6 @@ void Indie::displayPlayerMenu()
     static IndieTexture2D errorBind = loader.textures["empty_button_short_error"];
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieMusic MainMenuMusic = loader.musics["Moog-City-2"];
-    static IndieText leftText("Left");
-    static IndieText rightText("Right");
-    static IndieText upText("Up");
-    static IndieText downText("Down");
-    static IndieText bombText("Bomb");
     static int control = -1;
     static IndieButton *button = nullptr;
 
@@ -136,11 +131,6 @@ void Indie::displayPlayerMenu()
     bindUpButton.update(false, players[playerSelected].getKeys(), UP);
     bindDownButton.update(false, players[playerSelected].getKeys(), DOWN);
     bindBombButton.update(false, players[playerSelected].getKeys(), BOMB);
-    leftText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 100, middle_y + 250}, 48.0f, 1.0f, WHITE);
-    rightText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 100, middle_y + 375}, 48.0f, 1.0f, WHITE);
-    upText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 100, middle_y + 500}, 48.0f, 1.0f, WHITE);
-    downText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 100, middle_y + 625}, 48.0f, 1.0f, WHITE);
-    bombText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 100, middle_y + 750}, 48.0f, 1.0f, WHITE);
     if (button) {
         KeyboardKey key = KEY_NULL;
         button->update(true);
