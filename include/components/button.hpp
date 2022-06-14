@@ -10,6 +10,8 @@
 #include <functional>
 #include "encapsulation/texture.hpp"
 #include "encapsulation/text.hpp"
+#include "save/Serialization.hpp"
+#include "save/Deserialization.hpp"
 
 namespace bmb {
     class IndieButton {
