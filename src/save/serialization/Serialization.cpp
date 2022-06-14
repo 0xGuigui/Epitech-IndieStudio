@@ -5,7 +5,7 @@
 ** serialization.cpp
 */
 
-#include "../../../include/save/Serialization.hpp"
+#include "save/Serialization.hpp"
 
 void bmb::Serialization::fileWriter() {
     ofstream saveOut;
@@ -29,7 +29,7 @@ void bmb::Serialization::fileWriter() {
     saveOut.close();
 }
 
-void bmb::Serialization::setSaveData(std::vector<bmb::Bomb> bombArray, std::vector<bmb::Player> playerArray, std::vector<IndieVector3> destructibleObstacleArray) {
+void bmb::Serialization::setSaveData(std::vector<bmb::IndieBomb> bombArray, std::vector<bmb::Player> playerArray, std::vector<IndieVector3> destructibleObstacleArray, std::vector<IndieVector3> bonusArray) {
     int i = 0;
     headerSave_t header;
     for (it = bombArray.begin(); it != bombArray.end(); it++, i++);
@@ -39,7 +39,8 @@ void bmb::Serialization::setSaveData(std::vector<bmb::Bomb> bombArray, std::vect
     header.playerNumber = i;
     header.mapNumber = 1;
     bmb::mapSave_t mapSave;
-    mapSave.position = it.getDestructiblePositions();
+    mapSave.map = destructibleObstacleArray;
+    mapSave.bonus = bonusArray;
     this->mapSave = mapSave;
 
     for (it = playerArray.begin(); it != playerArray.end(); it++, i++) {
@@ -63,7 +64,7 @@ void bmb::Serialization::setSaveData(std::vector<bmb::Bomb> bombArray, std::vect
 }
 
 bmb::Serialization::Serialization() {
-    this->sysCall;
+
 }
 
 bmb::Serialization::~Serialization() {

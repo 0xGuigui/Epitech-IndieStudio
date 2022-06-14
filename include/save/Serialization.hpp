@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include "../indieStudio.hpp"
 #include "dataStruct.hpp"
 #include <vector>
 #include <string>
@@ -22,7 +21,6 @@ namespace bmb {
     protected:
         std::string *output;
         std::string pathToSave = "./save/data/save.save";
-        bmb::systemCall sysCall;
         std::vector<bmb::playerSave_t> playerSaveArray;
         std::vector<bmb::bombSave_t> bombSaveArray;
         bmb::mapSave_t mapSave;
@@ -32,6 +30,6 @@ namespace bmb {
         Serialization();
         ~Serialization();
         void fileWriter();
-        void setSaveData(std::vector<bmb::Bomb> bombArray, std::vector<bmb::Player> playerArray, std::vector<IndieVector3> destructibleObstacleArray);
+        void setSaveData(std::vector<IndieBomb> bombArray, std::vector<bmb::Player> playerArray, std::vector<IndieVector3> destructibleObstacleArray);
     };
 }

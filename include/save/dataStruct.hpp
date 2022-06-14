@@ -7,10 +7,10 @@
 
 #pragma once
 
+#include "bomb.hpp"
 #include <vector>
 #include <string>
 #include <tuple>
-#include <list>head
 #include <fstream>
 
 namespace bmb {
@@ -32,6 +32,7 @@ namespace bmb {
 
     struct mapSave_t {
         std::vector<IndieVector3> map;
+        std::vector<IndieVector3> bonus;
     };
 
     struct headerSave_t { //struct quantity

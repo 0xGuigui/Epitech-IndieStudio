@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include "indieStudio.hpp"
 #include <sstream>
 #include <fstream>
 #include <iostream>
@@ -17,10 +16,9 @@
 
 namespace bmb {
     class Deserialization {
-    protected
+    protected:
         char *input;
         std::string pathToSave = "./save/data/save.save";
-        bmb::systemCall sysCall;
         std::vector<bmb::playerSave_t> playerSaveArray;
         std::vector<bmb::bombSave_t> bombSaveArray;
         bmb::mapSave_t mapSave;

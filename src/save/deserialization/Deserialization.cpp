@@ -5,7 +5,7 @@
 ** deserialization.cpp
 */
 
-#include "../../../include/save/Deserialization.hpp"
+#include "save/Deserialization.hpp"
 
 void bmb::Deserialization::fileReader() {
     std::string output("");
@@ -16,8 +16,6 @@ void bmb::Deserialization::fileReader() {
     while (getline(file_input, output));
     this->input = output;
     file_input.close();
-    //return 0;this->sysCall.cOpen(this->pathToSave)
-    //this->sysCall.cRead(this->sysCall.open, this->input, sizeof(bmb::))
 }
 
 void bmb::Deserialization::setSaveData() {
@@ -61,7 +59,7 @@ bmb::mapSave_t bmb::Deserialization::getMapSave() {
 }
 
 bmb::Deserialization::Deserialization() {
-    this->sysCall;
+
 }
 
 bmb::Deserialization::~Deserialization() {
