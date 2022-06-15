@@ -15,9 +15,9 @@ using namespace bmb;
 
 void Indie::displayPlayerMenu()
 {
-    static IndieTexture2D mainMenuBackground = loader.textures["background_options_controls"];
-    static float middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
-    static float middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+    static IndieTexture2D playerControlsMenuBackground = loader.textures["background_options_controls"];
+    static float middle_x = (this->screen.GetWidth() - playerControlsMenuBackground.getWidth()) / 2;
+    static float middle_y = (this->screen.GetHeight() - playerControlsMenuBackground.getHeight()) / 2;
     static IndieTexture2D done = loader.textures["done_short"];
     static IndieTexture2D resetKeys = loader.textures["reset_keys"];
     static IndieTexture2D reset = loader.textures["reset"];
@@ -118,7 +118,7 @@ void Indie::displayPlayerMenu()
         control = BOMB;
         button = &bindBombButton;});
 
-    mainMenuBackground.Draw(middle_x, middle_y, WHITE);
+    playerControlsMenuBackground.Draw(middle_x, middle_y, WHITE);
     doneButton.update();
     resetKeysButton.update();
     resetLeftButton.update();
