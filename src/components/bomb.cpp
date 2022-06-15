@@ -17,7 +17,6 @@ IndieBomb::IndieBomb(int force, IndieVector3 position, const std::function<void(
     _bombExplosion.LoadFromMesh(mesh);
     _position = position;
     _onDetonate = onDetonate;
-    _sound = indie.loader.sounds["explosion"];
 }
 
 void IndieBomb::updateExplosionAnimation() {
