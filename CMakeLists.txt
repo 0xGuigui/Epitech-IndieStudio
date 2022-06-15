@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 
+set(CMAKE_CXX_STANDARD 20)
+
 set(CMAKE_PROJECT_NAME bomberman)
 
 project(${CMAKE_PROJECT_NAME})
@@ -12,7 +14,6 @@ find_package(raylib 3.0 REQUIRED) # Requires at least version 3.0
 
 include_directories(_deps/raylib-src/src/ include)
 
-#@TODO: Try to get all .cpp files for the compilation via cmake and Makefile
 add_executable(${CMAKE_PROJECT_NAME}
         src/main.cpp
         src/indie.cpp
@@ -22,12 +23,16 @@ add_executable(${CMAKE_PROJECT_NAME}
         src/Menus/PlayMenu.cpp
         src/Menus/SplashScreen.cpp
         src/Menus/PlayerControlsMenu.cpp
-        src/Game.cpp
+        src/Menus/CreditsMenu.cpp
+        src/Menus/GameMenu.cpp
         src/Menus/HelpMenu.cpp
-        src/IncludeDefinitions/Player.cpp
-        src/IncludeDefinitions/Bomb.cpp
-        src/IncludeDefinitions/PowerUp.cpp
-        src/IncludeDefinitions/MapController.cpp
+        src/Menus/EndMenu.cpp
+        src/game.cpp
+        src/Menus/HelpMenu.cpp
+        src/components/player.cpp
+        src/components/bomb.cpp
+        src/components/powerUp.cpp
+        src/components/mapController.cpp
         src/components/environmentHandler.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} raylib)
@@ -37,4 +42,8 @@ if (APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME} "-framework IOKit")
     target_link_libraries(${CMAKE_PROJECT_NAME} "-framework Cocoa")
     target_link_libraries(${CMAKE_PROJECT_NAME} "-framework OpenGL")
+endif()
+
+if (WIN32)
+    file(COPY assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
 endif()

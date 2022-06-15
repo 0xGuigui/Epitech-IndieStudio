@@ -13,13 +13,13 @@
 namespace bmb {
     class IndieRay {
     public:
-        IndieRay() {};
+        IndieRay() = default;
         IndieRay(const Ray &ray) : _ray(ray) {};
-        IndieRay(IndieVector3 position, IndieVector3 direction) {
+        IndieRay(const IndieVector3& position, const IndieVector3& direction) {
             _ray.direction = direction;
             _ray.position = position;
         }
-        void Load(IndieVector3 position, IndieVector3 direction) {
+        void Load(const IndieVector3& position, const IndieVector3& direction) {
             _ray.direction = direction;
             _ray.position = position;
         }

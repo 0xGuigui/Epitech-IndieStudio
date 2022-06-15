@@ -2,10 +2,10 @@
 ** EPITECH PROJECT, 2022
 ** B-YEP-400-LIL-4-1-indiestudio-paul.gervais
 ** File description:
-** splashscreen
-            bmb::Player(RED, {-15.0f, 1.5f, 5.0f}, DOWN), // top-right
-            bmb::Player(YELLOW, {-3.0f, 1.5f, 5.0f}, LEFT), // bottom-right
+** indie
 */
+
+
 
 #pragma once
 
@@ -14,10 +14,10 @@
 #include "encapsulation/mouse.hpp"
 #include "encapsulation/screen.hpp"
 #include "components/resourceLoader.hpp"
-#include "MapController.hpp"
-#include "KeyboardManager.hpp"
-#include "Player.hpp"
-#include "bomb.hpp"
+#include "components/mapController.hpp"
+#include "components/keyboardManager.hpp"
+#include "components/player.hpp"
+#include "components/bomb.hpp"
 #include "enums.hpp"
 
 class Indie {
@@ -29,6 +29,11 @@ class Indie {
         void displayControlsMenu();
         void displayPlayerMenu();
         void displayHelpMenu();
+        void displayHelpMenu2();
+        void displayHelpMenu3();
+        void displayGameMenu();
+        void displayCreditsMenu();
+        void displayEndMenu();
         void bomberMan();
     public:
         Indie();
@@ -42,10 +47,10 @@ class Indie {
         bmb::IndieMouse mouse;
         bmb::MapController map;
         std::vector<bmb::Player> players = {
-            bmb::Player(VIOLET, {-15.0f, 1.5f, -7.0f}, RIGHT), // bottom-left
+            bmb::Player(VIOLET, {-15.0f, 1.5f, -7.0f}, DOWN), // bottom-left
             bmb::Player(SKYBLUE, {-15.0f, 1.5f, 5.0f}, DOWN), // bottom-right
-            bmb::Player(GREEN, {-3.0f, 1.5f, -7.0f}, UP), // top-left
-            bmb::Player(GOLD, {-3.0f, 1.5f, 5.0f}, LEFT) // top-right
+            bmb::Player(GREEN, {-3.0f, 1.5f, -7.0f}, DOWN), // top-left
+            bmb::Player(GOLD, {-3.0f, 1.5f, 5.0f}, DOWN) // top-right
         };
         std::vector<bmb::IndieBomb> bombs;
         indieState state = splashScreen;
@@ -74,10 +79,27 @@ class Indie {
                 case helpMenu:
                     this->displayHelpMenu();
                     break;
+                case helpMenu2:
+                    this->displayHelpMenu2();
+                    break;
+                case helpMenu3:
+                    this->displayHelpMenu3();
+                    break;
+                case gameMenu:
+                    this->displayGameMenu();
+                    break;
+                case creditsMenu:
+                    this->displayCreditsMenu();
+                    break;
+                case endMenu:
+                    this->displayEndMenu();
+                    break;
                 case inGame:
                     this->bomberMan();
                     break;
-            };
+                default:
+                    break;
+            }
         }
         float timePlayed = 0.0f;
         float _musicPlayed = 0.0f;
@@ -85,7 +107,6 @@ class Indie {
         int screenHeight = 1080;
         bool _musicPlay = true;
         int playerSelected = 0;
-    protected:
 };
 
 extern Indie indie;

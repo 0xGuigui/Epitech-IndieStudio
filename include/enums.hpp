@@ -23,6 +23,11 @@ enum indieState {
     controlsMenu,
     playerMenu,
     helpMenu,
+    helpMenu2,
+    helpMenu3,
     inGame,
+    creditsMenu,
+    endMenu,
+    gameMenu,
     any
 };

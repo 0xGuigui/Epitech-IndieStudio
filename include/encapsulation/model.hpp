@@ -26,9 +26,8 @@ namespace bmb {
 			IndieModel(IndieMesh mesh) {
 				_model = LoadModelFromMesh(mesh);
 			}
-			~IndieModel() {
-				// UnloadModel(_model);
-			}
+			~IndieModel() = default;
+
             void setScale(float scale) {
                 _scale = scale;
             }
@@ -41,10 +40,10 @@ namespace bmb {
 			void LoadFromMesh(IndieMesh mesh) {
 				_model = LoadModelFromMesh(mesh);
 			}
-			void Draw(IndieVector3 position, float scale, IndieColor tint) {
+			void Draw(const IndieVector3& position, float scale, IndieColor tint) {
 				DrawModel(_model, position, scale, tint);
 			}
-			void DrawEx(IndieVector3 position, IndieVector3 rotationAxis, float rotationAngle, IndieVector3 scale, IndieColor tint) {
+			void DrawEx(const IndieVector3& position, const IndieVector3& rotationAxis, float rotationAngle, const IndieVector3& scale, IndieColor tint) {
 				DrawModelEx(_model, position, rotationAxis, rotationAngle, scale, tint);
 			}
 			BoundingBox getBoundingBox() {
