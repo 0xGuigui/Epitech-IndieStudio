@@ -23,14 +23,14 @@ void Indie::displayHelpMenu() {
         music.Play();
     music.Update();
 
-    static IndieButton doneButton((IndieRectangle){middle_x + 300, middle_y + 920, static_cast<float>(done.getWidth()), static_cast<float>(done.getHeight())},
-                                  (IndieVector2){middle_x + 300, middle_y + 920}, done, loader.textures["done_short_highlight"], [&]() -> void
+    static IndieButton doneButton({middle_x + 300, middle_y + 920, static_cast<float>(done.getWidth()), static_cast<float>(done.getHeight())},
+                                  {middle_x + 300, middle_y + 920}, done, loader.textures["done_short_highlight"], [&]() -> void
                                   {
         buttonSound.Play();
         this->state = optionsMenu; });
 
-    static IndieButton nextButton((IndieRectangle){middle_x + 1000, middle_y + 920, static_cast<float>(next.getWidth()), static_cast<float>(next.getHeight())},
-                                  (IndieVector2){middle_x + 1000, middle_y + 920}, next, loader.textures["next_highlight"], [&]() -> void
+    static IndieButton nextButton({middle_x + 1000, middle_y + 920, static_cast<float>(next.getWidth()), static_cast<float>(next.getHeight())},
+                                  {middle_x + 1000, middle_y + 920}, next, loader.textures["next_highlight"], [&]() -> void
                                   {
         buttonSound.Play();
         this->state = helpMenu2; });
@@ -53,14 +53,14 @@ void Indie::displayHelpMenu2() {
         music.Play();
     music.Update();
 
-    static IndieButton doneButton((IndieRectangle){middle_x + 1000, middle_y + 920, static_cast<float>(done.getWidth()), static_cast<float>(done.getHeight())},
-                                  (IndieVector2){middle_x + 1000, middle_y + 920}, done, loader.textures["done_short_highlight"], [&]() -> void
+    static IndieButton doneButton({middle_x + 1000, middle_y + 920, static_cast<float>(done.getWidth()), static_cast<float>(done.getHeight())},
+                                  {middle_x + 1000, middle_y + 920}, done, loader.textures["done_short_highlight"], [&]() -> void
                                   {
         buttonSound.Play();
         this->state = optionsMenu; });
 
-    static IndieButton previousButton((IndieRectangle){middle_x + 300, middle_y + 920, static_cast<float>(previous.getWidth()), static_cast<float>(previous.getHeight())},
-                                  (IndieVector2){middle_x + 300, middle_y + 920}, previous, loader.textures["previous_highlight"], [&]() -> void
+    static IndieButton previousButton({middle_x + 300, middle_y + 920, static_cast<float>(previous.getWidth()), static_cast<float>(previous.getHeight())},
+                                  {middle_x + 300, middle_y + 920}, previous, loader.textures["previous_highlight"], [&]() -> void
                                   {
         buttonSound.Play();
         this->state = helpMenu; });
