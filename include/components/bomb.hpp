@@ -28,7 +28,7 @@ namespace bmb {
     public:
         IndieBomb() = default;
 
-        IndieBomb(int force, IndieVector3 position, const std::function<void()> &onDetonate);
+        IndieBomb(int force, const IndieVector3& position, const std::function<void()> &onDetonate);
 
         ~IndieBomb() = default;
 
