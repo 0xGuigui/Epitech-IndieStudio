@@ -10,7 +10,6 @@
 using namespace bmb;
 
 void Indie::bomberMan() {
-    if (!this->map.isCameraUpdated())
     this->map.updateCamera();
     this->map.begin3D();
     this->map.Draw();

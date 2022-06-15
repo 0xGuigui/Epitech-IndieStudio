@@ -16,12 +16,12 @@
 namespace bmb {
 	class IndieScreen {
 		public:
-			IndieScreen() {};
-			~IndieScreen() {};
-            int GetWidth() {
+			IndieScreen() = default;
+			~IndieScreen() = default;
+            static int GetWidth() {
                 return GetScreenWidth();
             }
-            int GetHeight() {
+            static int GetHeight() {
                 return GetScreenHeight();
             }
             IndieRay GetMouseRay(IndieVector2 mousePosition, IndieCamera3D camera) {
@@ -36,7 +36,7 @@ namespace bmb {
             IndieVector2 GetWorldToScreen() {
                 return ::GetMousePosition();
             }
-            IndieVector2 GetWorldToScreenEx(IndieVector3 position, IndieCamera3D camera, int width, int height) {
+            static IndieVector2 GetWorldToScreenEx(const IndieVector3& position, IndieCamera3D camera, int width, int height) {
                 return ::GetWorldToScreenEx(position, camera, width, height);
             }
             IndieVector2 GetWorldToScreen2D(IndieVector2 position, IndieCamera2D camera) {

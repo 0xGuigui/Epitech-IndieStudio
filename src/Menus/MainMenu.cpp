@@ -25,20 +25,20 @@ void Indie::displayMainMenu()
     static IndieTexture2D accessibility = loader.textures["accessibility"];
     static IndieTexture2D SplashText = loader.textures["splashtext"];
 
-    static IndieButton singlePlayerButton((IndieRectangle){middle_x, middle_y + 100, static_cast<float>(singleplayer.getWidth()), static_cast<float>(singleplayer.getHeight())},
-                                          (IndieVector2){middle_x, middle_y + 100}, singleplayer, loader.textures["singleplayer_highlight"], [&]() -> void
+    static IndieButton singlePlayerButton({middle_x, middle_y + 100, static_cast<float>(singleplayer.getWidth()), static_cast<float>(singleplayer.getHeight())},
+                                          {middle_x, middle_y + 100}, singleplayer, loader.textures["singleplayer_highlight"], [&]() -> void
                                           {
         buttonSound.Play();
         this->state = playMenu; });
 
-    static IndieButton optionsButton((IndieRectangle){middle_x, middle_y + 200, static_cast<float>(options.getWidth()), static_cast<float>(options.getHeight())},
-                                     (IndieVector2){middle_x, middle_y + 200}, options, loader.textures["options_highlight"], [&]() -> void
+    static IndieButton optionsButton({middle_x, middle_y + 200, static_cast<float>(options.getWidth()), static_cast<float>(options.getHeight())},
+                                     {middle_x, middle_y + 200}, options, loader.textures["options_highlight"], [&]() -> void
                                      {
         buttonSound.Play();
         this->state = optionsMenu; });
 
-    static IndieButton quitButton((IndieRectangle){middle_x + 408, middle_y + 200, static_cast<float>(quitgame.getWidth()), static_cast<float>(quitgame.getHeight())},
-                                  (IndieVector2){middle_x + 408, middle_y + 200}, quitgame, loader.textures["quitgame_highlight"], [&]() -> void
+    static IndieButton quitButton({middle_x + 408, middle_y + 200, static_cast<float>(quitgame.getWidth()), static_cast<float>(quitgame.getHeight())},
+                                  {middle_x + 408, middle_y + 200}, quitgame, loader.textures["quitgame_highlight"], [&]() -> void
                                   {
         buttonSound.Play();
         while (buttonSound.isPlaying());
@@ -47,8 +47,8 @@ void Indie::displayMainMenu()
         MainMenuMusic.Stop();
         exit(0); });
 
-    static IndieButton accessibilityButton((IndieRectangle){middle_x + 825, middle_y + 200, static_cast<float>(accessibility.getWidth()), static_cast<float>(accessibility.getHeight())},
-                                           (IndieVector2){middle_x + 825, middle_y + 200}, accessibility, loader.textures["accessibility_highlight"], [&]() -> void
+    static IndieButton accessibilityButton({middle_x + 825, middle_y + 200, static_cast<float>(accessibility.getWidth()), static_cast<float>(accessibility.getHeight())},
+                                           {middle_x + 825, middle_y + 200}, accessibility, loader.textures["accessibility_highlight"], [&]() -> void
                                            {
         buttonSound.Play();
         OpenURL("https://bit.ly/3PSsHwZ");
