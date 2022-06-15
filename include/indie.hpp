@@ -46,10 +46,10 @@ class Indie {
         bmb::IndieMouse mouse;
         bmb::MapController map;
         std::vector<bmb::Player> players = {
-            bmb::Player(VIOLET, {-15.0f, 1.5f, -7.0f}, RIGHT), // bottom-left
+            bmb::Player(VIOLET, {-15.0f, 1.5f, -7.0f}, DOWN), // bottom-left
             bmb::Player(SKYBLUE, {-15.0f, 1.5f, 5.0f}, DOWN), // bottom-right
-            bmb::Player(GREEN, {-3.0f, 1.5f, -7.0f}, UP), // top-left
-            bmb::Player(GOLD, {-3.0f, 1.5f, 5.0f}, LEFT) // top-right
+            bmb::Player(GREEN, {-3.0f, 1.5f, -7.0f}, DOWN), // top-left
+            bmb::Player(GOLD, {-3.0f, 1.5f, 5.0f}, DOWN) // top-right
         };
         std::vector<bmb::IndieBomb> bombs;
         indieState state = splashScreen;
