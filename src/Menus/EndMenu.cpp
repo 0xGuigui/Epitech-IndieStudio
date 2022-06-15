@@ -11,4 +11,6 @@
 
 using namespace bmb;
 
-void Indie::displayEndMenu() {}
+void Indie::displayEndMenu() {
+    static IndieTexture2D endMenuBackground = loader.textures["winpage"];
+}

@@ -12,9 +12,9 @@ using namespace bmb;
 
 void Indie::displayPlayMenu()
 {
-    static IndieTexture2D mainMenuBackground = loader.textures["background_options"];
-    static float middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
-    static float middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+    static IndieTexture2D playMenuBackground = loader.textures["background_options"];
+    static float middle_x = (this->screen.GetWidth() - playMenuBackground.getWidth()) / 2;
+    static float middle_y = (this->screen.GetHeight() - playMenuBackground.getHeight()) / 2;
     static IndieTexture2D playButton = loader.textures["play"];
     static IndieTexture2D cancelButton = loader.textures["cancel"];
     static IndieSound buttonSound = loader.sounds["button"];
@@ -37,7 +37,7 @@ void Indie::displayPlayMenu()
         MainMenuMusic.Play();
 
     MainMenuMusic.Update();
-    mainMenuBackground.Draw(middle_x, middle_y, WHITE);
+    playMenuBackground.Draw(middle_x, middle_y, WHITE);
     playButtonObject.update();
     cancelButtonObject.update();
 }
