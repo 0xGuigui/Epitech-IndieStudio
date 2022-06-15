@@ -19,6 +19,7 @@ namespace bmb {
         std::vector<IndieVector3> explosion = {};
         IndieModel _bombExplosion;
         IndieModel _bomb;
+        IndieSound _sound;
         std::function<void()> _onDetonate;
         bool bombExplosion = false;
 
@@ -27,16 +28,7 @@ namespace bmb {
     public:
         IndieBomb() = default;
 
-        IndieBomb(int force, const IndieVector3 &position) {
-            create(position);
-            this->force = force;
-        }
-
-        template<typename F>
-        IndieBomb(int force, IndieVector3 position, F onDetonate) {
-            create(position, onDetonate);
-            this->force = force;
-        }
+        IndieBomb(int force, IndieVector3 position, const std::function<void()> &onDetonate);
 
         ~IndieBomb() = default;
 
@@ -56,25 +48,13 @@ namespace bmb {
         void updateExplosionAnimation();
 
         void update() {
+            if (!_sound.isPlaying())
+                _sound.Play();
             if (bombExplosion)
                 updateExplosionAnimation();
             else
                 updateBombAnimation();
             frame++;
-        }
-
-        void create(const IndieVector3 &position) {
-            _bomb = IndieModel("assets/models/blocks/tnt.glb");
-            IndieMesh mesh;
-            mesh.GenCube(1.0f, 1.0f, 1.0f);
-            _bombExplosion.LoadFromMesh(mesh);
-            _position = position;
-        }
-
-        template<typename F>
-        void create(const IndieVector3 &position, F func) {
-            create(position);
-            _onDetonate = func;
         }
 
         IndieVector3 getPosition() {

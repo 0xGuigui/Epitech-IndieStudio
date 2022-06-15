@@ -25,23 +25,36 @@ MapController::MapController(const IndieImage &mapImage, const IndieImage &mapOb
                                         return x == 1 ? 1 : 1 - std::pow(2, -10 * x);
                                     }, 120, 40);
     this->generateBoxes(75);
-    for (IndieVector3 &destructiblePosition: _destructiblePositions) {
+    generateBonuses();
+}
+
+void MapController::generateBonuses() {
+    static IndieSound pickUp = indie.loader.sounds["pickUP"];
+    for (IndieVector3 &destructiblePosition : _destructiblePositions) {
         int probability = rand() % 100;
         if (probability > 50 && probability < 65)
             _bonuses.emplace_back([&](Player &player) -> void {
                 player.setBombLeft(player.getBombLeft() + 1);
+                if (!pickUp.isPlaying())
+                    pickUp.Play();
             }, destructiblePosition, indie.loader.models["bomb_up"], BOMBUP);
         if (probability > 65 && probability < 80)
             _bonuses.emplace_back([&](Player &player) -> void {
                 player.setSpeed(player.getSpeed() + 0.2f);
+                if (!pickUp.isPlaying())
+                    pickUp.Play();
             }, destructiblePosition, indie.loader.models["speed_up"], SPEEDUP);
         if (probability > 80 && probability < 95)
             _bonuses.emplace_back([&](Player &player) -> void {
                 player.setForce(player.getForce() + 1);
+                if (!pickUp.isPlaying())
+                    pickUp.Play();
             }, destructiblePosition, indie.loader.models["fire_up"], FIREUP);
         if (probability > 95 && probability < 100)
             _bonuses.emplace_back([&](Player &player) -> void {
                 player.setGhost(true);
+                if (!pickUp.isPlaying())
+                    pickUp.Play();
             }, destructiblePosition, indie.loader.models["wall_pass"], WALLPASS);
     }
 }

@@ -12,9 +12,9 @@ using namespace bmb;
 
 void Indie::displayOptionsMenu()
 {
-    static IndieTexture2D mainMenuBackground = loader.textures["background_options"];
-    static float middle_x = (this->screen.GetWidth() - mainMenuBackground.getWidth()) / 2;
-    static float middle_y = (this->screen.GetHeight() - mainMenuBackground.getHeight()) / 2;
+    static IndieTexture2D optionsMenuBackground = loader.textures["background_options"];
+    static float middle_x = (this->screen.GetWidth() - optionsMenuBackground.getWidth()) / 2;
+    static float middle_y = (this->screen.GetHeight() - optionsMenuBackground.getHeight()) / 2;
     static IndieTexture2D doneButton = loader.textures["done"];
     static IndieTexture2D musicON = loader.textures["music_on"];
     static IndieTexture2D musicOFF = loader.textures["music_off"];
@@ -23,6 +23,8 @@ void Indie::displayOptionsMenu()
     static IndieTexture2D github = loader.textures["github"];
     static IndieTexture2D help = loader.textures["help"];
     static IndieTexture2D controls = loader.textures["controls"];
+    static IndieTexture2D credits = loader.textures["credits"];
+    static IndieTexture2D SuperSecretSettings = loader.textures["super_secret_settings"];
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieSound closeSound = loader.sounds["close"];
     static IndieMusic MainMenuMusic = loader.musics["Moog-City-2"];
@@ -69,15 +71,24 @@ void Indie::displayOptionsMenu()
         buttonSound.Play();
         this->state = helpMenu; });
 
+    static IndieButton creditsButtonObject({middle_x + 950, middle_y + 150, static_cast<float>(credits.getWidth()), static_cast<float>(credits.getHeight())},
+                                           {middle_x + 950, middle_y + 150}, credits, loader.textures["credits_highlight"], [&]() -> void
+                                           {
+        buttonSound.Play();
+        this->state = creditsMenu; });
+        // this->state = creditsMenu; });
+
     MainMenuMusic.setLoop(true);
 
     if (this->_musicPlay)
         MainMenuMusic.Update();
 
-    mainMenuBackground.Draw(middle_x, middle_y, WHITE);
+    optionsMenuBackground.Draw(middle_x, middle_y, WHITE);
     musicOnButtonObject.update();
     doneButtonObject.update();
     controlsButtonObject.update();
     githubButton.update();
     helpButtonObject.update();
+    creditsButtonObject.update();
+    SuperSecretSettings.Draw(middle_x + 950, middle_y + 250, WHITE);
 }

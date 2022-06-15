@@ -26,6 +26,7 @@ Player::Player(IndieColor color, const IndieVector3& position, direction facing)
     IndieTexture2D texture = indie.loader.textures["skin"];
 
     playerColor = color;
+    this->defaultPosition = position;
     this->position = position;
     playerModel.LoadModel("assets/Steve.iqm");
     anim = LoadModelAnimations("assets/Steve.iqm", &count);
