@@ -19,8 +19,8 @@ void Indie::displayCreditsMenu()
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieMusic music = loader.musics["Moog-City-2"];
 
-    static IndieButton doneButtonObject((IndieRectangle){middle_x + 575, middle_y + 920, static_cast<float>(done.getWidth()), static_cast<float>(done.getHeight())},
-                                        (IndieVector2){middle_x + 575, middle_y + 920}, done, loader.textures["done_highlight"], [&]() -> void
+    static IndieButton doneButtonObject({middle_x + 575, middle_y + 920, static_cast<float>(done.getWidth()), static_cast<float>(done.getHeight())},
+                                        {middle_x + 575, middle_y + 920}, done, loader.textures["done_highlight"], [&]() -> void
                                         {
         buttonSound.Play();
         this->state = optionsMenu; });
