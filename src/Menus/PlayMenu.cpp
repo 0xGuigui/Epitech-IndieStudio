@@ -27,7 +27,6 @@ void Indie::displayPlayMenu()
         this->map.getBonuses().clear();
         this->bombs.clear();
         this->map.generateDestructible(75);
-        this->map.generateBonuses();
         for (Player &player : this->players) {
             player.reset();
             player.turnDown();
