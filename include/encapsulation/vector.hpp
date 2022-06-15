@@ -70,6 +70,9 @@ namespace bmb {
         operator Vector3() const {
             return _vector;
         }
+        bool operator == (const IndieVector3 &vec) const {
+            return _vector.x == vec.getX() && _vector.z == vec.getZ();
+        }
     private:
         Vector3 _vector{};
     };

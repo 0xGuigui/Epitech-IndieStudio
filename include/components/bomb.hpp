@@ -81,6 +81,10 @@ namespace bmb {
             return _position;
         }
 
+        int getForce() {
+            return force;
+        }
+
         void Delete();
     };
 }
