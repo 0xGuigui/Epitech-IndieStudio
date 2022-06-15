@@ -27,14 +27,14 @@ void Indie::displayOptionsMenu()
     static IndieSound closeSound = loader.sounds["close"];
     static IndieMusic MainMenuMusic = loader.musics["Moog-City-2"];
 
-    static IndieButton doneButtonObject((IndieRectangle){middle_x + 575, middle_y + 850, static_cast<float>(doneButton.getWidth()), static_cast<float>(doneButton.getHeight())},
-                                        (IndieVector2){middle_x + 575, middle_y + 850}, doneButton, loader.textures["done_highlight"], [&]() -> void
+    static IndieButton doneButtonObject({middle_x + 575, middle_y + 850, static_cast<float>(doneButton.getWidth()), static_cast<float>(doneButton.getHeight())},
+                                        {middle_x + 575, middle_y + 850}, doneButton, loader.textures["done_highlight"], [&]() -> void
                                         {
         buttonSound.Play();
         this->state = mainMenu; });
 
-    static IndieButton musicOnButtonObject((IndieRectangle){middle_x + 300, middle_y + 150, static_cast<float>(musicON.getWidth()), static_cast<float>(musicON.getHeight())},
-                                           (IndieVector2){middle_x + 300, middle_y + 150}, musicON, loader.textures["music_on_highlight"], [&]() -> void
+    static IndieButton musicOnButtonObject({middle_x + 300, middle_y + 150, static_cast<float>(musicON.getWidth()), static_cast<float>(musicON.getHeight())},
+                                           {middle_x + 300, middle_y + 150}, musicON, loader.textures["music_on_highlight"], [&]() -> void
                                            {
         buttonSound.Play();
         if (this->_musicPlay) {
@@ -49,22 +49,22 @@ void Indie::displayOptionsMenu()
             musicOnButtonObject.setTexture(musicON, musicONHighlight);
         } });
 
-    static IndieButton controlsButtonObject((IndieRectangle){middle_x + 300, middle_y + 250, static_cast<float>(controls.getWidth()), static_cast<float>(controls.getHeight())},
-                                            (IndieVector2){middle_x + 300, middle_y + 250}, controls, loader.textures["controls_highlight"], [&]() -> void
+    static IndieButton controlsButtonObject({middle_x + 300, middle_y + 250, static_cast<float>(controls.getWidth()), static_cast<float>(controls.getHeight())},
+                                            {middle_x + 300, middle_y + 250}, controls, loader.textures["controls_highlight"], [&]() -> void
                                             {
         buttonSound.Play();
         this->state = controlsMenu; });
 
-    static IndieButton githubButton((IndieRectangle){middle_x + 300, middle_y + 350, static_cast<float>(github.getWidth()), static_cast<float>(github.getHeight())},
-                                           (IndieVector2){middle_x + 300, middle_y + 350}, github, loader.textures["github_highlight"], [&]() -> void
+    static IndieButton githubButton({middle_x + 300, middle_y + 350, static_cast<float>(github.getWidth()), static_cast<float>(github.getHeight())},
+                                           {middle_x + 300, middle_y + 350}, github, loader.textures["github_highlight"], [&]() -> void
                                            {
         buttonSound.Play();
         OpenURL("https://bit.ly/3tAMBmy");
         // exit(0);
         });
 
-    static IndieButton helpButtonObject((IndieRectangle){middle_x + 300, middle_y + 450, static_cast<float>(help.getWidth()), static_cast<float>(help.getHeight())},
-                                        (IndieVector2){middle_x + 300, middle_y + 450}, help, loader.textures["help_highlight"], [&]() -> void
+    static IndieButton helpButtonObject({middle_x + 300, middle_y + 450, static_cast<float>(help.getWidth()), static_cast<float>(help.getHeight())},
+                                        {middle_x + 300, middle_y + 450}, help, loader.textures["help_highlight"], [&]() -> void
                                         {
         buttonSound.Play();
         this->state = helpMenu; });

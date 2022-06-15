@@ -7,7 +7,7 @@
 
 #include "indie.hpp"
 #include "components/button.hpp"
-#include "Player.hpp"
+#include "components/player.hpp"
 
 using namespace bmb;
 
@@ -29,35 +29,35 @@ void Indie::displayControlsMenu()
 
     MainMenuMusic.Update();
 
-    static IndieButton doneButtonObject((IndieRectangle){middle_x + 575, middle_y + 850, static_cast<float>(doneButton.getWidth()), static_cast<float>(doneButton.getHeight())},
-                                        (IndieVector2){middle_x + 575, middle_y + 850}, doneButton, loader.textures["done_highlight"], [&]() -> void
+    static IndieButton doneButtonObject({middle_x + 575, middle_y + 850, static_cast<float>(doneButton.getWidth()), static_cast<float>(doneButton.getHeight())},
+                                        {middle_x + 575, middle_y + 850}, doneButton, loader.textures["done_highlight"], [&]() -> void
                                         {
         buttonSound.Play();
         this->state = optionsMenu; });
 
-    static IndieButton player1Button((IndieRectangle){middle_x + 300, middle_y + 150, static_cast<float>(player1.getWidth()), static_cast<float>(player1.getHeight())},
-                                     (IndieVector2){middle_x + 300, middle_y + 150}, player1, loader.textures["player1_highlight"], [&]() -> void
+    static IndieButton player1Button({middle_x + 300, middle_y + 150, static_cast<float>(player1.getWidth()), static_cast<float>(player1.getHeight())},
+                                     {middle_x + 300, middle_y + 150}, player1, loader.textures["player1_highlight"], [&]() -> void
                                      {
         buttonSound.Play();
         this->playerSelected = 0;
         this->state = playerMenu; });
 
-    static IndieButton player2Button((IndieRectangle){middle_x + 300, middle_y + 250, static_cast<float>(player2.getWidth()), static_cast<float>(player2.getHeight())},
-                                     (IndieVector2){middle_x + 300, middle_y + 250}, player2, loader.textures["player2_highlight"], [&]() -> void
+    static IndieButton player2Button({middle_x + 300, middle_y + 250, static_cast<float>(player2.getWidth()), static_cast<float>(player2.getHeight())},
+                                     {middle_x + 300, middle_y + 250}, player2, loader.textures["player2_highlight"], [&]() -> void
                                      {
         buttonSound.Play();
         this->playerSelected = 1;
         this->state = playerMenu; });
 
-    static IndieButton player3Button((IndieRectangle){middle_x + 300, middle_y + 350, static_cast<float>(player3.getWidth()), static_cast<float>(player3.getHeight())},
-                                     (IndieVector2){middle_x + 300, middle_y + 350}, player3, loader.textures["player3_highlight"], [&]() -> void
+    static IndieButton player3Button({middle_x + 300, middle_y + 350, static_cast<float>(player3.getWidth()), static_cast<float>(player3.getHeight())},
+                                     {middle_x + 300, middle_y + 350}, player3, loader.textures["player3_highlight"], [&]() -> void
                                      {
         buttonSound.Play();
         this->playerSelected = 2;
         this->state = playerMenu; });
 
-    static IndieButton player4Button((IndieRectangle){middle_x + 300, middle_y + 450, static_cast<float>(player4.getWidth()), static_cast<float>(player4.getHeight())},
-                                     (IndieVector2){middle_x + 300, middle_y + 450}, player4, loader.textures["player4_highlight"], [&]() -> void
+    static IndieButton player4Button({middle_x + 300, middle_y + 450, static_cast<float>(player4.getWidth()), static_cast<float>(player4.getHeight())},
+                                     {middle_x + 300, middle_y + 450}, player4, loader.textures["player4_highlight"], [&]() -> void
                                      {
         buttonSound.Play();
         this->playerSelected = 3;

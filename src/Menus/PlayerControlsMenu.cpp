@@ -9,7 +9,7 @@
 #include "components/button.hpp"
 #include "encapsulation/text.hpp"
 #include "encapsulation/font.hpp"
-#include "Player.hpp"
+#include "components/player.hpp"
 
 using namespace bmb;
 
@@ -34,50 +34,50 @@ void Indie::displayPlayerMenu()
 
     MainMenuMusic.Update();
 
-    static IndieButton doneButton((IndieRectangle){middle_x + 1000, middle_y + 920, static_cast<float>(done.getWidth()), static_cast<float>(done.getHeight())},
-                                  (IndieVector2){middle_x + 1000, middle_y + 920}, done, loader.textures["done_short_highlight"], [&]() -> void
+    static IndieButton doneButton({middle_x + 1000, middle_y + 920, static_cast<float>(done.getWidth()), static_cast<float>(done.getHeight())},
+                                  {middle_x + 1000, middle_y + 920}, done, loader.textures["done_short_highlight"], [&]() -> void
                                   {
         buttonSound.Play();
         this->state = controlsMenu; });
 
-    static IndieButton resetKeysButton((IndieRectangle){middle_x + 300, middle_y + 920, static_cast<float>(resetKeys.getWidth()), static_cast<float>(resetKeys.getHeight())},
-                                       (IndieVector2){middle_x + 300, middle_y + 920}, resetKeys, loader.textures["reset_keys_highlight"], [&]() -> void
+    static IndieButton resetKeysButton({middle_x + 300, middle_y + 920, static_cast<float>(resetKeys.getWidth()), static_cast<float>(resetKeys.getHeight())},
+                                       {middle_x + 300, middle_y + 920}, resetKeys, loader.textures["reset_keys_highlight"], [&]() -> void
                                        {
         buttonSound.Play();
         this->players[this->playerSelected].unbindKeys(); });
 
-    static IndieButton resetLeftButton((IndieRectangle){middle_x + 1400, middle_y + 250, static_cast<float>(reset.getWidth()), static_cast<float>(reset.getHeight())},
-                                       (IndieVector2){middle_x + 1400, middle_y + 250}, reset, loader.textures["reset_highlight"], [&]() -> void
+    static IndieButton resetLeftButton({middle_x + 1400, middle_y + 250, static_cast<float>(reset.getWidth()), static_cast<float>(reset.getHeight())},
+                                       {middle_x + 1400, middle_y + 250}, reset, loader.textures["reset_highlight"], [&]() -> void
                                        {
         buttonSound.Play();
         this->players[this->playerSelected].unbindKeyLeft(); });
 
-    static IndieButton resetRightButton((IndieRectangle){middle_x + 1400, middle_y + 375, static_cast<float>(reset.getWidth()), static_cast<float>(reset.getHeight())},
-                                        (IndieVector2){middle_x + 1400, middle_y + 375}, reset, loader.textures["reset_highlight"], [&]() -> void
+    static IndieButton resetRightButton({middle_x + 1400, middle_y + 375, static_cast<float>(reset.getWidth()), static_cast<float>(reset.getHeight())},
+                                        {middle_x + 1400, middle_y + 375}, reset, loader.textures["reset_highlight"], [&]() -> void
                                         {
         buttonSound.Play();
         this->players[this->playerSelected].unbindKeyRight(); });
 
-    static IndieButton resetUpButton((IndieRectangle){middle_x + 1400, middle_y + 500, static_cast<float>(reset.getWidth()), static_cast<float>(reset.getHeight())},
-                                     (IndieVector2){middle_x + 1400, middle_y + 500}, reset, loader.textures["reset_highlight"], [&]() -> void
+    static IndieButton resetUpButton({middle_x + 1400, middle_y + 500, static_cast<float>(reset.getWidth()), static_cast<float>(reset.getHeight())},
+                                     {middle_x + 1400, middle_y + 500}, reset, loader.textures["reset_highlight"], [&]() -> void
                                      {
         buttonSound.Play();
         this->players[this->playerSelected].unbindKeyUp(); });
 
-    static IndieButton resetDownButton((IndieRectangle){middle_x + 1400, middle_y + 625, static_cast<float>(reset.getWidth()), static_cast<float>(reset.getHeight())},
-                                       (IndieVector2){middle_x + 1400, middle_y + 625}, reset, loader.textures["reset_highlight"], [&]() -> void
+    static IndieButton resetDownButton({middle_x + 1400, middle_y + 625, static_cast<float>(reset.getWidth()), static_cast<float>(reset.getHeight())},
+                                       {middle_x + 1400, middle_y + 625}, reset, loader.textures["reset_highlight"], [&]() -> void
                                        {
         buttonSound.Play();
         this->players[this->playerSelected].unbindKeyDown(); });
 
-    static IndieButton resetBombButton((IndieRectangle){middle_x + 1400, middle_y + 750, static_cast<float>(reset.getWidth()), static_cast<float>(reset.getHeight())},
-                                       (IndieVector2){middle_x + 1400, middle_y + 750}, reset, loader.textures["reset_highlight"], [&]() -> void
+    static IndieButton resetBombButton({middle_x + 1400, middle_y + 750, static_cast<float>(reset.getWidth()), static_cast<float>(reset.getHeight())},
+                                       {middle_x + 1400, middle_y + 750}, reset, loader.textures["reset_highlight"], [&]() -> void
                                        {
         buttonSound.Play();
         this->players[this->playerSelected].unbindKeyBomb(); });
 
-    static IndieButton bindLeftButton((IndieRectangle){middle_x + 1080, middle_y + 250, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
-                                      (IndieVector2){middle_x + 1080, middle_y + 250}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
+    static IndieButton bindLeftButton({middle_x + 1080, middle_y + 250, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
+                                      {middle_x + 1080, middle_y + 250}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
                                       {
         buttonSound.Play();
         bindLeftButton.setTexture(waitingInputButton, waitingInputButton);
@@ -86,32 +86,32 @@ void Indie::displayPlayerMenu()
                                       });
 
 
-    static IndieButton bindRightButton((IndieRectangle){middle_x + 1080, middle_y + 375, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
-                                       (IndieVector2){middle_x + 1080, middle_y + 375}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
+    static IndieButton bindRightButton({middle_x + 1080, middle_y + 375, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
+                                       {middle_x + 1080, middle_y + 375}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
                                        {
         buttonSound.Play();
         bindRightButton.setTexture(waitingInputButton, waitingInputButton);
         control = RIGHT;
         button = &bindRightButton; });
 
-    static IndieButton bindUpButton((IndieRectangle){middle_x + 1080, middle_y + 500, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
-                                     (IndieVector2){middle_x + 1080, middle_y + 500}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
+    static IndieButton bindUpButton({middle_x + 1080, middle_y + 500, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
+                                     {middle_x + 1080, middle_y + 500}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
                                      {
         buttonSound.Play();
         bindUpButton.setTexture(waitingInputButton, waitingInputButton);
         control = UP;
         button = &bindUpButton;});
 
-    static IndieButton bindDownButton((IndieRectangle){middle_x + 1080, middle_y + 625, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
-                                      (IndieVector2){middle_x + 1080, middle_y + 625}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
+    static IndieButton bindDownButton({middle_x + 1080, middle_y + 625, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
+                                      {middle_x + 1080, middle_y + 625}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
                                       {
         buttonSound.Play();
         bindDownButton.setTexture(waitingInputButton, waitingInputButton);
         control = DOWN;
         button = &bindDownButton;});
 
-    static IndieButton bindBombButton((IndieRectangle){middle_x + 1080, middle_y + 750, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
-                                      (IndieVector2){middle_x + 1080, middle_y + 750}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
+    static IndieButton bindBombButton({middle_x + 1080, middle_y + 750, static_cast<float>(emptyButtonShort.getWidth()), static_cast<float>(emptyButtonShort.getHeight())},
+                                      {middle_x + 1080, middle_y + 750}, emptyButtonShort, loader.textures["empty_button_short_highlight"], [&]() -> void
                                       {
         buttonSound.Play();
         bindBombButton.setTexture(waitingInputButton, waitingInputButton);

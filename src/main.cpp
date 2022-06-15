@@ -6,7 +6,7 @@
 */
 
 #include "indie.hpp"
-#include "MapController.hpp"
+#include "components/mapController.hpp"
 #include <iostream>
 #include "../include/save/Serializationcopy.hpp"
 #include "../include/save/Deserializationcopy.hpp"
@@ -14,9 +14,13 @@
 Indie indie;
 
 int main() {
+<<<<<<< HEAD
     bmb::MapController m_ap;
     indie.window.fullScreen();
     indie.window.windowIcon(indie.loader.images["tnt"]);
+=======
+    std::srand(std::time(NULL));
+>>>>>>> dev
     KeyboardKey playerControls[5] = {KEY_UP, KEY_DOWN, KEY_RIGHT, KEY_LEFT, KEY_SPACE};
     KeyboardKey playerControls2[5] = {KEY_W, KEY_S, KEY_D, KEY_A, KEY_Q};
     KeyboardKey playerControls3[5] = {KEY_T, KEY_G, KEY_H, KEY_F, KEY_R};

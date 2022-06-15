@@ -15,7 +15,7 @@ namespace bmb {
 		private:
 			Rectangle _rec;
 		public:
-			IndieRectangle() {};
+			IndieRectangle() = default;
 			IndieRectangle(float x, float y, float width, float height) {
 				_rec = {
 					.x = x,
@@ -27,7 +27,7 @@ namespace bmb {
 			IndieRectangle(Rectangle rec) {
 				_rec = rec;
 			}
-			void Draw(IndieColor color) {
+			void Draw(IndieColor color) const {
 				DrawRectangle(static_cast<int>(_rec.x), static_cast<int>(_rec.y), static_cast<int>(_rec.width), static_cast<int>(_rec.height), color);
 			}
 			void DrawPro(IndieVector2 origin, float rotation, IndieColor color) {
@@ -52,4 +52,4 @@ namespace bmb {
 				return this->_rec;
 			}
 	};
-};
+}

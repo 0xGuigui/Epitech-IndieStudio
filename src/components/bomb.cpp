@@ -13,12 +13,12 @@ void IndieBomb::updateExplosionAnimation() {
     if (frame > 15)
         return this->Delete();
     _bombExplosion.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = indie.loader.textures["explosion_" + std::to_string(frame)];
-    for (IndieVector3 pos : explosion) {
+    for (const IndieVector3& pos : explosion) {
         _bombExplosion.Draw(pos, 1.0f, WHITE);
     }
 }
 
-bool IndieBomb::isExplosionValid(IndieVector3 position, int &direction) {
+bool IndieBomb::isExplosionValid(const IndieVector3& position, int &direction) {
     if (!(position.getX() >= -15.0f && position.getX() <= -3.0f &&
     position.getZ() <= 5.0f && position.getZ() >= -7.0f &&
     (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0))) {
@@ -68,10 +68,10 @@ void IndieBomb::detonate() {
     if (isExplosionValid(exPos, noDir))
         explosion.push_back(exPos);
     for (int i = 1, left = true, right = true, up = true, down = true; i <= this->force; i++) {
-        IndieVector3 explosionPos(_position.getX() + i, 0.5f, _position.getZ());
-        IndieVector3 explosionPos2(_position.getX() - i, 0.5f, _position.getZ());
-        IndieVector3 explosionPos3(_position.getX(), 0.5f, _position.getZ() + i);
-        IndieVector3 explosionPos4(_position.getX(), 0.5f, _position.getZ() - i);
+        IndieVector3 explosionPos(_position.getX() + static_cast<float>(i), 0.5f, _position.getZ());
+        IndieVector3 explosionPos2(_position.getX() - static_cast<float>(i), 0.5f, _position.getZ());
+        IndieVector3 explosionPos3(_position.getX(), 0.5f, _position.getZ() + static_cast<float>(i));
+        IndieVector3 explosionPos4(_position.getX(), 0.5f, _position.getZ() - static_cast<float>(i));
         if (down && isExplosionValid(explosionPos, down))
             this->explosion.push_back(explosionPos);
         if (up && isExplosionValid(explosionPos2, up))
@@ -86,7 +86,7 @@ void IndieBomb::detonate() {
 }
 
 void IndieBomb::Delete() {
-    for (std::vector<bmb::IndieBomb>::iterator it = indie.bombs.begin(); it != indie.bombs.end(); it++) {
+    for (auto it = indie.bombs.begin(); it != indie.bombs.end(); it++) {
         IndieVector3 pos = (*it).getPosition();
         if (pos.getX() == _position.getX() && pos.getZ() == _position.getZ())
             it = indie.bombs.erase(it);
