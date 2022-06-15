@@ -22,9 +22,9 @@ namespace bmb {
 			IndieWindow() = default;
 			IndieWindow(int screenHeight, int screenWidth, const std::string& title = "", unsigned int configFlags = FLAG_WINDOW_RESIZABLE) {
                 IndieImage programIcon = IndieImage("assets/images/indie_logo.png");
+				InitWindow(screenWidth, screenHeight, title.c_str());
                 SetWindowIcon(programIcon.getImage());
                 SetConfigFlags(configFlags);
-				InitWindow(screenWidth, screenHeight, title.c_str());
 				_height = screenHeight;
 				_width = screenWidth;
 			}
