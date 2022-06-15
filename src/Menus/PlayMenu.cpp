@@ -21,13 +21,13 @@ void Indie::displayPlayMenu()
     static IndieSound closeSound = loader.sounds["close"];
     static IndieMusic MainMenuMusic = loader.musics["Moog-City-2"];
     static IndieButton playButtonObject((IndieRectangle){middle_x + 200, middle_y + 850, static_cast<float>(playButton.getWidth()), static_cast<float>(playButton.getHeight())},
-                                        (IndieVector2){middle_x + 200, middle_y + 850}, playButton, loader.textures["play_highlight"], [&]() -> void
+                                        {middle_x + 200, middle_y + 850}, playButton, loader.textures["play_highlight"], [&]() -> void
                                         {
         buttonSound.Play();
         this->state = inGame;
         MainMenuMusic.Stop(); });
     static IndieButton cancelButtonObject((IndieRectangle){middle_x + 1100, middle_y + 850, static_cast<float>(cancelButton.getWidth()), static_cast<float>(cancelButton.getHeight())},
-                                          (IndieVector2){middle_x + 1100, middle_y + 850}, cancelButton, loader.textures["cancel_highlight"], [&]() -> void
+                                          {middle_x + 1100, middle_y + 850}, cancelButton, loader.textures["cancel_highlight"], [&]() -> void
                                           {
         buttonSound.Play();
         this->state = mainMenu; });
