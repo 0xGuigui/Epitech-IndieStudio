@@ -22,16 +22,32 @@ void bmb::Deserialization::setSaveData() {
     char *header;
     char *temp;
 
-    header = strtok(this->input, "\n");
+    //header = strtok(this->input, "\n");
+    header = this->input.substr(0, sizeof(bmb::headerSave_t));
+    this->input.erase(0, sizeof(bmb::headerSave_t));
     this->headerSave = (*reinterpret_cast<bmb::headerSave_t*>(header));
-    temp = strtok(this->input, "\n");
+    //temp = strtok(this->input, "\n");
+    for (int i = 0; i < this->headerSave.sizeOfMap; i++) {
+        temp = this->input.substr(0, sizeof(IndieVector3));
+        this->desMap.push_back(temp);
+        this->input.erase(0, sizeof(IndieVector3));
+    }
+    for (int i = 0; i < this->headerSave.sizeOfBonus; i++) {
+        temp = this->input.substr(0, sizeof(IndiePowerUp));
+        this->desMap.push_back(temp);
+        this->input.erase(0, sizeof(IndiePowerUp));
+    }
     this->mapSave = (*reinterpret_cast<bmb::mapSave_t*>(temp));
     for (int i = 0; i < this->headerSave.playerNumber; i++) {
-        temp = strtok(this->input, "\n");
+        //temp = strtok(this->input, "\n");
+        temp = this->input.substr(0, sizeof(bmb::playerSave_t));
+        this->input.erase(0, sizeof(bmb::playerSave_t));
         this->playerSaveArray.push_back((*reinterpret_cast<bmb::playerSave_t*>(temp)));
     }
     for (int i = 0; i < this->headerSave.bombNumber; i++) {
-        temp = strtok(this->input, "\n");
+        //temp = strtok(this->input, "\n");
+        temp = this->input.substr(0, sizeof(bmb::bombSave_t));
+        this->input.erase(0, sizeof(bmb::bombSave_t));
         this->bombSaveArray.push_back((*reinterpret_cast<bmb::bombSave_t*>(temp)));
     }
 }

@@ -31,7 +31,7 @@ int main() {
     serialization.fileWriter();
     bmb::Deserialization deserialization;
     deserialization.fileReader();
-    deserialization.setSaveData();
+    //deserialization.setSaveData();
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
         indie.keyboard.update(static_cast<int>(indie.state));
         if (IsKeyPressed(KEY_ESCAPE))

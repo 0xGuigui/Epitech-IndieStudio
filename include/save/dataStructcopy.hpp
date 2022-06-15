@@ -13,6 +13,7 @@
 #include <tuple>
 #include <fstream>
 #include <string.h>
+#include <unistd.h>
 
 namespace bmb {
     typedef struct playerSave_s {

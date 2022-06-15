@@ -10,17 +10,15 @@
 void bmb::Serialization::fileWriter() {
     std::ofstream saveOut("save.save", std::ios::binary);
     saveOut.write((char*)&this->headerSave, sizeof(this->headerSave));
-    saveOut.write("\n", sizeof(char));
-    saveOut.write((char*)&this->mapSave, sizeof(this->mapSave));
-    saveOut.write("\n", sizeof(char));
-    for (auto it = this->playerSaveArray.begin(); it != this->playerSaveArray.end(); it++) {
+    //saveOut.write((char*)&this->mapSave, sizeof(this->mapSave));
+    for (auto itt = this->mapSave.map.begin(); itt != this->mapSave.map.end(); itt++)
+        saveOut.write((char*)&itt, sizeof(itt));
+    for (auto itt = this->mapSave.bonus.begin(); itt != this->mapSave.bonus.end(); itt++)
+        saveOut.write((char*)&itt, sizeof(itt));
+    for (auto it = this->playerSaveArray.begin(); it != this->playerSaveArray.end(); it++)
         saveOut.write((char*)&it, sizeof(it));
-        saveOut.write("\n", sizeof(char));
-    }
-    for (auto it = this->bombSaveArray.begin(); it != this->bombSaveArray.end(); it++) {
+    for (auto it = this->bombSaveArray.begin(); it != this->bombSaveArray.end(); it++)
         saveOut.write((char*)&it, sizeof(it));
-        saveOut.write("\n", sizeof(char));
-    }
     saveOut.close();
 }
 
