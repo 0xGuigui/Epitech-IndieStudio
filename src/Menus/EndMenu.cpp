@@ -8,7 +8,6 @@
 #include "indie.hpp"
 #include "components/button.hpp"
 
-
 using namespace bmb;
 
 void Indie::displayEndMenu() {
@@ -39,5 +38,5 @@ void Indie::displayEndMenu() {
     IndieText winText("Player " + std::to_string(playerWon) + " won!");
     endMenuBackground.Draw(middle_x, middle_y, WHITE);
     backToMenuButton.update();
-    winText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 1400, middle_y + 150}, 48.0f, 1.0f, WHITE);
+    winText.DrawEx(loader.fonts["Minecraftia"], {middle_x + 1400, middle_y + 150}, 48.0f, 1.0f, WHITE);
 }

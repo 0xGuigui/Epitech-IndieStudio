@@ -10,8 +10,7 @@
 
 using namespace bmb;
 
-void Indie::displayCreditsMenu()
-{
+void Indie::displayCreditsMenu() {
     static IndieTexture2D creditsMenuBackground = loader.textures["background_credits"];
     static float middle_x = (this->screen.GetWidth() - creditsMenuBackground.getWidth()) / 2;
     static float middle_y = (this->screen.GetHeight() - creditsMenuBackground.getHeight()) / 2;
@@ -19,11 +18,12 @@ void Indie::displayCreditsMenu()
     static IndieSound buttonSound = loader.sounds["button"];
     static IndieMusic music = loader.musics["Moog-City-2"];
 
-    static IndieButton doneButtonObject({middle_x + 575, middle_y + 920, static_cast<float>(done.getWidth()), static_cast<float>(done.getHeight())},
-                                        {middle_x + 575, middle_y + 920}, done, loader.textures["done_highlight"], [&]() -> void
-                                        {
-        buttonSound.Play();
-        this->state = optionsMenu; });
+    static IndieButton doneButtonObject(
+            {middle_x + 575, middle_y + 920, static_cast<float>(done.getWidth()), static_cast<float>(done.getHeight())},
+            {middle_x + 575, middle_y + 920}, done, loader.textures["done_highlight"], [&]() -> void {
+                buttonSound.Play();
+                this->state = optionsMenu;
+            });
 
     if (this->_musicPlay)
         music.Play();
