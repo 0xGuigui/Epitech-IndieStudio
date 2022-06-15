@@ -14,8 +14,11 @@ void Indie::bomberMan() {
     this->map.updateCamera();
     this->map.begin3D();
     this->map.Draw();
-    if (this->_musicPlay && !loader.musics["InGame_Music"].isPlaying())
-        loader.musics["InGame_Music"].Play();
+    if (this->_musicPlay) {
+        if (!loader.musics["InGame_Music"].isPlaying())
+            loader.musics["InGame_Music"].Play();
+        loader.musics["InGame_Music"].Update();
+    }
     int nbAlive = 0;
     for (Player &player : indie.players) {
         player.Draw();

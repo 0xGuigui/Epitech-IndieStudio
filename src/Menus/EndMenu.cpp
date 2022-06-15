@@ -36,8 +36,7 @@ void Indie::displayEndMenu() {
             playerWon = i + 1;
         i++;
     }
-
-    static IndieText winText("Player " + std::to_string(playerWon) + " won!");
+    IndieText winText("Player " + std::to_string(playerWon) + " won!");
     endMenuBackground.Draw(middle_x, middle_y, WHITE);
     backToMenuButton.update();
     winText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 1400, middle_y + 150}, 48.0f, 1.0f, WHITE);
