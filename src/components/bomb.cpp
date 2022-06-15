@@ -77,10 +77,10 @@ bool IndieBomb::isExplosionValid(const IndieVector3 &position, int &direction) {
 }
 
 void IndieBomb::detonate() {
-    bool left = true;
-    bool right = true;
-    bool up = true;
-    bool down = true;
+    int left = true;
+    int right = true;
+    int up = true;
+    int down = true;
     IndieVector3 exPos(_position.getX(), 0.5f, _position.getZ());
     int noDir = 2;
 
@@ -92,13 +92,13 @@ void IndieBomb::detonate() {
         IndieVector3 explosionPos3(_position.getX(), 0.5f, _position.getZ() + static_cast<float>(i));
         IndieVector3 explosionPos4(_position.getX(), 0.5f, _position.getZ() - static_cast<float>(i));
 
-        if (isExplosionValid(explosionPos, reinterpret_cast<int &>(down)))
+        if (isExplosionValid(explosionPos, down))
             this->explosion.push_back(explosionPos);
-        if (up && isExplosionValid(explosionPos2, reinterpret_cast<int &>(up)))
+        if (up && isExplosionValid(explosionPos2, up))
             this->explosion.push_back(explosionPos2);
-        if (right && isExplosionValid(explosionPos3, reinterpret_cast<int &>(right)))
+        if (right && isExplosionValid(explosionPos3, right))
             this->explosion.push_back(explosionPos3);
-        if (left && isExplosionValid(explosionPos4, reinterpret_cast<int &>(left)))
+        if (left && isExplosionValid(explosionPos4, left))
             this->explosion.push_back(explosionPos4);
     }
 }
