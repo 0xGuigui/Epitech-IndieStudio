@@ -25,6 +25,7 @@ void Indie::displayPlayMenu()
                                         {
         buttonSound.Play();
         this->map.getBonuses().clear();
+        this->map.getDestructiblePositions().clear();
         this->bombs.clear();
         this->map.generateDestructible(75);
         for (Player &player : this->players) {
