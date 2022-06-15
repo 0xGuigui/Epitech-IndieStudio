@@ -54,116 +54,91 @@ void Player::setControls(KeyboardKey *controls) {
     setKeyRight(controls[2]);
     setKeyLeft(controls[3]);
     setKeyBomb(controls[4]);
+    ai = false;
 }
 
 void Player::setKeyLeft(KeyboardKey key) {
     indie.keyboard.unbind(keys[LEFT]);
     keys[LEFT] = key;
     indie.keyboard.bind(key, [&]() -> void {
-        if (dead || deadAnimation)
-            return;
-        turnLeft();
-        if (position.getZ() > -7.35f && (static_cast<int>(round(position.getX())) % 2 != 0 ||
-                                         static_cast<int>(round(position.getZ() - 0.35f)) % 2 != 0) &&
-            !checkCollision(0.0f, -0.05f))
-            position = {position.getX(), position.getY(), position.getZ() - (0.05f * _speed)};
-        _animate = true;
+        if (!ai)
+            moveLeft();
     }, [&]() -> void {
-        if (dead || deadAnimation)
-            return;
-        _animate = false;
-        frame = 0;
+        stop();
     }, inGame);
+    setAI();
 }
 
 void Player::setKeyRight(KeyboardKey key) {
     indie.keyboard.unbind(keys[RIGHT]);
     keys[RIGHT] = key;
     indie.keyboard.bind(key, [&]() -> void {
-        if (dead || deadAnimation)
-            return;
-        turnRight();
-        if (position.getZ() < 5.35f && (static_cast<int>(round(position.getX())) % 2 != 0 ||
-                                        static_cast<int>(round(position.getZ() + 0.35f)) % 2 != 0) &&
-            !checkCollision(0.0f, 0.05f))
-            position = {position.getX(), position.getY(), position.getZ() + (0.05f * _speed)};
-        _animate = true;
+        if (!ai)
+            moveRight();
     }, [&]() -> void {
-        if (dead || deadAnimation)
-            return;
-        _animate = false;
-        frame = 0;
+        stop();
     }, inGame);
+    setAI();
 }
 
 void Player::setKeyUp(KeyboardKey key) {
     indie.keyboard.unbind(keys[UP]);
     keys[UP] = key;
     indie.keyboard.bind(key, [&]() -> void {
-        if (dead || deadAnimation)
-            return;
-        turnUp();
-        if (position.getX() < -3.0f && (static_cast<int>(round(position.getX() + 0.35f)) % 2 != 0 ||
-                                        static_cast<int>(round(position.getZ())) % 2 != 0) &&
-            !checkCollision(0.05f, 0.0f))
-            position = {position.getX() + (0.05f * _speed), position.getY(), position.getZ()};
-        _animate = true;
+        if (!ai)
+            moveUp();
     }, [&]() -> void {
-        if (dead || deadAnimation)
-            return;
-        _animate = false;
-        frame = 0;
+        stop();
     }, inGame);
+    setAI();
 }
 
 void Player::setKeyDown(KeyboardKey key) {
     indie.keyboard.unbind(keys[DOWN]);
     keys[DOWN] = key;
     indie.keyboard.bind(key, [&]() -> void {
-        if (dead || deadAnimation)
-            return;
-        turnDown();
-        if (position.getX() > -15.35f && (static_cast<int>(round(position.getX() - 0.35f)) % 2 != 0 ||
-                                          static_cast<int>(round(position.getZ())) % 2 != 0) &&
-            !checkCollision(-0.05f, 0.0f))
-            position = {position.getX() - (0.05f * _speed), position.getY(), position.getZ()};
-        _animate = true;
+        if (!ai)
+            moveDown();
     }, [&]() -> void {
-        if (dead || deadAnimation)
-            return;
-        _animate = false;
-        frame = 0;
+        stop();
     }, inGame);
+    setAI();
 }
 
 void Player::setKeyBomb(KeyboardKey key) {
     indie.keyboard.unbind(keys[BOMB]);
     keys[BOMB] = key;
     indie.keyboard.bind(key, [&]() -> void {
-        if (dead || deadAnimation)
-            return;
-        IndieVector3 newPos(
-                round(position.getX()),
-                0.5f,
-                round(position.getZ())
-        );
-        for (IndieBomb &bomb: indie.bombs) {
-            IndieVector3 pos = bomb.getPosition();
-            if (pos.getX() == newPos.getX() && pos.getZ() == newPos.getZ())
-                return;
-        }
-        for (IndieVector3 &pos: indie.map.getDestructiblePositions()) {
-            if (pos.getX() == newPos.getX() && pos.getZ() == newPos.getZ())
-                return;
-        }
-        if (!_bombLeft)
-            return;
-        _bombLeft--;
-        IndieBomb bomb(_force, newPos, [&]() -> void {
-            _bombLeft++;
-        });
-        indie.bombs.push_back(bomb);
+        if (!ai)
+            dropBomb();
     }, []() -> void {}, inGame);
+    setAI();
+}
+
+void Player::dropBomb() {
+    if (dead || deadAnimation)
+        return;
+    IndieVector3 newPos(
+            round(position.getX()),
+            0.5f,
+            round(position.getZ())
+    );
+    for (IndieBomb &bomb: indie.bombs) {
+        IndieVector3 pos = bomb.getPosition();
+        if (pos.getX() == newPos.getX() && pos.getZ() == newPos.getZ())
+            return;
+    }
+    for (IndieVector3 &pos: indie.map.getDestructiblePositions()) {
+        if (pos.getX() == newPos.getX() && pos.getZ() == newPos.getZ())
+            return;
+    }
+    if (!_bombLeft)
+        return;
+    _bombLeft--;
+    IndieBomb bomb(_force, newPos, [&]() -> void {
+        _bombLeft++;
+    });
+    indie.bombs.push_back(bomb);
 }
 
 void Player::unbindKeys() {
@@ -171,34 +146,42 @@ void Player::unbindKeys() {
         indie.keyboard.unbind(key);
         key = KEY_NULL;
     }
+    ai = true;
 }
 
 void Player::unbindKeyLeft() {
     indie.keyboard.unbind(keys[LEFT]);
     keys[LEFT] = KEY_NULL;
+    ai = true;
 }
 
 void Player::unbindKeyRight() {
     indie.keyboard.unbind(keys[RIGHT]);
     keys[RIGHT] = KEY_NULL;
+    ai = true;
 }
 
 void Player::unbindKeyUp() {
     indie.keyboard.unbind(keys[UP]);
     keys[UP] = KEY_NULL;
+    ai = true;
 }
 
 void Player::unbindKeyDown() {
     indie.keyboard.unbind(keys[DOWN]);
     keys[DOWN] = KEY_NULL;
+    ai = true;
 }
 
 void Player::unbindKeyBomb() {
     indie.keyboard.unbind(keys[BOMB]);
     keys[BOMB] = KEY_NULL;
+    ai = true;
 }
 
 void Player::Draw() {
+    if (ai)
+        AI();
     if (!deadAnimation && !dead) {
         frame += _animate ? 2 : 0;
         if (frame >= 110)
@@ -217,5 +200,104 @@ void Player::Draw() {
             playerModel.Draw(position, (0.5f - (static_cast<float>(frame) * 0.005f)), IndieColor(RED));
         else
             playerModel.Draw(position, 0.5f, playerColor);
+    }
+}
+
+std::vector<direction> Player::checkDanger(IndieVector3 playerPosition) {
+    std::vector<direction> danger;
+    bool up, down, left, right = false;
+    for (IndieBomb &bomb: indie.bombs) {
+        IndieVector3 bombPosition = bomb.getPosition();
+        if (!right && bombPosition.getX() == round(playerPosition.getX()) && bombPosition.getZ() > round(playerPosition.getZ()) && round(playerPosition.getZ()) < bombPosition.getZ() + bomb.getForce()) {
+            danger.push_back(RIGHT);
+            right = true;
+        } else if (!left && bombPosition.getX() == round(playerPosition.getX()) && bombPosition.getZ() < round(playerPosition.getZ()) && round(playerPosition.getZ()) > bombPosition.getZ() - bomb.getForce()) {
+            danger.push_back(LEFT);
+            left = true;
+        } else if (!up && bombPosition.getZ() == round(playerPosition.getZ()) && bombPosition.getX() > round(playerPosition.getX()) && round(playerPosition.getX()) < bombPosition.getX() + bomb.getForce()) {
+            danger.push_back(UP);
+            up = true;
+        } else if (!down && bombPosition.getZ() == round(playerPosition.getZ()) && bombPosition.getX() < round(playerPosition.getX()) && round(playerPosition.getX()) > bombPosition.getX() - bomb.getForce()) {
+            danger.push_back(DOWN);
+            down = true;
+        }
+    }
+    return danger;
+}
+
+std::vector<direction> Player::canMove() {
+    std::vector<direction> canMove;
+    if (position.getZ() > -7.35f && (static_cast<int>(round(position.getX())) % 2 != 0 ||
+        static_cast<int>(round(position.getZ() - 0.35f)) % 2 != 0) && !checkCollision(0.0f, -0.05f)) {
+        std::vector<direction> dir = checkDanger({position.getX(), 0.5f, position.getZ() - 0.35f});
+        if (std::find(dir.begin(), dir.end(), LEFT) == dir.end())
+            canMove.push_back(LEFT);
+    }
+    if (position.getZ() < 5.35f && (static_cast<int>(round(position.getX())) % 2 != 0 ||
+        static_cast<int>(round(position.getZ() + 0.35f)) % 2 != 0) && !checkCollision(0.0f, 0.05f)) {
+        std::vector<direction> dir = checkDanger({position.getX(), 0.5f, position.getZ() + 0.35f});
+        if (std::find(dir.begin(), dir.end(), RIGHT) == dir.end())
+            canMove.push_back(RIGHT);
+    }
+    if (position.getX() < -3.0f && (static_cast<int>(round(position.getX() + 0.35f)) % 2 != 0 ||
+        static_cast<int>(round(position.getZ())) % 2 != 0) && !checkCollision(0.05f, 0.0f)) {
+        std::vector<direction> dir = checkDanger({position.getX() + 0.35f, 0.5f, position.getZ()});
+        if (std::find(dir.begin(), dir.end(), UP) == dir.end())
+            canMove.push_back(UP);
+    }
+    if (position.getX() > -15.35f && (static_cast<int>(round(position.getX() - 0.35f)) % 2 != 0 ||
+        static_cast<int>(round(position.getZ())) % 2 != 0) && !checkCollision(-0.05f, 0.0f)) {
+        std::vector<direction> dir = checkDanger({position.getX() - 0.35f, 0.5f, position.getZ()});
+        if (std::find(dir.begin(), dir.end(), DOWN) == dir.end())
+            canMove.push_back(DOWN);
+    }
+    return canMove;
+}
+
+void Player::AI() {
+    if (dead || deadAnimation)
+        return;
+    if (frame % 15 != 0) {
+        switch (direc) {
+        case UP:
+            moveUp();
+            break;
+        case DOWN:
+            moveDown();
+            break;
+        case LEFT:
+            moveLeft();
+            break;
+        case RIGHT:
+            moveRight();
+            break;
+        }
+        return;
+    }
+    std::vector<direction> danger = checkDanger(position);
+    std::vector<direction> canMove = this->canMove();
+    for (auto it = canMove.begin(); it != canMove.end();) {
+        if (std::find(danger.begin(), danger.end(), *it) != danger.end())
+            it = canMove.erase(it);
+        else
+            it++;
+    }
+    if (canMove.size() == 0)
+        return dropBomb();
+    int randDirection = rand() % canMove.size();
+    direc = canMove[randDirection];
+    switch (canMove[randDirection]) {
+        case UP:
+            moveUp();
+            break;
+        case DOWN:
+            moveDown();
+            break;
+        case LEFT:
+            moveLeft();
+            break;
+        case RIGHT:
+            moveRight();
+            break;
     }
 }
