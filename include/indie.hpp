@@ -30,6 +30,7 @@ class Indie {
         void displayPlayerMenu();
         void displayHelpMenu();
         void displayHelpMenu2();
+        void displayHelpMenu3();
         void displayGameMenu();
         void displayCreditsMenu();
         void displayEndMenu();
@@ -80,6 +81,9 @@ class Indie {
                     break;
                 case helpMenu2:
                     this->displayHelpMenu2();
+                    break;
+                case helpMenu3:
+                    this->displayHelpMenu3();
                     break;
                 case gameMenu:
                     this->displayGameMenu();

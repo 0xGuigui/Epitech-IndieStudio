@@ -44,6 +44,36 @@ void Indie::displayHelpMenu2() {
     static IndieTexture2D helpMenuBackground = loader.textures["background_help2"];
     static float middle_x = (this->screen.GetWidth() - helpMenuBackground.getWidth()) / 2;
     static float middle_y = (this->screen.GetHeight() - helpMenuBackground.getHeight()) / 2;
+    static IndieTexture2D next = loader.textures["next"];
+    static IndieTexture2D previous = loader.textures["previous"];
+    static IndieSound buttonSound = loader.sounds["button"];
+    static IndieMusic music = loader.musics["Moog-City-2"];
+
+    if (this->_musicPlay)
+        music.Play();
+    music.Update();
+
+    static IndieButton nextButton({middle_x + 1000, middle_y + 920, static_cast<float>(next.getWidth()), static_cast<float>(next.getHeight())},
+                                  {middle_x + 1000, middle_y + 920}, next, loader.textures["next_highlight"], [&]() -> void
+                                  {
+        buttonSound.Play();
+        this->state = helpMenu3; });
+
+    static IndieButton previousButton({middle_x + 300, middle_y + 920, static_cast<float>(previous.getWidth()), static_cast<float>(previous.getHeight())},
+                                  {middle_x + 300, middle_y + 920}, previous, loader.textures["previous_highlight"], [&]() -> void
+                                  {
+        buttonSound.Play();
+        this->state = helpMenu; });
+
+    helpMenuBackground.Draw(middle_x, middle_y, WHITE);
+    nextButton.update();
+    previousButton.update();
+}
+
+void Indie::displayHelpMenu3() {
+    static IndieTexture2D helpMenuBackground = loader.textures["background_help3"];
+    static float middle_x = (this->screen.GetWidth() - helpMenuBackground.getWidth()) / 2;
+    static float middle_y = (this->screen.GetHeight() - helpMenuBackground.getHeight()) / 2;
     static IndieTexture2D done = loader.textures["done_short"];
     static IndieTexture2D previous = loader.textures["previous"];
     static IndieSound buttonSound = loader.sounds["button"];
@@ -63,7 +93,7 @@ void Indie::displayHelpMenu2() {
                                   {middle_x + 300, middle_y + 920}, previous, loader.textures["previous_highlight"], [&]() -> void
                                   {
         buttonSound.Play();
-        this->state = helpMenu; });
+        this->state = helpMenu2; });
 
     helpMenuBackground.Draw(middle_x, middle_y, WHITE);
     doneButton.update();
