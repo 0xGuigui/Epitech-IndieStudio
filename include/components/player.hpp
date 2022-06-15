@@ -22,6 +22,7 @@ namespace bmb {
         int frame = 0;
         IndieColor playerColor = WHITE;
         IndieVector3 position;
+        IndieVector3 defaultPosition;
         bool _animate = false;
         bool _ghost = false; // WALLPASS
         int _bombLeft = 1;
@@ -154,6 +155,18 @@ namespace bmb {
         }
         bool isAlive() {
             return dead;
+        }
+
+        void reset() {
+            this->_force = 1;
+            this->position = defaultPosition;
+            this->_speed = 1.0f;
+            this->_ghost = false;
+            this->_bombLeft = 1;
+            this->dead = false;
+            this->deadAnimation = false;
+            this->frame = false;
+            this->_animate = false;
         }
     };
 }

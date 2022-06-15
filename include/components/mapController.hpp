@@ -140,6 +140,7 @@ namespace bmb {
         void generateDestructible(int percentage) {
             _destructiblePositions.clear();
             generateBoxes(percentage);
+            generateBonuses();
         }
 
         IndieModel &getMapModel() {
@@ -157,5 +158,7 @@ namespace bmb {
         std::vector<IndiePowerUp> &getBonuses() {
             return _bonuses;
         }
+
+        void generateBonuses();
     };
 }

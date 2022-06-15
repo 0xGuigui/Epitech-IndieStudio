@@ -27,6 +27,10 @@ MapController::MapController(const IndieImage& mapImage, const IndieImage& mapOb
 	_position = mapPosition;
 	_camera = camera;
 	this->generateBoxes(75);
+	generateBonuses();
+}
+
+void MapController::generateBonuses() {
 	for (IndieVector3 &destructiblePosition : _destructiblePositions) {
 		int probability = rand() % 100;
 		if (probability > 50 && probability < 65)
