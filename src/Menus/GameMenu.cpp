@@ -44,7 +44,7 @@ void Indie::displayGameMenu()
         this->state = mainMenu; });
 
     // mainMenuBackgroundObject.update();
-    // mainMenuBackground.Draw(middle_x, middle_y, WHITE);
+    mainMenuBackground.Draw(middle_x, middle_y, WHITE);
     backToGameButton.update();
     saveGameButton.update();
     quitGameButton.update();

@@ -29,8 +29,10 @@ class Indie {
         void displayControlsMenu();
         void displayPlayerMenu();
         void displayHelpMenu();
+        void displayHelpMenu2();
         void displayGameMenu();
         void displayCreditsMenu();
+        void displayEndMenu();
         void bomberMan();
     public:
         Indie();
@@ -76,11 +78,17 @@ class Indie {
                 case helpMenu:
                     this->displayHelpMenu();
                     break;
+                case helpMenu2:
+                    this->displayHelpMenu2();
+                    break;
                 case gameMenu:
                     this->displayGameMenu();
                     break;
                 case creditsMenu:
                     this->displayCreditsMenu();
+                    break;
+                case endMenu:
+                    this->displayEndMenu();
                     break;
                 case inGame:
                     this->bomberMan();
