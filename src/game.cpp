@@ -14,13 +14,18 @@ void Indie::bomberMan() {
     this->map.updateCamera();
     this->map.begin3D();
     this->map.Draw();
+    if (this->_musicPlay && !loader.musics["InGame_Music"].isPlaying())
+        loader.musics["InGame_Music"].Play();
     int nbAlive = 0;
     for (Player &player : indie.players) {
         player.Draw();
-        nbAlive += player.isAlive();
+        if (player.isAlive())
+            nbAlive++;
     }
-    if (nbAlive == 1)
+    if (nbAlive == 1) {
         indie.state = endMenu;
+        loader.musics["InGame_Music"].Stop();
+    }
     for (IndieBomb &bomb : indie.bombs)
         bomb.update();
     for (IndiePowerUp &powerUp : indie.map.getBonuses())

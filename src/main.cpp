@@ -23,6 +23,7 @@ int main() {
     indie.players[3].setControls(playerControls4);
     indie.state = indieState::splashScreen;
     indie.keyboard.bind(KEY_BACKSPACE, [&]() -> void {
+        indie.loader.musics["InGame_Music"].Stop();
         indie.state = gameMenu;
     }, []() -> void {}, inGame);
     SetExitKey(KEY_NULL);

@@ -25,6 +25,7 @@ void Indie::displayGameMenu()
                                         {middle_x + 575, middle_y + 425}, backToGame, loader.textures["back_to_game_highlight"], [&]() -> void
                                         {
         buttonSound.Play();
+        loader.musics["InGame_Music"].Play();
         this->state = inGame; });
 
     static IndieButton saveGameButton({middle_x + 575, middle_y + 525, static_cast<float>(saveGame.getWidth()), static_cast<float>(saveGame.getHeight())},
