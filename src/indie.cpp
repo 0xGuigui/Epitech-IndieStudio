@@ -16,7 +16,7 @@ Indie::Indie() :
             loader.textures["block"], loader.textures["brick"],
             loader.textures["oak_planks"],
             {-16.0f, 0.0f, -8.0f}, {-15.0f, 24.0f, -1.0f},
-            {-9.1f, 14.0f, -1.0f}) {
+            {-9.4f, 19.5f, -1.0f}) {
     bmb::IndieWindow::setMinSize(1, 1);
     window.setFPS(60);
 }

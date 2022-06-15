@@ -6,6 +6,7 @@
 */
 
 #include "components/mapController.hpp"
+#include <cmath>
 #include "indie.hpp"
 
 using namespace bmb;
@@ -13,7 +14,7 @@ using namespace bmb;
 MapController::MapController(const IndieImage &mapImage, const IndieImage &mapObstacleImage,
                              const IndieTexture2D &block, const IndieTexture2D &obstacle,
                              const IndieTexture2D &destructible, const IndieVector3 &mapPosition,
-                             const IndieVector3& cameraTargetPosition, const IndieVector3& cameraPosition) {
+                             const IndieVector3 &cameraTargetPosition, const IndieVector3 &cameraPosition) {
     _environmentHandler.init();
     IndieMesh destructibleMesh = GenMeshCube(1.0f, 1.0f, 1.0f);
     IndieMesh mapMesh(mapImage, {1.0f, 1.0f, 1.0f});
@@ -25,9 +26,10 @@ MapController::MapController(const IndieImage &mapImage, const IndieImage &mapOb
     _mapObstacle.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = obstacle;
     _destructible.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = destructible;
     _position = mapPosition;
-    _cameraTargetPosition = cameraTargetPosition;
-    _cameraStartPosition = cameraPosition;
-    _camera = IndieCamera3D(cameraPosition,{-9.0f, 0.0f, -1.0f}, { 0.0f, 1.0f, 0.0f }, 45, 0.0f);
+    _camera = IndieAnimatedCamera3D(cameraPosition, cameraTargetPosition, {-9.0f, 0.0f, -1.0f}, {0, 1, 0}, 45, 0.0f,
+                                    [](float x) -> float {
+                                        return x == 1 ? 1 : 1 - std::pow(2, -10 * x);
+                                    }, 120, 60);
     this->generateBoxes(75);
     for (IndieVector3 &destructiblePosition: _destructiblePositions) {
         int probability = rand() % 100;
@@ -48,4 +50,11 @@ MapController::MapController(const IndieImage &mapImage, const IndieImage &mapOb
                 player.setGhost(true);
             }, destructiblePosition, indie.loader.models["wall_pass"], WALLPASS);
     }
+}
+
+float ease_in(float x) {
+    const float c1 = 1.70158;
+    const float c3 = c1 + 1;
+
+    return x == 1 ? 1 : 1 - std::pow(2, -10 * x);
 }

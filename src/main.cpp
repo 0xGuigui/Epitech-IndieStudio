@@ -28,6 +28,9 @@ int main() {
         if (IsKeyPressed(KEY_ESCAPE))
             break;
         BeginDrawing();
+        bmb::IndieVector2 position = {-9, -1};
+
+        DrawTexture(indie.loader.textures["IndieCraft"], -9, -1, WHITE);
         ClearBackground(RAYWHITE);
         indie(indie.state);
         EndDrawing();

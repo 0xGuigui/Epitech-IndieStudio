@@ -21,10 +21,10 @@ namespace bmb {
 		public:
 			IndieWindow() = default;
 			IndieWindow(int screenHeight, int screenWidth, const std::string& title = "", unsigned int configFlags = FLAG_WINDOW_RESIZABLE) {
+                SetConfigFlags(configFlags);
                 IndieImage programIcon = IndieImage("assets/images/indie_logo.png");
 				InitWindow(screenWidth, screenHeight, title.c_str());
                 SetWindowIcon(programIcon.getImage());
-                SetConfigFlags(configFlags);
 				_height = screenHeight;
 				_width = screenWidth;
 			}

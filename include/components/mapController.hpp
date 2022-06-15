@@ -18,9 +18,8 @@ namespace bmb {
         IndieModel _map;
         IndieModel _mapObstacle;
         IndieModel _destructible;
-        IndieCamera3D _camera;
-        IndieVector3 _cameraTargetPosition;
-        IndieVector3 _cameraStartPosition;
+        // Animated camera
+        IndieAnimatedCamera3D _camera;
         IndieVector3 _position;
         float _elapsedFrame = 0;
         EnvironmentHandler _environmentHandler;
@@ -103,6 +102,7 @@ namespace bmb {
             _mapObstacle.Draw(_position, 1.0f, WHITE);
             for (const IndieVector3& pos: _destructiblePositions)
                 _destructible.Draw(pos, 1.0f, WHITE);
+
         }
 
         [[nodiscard]] bool isCameraUpdated() const {
@@ -129,16 +129,7 @@ namespace bmb {
         }
 
         void updateCamera() {
-            static float animationDuration = 120.0f;
-
-            if (_elapsedFrame <= animationDuration) {
-                float x = _cameraStartPosition.getX() + (_cameraTargetPosition.getX() - _cameraStartPosition.getX()) * _elapsedFrame / animationDuration;
-                float y = _cameraStartPosition.getY() + (_cameraTargetPosition.getY() - _cameraStartPosition.getY()) * _elapsedFrame / animationDuration;
-                float z = _cameraStartPosition.getZ() + (_cameraTargetPosition.getZ() - _cameraStartPosition.getZ()) * _elapsedFrame / animationDuration;
-                _camera.setPosition({x, y, z});
-            }
             _camera.update();
-            _elapsedFrame++;
         }
 
         void resetCameraAnimation() {
@@ -151,6 +142,10 @@ namespace bmb {
 
         void end3D() {
             _camera.end3D();
+        }
+
+        IndieCamera3D &getCamera() {
+            return _camera;
         }
 
         void generateDestructible(int percentage) {

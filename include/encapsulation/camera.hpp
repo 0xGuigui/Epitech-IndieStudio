@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <functional>
+#include <utility>
 #include "raylib.h"
 #include "vector.hpp"
 
@@ -46,7 +48,7 @@ namespace bmb {
 	};
 
     class IndieCamera3D {
-    private:
+    protected:
         Camera _camera{};
 
     public:
@@ -80,7 +82,8 @@ namespace bmb {
         void setMode(int mode) {
             SetCameraMode(_camera, mode);
         }
-        void update() {
+
+        virtual void update() {
             UpdateCamera(&_camera);
         }
         void begin3D() {
@@ -94,6 +97,54 @@ namespace bmb {
         }
         operator Camera *() {
             return &_camera;
+        }
+    };
+
+    class IndieAnimatedCamera3D : public IndieCamera3D {
+    private:
+        std::function<float(float)> _animationFunction;
+        IndieVector3 _startPosition;
+        IndieVector3 _targetPosition;
+        int _animationDuration{};
+        int _elapsedFrame{};
+        int _animationDelay{};
+
+    public:
+        IndieAnimatedCamera3D() = default;
+
+        IndieAnimatedCamera3D(const IndieVector3 &startPosition, const IndieVector3 &targetPosition,
+                              const IndieVector3 &target, const IndieVector3 &up,
+                              float fovy, int projection, std::function<float(float)> animationFunction,
+                              int animationDuration, int animationDelay) : IndieCamera3D(startPosition, target, up,
+                                                                                           fovy,
+                                                                                           projection),
+                                                                             _animationFunction(
+                                                                                     std::move(animationFunction)),
+                                                                             _animationDuration(animationDuration),
+                                                                             _animationDelay(animationDelay) {
+            _startPosition = startPosition;
+            _targetPosition = targetPosition;
+            _elapsedFrame = 0;
+        }
+
+        void update() override {
+            if (_elapsedFrame >= _animationDelay) {
+                float percent = _animationFunction(static_cast<float>(_elapsedFrame - _animationDelay) / _animationDuration);
+                IndieVector3 newPosition = {
+                        static_cast<float>(_startPosition.getX()) + (_targetPosition.getX() - _startPosition.getX()) * percent,
+                        static_cast<float>(_startPosition.getY()) + (_targetPosition.getY() - _startPosition.getY()) * percent,
+                        static_cast<float>(_startPosition.getZ()) + (_targetPosition.getZ() - _startPosition.getZ()) * percent
+                };
+                _camera.position = newPosition;
+            }
+            IndieCamera3D::update();
+            if (_elapsedFrame <= _animationDelay + _animationDuration) {
+                _elapsedFrame++;
+            }
+        }
+
+        void resetCameraAnimation() {
+            _elapsedFrame = 0;
         }
     };
 }
