@@ -19,7 +19,10 @@ namespace bmb {
         IndieModel _mapObstacle;
         IndieModel _destructible;
         IndieCamera3D _camera;
+        IndieVector3 _cameraTargetPosition;
+        IndieVector3 _cameraStartPosition;
         IndieVector3 _position;
+        float _elapsedFrame = 0;
         EnvironmentHandler _environmentHandler;
         std::vector<IndiePowerUp> _bonuses = {};
         std::vector<IndieVector3> _destructiblePositions = {};
@@ -78,7 +81,7 @@ namespace bmb {
 
         MapController(const IndieImage &mapImage, const IndieImage &mapObstacleImage,
                       const IndieTexture2D &block, const IndieTexture2D &obstacle, const IndieTexture2D &destructible,
-                      const IndieVector3 &mapPosition, const IndieCamera3D &camera);
+                      const IndieVector3 &mapPosition, const IndieVector3& cameraTargetPosition, const IndieVector3& cameraPosition);
 
         void setPosition(const IndieVector3 &position) {
             _position = position;
@@ -126,7 +129,20 @@ namespace bmb {
         }
 
         void updateCamera() {
+            static float animationDuration = 120.0f;
+
+            if (_elapsedFrame <= animationDuration) {
+                float x = _cameraStartPosition.getX() + (_cameraTargetPosition.getX() - _cameraStartPosition.getX()) * _elapsedFrame / animationDuration;
+                float y = _cameraStartPosition.getY() + (_cameraTargetPosition.getY() - _cameraStartPosition.getY()) * _elapsedFrame / animationDuration;
+                float z = _cameraStartPosition.getZ() + (_cameraTargetPosition.getZ() - _cameraStartPosition.getZ()) * _elapsedFrame / animationDuration;
+                _camera.setPosition({x, y, z});
+            }
             _camera.update();
+            _elapsedFrame++;
+        }
+
+        void resetCameraAnimation() {
+            _elapsedFrame = 0;
         }
 
         void begin3D() {
