@@ -8,10 +8,13 @@
 #include "indie.hpp"
 #include "MapController.hpp"
 #include <iostream>
+#include "../include/save/Serializationcopy.hpp"
+#include "../include/save/Deserializationcopy.hpp"
 
 Indie indie;
 
 int main() {
+    bmb::MapController m_ap;
     indie.window.fullScreen();
     indie.window.windowIcon(indie.loader.images["tnt"]);
     KeyboardKey playerControls[5] = {KEY_UP, KEY_DOWN, KEY_RIGHT, KEY_LEFT, KEY_SPACE};
@@ -24,6 +27,10 @@ int main() {
     indie.players[3].setControls(playerControls4);
     indie.state = indieState::splashScreen;
     SetExitKey(KEY_NULL);
+    bmb::Serialization serialization;
+    serialization.setSaveData(indie.bombs, indie.players, m_ap.getDestructiblePositions(), m_ap.getBonuses());
+    serialization.fileWriter();
+    bmb::Deserialization deserialization;
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
         indie.keyboard.update(static_cast<int>(indie.state));
         if (IsKeyPressed(KEY_ESCAPE))

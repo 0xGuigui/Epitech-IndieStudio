@@ -29,7 +29,8 @@ add_executable(${CMAKE_PROJECT_NAME}
         src/IncludeDefinitions/PowerUp.cpp
         src/IncludeDefinitions/MapController.cpp
         src/components/environmentHandler.cpp
-        src/save/serialization/Serialization.cpp)
+        src/save/serialization/Serializationcopy.cpp
+        src/save/deserialization/Deserializationcopy.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} raylib)
 
