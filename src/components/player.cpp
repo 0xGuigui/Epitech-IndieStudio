@@ -206,7 +206,10 @@ void Player::Draw() {
 
 std::vector<direction> Player::checkDanger(const IndieVector3 &playerPosition) {
     std::vector<direction> danger;
-    bool up, down, left, right = false;
+    bool up = false;
+    bool down = false;
+    bool left = false;
+    bool right = false;
 
     for (IndieBomb &bomb: indie.bombs) {
         IndieVector3 bombPosition = bomb.getPosition();

@@ -77,7 +77,10 @@ bool IndieBomb::isExplosionValid(const IndieVector3 &position, int &direction) {
 }
 
 void IndieBomb::detonate() {
-    bool left, right, up, down = true;
+    bool left = true;
+    bool right = true;
+    bool up = true;
+    bool down = true;
     IndieVector3 exPos(_position.getX(), 0.5f, _position.getZ());
     int noDir = 2;
 
