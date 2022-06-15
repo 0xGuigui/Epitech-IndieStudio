@@ -75,7 +75,7 @@ void Indie::displayOptionsMenu()
                                            (IndieVector2){middle_x + 950, middle_y + 150}, credits, loader.textures["credits_highlight"], [&]() -> void
                                            {
         buttonSound.Play();
-        this->state = gameMenu; });
+        this->state = creditsMenu; });
         // this->state = creditsMenu; });
 
     MainMenuMusic.setLoop(true);
