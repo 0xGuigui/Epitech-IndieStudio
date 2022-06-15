@@ -10,7 +10,7 @@
 void bmb::Deserialization::fileReader() {
     std::string output("");
 
-    std::ifstream file_input("./save/data/save.save");
+    std::ifstream file_input("save.save");
     if (!file_input.is_open())
         return;
     while (getline(file_input, output));

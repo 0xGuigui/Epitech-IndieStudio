@@ -25,21 +25,13 @@ add_executable(${CMAKE_PROJECT_NAME}
         src/Menus/PlayerControlsMenu.cpp
         src/game.cpp
         src/Menus/HelpMenu.cpp
-<<<<<<< HEAD
-        src/IncludeDefinitions/Player.cpp
-        src/IncludeDefinitions/Bomb.cpp
-        src/IncludeDefinitions/PowerUp.cpp
-        src/IncludeDefinitions/MapController.cpp
-        src/components/environmentHandler.cpp
-        src/save/serialization/Serializationcopy.cpp
-        src/save/deserialization/Deserializationcopy.cpp)
-=======
         src/components/player.cpp
         src/components/bomb.cpp
         src/components/powerUp.cpp
         src/components/mapController.cpp
-        src/components/environmentHandler.cpp)
->>>>>>> dev
+        src/components/environmentHandler.cpp
+        src/save/serialization/Serializationcopy.cpp
+        src/save/deserialization/Deserializationcopy.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} raylib)
 

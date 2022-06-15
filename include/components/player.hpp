@@ -103,6 +103,10 @@ namespace bmb {
             _ghost = ghost;
         }
 
+        IndieColor getColor() const {
+            return this->playerColor;
+        }
+
         void setControls(KeyboardKey *controls);
 
         void setKeyLeft(KeyboardKey key);

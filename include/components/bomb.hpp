@@ -81,6 +81,14 @@ namespace bmb {
             return _position;
         }
 
+        int getFrame() {
+            return this->frame;
+        }
+
+        IndieColor getColor() {
+            return this->bombColor;
+        }
+
         void Delete();
     };
 }
