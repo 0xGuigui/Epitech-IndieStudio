@@ -152,5 +152,8 @@ namespace bmb {
         KeyboardKey *getKeys() {
             return keys;
         }
+        bool isAlive() {
+            return dead;
+        }
     };
 }
