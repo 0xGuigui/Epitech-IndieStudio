@@ -9,6 +9,17 @@
 
 using namespace bmb;
 
+IndieBomb::IndieBomb(int force, IndieVector3 position, const std::function<void()> &onDetonate) {
+    this->force = force;
+    _bomb = indie.loader.models["tnt"];
+    IndieMesh mesh;
+    mesh.GenCube(1.0f, 1.0f, 1.0f);
+    _bombExplosion.LoadFromMesh(mesh);
+    _position = position;
+    _onDetonate = onDetonate;
+    _sound = indie.loader.sounds["explosion"];
+}
+
 void IndieBomb::updateExplosionAnimation() {
     if (frame > 15)
         return this->Delete();
