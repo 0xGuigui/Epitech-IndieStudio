@@ -37,3 +37,7 @@ if (APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME} "-framework Cocoa")
     target_link_libraries(${CMAKE_PROJECT_NAME} "-framework OpenGL")
 endif()
+
+if (WIN32)
+    file(COPY assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
+endif()
