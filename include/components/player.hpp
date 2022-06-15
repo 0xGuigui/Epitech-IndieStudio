@@ -154,7 +154,7 @@ namespace bmb {
             return keys;
         }
         bool isAlive() {
-            return dead;
+            return !dead;
         }
 
         void reset() {
