@@ -14,8 +14,13 @@ void Indie::bomberMan() {
     this->map.updateCamera();
     this->map.begin3D();
     this->map.Draw();
-    for (Player &player : indie.players)
+    int nbAlive = 0;
+    for (Player &player : indie.players) {
         player.Draw();
+        nbAlive += player.isAlive();
+    }
+    if (nbAlive == 1)
+        indie.state = endMenu;
     for (IndieBomb &bomb : indie.bombs)
         bomb.update();
     for (IndiePowerUp &powerUp : indie.map.getBonuses())
