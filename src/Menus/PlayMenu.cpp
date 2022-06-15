@@ -24,6 +24,11 @@ void Indie::displayPlayMenu()
                                         {middle_x + 200, middle_y + 850}, playButton, loader.textures["play_highlight"], [&]() -> void
                                         {
         buttonSound.Play();
+        this->map.generateDestructible(75);
+        this->map.generateBonuses();
+        for (Player &player : this->players)
+            player.reset();
+        this->bombs.clear();
         this->state = inGame;
         MainMenuMusic.Stop(); });
     static IndieButton cancelButtonObject({middle_x + 1100, middle_y + 850, static_cast<float>(cancelButton.getWidth()), static_cast<float>(cancelButton.getHeight())},
