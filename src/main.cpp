@@ -14,13 +14,8 @@
 Indie indie;
 
 int main() {
-<<<<<<< HEAD
     bmb::MapController m_ap;
-    indie.window.fullScreen();
-    indie.window.windowIcon(indie.loader.images["tnt"]);
-=======
     std::srand(std::time(NULL));
->>>>>>> dev
     KeyboardKey playerControls[5] = {KEY_UP, KEY_DOWN, KEY_RIGHT, KEY_LEFT, KEY_SPACE};
     KeyboardKey playerControls2[5] = {KEY_W, KEY_S, KEY_D, KEY_A, KEY_Q};
     KeyboardKey playerControls3[5] = {KEY_T, KEY_G, KEY_H, KEY_F, KEY_R};
@@ -35,6 +30,8 @@ int main() {
     serialization.setSaveData(indie.bombs, indie.players, m_ap.getDestructiblePositions(), m_ap.getBonuses());
     serialization.fileWriter();
     bmb::Deserialization deserialization;
+    deserialization.fileReader();
+    deserialization.setSaveData();
     for (; !bmb::IndieWindow::isClosed(); indie.timePlayed += GetFrameTime()) {
         indie.keyboard.update(static_cast<int>(indie.state));
         if (IsKeyPressed(KEY_ESCAPE))

@@ -38,18 +38,18 @@ void bmb::Serialization::setSaveData(std::vector<bmb::IndieBomb> bombArray, std:
     this->mapSave.bonus = bonusArray;
 
     for (auto it = playerArray.begin(); it != playerArray.end(); it++) {
-        this->playerSave.position = it->getPlayerPosition();
-        this->playerSave.color = it->getPlayerColor();
-        this->playerSave.fireUp = it->getForceBonus();
-        this->playerSave.speedUp = it->getSpeedBonus();
-        this->playerSave.wallPass = it->getGhostBonus();
-        this->playerSave.bombUp = it->getForceBonus();
+        this->playerSave.position = it->getPosition();
+        this->playerSave.color = it->getColor();
+        this->playerSave.fireUp = it->getForce();
+        this->playerSave.speedUp = it->getSpeed();
+        this->playerSave.wallPass = it->getGhost();
+        this->playerSave.bombUp = it->getBombLeft();
         this->bombSaveArray.push_back(bombSave);
     }
     for (auto it = bombArray.begin(); it != bombArray.end(); it++) {
-        this->bombSave.position = it->getBombPosition();
+        this->bombSave.position = it->getPosition();
         this->bombSave.frame = it->getFrame();
-        this->bombSave.color = it->getBombColor();
+        this->bombSave.color = it->getColor();
         this->bombSaveArray.push_back(bombSave);
     }
 }
