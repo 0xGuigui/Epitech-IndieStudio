@@ -6,7 +6,7 @@
 */
 
 #include "indie.hpp"
-#include "PowerUp.hpp"
+#include "components/powerUp.hpp"
 
 using namespace bmb;
 

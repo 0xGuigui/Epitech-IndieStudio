@@ -12,13 +12,14 @@
 #include "encapsulation/vector.hpp"
 #include "encapsulation/color.hpp"
 #include <string>
+#include <utility>
 
 namespace bmb {
     class IndieText {
     private:
         std::string _text;
     public:
-        IndieText(const std::string text) : _text(text) {};
+        explicit IndieText(std::string text) : _text(std::move(text)) {};
 
         IndieText(const IndieText &other) {
             this->_text = other._text;
@@ -36,12 +37,18 @@ namespace bmb {
             return (char *) this->_text.c_str();
         }
 
-        static void Draw(const std::string &text, IndieVector2 position, float fontSize, IndieColor color) {
-            DrawText(text.c_str(), position.getX(), position.getY(), fontSize, color);
+        static void Draw(const std::string &text, IndieVector2 position, int fontSize, IndieColor color) {
+            DrawText(text.c_str(),
+                     static_cast<int>(position.getX()),
+                     static_cast<int>(position.getY()),
+                     fontSize, color);
         }
 
-        void Draw(IndieVector2 position, float fontSize, IndieColor color) {
-            DrawText(_text.c_str(), position.getX(), position.getY(), fontSize, color);
+        void Draw(IndieVector2 position, int fontSize, IndieColor color) {
+            DrawText(_text.c_str(),
+                     static_cast<int>(position.getX()),
+                     static_cast<int>(position.getY()),
+                     fontSize, color);
         }
 
         static void DrawEx(const std::string &text, IndieFont font, IndieVector2 position, float fontSize, float spacing, IndieColor color) {

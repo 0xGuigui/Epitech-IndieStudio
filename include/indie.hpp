@@ -14,10 +14,10 @@
 #include "encapsulation/mouse.hpp"
 #include "encapsulation/screen.hpp"
 #include "components/resourceLoader.hpp"
-#include "MapController.hpp"
-#include "KeyboardManager.hpp"
-#include "Player.hpp"
-#include "bomb.hpp"
+#include "components/mapController.hpp"
+#include "components/keyboardManager.hpp"
+#include "components/player.hpp"
+#include "components/bomb.hpp"
 #include "enums.hpp"
 
 class Indie {

@@ -7,7 +7,7 @@
 
 #include "indie.hpp"
 #include "components/button.hpp"
-#include "Player.hpp"
+#include "components/player.hpp"
 
 using namespace bmb;
 

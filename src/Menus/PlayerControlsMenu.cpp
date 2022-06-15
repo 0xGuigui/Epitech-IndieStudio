@@ -9,7 +9,7 @@
 #include "components/button.hpp"
 #include "encapsulation/text.hpp"
 #include "encapsulation/font.hpp"
-#include "Player.hpp"
+#include "components/player.hpp"
 
 using namespace bmb;
 
