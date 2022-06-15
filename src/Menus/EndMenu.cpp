@@ -22,13 +22,23 @@ void Indie::displayEndMenu() {
     if (!winSound.isPlaying())
         winSound.Play();
 
-    static IndieButton backToMenuButton({middle_x + 275, middle_y + 920, static_cast<float>(backToMenu.getWidth()), static_cast<float>(backToMenu.getHeight())},
-                                        {middle_x + 275, middle_y + 920}, backToMenu, loader.textures["quit_to_title_highlight"], [&]() -> void
+    static IndieButton backToMenuButton({middle_x + 1375, middle_y + 920, static_cast<float>(backToMenu.getWidth()), static_cast<float>(backToMenu.getHeight())},
+                                        {middle_x + 1375, middle_y + 920}, backToMenu, loader.textures["quit_to_title_highlight"], [&]() -> void
                                         {
         buttonSound.Play();
         winSound.Stop();
         this->state = mainMenu; });
 
+    int playerWon = 0;
+    int i = 0;
+    for (Player &player : this->players) {
+        if (player.isAlive())
+            playerWon = i + 1;
+        i++;
+    }
+
+    static IndieText winText("Player " + std::to_string(playerWon) + " won!");
     endMenuBackground.Draw(middle_x, middle_y, WHITE);
     backToMenuButton.update();
+    winText.DrawEx(loader.fonts["Minecraftia"], (IndieVector2){middle_x + 1400, middle_y + 150}, 48.0f, 1.0f, WHITE);
 }
