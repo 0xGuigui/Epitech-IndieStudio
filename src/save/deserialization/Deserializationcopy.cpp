@@ -5,7 +5,7 @@
 ** deserialization.cpp
 */
 
-#include "../../../include/save/Deserialization.hpp"
+#include "../../../include/save/Deserializationcopy.hpp"
 
 void bmb::Deserialization::fileReader() {
     std::string output("");
@@ -23,26 +23,16 @@ void bmb::Deserialization::setSaveData() {
     char *temp;
 
     header = strtok(this->input, "\n");
-    static_cast<bmb::headerSave>(header);
-    this->headerSave = header;
+    this->headerSave = (*reinterpret_cast<bmb::headerSave_t*>(header));
     temp = strtok(this->input, "\n");
-    static_cast<bmb::mapSave>(temp);
-    this->mapSave = temp;
-    static_cast<std::string>(temp);
-    temp = "";
+    this->mapSave = (*reinterpret_cast<bmb::mapSave_t*>(temp));
     for (int i = 0; i < this->headerSave.playerNumber; i++) {
         temp = strtok(this->input, "\n");
-        static_cast<bmb::playerSave>(temp);
-        this->playerSaveArray.push_back(temp);
-        static_cast<std::string>(temp);
-        temp = "";
+        this->playerSaveArray.push_back((*reinterpret_cast<bmb::playerSave_t*>(temp)));
     }
     for (int i = 0; i < this->headerSave.bombNumber; i++) {
         temp = strtok(this->input, "\n");
-        static_cast<bmb::bombSave>(temp);
-        this->bombSaveArray.push_back(temp);
-        static_cast<std::string>(temp);
-        temp = "";
+        this->bombSaveArray.push_back((*reinterpret_cast<bmb::bombSave_t*>(temp)));
     }
 }
 

@@ -12,9 +12,10 @@
 #include <string>
 #include <tuple>
 #include <fstream>
+#include <string.h>
 
 namespace bmb {
-    class playerSave {
+    typedef struct playerSave_s {
     public:
         IndieVector3 position;
         int fireUp;
@@ -22,33 +23,27 @@ namespace bmb {
         int bombUp;
         int wallPass;
         IndieColor color = WHITE;
-        playerSave() {};
-        ~playerSave() {};
-    };
+    }playerSave_t;
 
-    class bombSave {
+    typedef struct bombSave_s {
     public:
         IndieVector3 position;
         int frame;
         IndieColor color = WHITE;
-        bombSave() {};
-        ~bombSave() {};
-    };
+    }bombSave_t;
 
-    class mapSave {
+    typedef struct mapSave_s {
     public:
         std::vector<IndieVector3> map;
-        std::vector<IndieVector3> bonus;
-        mapSave() {};
-        ~mapSave() {};
-    };
+        std::vector<IndiePowerUp> bonus;
+    }mapSave_t;
 
-    class headerSave { //struct quantity
+    typedef struct headerSave_s { //struct quantity
     public:
         int mapNumber;
+        size_t sizeOfMap;
+        size_t sizeOfBonus;
         int playerNumber;
         int bombNumber;
-        headerSave() {};
-        ~headerSave() {};
-    };
+    }headerSave_t;
 }
