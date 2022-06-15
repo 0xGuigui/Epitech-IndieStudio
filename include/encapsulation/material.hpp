@@ -12,18 +12,18 @@
 namespace bmb {
     class IndieMaterial {
     public:
-        IndieMaterial() {};
-        ~IndieMaterial() {};
-        Material *Load(const char *fileName, int *materialCount) {
+        IndieMaterial() = default;
+        ~IndieMaterial() = default;
+        static Material *Load(const char *fileName, int *materialCount) {
             return LoadMaterials(fileName, materialCount);
         }
-        Material LoadDefault(void) {
+        static Material LoadDefault() {
             return LoadMaterialDefault();
         }
         void Unload() {
             return UnloadMaterial(this->_material);
         }
-        void SetTexture(int mapType, IndieTexture2D texture) {
+        void SetTexture(int mapType, const IndieTexture2D& texture) {
             return SetMaterialTexture(&this->_material, mapType, texture);
         }
         // void SetModelMesh(IndieModel model, int meshId, int materialId) {

@@ -30,9 +30,7 @@ namespace bmb {
 			IndieTexture2D(Texture2D texture) {
 				_texture = texture;
 			}
-			~IndieTexture2D() {
-				//UnloadTexture(_texture);
-			};
+			~IndieTexture2D() = default;
 			void loadTexture(const char *fileName) {
 				_texture = LoadTexture(fileName);
 			};
@@ -69,13 +67,13 @@ namespace bmb {
 			void DrawNPatch(IndieNPatchInfo nPatchInfo, IndieRectangle dest, IndieVector2 origin, float rotation, IndieColor tint) {
 				DrawTextureNPatch(_texture, nPatchInfo, dest, origin, rotation, tint);
 			}
-			int getWidth() {
+			int getWidth() const {
 				return _texture.width;
 			}
 			void setWidth(int width) {
 				_texture.width = width;
 			}
-			int getHeight() {
+			int getHeight() const {
 				return _texture.height;
 			}
 			void setHeight(int height) {

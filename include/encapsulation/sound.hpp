@@ -16,7 +16,7 @@ namespace bmb {
             Sound _sound{};
 
 		public:
-			IndieSound() = default;;
+			IndieSound() = default;
 			IndieSound(const Sound &sound) : _sound(sound) {};
 			explicit IndieSound(const std::string &fileName) : _sound(::LoadSound(fileName.c_str())) {};
 			~IndieSound() {
@@ -59,4 +59,4 @@ namespace bmb {
 				return _sound;
 			}
 	};
-};
+}
