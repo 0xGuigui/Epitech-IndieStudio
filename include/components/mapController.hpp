@@ -15,10 +15,7 @@
 namespace bmb {
     class MapController {
     private:
-        IndieModel _map;
-        IndieModel _mapObstacle;
         IndieModel _destructible;
-        // Animated camera
         IndieAnimatedCamera3D _camera;
         IndieVector3 _position;
         float _elapsedFrame = 0;
@@ -86,11 +83,6 @@ namespace bmb {
             _position = position;
         }
 
-        void DrawMap() {
-            _map.Draw(_position, 1.0f, WHITE);
-            _mapObstacle.Draw(_position, 1.0f, WHITE);
-        }
-
         void DrawObstacles() {
             for (const IndieVector3& pos: _destructiblePositions)
                 _destructible.Draw(pos, 1.0f, WHITE);
@@ -98,8 +90,6 @@ namespace bmb {
 
         void Draw() {
             _environmentHandler.draw();
-            _map.Draw(_position, 1.0f, WHITE);
-            _mapObstacle.Draw(_position, 1.0f, WHITE);
             for (const IndieVector3& pos: _destructiblePositions)
                 _destructible.Draw(pos, 1.0f, WHITE);
 
@@ -151,14 +141,6 @@ namespace bmb {
         void generateDestructible(int percentage) {
             _destructiblePositions.clear();
             generateBoxes(percentage);
-        }
-
-        IndieModel &getMapModel() {
-            return _map;
-        }
-
-        IndieModel &getObstacleModel() {
-            return _mapObstacle;
         }
 
         std::vector<IndieVector3> &getDestructiblePositions() {

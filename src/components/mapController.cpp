@@ -17,19 +17,13 @@ MapController::MapController(const IndieImage &mapImage, const IndieImage &mapOb
                              const IndieVector3 &cameraTargetPosition, const IndieVector3 &cameraPosition) {
     _environmentHandler.init();
     IndieMesh destructibleMesh = GenMeshCube(1.0f, 1.0f, 1.0f);
-    IndieMesh mapMesh(mapImage, {1.0f, 1.0f, 1.0f});
-    IndieMesh obsMesh(mapObstacleImage, {1.0f, 1.0f, 1.0f});
-    _map.LoadFromMesh(mapMesh);
-    _mapObstacle.LoadFromMesh(obsMesh);
     _destructible.LoadFromMesh(destructibleMesh);
-    _map.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = block;
-    _mapObstacle.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = obstacle;
     _destructible.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = destructible;
     _position = mapPosition;
     _camera = IndieAnimatedCamera3D(cameraPosition, cameraTargetPosition, {-9.0f, 0.0f, -1.0f}, {0, 1, 0}, 45, 0.0f,
                                     [](float x) -> float {
                                         return x == 1 ? 1 : 1 - std::pow(2, -10 * x);
-                                    }, 120, 60);
+                                    }, 120, 40);
     this->generateBoxes(75);
     for (IndieVector3 &destructiblePosition: _destructiblePositions) {
         int probability = rand() % 100;
@@ -50,11 +44,4 @@ MapController::MapController(const IndieImage &mapImage, const IndieImage &mapOb
                 player.setGhost(true);
             }, destructiblePosition, indie.loader.models["wall_pass"], WALLPASS);
     }
-}
-
-float ease_in(float x) {
-    const float c1 = 1.70158;
-    const float c3 = c1 + 1;
-
-    return x == 1 ? 1 : 1 - std::pow(2, -10 * x);
 }
