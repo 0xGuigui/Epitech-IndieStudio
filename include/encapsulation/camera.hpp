@@ -13,7 +13,7 @@
 namespace bmb {
 	class IndieCamera2D {
         private:
-            Camera2D _camera2D;
+            Camera2D _camera2D{};
 
 		public:
             IndieCamera2D(IndieVector2 offset, IndieVector2 target, float rotation, float zoom) {
@@ -23,7 +23,7 @@ namespace bmb {
                 _camera2D.offset = offset;
                 BeginMode2D(_camera2D);
             }
-			~IndieCamera2D() {};
+			~IndieCamera2D() = default;
             IndieCamera2D(const Camera2D &camera) : _camera2D(camera) {};
             void Begin() {
                 BeginMode2D(_camera2D);
@@ -50,7 +50,8 @@ namespace bmb {
         Camera _camera{};
 
     public:
-        IndieCamera3D() {};
+        IndieCamera3D() = default;
+        ~IndieCamera3D() = default;
         IndieCamera3D(const IndieVector3& position, const IndieVector3& target, const IndieVector3& up, float fovy, int projection) {
             _camera.position = position;
             _camera.target = target;
@@ -70,10 +71,10 @@ namespace bmb {
         void SetSmoothZoomControl(int keySmoothZoom) {
             SetCameraSmoothZoomControl(keySmoothZoom);
         }
-        void setPosition(IndieVector3 position) {
+        void setPosition(const IndieVector3& position) {
             _camera.position = position;
         }
-        void setTarget(IndieVector3 target) {
+        void setTarget(const IndieVector3& target) {
             _camera.target = target;
         }
         void setMode(int mode) {
@@ -85,10 +86,9 @@ namespace bmb {
         void begin3D() {
             BeginMode3D(_camera);
         }
-        void end3D() {
+        static void end3D() {
             EndMode3D();
         }
-        ~IndieCamera3D() {};
         operator Camera() const {
             return _camera;
         }

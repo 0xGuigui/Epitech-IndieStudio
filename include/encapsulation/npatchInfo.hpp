@@ -12,9 +12,9 @@
 namespace bmb {
 	class IndieNPatchInfo {
 		private:
-			NPatchInfo _patch;
+			NPatchInfo _patch{};
 		public:
-			IndieNPatchInfo() {};
+			IndieNPatchInfo() = default;
 			IndieNPatchInfo(IndieRectangle source, int left, int top, int right, int bottom, int layout) {
 				_patch = {
 					.source = source,
@@ -42,4 +42,4 @@ namespace bmb {
 				return _patch;
 			}
 	};
-};
+}
