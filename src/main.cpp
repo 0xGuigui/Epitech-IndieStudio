@@ -31,6 +31,8 @@ int main() {
         indie.keyboard.update(static_cast<int>(indie.state));
         if (IsKeyPressed(KEY_ESCAPE))
             break;
+        if (IsKeyPressed(KEY_F11))
+            indie.window.fullScreen();
         BeginDrawing();
         if (indie.state != gameMenu)
             ClearBackground(RAYWHITE);
