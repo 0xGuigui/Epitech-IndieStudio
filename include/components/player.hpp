@@ -217,7 +217,7 @@ namespace bmb {
 
         void AI();
 
-        std::vector<direction> checkDanger(IndieVector3);
+        static std::vector<direction> checkDanger(const IndieVector3&);
 
         std::vector<direction> canMove();
 

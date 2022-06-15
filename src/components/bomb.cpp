@@ -9,10 +9,10 @@
 
 using namespace bmb;
 
-IndieBomb::IndieBomb(int force, IndieVector3 position, const std::function<void()> &onDetonate) {
+IndieBomb::IndieBomb(int force, const IndieVector3 &position, const std::function<void()> &onDetonate) {
     this->force = force;
     _bomb = indie.loader.models["tnt"];
-    IndieMesh mesh;
+    IndieMesh mesh{};
     mesh.GenCube(1.0f, 1.0f, 1.0f);
     _bombExplosion.LoadFromMesh(mesh);
     _position = position;
@@ -22,21 +22,24 @@ IndieBomb::IndieBomb(int force, IndieVector3 position, const std::function<void(
 void IndieBomb::updateExplosionAnimation() {
     if (frame > 15)
         return this->Delete();
-    _bombExplosion.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = indie.loader.textures["explosion_" + std::to_string(frame)];
-    for (const IndieVector3& pos : explosion) {
+    _bombExplosion.getModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = indie.loader.textures["explosion_" +
+                                                                                                      std::to_string(
+                                                                                                              frame)];
+    for (const IndieVector3 &pos: explosion) {
         _bombExplosion.Draw(pos, 1.0f, WHITE);
     }
 }
 
-bool IndieBomb::isExplosionValid(const IndieVector3& position, int &direction) {
+bool IndieBomb::isExplosionValid(const IndieVector3 &position, int &direction) {
     if (!(position.getX() >= -15.0f && position.getX() <= -3.0f &&
-    position.getZ() <= 5.0f && position.getZ() >= -7.0f &&
-    (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0))) {
+          position.getZ() <= 5.0f && position.getZ() >= -7.0f &&
+          (static_cast<int>(round(position.getX())) % 2 != 0 || static_cast<int>(round(position.getZ())) % 2 != 0))) {
         direction = false;
         return false;
     }
     bool removed = false;
-    for (auto pos = indie.map.getDestructiblePositions().begin(); pos != indie.map.getDestructiblePositions().end(); pos++) {
+    for (auto pos = indie.map.getDestructiblePositions().begin();
+         pos != indie.map.getDestructiblePositions().end(); pos++) {
         if (pos->getX() == position.getX() && pos->getZ() == position.getZ()) {
             pos = indie.map.getDestructiblePositions().erase(pos);
             direction = false;
@@ -48,9 +51,10 @@ bool IndieBomb::isExplosionValid(const IndieVector3& position, int &direction) {
     if (removed)
         return true;
     if (direction != 2) {
-        for (IndieBomb &bomb : indie.bombs) {
+        for (IndieBomb &bomb: indie.bombs) {
             if ((_position.getX() != bomb._position.getX() || position.getZ() != _position.getZ()) &&
-            (!bomb.bombExplosion && position.getX() == bomb._position.getX() && position.getZ() == bomb._position.getZ())) {
+                (!bomb.bombExplosion && position.getX() == bomb._position.getX() &&
+                 position.getZ() == bomb._position.getZ())) {
                 bomb.bombExplosion = true;
                 bomb._onDetonate();
                 bomb.detonate();
@@ -59,12 +63,12 @@ bool IndieBomb::isExplosionValid(const IndieVector3& position, int &direction) {
             }
         }
     }
-    for (Player &player : indie.players) {
+    for (Player &player: indie.players) {
         IndieVector3 playerPos(
-            round(player.getPosition().getX()),
-            0.5f,
-            round(player.getPosition().getZ())
-		);
+                round(player.getPosition().getX()),
+                0.5f,
+                round(player.getPosition().getZ())
+        );
         if (playerPos.getX() == position.getX() && playerPos.getZ() == position.getZ()) {
             player.die();
         }
@@ -73,25 +77,26 @@ bool IndieBomb::isExplosionValid(const IndieVector3& position, int &direction) {
 }
 
 void IndieBomb::detonate() {
+    bool left, right, up, down = true;
     IndieVector3 exPos(_position.getX(), 0.5f, _position.getZ());
     int noDir = 2;
+
     if (isExplosionValid(exPos, noDir))
         explosion.push_back(exPos);
-    for (int i = 1, left = true, right = true, up = true, down = true; i <= this->force; i++) {
+    for (int i = 1; i <= this->force; i++) {
         IndieVector3 explosionPos(_position.getX() + static_cast<float>(i), 0.5f, _position.getZ());
         IndieVector3 explosionPos2(_position.getX() - static_cast<float>(i), 0.5f, _position.getZ());
         IndieVector3 explosionPos3(_position.getX(), 0.5f, _position.getZ() + static_cast<float>(i));
         IndieVector3 explosionPos4(_position.getX(), 0.5f, _position.getZ() - static_cast<float>(i));
-        if (down && isExplosionValid(explosionPos, down))
+
+        if (isExplosionValid(explosionPos, reinterpret_cast<int &>(down)))
             this->explosion.push_back(explosionPos);
-        if (up && isExplosionValid(explosionPos2, up))
+        if (up && isExplosionValid(explosionPos2, reinterpret_cast<int &>(up)))
             this->explosion.push_back(explosionPos2);
-        if (right && isExplosionValid(explosionPos3, right))
+        if (right && isExplosionValid(explosionPos3, reinterpret_cast<int &>(right)))
             this->explosion.push_back(explosionPos3);
-        if (left && isExplosionValid(explosionPos4, left))
+        if (left && isExplosionValid(explosionPos4, reinterpret_cast<int &>(left)))
             this->explosion.push_back(explosionPos4);
-        if (!left && !right && !up && !down)
-            break;
     }
 }
 
