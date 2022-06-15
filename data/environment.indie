@@ -22,6 +22,44 @@
 -2 0.5 6 14 1 wood_dark_oak
 
 # Non-breakable blocks
+-4 0.5 -6 1 1 cobbled_deepslate
+-4 0.5 -4 1 1 cobbled_deepslate
+-4 0.5 -2 1 1 cobbled_deepslate
+-4 0.5 0 1 1 cobbled_deepslate
+-4 0.5 2 1 1 cobbled_deepslate
+-4 0.5 4 1 1 cobbled_deepslate
+-6 0.5 -6 1 1 cobbled_deepslate
+-6 0.5 -4 1 1 cobbled_deepslate
+-6 0.5 -2 1 1 cobbled_deepslate
+-6 0.5 0 1 1 cobbled_deepslate
+-6 0.5 2 1 1 cobbled_deepslate
+-6 0.5 4 1 1 cobbled_deepslate
+-8 0.5 -6 1 1 cobbled_deepslate
+-8 0.5 -4 1 1 cobbled_deepslate
+-8 0.5 -2 1 1 cobbled_deepslate
+-8 0.5 0 1 1 cobbled_deepslate
+-8 0.5 2 1 1 cobbled_deepslate
+-8 0.5 4 1 1 cobbled_deepslate
+-10 0.5 -6 1 1 cobbled_deepslate
+-10 0.5 -4 1 1 cobbled_deepslate
+-10 0.5 -2 1 1 cobbled_deepslate
+-10 0.5 0 1 1 cobbled_deepslate
+-10 0.5 2 1 1 cobbled_deepslate
+-10 0.5 4 1 1 cobbled_deepslate
+-12 0.5 -6 1 1 cobbled_deepslate
+-12 0.5 -4 1 1 cobbled_deepslate
+-12 0.5 -2 1 1 cobbled_deepslate
+-12 0.5 0 1 1 cobbled_deepslate
+-12 0.5 2 1 1 cobbled_deepslate
+-12 0.5 4 1 1 cobbled_deepslate
+-14 0.5 -6 1 1 cobbled_deepslate
+-14 0.5 -4 1 1 cobbled_deepslate
+-14 0.5 -2 1 1 cobbled_deepslate
+-14 0.5 0 1 1 cobbled_deepslate
+-14 0.5 2 1 1 cobbled_deepslate
+-14 0.5 4 1 1 cobbled_deepslate
+
+# block around the map
 -27.0 -4.5 -22.0 4 1 stone
 -26.0 -4.5 -22.0 1 1 copper_ore
 -24.0 -4.5 -22.0 2 1 stone
