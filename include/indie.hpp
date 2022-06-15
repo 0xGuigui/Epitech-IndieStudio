@@ -77,7 +77,9 @@ class Indie {
                 case inGame:
                     this->bomberMan();
                     break;
-            };
+                default:
+                    break;
+            }
         }
         float timePlayed = 0.0f;
         float _musicPlayed = 0.0f;
@@ -85,7 +87,6 @@ class Indie {
         int screenHeight = 1080;
         bool _musicPlay = true;
         int playerSelected = 0;
-    protected:
 };
 
 extern Indie indie;
