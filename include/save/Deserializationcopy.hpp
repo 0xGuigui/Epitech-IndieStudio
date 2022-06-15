@@ -14,14 +14,19 @@
 #include "dataStructcopy.hpp"
 #include "../components/player.hpp"
 #include "../components/bomb.hpp"
+#include "../components/powerUp.hpp"
+#include "../encapsulation/vector.hpp"
 
 namespace bmb {
     class Deserialization {
     protected:
+        char *rawInput;
         char *input;
         std::string pathToSave = "./save.save";
         std::vector<bmb::playerSave_t> playerSaveArray;
         std::vector<bmb::bombSave_t> bombSaveArray;
+        std::vector<IndieVector3> desMap;
+        std::vector<IndiePowerUp> desBonus;
         bmb::mapSave_t mapSave;
         bmb::headerSave_t headerSave;
 
